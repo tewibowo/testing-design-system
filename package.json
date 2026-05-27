@@ -1,0 +1,38 @@
+{
+  "name": "testing-design-system",
+  "version": "0.1.0",
+  "private": true,
+  "description": "StraitsX design system — tokens + React components, with Storybook and Chromatic visual regression.",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./tokens.css": "./src/styles/tokens.css",
+    "./global.css": "./src/styles/global.css"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "SKILL.md"
+  ],
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build -o storybook-static",
+    "chromatic": "chromatic --exit-zero-on-changes"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^4.0.0",
+    "@storybook/addon-a11y": "^10.4.0",
+    "@storybook/react-vite": "^10.4.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "chromatic": "^13.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "storybook": "^10.4.0",
+    "vite": "^7.0.0"
+  }
+}

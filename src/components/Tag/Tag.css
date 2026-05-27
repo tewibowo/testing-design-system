@@ -1,0 +1,41 @@
+.sx-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  font: 700 13px/1.2 var(--sx-font-body);
+  border: 1px solid transparent;
+  border-radius: var(--sx-radius-card);
+}
+.sx-tag--pill { border-radius: var(--sx-radius-full); }
+
+.sx-tag--positive {
+  background: var(--sx-positive-soft);
+  border-color: var(--sx-positive-border);
+  color: var(--sx-positive);
+}
+.sx-tag--critical {
+  background: var(--sx-critical-soft);
+  border-color: var(--sx-critical-border);
+  color: var(--sx-critical);
+}
+.sx-tag--warning {
+  background: var(--sx-warning-soft);
+  border-color: var(--sx-warning-border);
+  color: var(--sx-warning);
+}
+.sx-tag--info {
+  background: var(--sx-information-soft);
+  border-color: var(--sx-information-border);
+  color: var(--sx-information);
+}
+.sx-tag--neutral {
+  background: var(--sx-neutral-soft);
+  border-color: var(--sx-neutral-border);
+  color: var(--sx-neutral);
+}
+.sx-tag--brand {
+  background: var(--sx-vibrant-green);
+  color: var(--sx-deep-ivy);
+  border-color: transparent;
+}

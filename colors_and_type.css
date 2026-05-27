@@ -1,0 +1,189 @@
+/* StraitsX Design System — Foundations
+ * Colors + Type tokens, plus semantic helpers.
+ * Source: StraitsX Brand Guidelines 2025 + FDS3 Figma (Style-Guideline page).
+ */
+
+/* ───── FONTS ───── */
+@font-face {
+  font-family: "Red Hat Display";
+  src: url("./fonts/RedHatDisplay-VariableFont_wght.ttf") format("truetype-variations"),
+       url("./fonts/RedHatDisplay-VariableFont_wght.ttf") format("truetype");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Red Hat Display";
+  src: url("./fonts/RedHatDisplay-Italic-VariableFont_wght.ttf") format("truetype-variations"),
+       url("./fonts/RedHatDisplay-Italic-VariableFont_wght.ttf") format("truetype");
+  font-weight: 300 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hanken Grotesk";
+  src: url("./fonts/HankenGrotesk-VariableFont_wght.ttf") format("truetype-variations"),
+       url("./fonts/HankenGrotesk-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hanken Grotesk";
+  src: url("./fonts/HankenGrotesk-Italic-VariableFont_wght.ttf") format("truetype-variations"),
+       url("./fonts/HankenGrotesk-Italic-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+/* Red Hat Mono — used for numerals + technical figures. Loaded from Google Fonts
+   (per brand guideline: "available for download from Google Fonts"). */
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@300;400;500;600;700&display=swap");
+
+:root {
+  /* ─── BRAND COLORS — Primary (Brand Guidelines, p.20) ─── */
+  --sx-vibrant-green: #00D37E;   /* signature, growth */
+  --sx-secure-teal:   #054948;   /* grounding, security */
+  --sx-deep-ivy:      #002B2A;   /* near-black w/ green undertone */
+
+  /* ─── BRAND COLORS — Secondary (p.21) ─── */
+  --sx-mint:        #79FFCA;     /* "Seamless" */
+  --sx-grey:        #D8D8D8;     /* "Innovative" */
+  --sx-light-grey:  #F0F0F0;     /* "Modern" */
+  --sx-gold:        #B59B58;     /* "Wealthy" */
+  --sx-blue:        #187D97;     /* "Credible" */
+
+  /* ─── Stablecoin marks (p.22) ─── */
+  --sx-xsgd: #DF1312;
+  --sx-xidr: #0E3FC7;
+  --sx-xusd: #257C58;
+
+  /* ─── Surface / background / line (extracted from Figma) ─── */
+  --sx-bg:           #FFFFFF;
+  --sx-bg-subtle:    #F7F7F7;
+  --sx-bg-muted:     #F6F7F9;
+  --sx-bg-success:   #F0F9F4;
+  --sx-line-strong:  #C6C6C6;
+  --sx-line:         #E0E0E0;
+  --sx-line-soft:    #EBEBEB;
+
+  /* ─── Foreground / text ─── */
+  --sx-fg:           #121212;     /* default body, used over light backgrounds */
+  --sx-fg-1:         #002B2A;     /* primary text, ivy */
+  --sx-fg-2:         #505454;     /* secondary */
+  --sx-fg-3:         #6B6B6B;     /* helper / placeholder */
+  --sx-fg-4:         #9D9E9F;     /* disabled */
+  --sx-fg-inverse:   #FFFFFF;
+
+  /* ─── Semantic / feedback ─── */
+  --sx-positive:        #007D00;
+  --sx-positive-soft:   #F0F9F4;
+  --sx-positive-border: #B6DDC4;
+  --sx-critical:        #DF1312;
+  --sx-critical-soft:   #FDECEC;
+  --sx-critical-border: #F2A89B;
+  --sx-warning:         #F79410;
+  --sx-warning-soft:    #FFF5E6;
+  --sx-warning-border:  #F7D7A7;
+  --sx-information:     #0D69D4;
+  --sx-information-soft:#EAF2FD;
+  --sx-information-border:#A8C8F2;
+  --sx-neutral:         #1B2736;
+  --sx-neutral-soft:    #F2F4F5;
+  --sx-neutral-border:  #C6C6C6;
+
+  /* ─── Type stacks ─── */
+  --sx-font-display: "Red Hat Display", "Inter", system-ui, -apple-system, Segoe UI, sans-serif;
+  --sx-font-body:    "Hanken Grotesk", "Inter", system-ui, -apple-system, Segoe UI, sans-serif;
+  --sx-font-mono:    "Red Hat Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* ─── Type scale (FDS3 Typography frame) ─── */
+  /* Display — Red Hat Display Bold; marketing only */
+  --sx-display-l: 700 64px/1.05 var(--sx-font-display);
+  --sx-display-m: 700 45px/1.05 var(--sx-font-display);
+  --sx-display-s: 700 36px/1.08 var(--sx-font-display);
+  /* Headline — Hanken Grotesk Regular; secondary marketing */
+  --sx-headline-l: 400 28px/1.25 var(--sx-font-body);
+  --sx-headline-m: 400 24px/1.30 var(--sx-font-body);
+  --sx-headline-s: 400 20px/1.35 var(--sx-font-body);
+  /* Title — Red Hat Display Bold; structural headings */
+  --sx-title-l: 700 28px/1.20 var(--sx-font-display);
+  --sx-title-m: 700 24px/1.25 var(--sx-font-display);
+  --sx-title-s: 700 20px/1.30 var(--sx-font-display);
+  /* Label — Red Hat Display Bold; functional UI text */
+  --sx-label-l: 700 16px/1.35 var(--sx-font-display);
+  --sx-label-m: 700 14px/1.35 var(--sx-font-display);
+  --sx-label-s: 700 12px/1.35 var(--sx-font-display);
+  /* Label (Hanken) — variant w/ more personality */
+  --sx-label-l-hk: 700 16px/1.35 var(--sx-font-body);
+  --sx-label-m-hk: 700 14px/1.35 var(--sx-font-body);
+  --sx-label-s-hk: 700 12px/1.35 var(--sx-font-body);
+  /* Body — Hanken Grotesk Regular */
+  --sx-body-l: 400 16px/1.5  var(--sx-font-body);
+  --sx-body-m: 400 14px/1.5  var(--sx-font-body);
+  --sx-body-s: 400 12px/1.5  var(--sx-font-body);
+
+  /* ─── Radii (Style-Guideline / Box-Shadow + Table) ─── */
+  --sx-radius-card:    8px;   /* Alert, Card */
+  --sx-radius-control: 12px;  /* Input, Select, Copybox, Dialog */
+  --sx-radius-full:    999px; /* Button, Tag, Badge, Icon Button */
+  --sx-radius-sm:      4px;
+  --sx-radius-lg:      16px;  /* Style-Guideline panels */
+
+  /* ─── Elevation / shadows (Style-Guideline / Box-Shadow frame) ─── */
+  --sx-shadow-1: 0 1px 3px 0 rgba(10,13,18,0.10), 0 1px 2px 0 rgba(10,13,18,0.06);
+  --sx-shadow-2: 0 12px 16px -4px rgba(10,13,18,0.08), 0 4px 6px -2px rgba(10,13,18,0.03);
+  --sx-shadow-3: 0 20px 24px -4px rgba(10,13,18,0.08), 0 8px 8px -4px rgba(10,13,18,0.03);
+
+  /* ─── Spacing (4-px base, Figma gaps observed) ─── */
+  --sx-space-1: 4px;
+  --sx-space-2: 8px;
+  --sx-space-3: 12px;
+  --sx-space-4: 16px;
+  --sx-space-5: 24px;
+  --sx-space-6: 32px;
+  --sx-space-7: 40px;
+  --sx-space-8: 64px;
+
+  /* ─── Motion ─── */
+  --sx-ease:    cubic-bezier(0.2, 0.7, 0.2, 1);
+  --sx-dur-1:   120ms; /* hover, press */
+  --sx-dur-2:   200ms; /* enter/leave for chips, tooltips */
+  --sx-dur-3:   320ms; /* sheets, modals */
+}
+
+/* ───── Element defaults ───── */
+html, body {
+  font: var(--sx-body-m);
+  color: var(--sx-fg-1);
+  background: var(--sx-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1 { font: var(--sx-title-l); color: var(--sx-fg-1); margin: 0; letter-spacing: -0.01em; }
+h2 { font: var(--sx-title-m); color: var(--sx-fg-1); margin: 0; }
+h3 { font: var(--sx-title-s); color: var(--sx-fg-1); margin: 0; }
+h4 { font: var(--sx-label-l); color: var(--sx-fg-1); margin: 0; }
+p, li { font: var(--sx-body-m); color: var(--sx-fg-1); margin: 0; }
+small { font: var(--sx-body-s); color: var(--sx-fg-2); }
+code, pre, kbd, samp { font-family: var(--sx-font-mono); }
+.numeric, .num { font-family: var(--sx-font-mono); font-variant-numeric: tabular-nums; }
+
+/* Semantic shortcuts */
+.sx-display-l { font: var(--sx-display-l); letter-spacing: -0.02em; }
+.sx-display-m { font: var(--sx-display-m); letter-spacing: -0.01em; }
+.sx-display-s { font: var(--sx-display-s); letter-spacing: -0.01em; }
+.sx-headline-l { font: var(--sx-headline-l); }
+.sx-headline-m { font: var(--sx-headline-m); }
+.sx-headline-s { font: var(--sx-headline-s); }
+.sx-title-l { font: var(--sx-title-l); }
+.sx-title-m { font: var(--sx-title-m); }
+.sx-title-s { font: var(--sx-title-s); }
+.sx-label-l { font: var(--sx-label-l); }
+.sx-label-m { font: var(--sx-label-m); }
+.sx-label-s { font: var(--sx-label-s); }
+.sx-body-l { font: var(--sx-body-l); }
+.sx-body-m { font: var(--sx-body-m); }
+.sx-body-s { font: var(--sx-body-s); }

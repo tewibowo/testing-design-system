@@ -1,0 +1,55 @@
+import React, { useState } from "react";
+import { Card } from "../Card/Card.jsx";
+import { EmptyState } from "../EmptyState/EmptyState.jsx";
+import "./TransferPanel.css";
+
+const DEFAULT_TABS = [
+  { id: "in", label: "Transfer In" },
+  { id: "out", label: "Transfer Out" },
+  { id: "swap", label: "Swap" },
+];
+
+/**
+ * Tabbed transfer panel — Transfer In / Out / Swap. Pass `children` to render
+ * a tab body; otherwise a verification-gated EmptyState renders.
+ */
+export function TransferPanel({
+  tabs = DEFAULT_TABS,
+  defaultTab,
+  activeTab,
+  onTabChange,
+  children,
+}) {
+  const [internal, setInternal] = useState(defaultTab || tabs[0]?.id);
+  const current = activeTab ?? internal;
+  const handleSelect = (id) => {
+    if (activeTab === undefined) setInternal(id);
+    onTabChange && onTabChange(id);
+  };
+  return (
+    <Card surface="raised" className="sx-transfer">
+      <div className="sx-tabs" role="tablist">
+        {tabs.map((t) => (
+          <button
+            key={t.id}
+            role="tab"
+            aria-selected={current === t.id}
+            className={"sx-tab" + (current === t.id ? " is-active" : "")}
+            onClick={() => handleSelect(t.id)}
+            type="button"
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+      <div className="sx-transfer__body">
+        {children ?? (
+          <EmptyState
+            title="Verify your account and complete the assessment to transact."
+            sub="You won't be able to initiate any transactions until verification is completed."
+          />
+        )}
+      </div>
+    </Card>
+  );
+}

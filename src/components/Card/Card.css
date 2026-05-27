@@ -1,0 +1,25 @@
+.sx-card {
+  background: #fff;
+  border-radius: var(--sx-radius-card);
+  border: 1px solid var(--sx-line);
+  padding: 24px;
+  color: var(--sx-fg-1);
+}
+.sx-card--raised {
+  border-color: transparent;
+  box-shadow: var(--sx-shadow-1);
+}
+.sx-card--ivy {
+  background: var(--sx-deep-ivy);
+  color: #fff;
+  border-color: transparent;
+}
+.sx-card--teal {
+  background: var(--sx-secure-teal);
+  color: #fff;
+  border-color: transparent;
+}
+.sx-card__title { font: 700 20px/1.25 var(--sx-font-display); margin: 0 0 8px; }
+.sx-card__body { font: var(--sx-body-m); color: var(--sx-fg-2); margin: 0; }
+.sx-card--ivy .sx-card__body,
+.sx-card--teal .sx-card__body { color: rgba(255, 255, 255, 0.85); }

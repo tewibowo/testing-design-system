@@ -1,0 +1,49 @@
+.sx-sidebar {
+  background: #fff;
+  padding: 32px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border-right: 1px solid var(--sx-line-soft);
+  min-width: 248px;
+  height: 100%;
+}
+.sx-sidebar__brand { display: flex; align-items: center; gap: 10px; padding: 0 8px 12px; }
+.sx-sidebar__brand-name {
+  font: 800 22px/1 var(--sx-font-display);
+  color: var(--sx-deep-ivy);
+  letter-spacing: -0.01em;
+}
+.sx-sidebar__brand-sub { font: var(--sx-body-s); color: var(--sx-fg-2); margin-top: 2px; }
+.sx-sidebar__nav { display: flex; flex-direction: column; gap: 4px; }
+
+.sx-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--sx-radius-card);
+  border: 0;
+  background: transparent;
+  color: var(--sx-fg);
+  cursor: pointer;
+  font: var(--sx-body-m);
+  text-align: left;
+  transition: background var(--sx-dur-1) var(--sx-ease), color var(--sx-dur-1) var(--sx-ease);
+}
+.sx-nav-item:hover { background: var(--sx-bg-subtle); }
+.sx-nav-item.is-active {
+  background: #E2F7EC;
+  color: var(--sx-secure-teal);
+  font-weight: 700;
+}
+.sx-nav-item.is-active .material-symbols-rounded { color: var(--sx-secure-teal); }
+.sx-nav-item__label { flex: 1; }
+.sx-nav-item__tag {
+  font: 700 11px/1 var(--sx-font-display);
+  padding: 3px 8px;
+  border-radius: var(--sx-radius-full);
+  background: var(--sx-mint);
+  color: var(--sx-deep-ivy);
+}
+.sx-nav-item .material-symbols-rounded { font-size: 22px; color: var(--sx-fg-2); }

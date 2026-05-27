@@ -1,0 +1,24 @@
+.sx-transfer { padding: 0; overflow: hidden; }
+.sx-tabs { display: flex; border-bottom: 1px solid var(--sx-line); }
+.sx-tab {
+  flex: 1;
+  height: 56px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font: 700 16px/1 var(--sx-font-display);
+  color: var(--sx-fg-3);
+  position: relative;
+}
+.sx-tab:hover { color: var(--sx-fg-1); }
+.sx-tab.is-active { color: var(--sx-deep-ivy); }
+.sx-tab.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 3px;
+  background: var(--sx-deep-ivy);
+}
+.sx-transfer__body { padding: 36px 24px 28px; }

@@ -1,0 +1,57 @@
+import React from "react";
+import { Input } from "./Input.jsx";
+
+export default {
+  title: "Components/Input",
+  component: Input,
+  parameters: { layout: "padded" },
+  argTypes: {
+    label: { control: "text" },
+    helper: { control: "text" },
+    error: { control: "text" },
+    prefix: { control: "text" },
+    suffix: { control: "text" },
+    placeholder: { control: "text" },
+    disabled: { control: "boolean" },
+  },
+  decorators: [(Story) => <div style={{ maxWidth: 360 }}><Story /></div>],
+};
+
+export const Default = {
+  args: {
+    label: "Email",
+    helper: "We'll send your verification code here.",
+    placeholder: "hello@straitsx.com",
+  },
+};
+
+export const WithSuffix = {
+  args: { label: "Amount", suffix: "SGD", defaultValue: "1,250.00" },
+};
+
+export const WithPrefix = {
+  args: { label: "Annual revenue", prefix: "S$", defaultValue: "250,000.00" },
+};
+
+export const ErrorState = {
+  args: {
+    label: "Wallet address",
+    defaultValue: "0xa1B…f2",
+    error: "Address checksum doesn't match.",
+  },
+};
+
+export const Disabled = {
+  args: { label: "Account number", defaultValue: "0123 4567 8901", disabled: true },
+};
+
+export const Composition = {
+  render: () => (
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, maxWidth: 560 }}>
+      <Input label="Email" placeholder="hello@straitsx.com" />
+      <Input label="Amount" suffix="SGD" defaultValue="1,250.00" />
+      <Input label="Wallet address" defaultValue="0xa1B…f2" error="Address checksum doesn't match." />
+      <Input label="Account number" defaultValue="0123 4567 8901" disabled />
+    </div>
+  ),
+};

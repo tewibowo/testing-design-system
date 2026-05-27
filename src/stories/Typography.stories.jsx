@@ -1,0 +1,107 @@
+import React from "react";
+import "./tokens.css";
+
+export default {
+  title: "Tokens/Typography",
+  parameters: { layout: "padded" },
+};
+
+const Row = ({ label, meta, font, sample }) => (
+  <div style={{ display: "flex", alignItems: "baseline", gap: 18, borderBottom: "1px solid var(--sx-line-soft)", paddingBottom: 10 }}>
+    <div style={{ font, color: "#002B2A", flex: 1 }}>{sample || label}</div>
+    <div className="tk-meta">{meta}</div>
+  </div>
+);
+
+export const Families = {
+  render: () => (
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 24 }}>
+      <div>
+        <div style={{ font: "700 64px/1 'Red Hat Display', sans-serif", color: "#002B2A", letterSpacing: "-0.01em" }}>Aa</div>
+        <div style={{ font: "var(--sx-label-m)", marginTop: 8 }}>Red Hat Display</div>
+        <div style={{ font: "var(--sx-body-s)", color: "var(--sx-fg-3)" }}>Display · Title · Label (Bold)</div>
+        <div style={{ font: "300 16px/1.4 'Red Hat Display', sans-serif", marginTop: 8 }}>
+          Light · Regular · <b>Bold</b> · <span style={{ fontWeight: 900 }}>Black</span>
+        </div>
+      </div>
+      <div>
+        <div style={{ font: "400 64px/1 'Hanken Grotesk', sans-serif", color: "#002B2A" }}>Aa</div>
+        <div style={{ font: "var(--sx-label-m)", marginTop: 8 }}>Hanken Grotesk</div>
+        <div style={{ font: "var(--sx-body-s)", color: "var(--sx-fg-3)" }}>Body · Headline · Label (Hanken)</div>
+        <div style={{ font: "400 16px/1.4 'Hanken Grotesk', sans-serif", marginTop: 8 }}>
+          Light · Regular · <b>Bold</b> · <span style={{ fontWeight: 900 }}>Black</span>
+        </div>
+      </div>
+      <div>
+        <div style={{ font: "600 56px/1 'Red Hat Mono', monospace", color: "#002B2A" }}>1234</div>
+        <div style={{ font: "var(--sx-label-m)", marginTop: 8 }}>Red Hat Mono</div>
+        <div style={{ font: "var(--sx-body-s)", color: "var(--sx-fg-3)" }}>Numerals · Code · Google Fonts</div>
+      </div>
+    </div>
+  ),
+};
+
+export const Display = {
+  render: () => (
+    <div className="tk-row--baseline">
+      <Row label="Display L" meta="RHD Bold · 64 / 67" font="700 64px/1.05 'Red Hat Display', sans-serif" />
+      <Row label="Display M" meta="RHD Bold · 45 / 47" font="700 45px/1.05 'Red Hat Display', sans-serif" />
+      <Row label="Display S" meta="RHD Bold · 36 / 39" font="700 36px/1.08 'Red Hat Display', sans-serif" />
+      <p style={{ font: "var(--sx-body-s)", color: "var(--sx-fg-3)" }}>Marketing &amp; hero use only. Avoid in dashboard.</p>
+    </div>
+  ),
+};
+
+export const Title = {
+  render: () => (
+    <div className="tk-row--baseline">
+      <Row label="Title Large" meta="RHD Bold · 28" font="700 28px/1.2 'Red Hat Display', sans-serif" />
+      <Row label="Title Medium" meta="RHD Bold · 24" font="700 24px/1.25 'Red Hat Display', sans-serif" />
+      <Row label="Title Small" meta="RHD Bold · 20" font="700 20px/1.3 'Red Hat Display', sans-serif" />
+    </div>
+  ),
+};
+
+export const Label = {
+  render: () => (
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18 }}>
+      <div>
+        <div className="tk-meta" style={{ textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 }}>Label · Red Hat Display</div>
+        <div style={{ font: "var(--sx-label-l)", color: "#002B2A" }}>Label Large 16</div>
+        <div style={{ font: "var(--sx-label-m)", color: "#002B2A", marginTop: 4 }}>Label Medium 14</div>
+        <div style={{ font: "var(--sx-label-s)", color: "#002B2A", marginTop: 4 }}>Label Small 12</div>
+      </div>
+      <div>
+        <div className="tk-meta" style={{ textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 }}>Label · Hanken Grotesk</div>
+        <div style={{ font: "var(--sx-label-l-hk)", color: "#002B2A" }}>Label Large 16</div>
+        <div style={{ font: "var(--sx-label-m-hk)", color: "#002B2A", marginTop: 4 }}>Label Medium 14</div>
+        <div style={{ font: "var(--sx-label-s-hk)", color: "#002B2A", marginTop: 4 }}>Label Small 12</div>
+      </div>
+    </div>
+  ),
+};
+
+export const Body = {
+  render: () => (
+    <div className="tk-row--baseline">
+      <div>
+        <div style={{ font: "var(--sx-body-l)", color: "#002B2A", maxWidth: 560 }}>
+          Body Large 16 / 24 — Hanken Grotesk Regular. Used for descriptions and the secondary text under titles.
+        </div>
+        <div className="tk-meta" style={{ marginTop: 2 }}>Hanken · 16 / 1.5</div>
+      </div>
+      <div>
+        <div style={{ font: "var(--sx-body-m)", color: "#002B2A", maxWidth: 560 }}>
+          Body Medium 14 / 21 — default body. Also used for input labels and the bulk of dashboard copy.
+        </div>
+        <div className="tk-meta" style={{ marginTop: 2 }}>Hanken · 14 / 1.5</div>
+      </div>
+      <div>
+        <div style={{ font: "var(--sx-body-s)", color: "#002B2A", maxWidth: 560 }}>
+          Body Small 12 / 18 — fine print, helper text, and dense table cells.
+        </div>
+        <div className="tk-meta" style={{ marginTop: 2 }}>Hanken · 12 / 1.5</div>
+      </div>
+    </div>
+  ),
+};

@@ -1,0 +1,19 @@
+.sx-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  padding: 32px 16px;
+}
+.sx-empty.is-compact { gap: 6px; padding: 20px 12px; }
+.sx-empty__title {
+  font: 700 16px/1.3 var(--sx-font-display);
+  color: var(--sx-deep-ivy);
+  max-width: 480px;
+}
+.sx-empty__sub {
+  font: var(--sx-body-m);
+  color: var(--sx-fg-2);
+  max-width: 480px;
+}

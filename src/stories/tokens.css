@@ -1,0 +1,34 @@
+.tk-row { display: flex; gap: 12px; align-items: stretch; flex-wrap: wrap; }
+.tk-swatch {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 0;
+  min-width: 120px;
+}
+.tk-swatch .chip {
+  height: 72px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+.tk-swatch .name {
+  font: var(--sx-label-m);
+  color: var(--sx-fg-1);
+  white-space: nowrap;
+}
+.tk-swatch .hex {
+  font: var(--sx-body-s);
+  font-family: var(--sx-font-mono);
+  color: var(--sx-fg-2);
+}
+.tk-swatch .role { font: var(--sx-body-s); color: var(--sx-fg-3); }
+.tk-grid { display: grid; gap: 12px; }
+.tk-grid--5 { grid-template-columns: repeat(5, 1fr); }
+.tk-grid--4 { grid-template-columns: repeat(4, 1fr); }
+.tk-divider { border-top: 1px solid var(--sx-line-soft); padding-top: 16px; margin-top: 16px; }
+.tk-row--baseline { display: flex; flex-direction: column; gap: 14px; }
+.tk-meta {
+  font: var(--sx-body-s);
+  color: var(--sx-fg-3);
+  font-family: var(--sx-font-mono);
+}
