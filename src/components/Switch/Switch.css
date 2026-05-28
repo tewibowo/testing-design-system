@@ -1,0 +1,28 @@
+.sx-switch__track {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  background: var(--sx-line-strong);
+  border-radius: 999px;
+  flex: 0 0 auto;
+  transition: background var(--sx-dur-1) var(--sx-ease);
+}
+.sx-switch__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-radius: 999px;
+  box-shadow: 0 1px 2px rgba(10, 13, 18, 0.25);
+  transition: transform var(--sx-dur-1) var(--sx-ease);
+}
+.sx-control input:checked + .sx-switch__track {
+  background: var(--sx-secure-teal);
+}
+.sx-control input:checked + .sx-switch__track .sx-switch__thumb {
+  transform: translateX(16px);
+}
+.sx-control.is-disabled .sx-switch__track { background: var(--sx-line); }
+.sx-control.is-disabled .sx-switch__thumb { box-shadow: none; }

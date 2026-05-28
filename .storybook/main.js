@@ -9,6 +9,7 @@ const config = {
   addons: [
     "@storybook/addon-a11y",
     "@chromatic-com/storybook",
+    "@storybook/addon-mcp"
   ],
   framework: {
     name: "@storybook/react-vite",

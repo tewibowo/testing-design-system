@@ -1,0 +1,31 @@
+.sx-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  font-family: var(--sx-font-display);
+  font-weight: 700;
+  color: var(--sx-deep-ivy);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--sx-dur-1) var(--sx-ease);
+}
+.sx-link-btn:hover { color: var(--sx-secure-teal); }
+.sx-link-btn:focus-visible {
+  outline: 2px solid var(--sx-information);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.sx-link-btn--lg { font-size: 16px; line-height: 1.4; }
+.sx-link-btn--md { font-size: 14px; line-height: 1.4; }
+.sx-link-btn--sm { font-size: 12px; line-height: 1.4; }
+
+.sx-link-btn--onDark { color: var(--sx-vibrant-green); }
+.sx-link-btn--onDark:hover { color: var(--sx-mint); }
+
+.sx-link-btn .material-symbols-rounded { font-size: 1.15em; }
+.sx-link-btn[disabled] { color: var(--sx-fg-4); cursor: not-allowed; }

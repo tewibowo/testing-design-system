@@ -1,0 +1,40 @@
+.sx-tooltip {
+  display: inline-flex;
+  position: relative;
+}
+.sx-tooltip__bubble {
+  position: absolute;
+  z-index: 50;
+  background: var(--sx-deep-ivy);
+  color: #fff;
+  font: var(--sx-body-s);
+  padding: 8px 10px;
+  border-radius: var(--sx-radius-sm);
+  max-width: 240px;
+  width: max-content;
+  box-shadow: var(--sx-shadow-2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--sx-dur-1) var(--sx-ease), transform var(--sx-dur-1) var(--sx-ease);
+}
+.sx-tooltip__bubble::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--sx-deep-ivy);
+  transform: rotate(45deg);
+}
+.sx-tooltip[data-open="true"] .sx-tooltip__bubble {
+  opacity: 1;
+}
+
+/* placements */
+.sx-tooltip[data-side="top"] .sx-tooltip__bubble { bottom: 100%; left: 50%; transform: translate(-50%, -8px); }
+.sx-tooltip[data-side="top"] .sx-tooltip__bubble::after { bottom: -4px; left: 50%; margin-left: -4px; }
+.sx-tooltip[data-side="bottom"] .sx-tooltip__bubble { top: 100%; left: 50%; transform: translate(-50%, 8px); }
+.sx-tooltip[data-side="bottom"] .sx-tooltip__bubble::after { top: -4px; left: 50%; margin-left: -4px; }
+.sx-tooltip[data-side="left"] .sx-tooltip__bubble { right: 100%; top: 50%; transform: translate(-8px, -50%); }
+.sx-tooltip[data-side="left"] .sx-tooltip__bubble::after { right: -4px; top: 50%; margin-top: -4px; }
+.sx-tooltip[data-side="right"] .sx-tooltip__bubble { left: 100%; top: 50%; transform: translate(8px, -50%); }
+.sx-tooltip[data-side="right"] .sx-tooltip__bubble::after { left: -4px; top: 50%; margin-top: -4px; }

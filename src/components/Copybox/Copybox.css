@@ -1,0 +1,47 @@
+.sx-copybox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 4px 0 14px;
+  height: 48px;
+  background: var(--sx-bg-subtle);
+  border: 1px solid var(--sx-line);
+  border-radius: var(--sx-radius-control);
+  font-family: var(--sx-font-mono);
+  font-size: 14px;
+  color: var(--sx-fg-1);
+}
+.sx-copybox__value {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sx-copybox--multiline {
+  align-items: flex-start;
+  padding: 12px 12px 12px 14px;
+  height: auto;
+  min-height: 96px;
+}
+.sx-copybox--multiline .sx-copybox__value {
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow: auto;
+}
+.sx-copybox__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: var(--sx-deep-ivy);
+  font: 700 13px/1 var(--sx-font-display);
+  padding: 8px 12px;
+  border-radius: var(--sx-radius-card);
+  transition: background var(--sx-dur-1) var(--sx-ease);
+}
+.sx-copybox__btn:hover { background: var(--sx-light-grey); }
+.sx-copybox__btn .material-symbols-rounded { font-size: 18px; }
+.sx-copybox.is-copied .sx-copybox__btn { color: var(--sx-positive); }
