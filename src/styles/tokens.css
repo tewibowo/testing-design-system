@@ -3,6 +3,8 @@
  * Source: StraitsX Brand Guidelines 2025 + FDS3 Figma (Style-Guideline page).
  */
 
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@300;400;500;600;700&display=swap");
+
 /* ───── FONTS ───── */
 @font-face {
   font-family: "Red Hat Display";
@@ -38,7 +40,6 @@
 }
 /* Red Hat Mono — used for numerals + technical figures. Loaded from Google Fonts
    (per brand guideline: "available for download from Google Fonts"). */
-@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@300;400;500;600;700&display=swap");
 
 :root {
   /* ─── BRAND COLORS — Primary (Brand Guidelines, p.20) ─── */
