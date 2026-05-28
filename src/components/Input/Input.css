@@ -51,3 +51,44 @@
   font-size: 14px;
   white-space: nowrap;
 }
+
+.sx-input__lead {
+  color: var(--sx-fg-3);
+  font-size: 20px;
+}
+
+.sx-input__icon-btn {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: var(--sx-fg-3);
+  padding: 4px;
+  margin: -4px;
+  border-radius: var(--sx-radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.sx-input__icon-btn:hover { color: var(--sx-fg-1); background: var(--sx-bg-subtle); }
+.sx-input__icon-btn .material-symbols-rounded { font-size: 20px; }
+
+.sx-input--with-button { padding-right: 4px; }
+.sx-input__trailing-btn {
+  flex: 0 0 auto;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: var(--sx-radius-full);
+  background: var(--sx-deep-ivy);
+  color: #fff;
+  border: 0;
+  cursor: pointer;
+  font: 700 14px/1 var(--sx-font-display);
+  white-space: nowrap;
+  transition: background var(--sx-dur-1) var(--sx-ease);
+}
+.sx-input__trailing-btn:hover { background: var(--sx-secure-teal); }
+.sx-input__trailing-btn[disabled] {
+  background: var(--sx-light-grey);
+  color: var(--sx-fg-4);
+  cursor: not-allowed;
+}

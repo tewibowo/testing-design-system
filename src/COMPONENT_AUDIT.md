@@ -10,16 +10,19 @@ We've shipped **11 components** so far (≈25 % of what's in the Figma). The rem
 | Category | Built | Remaining | Coverage |
 | --- | --- | --- | --- |
 | Foundations (Style-Guideline) | 5 / 5 | 0 | ✅ 100 % |
-| Brand / Logo | 1 / 1 | 0 | ✅ 100 % |
+| Brand / Logo | 3 / 3 (Logomark · Icon · PartnerLogo) | 0 | ✅ 100 % |
 | Actions | 3 / 3 | 0 | ✅ 100 % |
 | Status (Tag / Badge) | 2 / 2 | 0 | ✅ 100 % |
-| Input | 7 / 9 | 2 | 🟡 78 % |
-| Feedback | 5 / 6 | 1 | 🟡 83 % |
-| Navigation | 3 / 7 | 4 | 🟡 43 % |
-| Control / Layout | 3 / 6 | 3 | 🟡 50 % |
-| Composition (Dashboard) | 5 / 5 | 0 | ✅ 100 % |
-| Illustrations & Icons | 0 / 2 systems | 2 | 🔴 0 % |
-| **Total** | **34 / 46** | **12** | **~74 %** |
+| Input | 9 / 9 | 0 | ✅ 100 % |
+| Feedback | 6 / 6 | 0 | ✅ 100 % |
+| Navigation | 7 / 7 | 0 | ✅ 100 % |
+| Control / Layout | 6 / 6 | 0 | ✅ 100 % |
+| Composition (Dashboard) | 6 / 6 | 0 | ✅ 100 % |
+| Example screens | 6 (Personal Account · Transaction History · Settings · Mint · Sign In · Marketing Hero) | — | ✅ |
+| Iconography / Imagery | 2 / 2 systems (text-only fallbacks; awaiting licensed SVGs to slot in) | 0 | ✅ scaffolded |
+| **Total** | **47 / 46** | **0** | ✅ **100 %** |
+
+> The PartnerLogo and illustrated EmptyState slots are wired and render text fallbacks. Drop licensed SVGs into `src/assets/partners/` (and register them in `PartnerLogo.jsx`) or `src/assets/illustrations/` to upgrade the visuals.
 
 ---
 

@@ -1,0 +1,40 @@
+.sx-coachmark-scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 43, 42, 0.5);
+  z-index: 1200;
+  pointer-events: auto;
+}
+.sx-coachmark-spot {
+  position: absolute;
+  border-radius: var(--sx-radius-card);
+  box-shadow: 0 0 0 9999px rgba(0, 43, 42, 0.55);
+  pointer-events: none;
+  transition: all var(--sx-dur-3) var(--sx-ease);
+}
+.sx-coachmark {
+  position: absolute;
+  z-index: 1201;
+  background: #fff;
+  border-radius: var(--sx-radius-control);
+  box-shadow: var(--sx-shadow-3);
+  padding: 16px;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sx-coachmark__title { font: 700 14px/1.4 var(--sx-font-display); color: var(--sx-deep-ivy); }
+.sx-coachmark__body { font: var(--sx-body-m); color: var(--sx-fg-2); }
+.sx-coachmark__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+.sx-coachmark__count {
+  font: var(--sx-body-s);
+  color: var(--sx-fg-3);
+  font-family: var(--sx-font-mono);
+}
+.sx-coachmark__actions { display: flex; gap: 8px; }

@@ -29,6 +29,22 @@ export const WithSuffix = {
   args: { label: "Amount", suffix: "SGD", defaultValue: "1,250.00" },
 };
 
+export const Password = {
+  args: { label: "Password", type: "password", defaultValue: "ferret-cobalt-mountain" },
+};
+
+export const Search = {
+  args: { type: "search", placeholder: "Search transactions" },
+};
+
+export const WithTrailingButton = {
+  args: {
+    label: "Promo code",
+    placeholder: "Enter code",
+    trailingButton: { label: "Apply", onClick: () => {} },
+  },
+};
+
 export const WithPrefix = {
   args: { label: "Annual revenue", prefix: "S$", defaultValue: "250,000.00" },
 };

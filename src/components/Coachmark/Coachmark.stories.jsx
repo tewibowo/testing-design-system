@@ -1,0 +1,64 @@
+import React, { useRef, useState } from "react";
+import { Coachmark } from "./Coachmark.jsx";
+import { Button } from "../Button/Button.jsx";
+
+export default {
+  title: "Components/Coachmark",
+  component: Coachmark,
+  parameters: { layout: "fullscreen" },
+};
+
+export const Default = {
+  render: () => {
+    const ref = useRef(null);
+    const [open, setOpen] = useState(true);
+    return (
+      <div style={{ padding: 64 }}>
+        <Button ref={ref} onClick={() => setOpen(true)}>Mint</Button>
+        <Coachmark
+          target={ref}
+          open={open}
+          onDismiss={() => setOpen(false)}
+          title="Mint new stablecoins"
+          body="Convert SGD from your bank account into XSGD — instantly and at zero fee."
+          step={1}
+          totalSteps={3}
+          onNext={() => setOpen(false)}
+        />
+      </div>
+    );
+  },
+};
+
+export const Tour = {
+  render: () => {
+    const a = useRef(null);
+    const b = useRef(null);
+    const c = useRef(null);
+    const refs = [a, b, c];
+    const tips = [
+      { title: "Mint", body: "Top up XSGD instantly from your bank." },
+      { title: "Send", body: "Send stablecoins to any wallet, on or off-chain." },
+      { title: "Earn", body: "Park stablecoins and earn yield." },
+    ];
+    const [i, setI] = useState(0);
+    return (
+      <div style={{ display: "flex", gap: 12, padding: 64 }}>
+        <Button ref={a}>Mint</Button>
+        <Button ref={b} variant="secondary">Send</Button>
+        <Button ref={c} variant="secondary">Earn</Button>
+        <Coachmark
+          target={refs[i]}
+          open={i < tips.length}
+          onDismiss={() => setI(tips.length)}
+          onNext={() => setI((x) => x + 1)}
+          onPrev={() => setI((x) => x - 1)}
+          step={i + 1}
+          totalSteps={tips.length}
+          title={tips[i]?.title}
+          body={tips[i]?.body}
+        />
+      </div>
+    );
+  },
+};
