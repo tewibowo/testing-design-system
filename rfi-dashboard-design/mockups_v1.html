@@ -1,0 +1,1468 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RFI Self-Service Dashboard — Phase 1 mockups (v1)</title>
+
+<!-- Brand + UI fonts, loaded from Google Fonts (per StraitsX brand guideline: Red Hat Display,
+     Hanken Grotesk and Red Hat Mono are all available on Google Fonts). Material Symbols Rounded
+     powers the design-system <Icon>. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Red+Hat+Mono:wght@300..700&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================================
+   StraitsX Design System foundations — tokens.css (:root) + global.css
+   Copied verbatim from src/styles/tokens.css and src/styles/global.css.
+   (Local @font-face rules omitted; the families above come from Google Fonts.)
+   ========================================================================== */
+:root {
+  --sx-vibrant-green: #00D37E;
+  --sx-secure-teal:   #054948;
+  --sx-deep-ivy:      #002B2A;
+  --sx-mint:        #79FFCA;
+  --sx-grey:        #D8D8D8;
+  --sx-light-grey:  #F0F0F0;
+  --sx-gold:        #B59B58;
+  --sx-blue:        #187D97;
+  --sx-xsgd: #DF1312;
+  --sx-xidr: #0E3FC7;
+  --sx-xusd: #257C58;
+  --sx-bg:           #FFFFFF;
+  --sx-bg-subtle:    #F7F7F7;
+  --sx-bg-muted:     #F6F7F9;
+  --sx-bg-success:   #F0F9F4;
+  --sx-line-strong:  #C6C6C6;
+  --sx-line:         #E0E0E0;
+  --sx-line-soft:    #EBEBEB;
+  --sx-fg:           #121212;
+  --sx-fg-1:         #002B2A;
+  --sx-fg-2:         #505454;
+  --sx-fg-3:         #6B6B6B;
+  --sx-fg-4:         #9D9E9F;
+  --sx-fg-inverse:   #FFFFFF;
+  --sx-positive:        #007D00;
+  --sx-positive-soft:   #F0F9F4;
+  --sx-positive-border: #B6DDC4;
+  --sx-critical:        #DF1312;
+  --sx-critical-soft:   #FDECEC;
+  --sx-critical-border: #F2A89B;
+  --sx-warning:         #F79410;
+  --sx-warning-soft:    #FFF5E6;
+  --sx-warning-border:  #F7D7A7;
+  --sx-information:     #0D69D4;
+  --sx-information-soft:#EAF2FD;
+  --sx-information-border:#A8C8F2;
+  --sx-neutral:         #1B2736;
+  --sx-neutral-soft:    #F2F4F5;
+  --sx-neutral-border:  #C6C6C6;
+  --sx-font-display: "Red Hat Display", "Inter", system-ui, -apple-system, Segoe UI, sans-serif;
+  --sx-font-body:    "Hanken Grotesk", "Inter", system-ui, -apple-system, Segoe UI, sans-serif;
+  --sx-font-mono:    "Red Hat Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --sx-display-l: 700 64px/1.05 var(--sx-font-display);
+  --sx-display-m: 700 45px/1.05 var(--sx-font-display);
+  --sx-display-s: 700 36px/1.08 var(--sx-font-display);
+  --sx-headline-l: 400 28px/1.25 var(--sx-font-body);
+  --sx-headline-m: 400 24px/1.30 var(--sx-font-body);
+  --sx-headline-s: 400 20px/1.35 var(--sx-font-body);
+  --sx-title-l: 700 28px/1.20 var(--sx-font-display);
+  --sx-title-m: 700 24px/1.25 var(--sx-font-display);
+  --sx-title-s: 700 20px/1.30 var(--sx-font-display);
+  --sx-label-l: 700 16px/1.35 var(--sx-font-display);
+  --sx-label-m: 700 14px/1.35 var(--sx-font-display);
+  --sx-label-s: 700 12px/1.35 var(--sx-font-display);
+  --sx-body-l: 400 16px/1.5  var(--sx-font-body);
+  --sx-body-m: 400 14px/1.5  var(--sx-font-body);
+  --sx-body-s: 400 12px/1.5  var(--sx-font-body);
+  --sx-radius-card:    8px;
+  --sx-radius-control: 12px;
+  --sx-radius-full:    999px;
+  --sx-radius-sm:      4px;
+  --sx-radius-lg:      16px;
+  --sx-shadow-1: 0 1px 3px 0 rgba(10,13,18,0.10), 0 1px 2px 0 rgba(10,13,18,0.06);
+  --sx-shadow-2: 0 12px 16px -4px rgba(10,13,18,0.08), 0 4px 6px -2px rgba(10,13,18,0.03);
+  --sx-shadow-3: 0 20px 24px -4px rgba(10,13,18,0.08), 0 8px 8px -4px rgba(10,13,18,0.03);
+  --sx-space-1: 4px;  --sx-space-2: 8px;  --sx-space-3: 12px; --sx-space-4: 16px;
+  --sx-space-5: 24px; --sx-space-6: 32px; --sx-space-7: 40px; --sx-space-8: 64px;
+  --sx-ease:    cubic-bezier(0.2, 0.7, 0.2, 1);
+  --sx-dur-1:   120ms; --sx-dur-2:   200ms; --sx-dur-3:   320ms;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body, #root { margin: 0; padding: 0; }
+body {
+  font: var(--sx-body-m); color: var(--sx-fg-1); background: var(--sx-bg);
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility;
+}
+button { font: inherit; }
+.material-symbols-rounded, .sx-icon {
+  font-family: "Material Symbols Rounded";
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  font-weight: normal; font-style: normal; line-height: 1; letter-spacing: normal;
+  text-transform: none; display: inline-block; white-space: nowrap; word-wrap: normal;
+  direction: ltr; -webkit-font-feature-settings: "liga"; font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased; user-select: none; vertical-align: middle; flex: 0 0 auto;
+}
+.sx-icon--filled { font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24; }
+
+/* ============================================================================
+   Component CSS — copied verbatim from each component's .css in src/components/
+   ========================================================================== */
+
+/* Button */
+.sx-btn { display:inline-flex; align-items:center; justify-content:center; gap:6px; border-radius:var(--sx-radius-full); border:0; cursor:pointer; font-family:var(--sx-font-display); font-weight:700; line-height:1; white-space:nowrap; transition: background var(--sx-dur-1) var(--sx-ease), color var(--sx-dur-1) var(--sx-ease), border-color var(--sx-dur-1) var(--sx-ease); }
+.sx-btn:focus-visible { outline:2px solid var(--sx-information); outline-offset:2px; }
+.sx-btn--lg { height:48px; padding:0 24px; font-size:16px; }
+.sx-btn--md { height:40px; padding:0 16px; font-size:14px; }
+.sx-btn--sm { height:32px; padding:0 12px; font-size:12px; }
+.sx-btn--primary { background:var(--sx-vibrant-green); color:var(--sx-deep-ivy); }
+.sx-btn--primary:hover { background:#02B870; }
+.sx-btn--primary:active { background:var(--sx-secure-teal); color:#fff; }
+.sx-btn--secondary { background:transparent; color:var(--sx-deep-ivy); border:1.5px solid var(--sx-deep-ivy); }
+.sx-btn--secondary:hover { background:rgba(0,43,42,0.06); }
+.sx-btn--secondary:active { background:rgba(0,43,42,0.12); }
+.sx-btn--tertiary { background:transparent; color:var(--sx-deep-ivy); padding:0 8px; text-decoration:underline; text-underline-offset:3px; }
+.sx-btn--tertiary:hover { color:var(--sx-secure-teal); }
+.sx-btn[disabled], .sx-btn[aria-disabled="true"] { background:var(--sx-light-grey); color:var(--sx-fg-4); border-color:transparent; cursor:not-allowed; text-decoration:none; }
+
+/* IconButton */
+.sx-icon-btn { display:inline-flex; align-items:center; justify-content:center; border:0; cursor:pointer; background:transparent; color:var(--sx-fg-1); transition: background var(--sx-dur-1) var(--sx-ease), color var(--sx-dur-1) var(--sx-ease); }
+.sx-icon-btn:focus-visible { outline:2px solid var(--sx-information); outline-offset:2px; }
+.sx-icon-btn--lg { width:48px; height:48px; } .sx-icon-btn--md { width:40px; height:40px; } .sx-icon-btn--sm { width:32px; height:32px; }
+.sx-icon-btn--lg .material-symbols-rounded { font-size:24px; } .sx-icon-btn--md .material-symbols-rounded { font-size:22px; } .sx-icon-btn--sm .material-symbols-rounded { font-size:18px; }
+.sx-icon-btn--circle { border-radius:var(--sx-radius-full); } .sx-icon-btn--square { border-radius:var(--sx-radius-card); }
+.sx-icon-btn--ghost { background:transparent; } .sx-icon-btn--ghost:hover { background:var(--sx-bg-subtle); } .sx-icon-btn--ghost:active { background:var(--sx-light-grey); }
+.sx-icon-btn--outline { background:#fff; border:1px solid var(--sx-line); } .sx-icon-btn--outline:hover { background:var(--sx-bg-subtle); }
+.sx-icon-btn--filled { background:var(--sx-deep-ivy); color:#fff; } .sx-icon-btn--filled:hover { background:var(--sx-secure-teal); }
+.sx-icon-btn[disabled] { background:var(--sx-light-grey); color:var(--sx-fg-4); cursor:not-allowed; border-color:transparent; }
+
+/* LinkButton */
+.sx-link-btn { display:inline-flex; align-items:center; gap:4px; background:transparent; border:0; cursor:pointer; padding:0; font-family:var(--sx-font-display); font-weight:700; color:var(--sx-deep-ivy); text-decoration:underline; text-underline-offset:3px; transition: color var(--sx-dur-1) var(--sx-ease); }
+.sx-link-btn:hover { color:var(--sx-secure-teal); }
+.sx-link-btn:focus-visible { outline:2px solid var(--sx-information); outline-offset:2px; border-radius:2px; }
+.sx-link-btn--lg { font-size:16px; line-height:1.4; } .sx-link-btn--md { font-size:14px; line-height:1.4; } .sx-link-btn--sm { font-size:12px; line-height:1.4; }
+.sx-link-btn .material-symbols-rounded { font-size:1.15em; }
+.sx-link-btn[disabled] { color:var(--sx-fg-4); cursor:not-allowed; }
+
+/* Tag */
+.sx-tag { display:inline-flex; align-items:center; gap:4px; padding:4px 12px; font:700 13px/1.2 var(--sx-font-body); border:1px solid transparent; border-radius:var(--sx-radius-card); }
+.sx-tag--pill { border-radius:var(--sx-radius-full); }
+.sx-tag--positive { background:var(--sx-positive-soft); border-color:var(--sx-positive-border); color:var(--sx-positive); }
+.sx-tag--critical { background:var(--sx-critical-soft); border-color:var(--sx-critical-border); color:var(--sx-critical); }
+.sx-tag--warning { background:var(--sx-warning-soft); border-color:var(--sx-warning-border); color:var(--sx-warning); }
+.sx-tag--info { background:var(--sx-information-soft); border-color:var(--sx-information-border); color:var(--sx-information); }
+.sx-tag--neutral { background:var(--sx-neutral-soft); border-color:var(--sx-neutral-border); color:var(--sx-neutral); }
+.sx-tag--brand { background:var(--sx-vibrant-green); color:var(--sx-deep-ivy); border-color:transparent; }
+
+/* Badge */
+.sx-badge { display:inline-flex; align-items:center; justify-content:center; min-width:18px; height:18px; padding:0 5px; border-radius:var(--sx-radius-full); background:var(--sx-vibrant-green); color:var(--sx-deep-ivy); font:700 11px/18px var(--sx-font-display); border:2px solid #fff; font-variant-numeric:tabular-nums; }
+.sx-badge--lg { min-width:22px; height:22px; padding:0 7px; font-size:12px; line-height:22px; }
+.sx-badge--sm { min-width:14px; height:14px; padding:0 4px; font-size:10px; line-height:14px; border-width:1.5px; }
+.sx-badge--dot { width:10px; height:10px; min-width:0; padding:0; border-width:2px; }
+.sx-badge--critical { background:var(--sx-critical); color:#fff; }
+.sx-badge--warning  { background:var(--sx-warning);  color:var(--sx-deep-ivy); }
+.sx-badge--info     { background:var(--sx-information); color:#fff; }
+.sx-badge--neutral  { background:var(--sx-neutral); color:#fff; }
+.sx-badge-wrap { position:relative; display:inline-flex; }
+.sx-badge-wrap .sx-badge { position:absolute; top:-2px; right:-2px; }
+
+/* Field shared (Input / Textarea / Select / DateInput / Upload label) */
+.sx-field { display:flex; flex-direction:column; gap:6px; }
+.sx-field__label { font:var(--sx-body-m); color:var(--sx-fg-1); }
+.sx-field__helper { font:var(--sx-body-s); color:var(--sx-fg-3); }
+.sx-field__helper.is-error { color:var(--sx-critical); }
+
+/* Input */
+.sx-input { display:flex; align-items:center; gap:8px; height:48px; padding:0 14px; border-radius:var(--sx-radius-control); border:1px solid var(--sx-line-strong); background:#fff; font:var(--sx-body-l); color:var(--sx-fg-1); transition:border-color var(--sx-dur-1) var(--sx-ease), box-shadow var(--sx-dur-1) var(--sx-ease); }
+.sx-input:focus-within { border-color:var(--sx-secure-teal); box-shadow:0 0 0 3px rgba(0,211,126,0.16); }
+.sx-input.is-error { border-color:var(--sx-critical); }
+.sx-input.is-error:focus-within { box-shadow:0 0 0 3px rgba(223,19,18,0.16); }
+.sx-input.is-disabled { background:var(--sx-bg-subtle); color:var(--sx-fg-4); border-color:var(--sx-line); cursor:not-allowed; }
+.sx-input input { flex:1; min-width:0; border:0; outline:0; background:transparent; font:inherit; color:inherit; }
+.sx-input input::placeholder { color:var(--sx-fg-3); }
+.sx-input__prefix, .sx-input__suffix { color:var(--sx-fg-3); font-family:var(--sx-font-mono); font-size:14px; white-space:nowrap; }
+.sx-input__lead { color:var(--sx-fg-3); font-size:20px; }
+.sx-input__icon-btn { background:transparent; border:0; cursor:pointer; color:var(--sx-fg-3); padding:4px; margin:-4px; border-radius:var(--sx-radius-sm); display:inline-flex; align-items:center; justify-content:center; }
+.sx-input__icon-btn:hover { color:var(--sx-fg-1); background:var(--sx-bg-subtle); }
+.sx-input__icon-btn .material-symbols-rounded { font-size:20px; }
+.sx-input--with-button { padding-right:4px; }
+.sx-input__trailing-btn { flex:0 0 auto; height:40px; padding:0 16px; border-radius:var(--sx-radius-full); background:var(--sx-deep-ivy); color:#fff; border:0; cursor:pointer; font:700 14px/1 var(--sx-font-display); white-space:nowrap; transition:background var(--sx-dur-1) var(--sx-ease); }
+.sx-input__trailing-btn:hover { background:var(--sx-secure-teal); }
+.sx-input__trailing-btn[disabled] { background:var(--sx-light-grey); color:var(--sx-fg-4); cursor:not-allowed; }
+
+/* Textarea */
+.sx-textarea-wrap { display:flex; flex-direction:column; min-height:96px; padding:10px 14px; border-radius:var(--sx-radius-control); border:1px solid var(--sx-line-strong); background:#fff; transition:border-color var(--sx-dur-1) var(--sx-ease), box-shadow var(--sx-dur-1) var(--sx-ease); }
+.sx-textarea-wrap:focus-within { border-color:var(--sx-secure-teal); box-shadow:0 0 0 3px rgba(0,211,126,0.16); }
+.sx-textarea-wrap.is-error { border-color:var(--sx-critical); }
+.sx-textarea-wrap.is-disabled { background:var(--sx-bg-subtle); color:var(--sx-fg-4); }
+.sx-textarea-wrap textarea { flex:1; border:0; outline:0; background:transparent; font:var(--sx-body-l); color:var(--sx-fg-1); resize:vertical; min-height:72px; }
+.sx-textarea-wrap textarea::placeholder { color:var(--sx-fg-3); }
+.sx-textarea-wrap__count { align-self:flex-end; margin-top:6px; font:var(--sx-body-s); color:var(--sx-fg-3); font-family:var(--sx-font-mono); }
+
+/* Select */
+.sx-select { position:relative; display:flex; align-items:center; height:48px; padding:0 14px; background:#fff; border:1px solid var(--sx-line-strong); border-radius:var(--sx-radius-control); font:var(--sx-body-l); color:var(--sx-fg-1); transition:border-color var(--sx-dur-1) var(--sx-ease), box-shadow var(--sx-dur-1) var(--sx-ease); cursor:pointer; }
+.sx-select:focus-within { border-color:var(--sx-secure-teal); box-shadow:0 0 0 3px rgba(0,211,126,0.16); }
+.sx-select.is-error { border-color:var(--sx-critical); }
+.sx-select.is-disabled { background:var(--sx-bg-subtle); color:var(--sx-fg-4); cursor:not-allowed; }
+.sx-select select { flex:1; appearance:none; border:0; outline:0; background:transparent; font:inherit; color:inherit; cursor:inherit; padding-right:24px; }
+.sx-select__chevron { position:absolute; right:12px; top:50%; transform:translateY(-50%); pointer-events:none; color:var(--sx-fg-3); font-size:22px; }
+
+/* Copybox */
+.sx-copybox { display:flex; align-items:center; gap:8px; padding:0 4px 0 14px; height:48px; background:var(--sx-bg-subtle); border:1px solid var(--sx-line); border-radius:var(--sx-radius-control); font-family:var(--sx-font-mono); font-size:14px; color:var(--sx-fg-1); }
+.sx-copybox__value { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.sx-copybox--multiline { align-items:flex-start; padding:12px 12px 12px 14px; height:auto; min-height:96px; }
+.sx-copybox--multiline .sx-copybox__value { white-space:pre-wrap; word-break:break-word; overflow:auto; }
+.sx-copybox__btn { display:inline-flex; align-items:center; gap:6px; background:transparent; border:0; cursor:pointer; color:var(--sx-deep-ivy); font:700 13px/1 var(--sx-font-display); padding:8px 12px; border-radius:var(--sx-radius-card); transition:background var(--sx-dur-1) var(--sx-ease); }
+.sx-copybox__btn:hover { background:var(--sx-light-grey); }
+.sx-copybox__btn .material-symbols-rounded { font-size:18px; }
+.sx-copybox.is-copied .sx-copybox__btn { color:var(--sx-positive); }
+
+/* Checkbox / control */
+.sx-control { display:inline-flex; align-items:flex-start; gap:10px; cursor:pointer; font:var(--sx-body-m); color:var(--sx-fg-1); }
+.sx-control input { position:absolute; opacity:0; pointer-events:none; width:0; height:0; }
+.sx-control__label { padding-top:1px; }
+.sx-control__sub { display:block; font:var(--sx-body-s); color:var(--sx-fg-3); margin-top:2px; }
+.sx-control.is-disabled { color:var(--sx-fg-4); cursor:not-allowed; }
+.sx-checkbox__box { width:18px; height:18px; border-radius:4px; border:1.5px solid var(--sx-line-strong); background:#fff; display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; transition:background var(--sx-dur-1) var(--sx-ease), border-color var(--sx-dur-1) var(--sx-ease); }
+.sx-checkbox__box svg { width:14px; height:14px; color:#fff; opacity:0; transform:scale(0.7); transition:opacity var(--sx-dur-1) var(--sx-ease), transform var(--sx-dur-1) var(--sx-ease); }
+.sx-control input:checked + .sx-checkbox__box { background:var(--sx-secure-teal); border-color:var(--sx-secure-teal); }
+.sx-control input:checked + .sx-checkbox__box svg { opacity:1; transform:scale(1); }
+.sx-control.is-error .sx-checkbox__box { border-color:var(--sx-critical); }
+.sx-control.is-disabled .sx-checkbox__box { background:var(--sx-bg-subtle); border-color:var(--sx-line); }
+
+/* Upload */
+.sx-upload { display:flex; flex-direction:column; gap:8px; }
+.sx-upload__drop { border:1.5px dashed var(--sx-line-strong); border-radius:var(--sx-radius-card); background:var(--sx-bg-subtle); padding:24px; display:flex; flex-direction:column; align-items:center; gap:8px; cursor:pointer; transition:border-color var(--sx-dur-1) var(--sx-ease), background var(--sx-dur-1) var(--sx-ease); text-align:center; }
+.sx-upload__drop:hover, .sx-upload__drop.is-dragging { border-color:var(--sx-secure-teal); background:var(--sx-bg-success); }
+.sx-upload__drop.is-error { border-color:var(--sx-critical); background:var(--sx-critical-soft); }
+.sx-upload__icon { font-size:36px; color:var(--sx-secure-teal); }
+.sx-upload__primary { font:700 14px/1.4 var(--sx-font-display); color:var(--sx-deep-ivy); }
+.sx-upload__primary .sx-upload__link { color:var(--sx-secure-teal); text-decoration:underline; cursor:pointer; }
+.sx-upload__hint { font:var(--sx-body-s); color:var(--sx-fg-3); }
+.sx-upload input[type="file"] { position:absolute; opacity:0; pointer-events:none; width:1px; height:1px; }
+.sx-upload__list { display:flex; flex-direction:column; gap:6px; margin-top:4px; }
+.sx-upload__file { display:flex; align-items:center; gap:10px; padding:8px 12px; background:#fff; border:1px solid var(--sx-line); border-radius:var(--sx-radius-card); }
+.sx-upload__file-icon { font-size:22px; color:var(--sx-fg-2); }
+.sx-upload__file-name { flex:1; min-width:0; font:var(--sx-body-m); color:var(--sx-fg-1); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.sx-upload__file-size { font:var(--sx-body-s); color:var(--sx-fg-3); font-family:var(--sx-font-mono); }
+.sx-upload__file-remove { background:transparent; border:0; cursor:pointer; color:var(--sx-fg-3); padding:4px; margin:-4px; }
+.sx-upload__file-remove:hover { color:var(--sx-critical); }
+
+/* Card */
+.sx-card { background:#fff; border-radius:var(--sx-radius-card); border:1px solid var(--sx-line); padding:24px; color:var(--sx-fg-1); }
+.sx-card--raised { border-color:transparent; box-shadow:var(--sx-shadow-1); }
+.sx-card--ivy { background:var(--sx-deep-ivy); color:#fff; border-color:transparent; }
+.sx-card--teal { background:var(--sx-secure-teal); color:#fff; border-color:transparent; }
+.sx-card__title { font:700 20px/1.25 var(--sx-font-display); margin:0 0 8px; }
+.sx-card__body { font:var(--sx-body-m); color:var(--sx-fg-2); margin:0; }
+.sx-card--ivy .sx-card__body, .sx-card--teal .sx-card__body { color:rgba(255,255,255,0.85); }
+
+/* Table */
+.sx-table-wrap { width:100%; overflow-x:auto; background:#fff; border-radius:var(--sx-radius-card); border:1px solid var(--sx-line); }
+.sx-table { width:100%; border-collapse:separate; border-spacing:0; font:var(--sx-body-m); color:var(--sx-fg-1); }
+.sx-table thead th { position:sticky; top:0; background:var(--sx-bg-subtle); color:var(--sx-fg-2); font:700 12px/1.4 var(--sx-font-display); text-transform:uppercase; letter-spacing:0.06em; text-align:left; padding:12px 16px; border-bottom:1px solid var(--sx-line); }
+.sx-table tbody td { padding:14px 16px; border-bottom:1px solid var(--sx-line-soft); vertical-align:middle; }
+.sx-table tbody tr:last-child td { border-bottom:0; }
+.sx-table tbody tr:hover td { background:var(--sx-bg-subtle); }
+.sx-table--zebra tbody tr:nth-child(odd) td { background:rgba(247,247,247,0.5); }
+.sx-table th.sx-table__num, .sx-table td.sx-table__num { text-align:right; font-family:var(--sx-font-mono); font-variant-numeric:tabular-nums; }
+.sx-table__empty { padding:48px 24px; text-align:center; color:var(--sx-fg-3); font:var(--sx-body-m); }
+
+/* Pagination */
+.sx-pagination { display:flex; align-items:center; gap:4px; font:var(--sx-body-m); }
+.sx-pagination__btn { min-width:36px; height:36px; padding:0 8px; background:transparent; border:1px solid transparent; border-radius:var(--sx-radius-card); cursor:pointer; color:var(--sx-fg-1); font:700 14px/1 var(--sx-font-display); display:inline-flex; align-items:center; justify-content:center; transition:background var(--sx-dur-1) var(--sx-ease), border-color var(--sx-dur-1) var(--sx-ease); }
+.sx-pagination__btn:hover:not(.is-active):not([disabled]) { background:var(--sx-bg-subtle); }
+.sx-pagination__btn.is-active { background:var(--sx-deep-ivy); color:#fff; }
+.sx-pagination__btn[disabled] { color:var(--sx-fg-4); cursor:not-allowed; }
+.sx-pagination__btn .material-symbols-rounded { font-size:20px; }
+.sx-pagination__ellipsis { width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; color:var(--sx-fg-3); }
+.sx-pagination__summary { margin-left:12px; color:var(--sx-fg-3); font:var(--sx-body-s); font-family:var(--sx-font-mono); }
+
+/* PageTitle */
+.sx-page-title { display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap; padding-bottom:16px; border-bottom:1px solid var(--sx-line-soft); margin-bottom:24px; }
+.sx-page-title__head { display:flex; flex-direction:column; gap:8px; min-width:0; }
+.sx-page-title__h1 { font:700 28px/1.2 var(--sx-font-display); color:var(--sx-deep-ivy); letter-spacing:-0.01em; margin:0; }
+.sx-page-title__sub { font:var(--sx-body-l); color:var(--sx-fg-2); margin:0; max-width:64ch; }
+.sx-page-title__actions { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+
+/* Breadcrumb (minimal — matches DS trail pattern) */
+.sx-breadcrumb { display:flex; align-items:center; gap:6px; font:var(--sx-body-s); color:var(--sx-fg-3); }
+.sx-breadcrumb a { color:var(--sx-fg-3); text-decoration:none; cursor:pointer; }
+.sx-breadcrumb a:hover { color:var(--sx-secure-teal); text-decoration:underline; }
+.sx-breadcrumb .material-symbols-rounded { font-size:16px; }
+
+/* Steps */
+.sx-steps { display:flex; align-items:flex-start; width:100%; }
+.sx-steps__step { flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; position:relative; min-width:0; cursor:default; }
+.sx-steps__dot { width:32px; height:32px; border-radius:999px; background:#fff; border:1.5px solid var(--sx-line-strong); color:var(--sx-fg-1); font:700 14px/1 var(--sx-font-display); display:inline-flex; align-items:center; justify-content:center; }
+.sx-steps__dot .material-symbols-rounded { font-size:18px; }
+.sx-steps__step.is-done .sx-steps__dot { background:var(--sx-secure-teal); border-color:var(--sx-secure-teal); color:#fff; }
+.sx-steps__step.is-active .sx-steps__dot { border-color:var(--sx-deep-ivy); border-width:2px; }
+.sx-steps__label { font:700 13px/1.3 var(--sx-font-display); color:var(--sx-fg-2); text-align:center; max-width:14ch; }
+.sx-steps__step.is-active .sx-steps__label { color:var(--sx-deep-ivy); }
+.sx-steps__step.is-done .sx-steps__label { color:var(--sx-fg-1); }
+.sx-steps__sub { font:var(--sx-body-s); color:var(--sx-fg-3); text-align:center; max-width:18ch; }
+.sx-steps__connector { flex:1; height:1.5px; background:var(--sx-line-strong); margin-top:16px; align-self:flex-start; }
+.sx-steps__connector.is-done { background:var(--sx-secure-teal); }
+.sx-steps--vertical { flex-direction:column; align-items:stretch; gap:0; }
+.sx-steps--vertical .sx-steps__step { flex:0 0 auto; flex-direction:row; align-items:flex-start; gap:12px; text-align:left; padding:4px 0; }
+.sx-steps--vertical .sx-steps__label, .sx-steps--vertical .sx-steps__sub { text-align:left; max-width:none; }
+.sx-steps--vertical .sx-steps__connector { width:1.5px; height:24px; margin:0 0 0 16px; flex:0 0 auto; align-self:flex-start; }
+
+/* EmptyState */
+.sx-empty { display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px; padding:32px 16px; }
+.sx-empty.is-compact { gap:6px; padding:20px 12px; }
+.sx-empty__title { font:700 16px/1.3 var(--sx-font-display); color:var(--sx-deep-ivy); max-width:480px; }
+.sx-empty__sub { font:var(--sx-body-m); color:var(--sx-fg-2); max-width:480px; }
+
+/* Alert */
+.sx-alert { display:flex; gap:12px; align-items:flex-start; padding:14px 16px; border-radius:var(--sx-radius-card); border:1px solid; background:#fff; color:var(--sx-fg-1); }
+.sx-alert__icon { flex:0 0 auto; font-size:22px; margin-top:1px; }
+.sx-alert__body { flex:1; min-width:0; }
+.sx-alert__title { font:700 14px/1.4 var(--sx-font-display); }
+.sx-alert__text { font:var(--sx-body-m); color:var(--sx-fg-2); margin-top:2px; }
+.sx-alert__actions { display:flex; gap:8px; margin-top:10px; }
+.sx-alert__close { flex:0 0 auto; background:transparent; border:0; cursor:pointer; color:inherit; opacity:0.6; padding:2px; margin:-2px; }
+.sx-alert__close:hover { opacity:1; }
+.sx-alert--positive { background:var(--sx-positive-soft); border-color:var(--sx-positive-border); } .sx-alert--positive .sx-alert__icon { color:var(--sx-positive); }
+.sx-alert--critical { background:var(--sx-critical-soft); border-color:var(--sx-critical-border); } .sx-alert--critical .sx-alert__icon { color:var(--sx-critical); }
+.sx-alert--warning  { background:var(--sx-warning-soft);  border-color:var(--sx-warning-border); } .sx-alert--warning .sx-alert__icon  { color:var(--sx-warning); }
+.sx-alert--info     { background:var(--sx-information-soft); border-color:var(--sx-information-border); } .sx-alert--info .sx-alert__icon     { color:var(--sx-information); }
+.sx-alert--neutral  { background:var(--sx-neutral-soft); border-color:var(--sx-neutral-border); } .sx-alert--neutral .sx-alert__icon  { color:var(--sx-neutral); }
+
+/* Modal */
+.sx-modal-scrim { position:fixed; inset:0; background:rgba(0,43,42,0.4); display:flex; align-items:center; justify-content:center; padding:24px; z-index:1100; animation:sx-scrim-in var(--sx-dur-3) var(--sx-ease); }
+@keyframes sx-scrim-in { from { opacity:0; } to { opacity:1; } }
+.sx-modal { background:#fff; border-radius:var(--sx-radius-control); box-shadow:var(--sx-shadow-3); width:100%; max-width:480px; display:flex; flex-direction:column; max-height:calc(100vh - 48px); animation:sx-modal-in var(--sx-dur-3) var(--sx-ease); }
+@keyframes sx-modal-in { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+.sx-modal--sm { max-width:360px; } .sx-modal--lg { max-width:640px; } .sx-modal--xl { max-width:880px; }
+.sx-modal__head { display:flex; align-items:flex-start; gap:12px; padding:24px 24px 8px; }
+.sx-modal__title { flex:1; font:700 20px/1.3 var(--sx-font-display); color:var(--sx-deep-ivy); }
+.sx-modal__close { flex:0 0 auto; background:transparent; border:0; cursor:pointer; color:var(--sx-fg-2); margin:-8px -8px -8px 0; padding:8px; border-radius:var(--sx-radius-card); }
+.sx-modal__close:hover { background:var(--sx-bg-subtle); color:var(--sx-fg-1); }
+.sx-modal__body { padding:8px 24px 24px; font:var(--sx-body-m); color:var(--sx-fg-2); overflow-y:auto; }
+.sx-modal__foot { display:flex; justify-content:flex-end; gap:8px; padding:12px 24px 20px; border-top:1px solid var(--sx-line-soft); }
+
+/* Menu */
+.sx-menu { position:relative; display:inline-block; }
+.sx-menu__list { position:absolute; z-index:60; background:#fff; border-radius:var(--sx-radius-card); border:1px solid var(--sx-line); box-shadow:var(--sx-shadow-2); min-width:200px; padding:4px; display:flex; flex-direction:column; animation:sx-menu-in 120ms var(--sx-ease); }
+@keyframes sx-menu-in { from { opacity:0; transform:translateY(-2px); } to { opacity:1; transform:translateY(0); } }
+.sx-menu__list--right { right:0; } .sx-menu__list--top { bottom:calc(100% + 6px); } .sx-menu__list--bottom { top:calc(100% + 6px); }
+.sx-menu__item { display:flex; align-items:center; gap:10px; padding:8px 10px; border:0; background:transparent; cursor:pointer; text-align:left; font:var(--sx-body-m); color:var(--sx-fg-1); border-radius:var(--sx-radius-sm); transition:background var(--sx-dur-1) var(--sx-ease); }
+.sx-menu__item:hover, .sx-menu__item:focus-visible { background:var(--sx-bg-subtle); outline:none; }
+.sx-menu__item[disabled] { color:var(--sx-fg-4); cursor:not-allowed; }
+.sx-menu__item .material-symbols-rounded { font-size:20px; color:var(--sx-fg-2); }
+.sx-menu__item--critical { color:var(--sx-critical); } .sx-menu__item--critical .material-symbols-rounded { color:var(--sx-critical); }
+.sx-menu__divider { height:1px; background:var(--sx-line-soft); margin:4px 0; }
+.sx-menu__label { font:var(--sx-body-s); color:var(--sx-fg-3); text-transform:uppercase; letter-spacing:0.08em; padding:6px 10px 4px; }
+
+/* Tabs */
+.sx-tabs__strip { display:flex; border-bottom:1px solid var(--sx-line); gap:0; }
+.sx-tabs__tab { flex:0 0 auto; height:48px; padding:0 20px; background:transparent; border:0; cursor:pointer; font:700 14px/1 var(--sx-font-display); color:var(--sx-fg-3); position:relative; transition:color var(--sx-dur-1) var(--sx-ease); }
+.sx-tabs__tab:hover { color:var(--sx-fg-1); }
+.sx-tabs__tab.is-active { color:var(--sx-deep-ivy); }
+.sx-tabs__tab.is-active::after { content:""; position:absolute; left:12px; right:12px; bottom:-1px; height:3px; background:var(--sx-deep-ivy); border-radius:2px 2px 0 0; }
+.sx-tabs__tab[disabled] { color:var(--sx-fg-4); cursor:not-allowed; }
+.sx-tabs--fill .sx-tabs__tab { flex:1; }
+.sx-tabs--pill .sx-tabs__strip { border-bottom:0; gap:4px; padding:4px; background:var(--sx-bg-subtle); border-radius:var(--sx-radius-full); display:inline-flex; }
+.sx-tabs--pill .sx-tabs__tab { height:36px; border-radius:var(--sx-radius-full); padding:0 16px; }
+.sx-tabs--pill .sx-tabs__tab.is-active { background:#fff; color:var(--sx-deep-ivy); box-shadow:var(--sx-shadow-1); }
+.sx-tabs--pill .sx-tabs__tab.is-active::after { display:none; }
+.sx-tabs__panel { padding:24px 0; }
+
+/* Sidebar */
+.sx-sidebar { background:#fff; padding:32px 16px 24px; display:flex; flex-direction:column; gap:24px; border-right:1px solid var(--sx-line-soft); min-width:248px; height:100%; }
+.sx-sidebar__brand { display:flex; align-items:center; gap:10px; padding:0 8px 12px; }
+.sx-sidebar__brand-name { font:800 22px/1 var(--sx-font-display); color:var(--sx-deep-ivy); letter-spacing:-0.01em; }
+.sx-sidebar__brand-sub { font:var(--sx-body-s); color:var(--sx-fg-2); margin-top:2px; }
+.sx-sidebar__nav { display:flex; flex-direction:column; gap:4px; }
+.sx-nav-item { display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:var(--sx-radius-card); border:0; background:transparent; color:var(--sx-fg); cursor:pointer; font:var(--sx-body-m); text-align:left; transition:background var(--sx-dur-1) var(--sx-ease), color var(--sx-dur-1) var(--sx-ease); }
+.sx-nav-item:hover { background:var(--sx-bg-subtle); }
+.sx-nav-item.is-active { background:#E2F7EC; color:var(--sx-secure-teal); font-weight:700; }
+.sx-nav-item.is-active .material-symbols-rounded { color:var(--sx-secure-teal); }
+.sx-nav-item__label { flex:1; }
+.sx-nav-item__tag { font:700 11px/1 var(--sx-font-display); padding:3px 8px; border-radius:var(--sx-radius-full); background:var(--sx-mint); color:var(--sx-deep-ivy); }
+.sx-nav-item .material-symbols-rounded { font-size:22px; color:var(--sx-fg-2); }
+
+/* TopBar */
+.sx-topbar { display:inline-flex; align-items:center; gap:18px; }
+.sx-icon-button { position:relative; width:40px; height:40px; border-radius:var(--sx-radius-full); background:#fff; border:1px solid var(--sx-line); display:inline-flex; align-items:center; justify-content:center; color:var(--sx-fg-1); cursor:pointer; transition:background var(--sx-dur-1) var(--sx-ease); }
+.sx-icon-button:hover { background:var(--sx-bg-subtle); }
+.sx-icon-button__badge { position:absolute; top:-2px; right:-2px; min-width:18px; height:18px; padding:0 5px; border-radius:var(--sx-radius-full); background:var(--sx-vibrant-green); color:var(--sx-deep-ivy); font:700 11px/18px var(--sx-font-display); text-align:center; border:2px solid #fff; }
+.sx-topbar__user { display:flex; align-items:center; gap:10px; }
+.sx-topbar__avatar { width:36px; height:36px; border-radius:var(--sx-radius-full); background:var(--sx-bg-subtle); color:var(--sx-fg-3); display:inline-flex; align-items:center; justify-content:center; font-size:22px; border:1px solid var(--sx-line); }
+.sx-topbar__user-name { font:var(--sx-label-m); color:var(--sx-fg-1); }
+.sx-topbar__user-sub { font:var(--sx-body-s); color:var(--sx-fg-2); }
+
+/* Toast */
+.sx-toast-region { position:fixed; right:24px; bottom:24px; display:flex; flex-direction:column; gap:8px; z-index:1000; pointer-events:none; }
+.sx-toast { pointer-events:auto; min-width:280px; max-width:420px; background:var(--sx-deep-ivy); color:#fff; border-radius:var(--sx-radius-card); padding:12px 14px; box-shadow:var(--sx-shadow-2); display:flex; gap:10px; align-items:flex-start; animation:sx-toast-in 240ms var(--sx-ease); }
+@keyframes sx-toast-in { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+.sx-toast__icon { flex:0 0 auto; font-size:22px; margin-top:1px; color:var(--sx-vibrant-green); }
+.sx-toast__body { flex:1; min-width:0; }
+.sx-toast__title { font:700 14px/1.3 var(--sx-font-display); }
+.sx-toast__text { font:var(--sx-body-m); color:rgba(255,255,255,0.85); margin-top:2px; }
+.sx-toast__close { flex:0 0 auto; background:transparent; border:0; cursor:pointer; color:inherit; opacity:0.7; padding:2px; margin:-2px; }
+.sx-toast__close:hover { opacity:1; }
+.sx-toast--critical .sx-toast__icon { color:var(--sx-critical); }
+.sx-toast--warning  .sx-toast__icon { color:var(--sx-warning); }
+.sx-toast--info     .sx-toast__icon { color:var(--sx-information); }
+
+/* ============================================================================
+   App shell + mockup-only layout helpers (token-based, not DS components)
+   ========================================================================== */
+.app { display:grid; grid-template-columns:248px 1fr; min-height:100vh; background:var(--sx-bg-muted); }
+.app__sidebar { position:sticky; top:0; height:100vh; }
+.app__main { display:flex; flex-direction:column; min-width:0; }
+.app__bar { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 32px; background:#fff; border-bottom:1px solid var(--sx-line-soft); position:sticky; top:0; z-index:50; }
+.app__bar-left { display:flex; align-items:center; gap:14px; }
+.app__content { padding:28px 32px 64px; max-width:1240px; width:100%; }
+
+.preview-as { display:inline-flex; align-items:center; gap:8px; padding:4px; background:var(--sx-bg-subtle); border-radius:var(--sx-radius-full); }
+.preview-as__label { font:var(--sx-label-s); color:var(--sx-fg-2); padding-left:8px; text-transform:uppercase; letter-spacing:0.06em; }
+.preview-as__btn { border:0; background:transparent; cursor:pointer; font:700 13px/1 var(--sx-font-display); color:var(--sx-fg-2); padding:8px 12px; border-radius:var(--sx-radius-full); }
+.preview-as__btn.is-active { background:#fff; color:var(--sx-deep-ivy); box-shadow:var(--sx-shadow-1); }
+
+.stat-grid { display:grid; grid-template-columns:repeat(6, 1fr); gap:12px; margin-bottom:20px; }
+@media (max-width:1100px){ .stat-grid { grid-template-columns:repeat(3,1fr);} }
+.stat-card { display:flex; flex-direction:column; gap:6px; padding:16px 18px; cursor:pointer; transition:box-shadow var(--sx-dur-1) var(--sx-ease), border-color var(--sx-dur-1) var(--sx-ease); }
+.stat-card:hover { box-shadow:var(--sx-shadow-1); }
+.stat-card.is-active { border-color:var(--sx-secure-teal); box-shadow:0 0 0 2px rgba(5,73,72,0.12); }
+.stat-card__top { display:flex; align-items:center; gap:8px; }
+.stat-card__num { font:700 30px/1 var(--sx-font-mono); color:var(--sx-deep-ivy); font-variant-numeric:tabular-nums; }
+.stat-card__label { font:var(--sx-body-s); color:var(--sx-fg-2); }
+
+.toolbar { display:flex; align-items:flex-end; gap:12px; flex-wrap:wrap; margin-bottom:16px; }
+.toolbar__search { flex:1 1 280px; min-width:240px; }
+.toolbar__filter { width:190px; }
+.toolbar__dates { display:flex; gap:8px; align-items:flex-end; }
+.toolbar__dates .sx-field { width:160px; }
+.list-meta { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:14px 2px 0; flex-wrap:wrap; }
+.sla { display:inline-flex; align-items:center; gap:8px; }
+.sla__text { font:var(--sx-body-m); color:var(--sx-fg-1); }
+.sla__text .num { font-family:var(--sx-font-mono); }
+.sla-legend { display:flex; align-items:center; gap:16px; font:var(--sx-body-s); color:var(--sx-fg-3); flex-wrap:wrap; }
+.sla-legend span { display:inline-flex; align-items:center; gap:6px; }
+.cell-strong { font:700 14px/1.35 var(--sx-font-display); color:var(--sx-deep-ivy); }
+.cell-mono { font-family:var(--sx-font-mono); font-size:13px; color:var(--sx-fg-2); }
+.row-actions { display:flex; align-items:center; gap:4px; justify-content:flex-end; }
+
+.detail-grid { display:grid; grid-template-columns:minmax(0,1fr) 340px; gap:20px; align-items:start; }
+@media (max-width:980px){ .detail-grid { grid-template-columns:1fr; } }
+.stack { display:flex; flex-direction:column; gap:20px; }
+.kv { display:grid; grid-template-columns:140px 1fr; gap:8px 16px; }
+.kv dt { font:var(--sx-body-m); color:var(--sx-fg-3); }
+.kv dd { margin:0; font:700 14px/1.4 var(--sx-font-display); color:var(--sx-deep-ivy); word-break:break-word; }
+.section-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px; }
+.section-head h2 { font:700 18px/1.3 var(--sx-font-display); color:var(--sx-deep-ivy); }
+.checklist { display:flex; flex-direction:column; gap:12px; }
+.q-block { border:1px solid var(--sx-line); border-radius:var(--sx-radius-card); padding:16px; background:#fff; }
+.q-block + .q-block { margin-top:14px; }
+.q-head { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:6px; }
+.q-title { font:700 15px/1.4 var(--sx-font-display); color:var(--sx-deep-ivy); }
+.q-req { color:var(--sx-critical); font-weight:700; }
+.q-body { margin-top:12px; }
+.choice-grid { display:flex; flex-direction:column; gap:10px; padding:6px 0; }
+.choice { display:flex; align-items:center; gap:10px; padding:10px 12px; border:1px solid var(--sx-line); border-radius:var(--sx-radius-card); cursor:pointer; transition:border-color var(--sx-dur-1) var(--sx-ease), background var(--sx-dur-1) var(--sx-ease); }
+.choice.is-on { border-color:var(--sx-information); background:var(--sx-information-soft); }
+.respond-foot { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:20px; flex-wrap:wrap; }
+.muted { color:var(--sx-fg-3); font:var(--sx-body-s); }
+.matrix-yes { color:var(--sx-positive); } .matrix-no { color:var(--sx-fg-4); }
+.member { display:flex; align-items:center; gap:10px; }
+.member__avatar { width:34px; height:34px; border-radius:var(--sx-radius-full); background:var(--sx-mint); color:var(--sx-deep-ivy); font:700 13px/1 var(--sx-font-display); display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; }
+.member__name { font:700 14px/1.3 var(--sx-font-display); color:var(--sx-deep-ivy); }
+.member__email { font:var(--sx-body-s); color:var(--sx-fg-3); }
+.invite-row { display:flex; gap:12px; align-items:flex-end; flex-wrap:wrap; margin-top:6px; }
+.invite-row .toolbar__search { flex:1 1 280px; }
+.access-denied { display:flex; flex-direction:column; align-items:center; gap:16px; padding:48px 24px; text-align:center; }
+.access-denied .material-symbols-rounded { font-size:48px; color:var(--sx-fg-4); }
+.sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel" data-presets="react">
+const { useState, useEffect, useRef, useId, Fragment } = React;
+const { createPortal } = ReactDOM;
+
+/* ===========================================================================
+   Design-system components — faithful reconstructions of src/components/*.
+   Markup + class names mirror the real components so the verbatim DS CSS
+   above applies. Props match the documented API (verified via get-documentation).
+   =========================================================================== */
+
+const Icon = ({ name, size = 24, filled = false, color, className = "", style, ...rest }) => (
+  <span className={["sx-icon", filled && "sx-icon--filled", className].filter(Boolean).join(" ")}
+        aria-hidden="true" style={{ fontSize: size, color, ...style }} {...rest}>{name}</span>
+);
+
+const Button = ({ variant = "primary", size = "lg", disabled = false, type = "button", className = "", children, ...rest }) => (
+  <button type={type} disabled={disabled}
+    className={["sx-btn", `sx-btn--${variant}`, `sx-btn--${size}`, className].filter(Boolean).join(" ")} {...rest}>{children}</button>
+);
+
+const IconButton = ({ icon, variant = "ghost", shape = "circle", size = "md", label, disabled = false, type = "button", className = "", ...rest }) => (
+  <button type={type} disabled={disabled} aria-label={label}
+    className={["sx-icon-btn", `sx-icon-btn--${variant}`, `sx-icon-btn--${shape}`, `sx-icon-btn--${size}`, className].filter(Boolean).join(" ")} {...rest}>
+    <span className="material-symbols-rounded" aria-hidden="true">{icon}</span>
+  </button>
+);
+
+const LinkButton = ({ as: Tag = "button", size = "md", onDark = false, leadingIcon, trailingIcon, disabled = false, className = "", children, ...rest }) => {
+  const props = Tag === "button" ? { type: "button", disabled } : {};
+  return (
+    <Tag className={["sx-link-btn", `sx-link-btn--${size}`, onDark && "sx-link-btn--onDark", className].filter(Boolean).join(" ")} {...props} {...rest}>
+      {leadingIcon && <span className="material-symbols-rounded">{leadingIcon}</span>}
+      {children}
+      {trailingIcon && <span className="material-symbols-rounded">{trailingIcon}</span>}
+    </Tag>
+  );
+};
+
+const Tag = ({ tone = "neutral", shape = "default", className = "", children, ...rest }) => (
+  <span className={["sx-tag", `sx-tag--${tone}`, shape === "pill" && "sx-tag--pill", className].filter(Boolean).join(" ")} {...rest}>{children}</span>
+);
+
+const Badge = ({ tone = "brand", size = "md", dot = false, max = 99, children, className = "", ...rest }) => {
+  const cls = ["sx-badge", `sx-badge--${size}`, tone !== "brand" && `sx-badge--${tone}`, dot && "sx-badge--dot", className].filter(Boolean).join(" ");
+  const content = dot ? null : (typeof children === "number" && children > max ? `${max}+` : children);
+  return <span className={cls} {...rest}>{content}</span>;
+};
+
+const Input = ({ label, helper, error, prefix, suffix, type = "text", disabled = false, id: idProp, className = "", value, defaultValue, onChange, trailingButton, ...inputProps }) => {
+  const autoId = useId(); const id = idProp || autoId;
+  const isError = !!error, isPassword = type === "password", isSearch = type === "search";
+  const [reveal, setReveal] = useState(false);
+  const [internal, setInternal] = useState(defaultValue ?? "");
+  const isControlled = value !== undefined;
+  const currentValue = isControlled ? value : internal;
+  const handleChange = (e) => { if (!isControlled) setInternal(e.target.value); onChange && onChange(e); };
+  const wrapCls = ["sx-input", isError && "is-error", disabled && "is-disabled", trailingButton && "sx-input--with-button", className].filter(Boolean).join(" ");
+  const effectiveType = isPassword ? (reveal ? "text" : "password") : type;
+  const handleClear = () => { isControlled ? (onChange && onChange({ target: { value: "" } })) : setInternal(""); };
+  return (
+    <div className="sx-field">
+      {label && <label htmlFor={id} className="sx-field__label">{label}</label>}
+      <div className={wrapCls}>
+        {isSearch && <span className="material-symbols-rounded sx-input__lead" aria-hidden="true">search</span>}
+        {prefix && !isSearch && <span className="sx-input__prefix">{prefix}</span>}
+        <input id={id} type={effectiveType} disabled={disabled} value={currentValue} onChange={handleChange} {...inputProps} />
+        {isSearch && currentValue && !disabled && (
+          <button type="button" className="sx-input__icon-btn" onClick={handleClear} aria-label="Clear"><span className="material-symbols-rounded">close</span></button>
+        )}
+        {suffix && !isSearch && !isPassword && <span className="sx-input__suffix">{suffix}</span>}
+        {trailingButton && (
+          <button type="button" className="sx-input__trailing-btn" onClick={trailingButton.onClick} disabled={disabled || trailingButton.disabled}>{trailingButton.label}</button>
+        )}
+      </div>
+      {(helper || error) && <span className={"sx-field__helper" + (isError ? " is-error" : "")}>{error || helper}</span>}
+    </div>
+  );
+};
+
+const Textarea = ({ label, helper, error, maxLength, showCount = false, value, defaultValue = "", disabled = false, id: idProp, onChange, className = "", rows = 4, ...rest }) => {
+  const id = useId(); const isError = !!error;
+  const [internal, setInternal] = useState(defaultValue);
+  const v = value ?? internal;
+  const handleChange = (e) => { if (value === undefined) setInternal(e.target.value); onChange && onChange(e); };
+  return (
+    <div className={"sx-field " + className}>
+      {label && <label htmlFor={idProp || id} className="sx-field__label">{label}</label>}
+      <div className={["sx-textarea-wrap", isError && "is-error", disabled && "is-disabled"].filter(Boolean).join(" ")}>
+        <textarea id={idProp || id} rows={rows} value={v} onChange={handleChange} disabled={disabled} maxLength={maxLength} {...rest} />
+        {(showCount || maxLength) && <span className="sx-textarea-wrap__count">{String(v).length}{maxLength ? `/${maxLength}` : ""}</span>}
+      </div>
+      {(helper || error) && <span className={"sx-field__helper" + (isError ? " is-error" : "")}>{error || helper}</span>}
+    </div>
+  );
+};
+
+const Select = ({ label, helper, error, options = [], placeholder = "Select…", disabled = false, id: idProp, className = "", ...selectProps }) => {
+  const id = useId(); const isError = !!error;
+  return (
+    <div className={"sx-field " + className}>
+      {label && <label htmlFor={idProp || id} className="sx-field__label">{label}</label>}
+      <div className={["sx-select", isError && "is-error", disabled && "is-disabled"].filter(Boolean).join(" ")}>
+        <select id={idProp || id} disabled={disabled} {...selectProps}>
+          {placeholder !== false && <option value="" disabled hidden>{placeholder}</option>}
+          {options.map((o) => <option key={o.value} value={o.value} disabled={o.disabled}>{o.label}</option>)}
+        </select>
+        <span className="material-symbols-rounded sx-select__chevron" aria-hidden="true">expand_more</span>
+      </div>
+      {(helper || error) && <span className={"sx-field__helper" + (isError ? " is-error" : "")}>{error || helper}</span>}
+    </div>
+  );
+};
+
+const DateInput = ({ label, helper, error, disabled = false, id: idProp, className = "", ...inputProps }) => {
+  const id = useId(); const isError = !!error;
+  return (
+    <div className={"sx-field " + className}>
+      {label && <label htmlFor={idProp || id} className="sx-field__label">{label}</label>}
+      <div className={["sx-input", isError && "is-error", disabled && "is-disabled"].filter(Boolean).join(" ")}>
+        <input id={idProp || id} type="date" disabled={disabled} {...inputProps} />
+        <span className="material-symbols-rounded" style={{ color: "var(--sx-fg-3)", pointerEvents: "none" }} aria-hidden="true">calendar_today</span>
+      </div>
+      {(helper || error) && <span className={"sx-field__helper" + (isError ? " is-error" : "")}>{error || helper}</span>}
+    </div>
+  );
+};
+
+const Copybox = ({ value = "", multiline = false, label, className = "", ...rest }) => {
+  const [copied, setCopied] = useState(false);
+  const copy = async () => { try { await navigator.clipboard.writeText(value); } catch {} setCopied(true); setTimeout(() => setCopied(false), 1500); };
+  return (
+    <div className="sx-field" {...rest}>
+      {label && <label className="sx-field__label">{label}</label>}
+      <div className={["sx-copybox", multiline && "sx-copybox--multiline", copied && "is-copied", className].filter(Boolean).join(" ")}>
+        <span className="sx-copybox__value">{value}</span>
+        <button type="button" className="sx-copybox__btn" onClick={copy} aria-label="Copy">
+          <span className="material-symbols-rounded">{copied ? "check" : "content_copy"}</span>{copied ? "Copied" : "Copy"}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const Checkbox = ({ label, sub, checked, defaultChecked, disabled = false, error = false, onChange, id: idProp, className = "", ...inputProps }) => {
+  const id = useId();
+  return (
+    <label htmlFor={idProp || id} className={["sx-control", disabled && "is-disabled", error && "is-error", className].filter(Boolean).join(" ")}>
+      <input type="checkbox" id={idProp || id} checked={checked} defaultChecked={defaultChecked} disabled={disabled} onChange={onChange} {...inputProps} />
+      <span className="sx-checkbox__box" aria-hidden="true">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5 L6.5 12 L13 4.5" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" /></svg>
+      </span>
+      {label && <span className="sx-control__label">{label}{sub && <span className="sx-control__sub">{sub}</span>}</span>}
+    </label>
+  );
+};
+
+function formatBytes(n) {
+  if (n < 1024) return `${n} B`;
+  if (n < 1024 * 1024) return `${(n / 1024).toFixed(1)} KB`;
+  if (n < 1024 * 1024 * 1024) return `${(n / 1024 / 1024).toFixed(1)} MB`;
+  return `${(n / 1024 / 1024 / 1024).toFixed(2)} GB`;
+}
+const Upload = ({ label, hint = "PNG, JPG or PDF up to 10 MB", accept, multiple = false, files: controlledFiles, onChange, error, disabled = false, className = "" }) => {
+  const [internal, setInternal] = useState([]);
+  const [dragging, setDragging] = useState(false);
+  const isControlled = controlledFiles !== undefined;
+  const files = isControlled ? controlledFiles : internal;
+  const setFiles = (next) => { if (!isControlled) setInternal(next); onChange && onChange(next); };
+  const handleSelect = (list) => { const arr = Array.from(list || []); setFiles(multiple ? [...files, ...arr] : arr.slice(0, 1)); };
+  const remove = (file) => setFiles(files.filter((f) => f !== file));
+  return (
+    <div className={"sx-upload " + className}>
+      {label && <span className="sx-field__label">{label}</span>}
+      <label className={["sx-upload__drop", dragging && "is-dragging", error && "is-error"].filter(Boolean).join(" ")}
+        onDragOver={(e) => { e.preventDefault(); if (!disabled) setDragging(true); }}
+        onDragLeave={() => setDragging(false)}
+        onDrop={(e) => { e.preventDefault(); setDragging(false); if (disabled) return; handleSelect(e.dataTransfer.files); }}>
+        <span className="material-symbols-rounded sx-upload__icon" aria-hidden="true">cloud_upload</span>
+        <span className="sx-upload__primary"><span className="sx-upload__link">Click to upload</span> or drag and drop</span>
+        <span className="sx-upload__hint">{hint}</span>
+        <input type="file" accept={accept} multiple={multiple} disabled={disabled} onChange={(e) => handleSelect(e.target.files)} />
+      </label>
+      {error && <span className="sx-field__helper is-error">{error}</span>}
+      {files.length > 0 && (
+        <div className="sx-upload__list">
+          {files.map((file, i) => (
+            <div key={i} className="sx-upload__file">
+              <span className="material-symbols-rounded sx-upload__file-icon" aria-hidden="true">description</span>
+              <span className="sx-upload__file-name">{file.name}</span>
+              <span className="sx-upload__file-size">{formatBytes(file.size)}</span>
+              <button type="button" className="sx-upload__file-remove" onClick={() => remove(file)} aria-label={`Remove ${file.name}`}><span className="material-symbols-rounded">close</span></button>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+const Card = ({ surface = "default", className = "", title, body, children, ...rest }) => (
+  <section className={["sx-card", surface !== "default" && `sx-card--${surface}`, className].filter(Boolean).join(" ")} {...rest}>
+    {title && <h3 className="sx-card__title">{title}</h3>}
+    {body && <p className="sx-card__body">{body}</p>}
+    {children}
+  </section>
+);
+
+const Table = ({ columns = [], rows = [], rowKey = "id", zebra = false, empty = "No data.", className = "" }) => (
+  <div className={"sx-table-wrap " + className}>
+    <table className={"sx-table" + (zebra ? " sx-table--zebra" : "")}>
+      <thead><tr>{columns.map((c) => <th key={c.key} className={c.numeric || c.align === "right" ? "sx-table__num" : undefined} style={c.width ? { width: c.width } : undefined}>{c.header}</th>)}</tr></thead>
+      <tbody>
+        {rows.length === 0 && <tr><td className="sx-table__empty" colSpan={columns.length}>{empty}</td></tr>}
+        {rows.map((row, i) => (
+          <tr key={row[rowKey] ?? i}>
+            {columns.map((c) => <td key={c.key} className={c.numeric || c.align === "right" ? "sx-table__num" : undefined}>{c.render ? c.render(row) : row[c.key]}</td>)}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
+
+function buildPages(current, total, siblings = 1) {
+  const range = (f, t) => { const o = []; for (let i = f; i <= t; i++) o.push(i); return o; };
+  const totalShown = siblings * 2 + 5;
+  if (total <= totalShown) return range(1, total);
+  const left = Math.max(current - siblings, 2), right = Math.min(current + siblings, total - 1);
+  const pages = [1];
+  if (left > 2) pages.push("…");
+  pages.push(...range(left, right));
+  if (right < total - 1) pages.push("…");
+  pages.push(total);
+  return pages;
+}
+const Pagination = ({ page = 1, totalPages = 1, onChange, siblings = 1, showSummary = false, total, pageSize, className = "" }) => {
+  const pages = buildPages(page, totalPages, siblings);
+  const go = (p) => { if (p < 1 || p > totalPages || p === page) return; onChange && onChange(p); };
+  return (
+    <nav aria-label="Pagination" className={"sx-pagination " + className}>
+      <button type="button" className="sx-pagination__btn" disabled={page <= 1} onClick={() => go(page - 1)} aria-label="Previous page"><span className="material-symbols-rounded">chevron_left</span></button>
+      {pages.map((p, i) => p === "…"
+        ? <span key={`e${i}`} className="sx-pagination__ellipsis" aria-hidden="true">…</span>
+        : <button key={p} type="button" className={"sx-pagination__btn" + (p === page ? " is-active" : "")} aria-current={p === page ? "page" : undefined} onClick={() => go(p)}>{p}</button>)}
+      <button type="button" className="sx-pagination__btn" disabled={page >= totalPages} onClick={() => go(page + 1)} aria-label="Next page"><span className="material-symbols-rounded">chevron_right</span></button>
+      {showSummary && total != null && pageSize != null && <span className="sx-pagination__summary">{(page - 1) * pageSize + 1}–{Math.min(page * pageSize, total)} of {total}</span>}
+    </nav>
+  );
+};
+
+const Breadcrumb = ({ items = [] }) => (
+  <nav className="sx-breadcrumb" aria-label="Breadcrumb">
+    {items.map((it, i) => (
+      <Fragment key={i}>
+        {i > 0 && <span className="material-symbols-rounded" aria-hidden="true">chevron_right</span>}
+        {it.onClick ? <a onClick={it.onClick}>{it.label}</a> : <span style={{ color: "var(--sx-fg-1)" }}>{it.label}</span>}
+      </Fragment>
+    ))}
+  </nav>
+);
+
+const PageTitle = ({ title, subtitle, breadcrumb, actions, className = "" }) => (
+  <div className={"sx-page-title " + className}>
+    <div className="sx-page-title__head">{breadcrumb}<h1 className="sx-page-title__h1">{title}</h1>{subtitle && <p className="sx-page-title__sub">{subtitle}</p>}</div>
+    {actions && <div className="sx-page-title__actions">{actions}</div>}
+  </div>
+);
+
+const Steps = ({ items = [], current = 0, onSelect, orientation = "horizontal", className = "" }) => (
+  <div className={["sx-steps", orientation === "vertical" && "sx-steps--vertical", className].filter(Boolean).join(" ")} role="list">
+    {items.map((item, i) => {
+      const state = i < current ? "done" : i === current ? "active" : "todo";
+      return (
+        <Fragment key={i}>
+          <div className={["sx-steps__step", `is-${state}`].join(" ")} aria-current={state === "active" ? "step" : undefined}>
+            <span className="sx-steps__dot">{state === "done" ? <span className="material-symbols-rounded">check</span> : i + 1}</span>
+            <span className="sx-steps__label">{item.label}</span>
+            {item.sub && <span className="sx-steps__sub">{item.sub}</span>}
+          </div>
+          {i < items.length - 1 && <span className={"sx-steps__connector" + (state === "done" ? " is-done" : "")} aria-hidden="true" />}
+        </Fragment>
+      );
+    })}
+  </div>
+);
+
+const EmptyState = ({ title, sub, compact = false, className = "" }) => (
+  <div className={["sx-empty", compact && "is-compact", className].filter(Boolean).join(" ")}>
+    {title && <div className="sx-empty__title">{title}</div>}
+    {sub && <div className="sx-empty__sub">{sub}</div>}
+  </div>
+);
+
+const ALERT_ICONS = { positive: "check_circle", critical: "error", warning: "warning", info: "info", neutral: "info" };
+const Alert = ({ tone = "info", title, children, icon, onDismiss, actions, className = "", ...rest }) => {
+  const symbol = icon ?? ALERT_ICONS[tone] ?? "info";
+  return (
+    <div role="alert" className={["sx-alert", `sx-alert--${tone}`, className].filter(Boolean).join(" ")} {...rest}>
+      {symbol && <span className="material-symbols-rounded sx-alert__icon" aria-hidden="true">{symbol}</span>}
+      <div className="sx-alert__body">
+        {title && <div className="sx-alert__title">{title}</div>}
+        {children && <div className="sx-alert__text">{children}</div>}
+        {actions && <div className="sx-alert__actions">{actions}</div>}
+      </div>
+      {onDismiss && <button type="button" className="sx-alert__close" onClick={onDismiss} aria-label="Dismiss"><span className="material-symbols-rounded">close</span></button>}
+    </div>
+  );
+};
+
+const Modal = ({ open, onClose, title, children, footer, size = "md", dismissable = true, hideClose = false, className = "" }) => {
+  useEffect(() => {
+    if (!open || !dismissable) return undefined;
+    const onKey = (e) => { if (e.key === "Escape") onClose && onClose(); };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open, dismissable, onClose]);
+  if (!open) return null;
+  const handleScrim = (e) => { if (dismissable && e.target === e.currentTarget) onClose && onClose(); };
+  return createPortal(
+    <div className="sx-modal-scrim" role="presentation" onClick={handleScrim}>
+      <div className={["sx-modal", `sx-modal--${size}`, className].filter(Boolean).join(" ")} role="dialog" aria-modal="true">
+        {(title || !hideClose) && (
+          <div className="sx-modal__head">
+            {title && <div className="sx-modal__title">{title}</div>}
+            {!hideClose && <button type="button" className="sx-modal__close" onClick={onClose} aria-label="Close"><span className="material-symbols-rounded">close</span></button>}
+          </div>
+        )}
+        <div className="sx-modal__body">{children}</div>
+        {footer && <div className="sx-modal__foot">{footer}</div>}
+      </div>
+    </div>, document.body);
+};
+
+function Menu({ trigger, align = "left", placement = "bottom", children, className = "" }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  useEffect(() => {
+    if (!open) return undefined;
+    const away = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+    const key = (e) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("mousedown", away); document.addEventListener("keydown", key);
+    return () => { document.removeEventListener("mousedown", away); document.removeEventListener("keydown", key); };
+  }, [open]);
+  return (
+    <div className={"sx-menu " + className} ref={ref}>
+      {trigger ? trigger({ onClick: () => setOpen((o) => !o), open }) : null}
+      {open && (
+        <div role="menu" className={["sx-menu__list", align === "right" && "sx-menu__list--right", placement === "top" ? "sx-menu__list--top" : "sx-menu__list--bottom"].filter(Boolean).join(" ")}>
+          {React.Children.map(children, (child) => React.isValidElement(child) && child.type === MenuItem ? React.cloneElement(child, { __close: () => setOpen(false) }) : child)}
+        </div>
+      )}
+    </div>
+  );
+}
+function MenuItem({ icon, tone = "default", disabled = false, onSelect, children, __close }) {
+  return (
+    <button type="button" role="menuitem" disabled={disabled}
+      className={["sx-menu__item", tone === "critical" && "sx-menu__item--critical"].filter(Boolean).join(" ")}
+      onClick={() => { if (disabled) return; onSelect && onSelect(); __close && __close(); }}>
+      {icon && <span className="material-symbols-rounded">{icon}</span>}{children}
+    </button>
+  );
+}
+const MenuDivider = () => <div className="sx-menu__divider" />;
+const MenuLabel = ({ children }) => <div className="sx-menu__label">{children}</div>;
+Menu.Item = MenuItem; Menu.Divider = MenuDivider; Menu.Label = MenuLabel;
+
+function Tabs({ items = [], defaultTab, activeTab, onTabChange, variant = "underline", fill = false, className = "" }) {
+  const [internal, setInternal] = useState(defaultTab || items[0]?.id);
+  const current = activeTab ?? internal;
+  const setCurrent = (id) => { if (activeTab === undefined) setInternal(id); onTabChange && onTabChange(id); };
+  const activeItem = items.find((i) => i.id === current);
+  return (
+    <div className={["sx-tabs", variant === "pill" && "sx-tabs--pill", fill && "sx-tabs--fill", className].filter(Boolean).join(" ")}>
+      <div className="sx-tabs__strip" role="tablist">
+        {items.map((t) => (
+          <button key={t.id} type="button" role="tab" aria-selected={current === t.id} disabled={t.disabled}
+            className={"sx-tabs__tab" + (current === t.id ? " is-active" : "")} onClick={() => setCurrent(t.id)}>{t.label}</button>
+        ))}
+      </div>
+      {activeItem && activeItem.content !== undefined && <div role="tabpanel" className="sx-tabs__panel">{activeItem.content}</div>}
+    </div>
+  );
+}
+
+const Logomark = ({ size = 36, fill = "#00D37E" }) => (
+  <svg width={size} height={size * (90 / 219)} viewBox="0 0 219.184 89.975" fill="none" aria-hidden="true">
+    <path d="M 216.132 24.793 L 198.312 10.033 C 189.882 3.033 165.042 -12.737 126.342 19.813 L 79.782 58.973 C 67.572 69.243 47.892 80.263 31.762 66.863 L 23.862 60.323 C 22.772 59.423 22.762 57.753 23.852 56.843 L 66.722 20.783 C 67.562 20.083 68.782 20.073 69.622 20.773 C 72.902 23.493 80.612 29.873 80.652 29.903 C 86.922 35.073 96.012 34.973 102.232 29.743 L 108.652 24.343 C 109.472 23.653 108.962 22.303 107.882 22.343 C 98.592 22.713 93.542 18.523 91.382 16.723 L 73.532 1.953 C 70.372 -0.667 65.782 -0.647 62.642 1.993 L 3.152 52.033 C 1.732 53.223 0.682 54.813 0.242 56.613 C -0.538 59.843 0.612 63.143 3.072 65.183 L 20.892 79.943 C 29.322 86.943 54.162 102.713 92.862 70.163 L 139.422 31.003 C 151.632 20.733 171.322 9.713 187.442 23.113 L 195.342 29.653 C 196.432 30.553 196.442 32.223 195.352 33.133 L 152.482 69.193 C 151.642 69.893 150.422 69.903 149.582 69.203 C 146.302 66.483 138.592 60.103 138.552 60.073 C 132.282 54.903 123.192 55.003 116.972 60.233 L 110.552 65.633 C 109.732 66.323 110.242 67.673 111.322 67.633 C 120.612 67.263 125.662 71.453 127.822 73.253 L 145.652 88.023 C 148.812 90.643 153.402 90.623 156.542 87.983 L 216.032 37.953 C 217.452 36.763 218.502 35.173 218.942 33.373 C 219.722 30.143 218.572 26.843 216.112 24.803 L 216.132 24.793 Z" fill={fill} fillRule="nonzero" />
+  </svg>
+);
+
+const Sidebar = ({ items, active, onSelect, brandName = "StraitsX", brandSub = "Business Account" }) => (
+  <aside className="sx-sidebar">
+    <div className="sx-sidebar__brand">
+      <Logomark size={42} />
+      <div><div className="sx-sidebar__brand-name">{brandName}</div><div className="sx-sidebar__brand-sub">{brandSub}</div></div>
+    </div>
+    <nav className="sx-sidebar__nav" aria-label="Main">
+      {items.map((item) => (
+        <button key={item.id} type="button" className={"sx-nav-item" + (active === item.id ? " is-active" : "")} onClick={() => onSelect && onSelect(item.id)}>
+          <span className="material-symbols-rounded" aria-hidden="true">{item.icon}</span>
+          <span className="sx-nav-item__label">{item.label}</span>
+          {item.tag && <span className="sx-nav-item__tag">{item.tag}</span>}
+        </button>
+      ))}
+    </nav>
+  </aside>
+);
+
+const TopBar = ({ unread = 0, name = "John Doe", company = "ABC Pte. Ltd.", onNotificationsClick }) => (
+  <div className="sx-topbar">
+    <button type="button" className="sx-icon-button" aria-label="Notifications" onClick={onNotificationsClick}>
+      <span className="material-symbols-rounded" aria-hidden="true">notifications</span>
+      {unread > 0 && <span className="sx-icon-button__badge">{unread}</span>}
+    </button>
+    <button type="button" className="sx-topbar__user" style={{ background: "transparent", border: 0, cursor: "pointer", padding: 0 }}>
+      <span className="material-symbols-rounded sx-topbar__avatar" aria-hidden="true">person</span>
+      <div className="sx-topbar__user-text" style={{ textAlign: "left" }}>
+        <div className="sx-topbar__user-name">{name}</div><div className="sx-topbar__user-sub">{company}</div>
+      </div>
+    </button>
+  </div>
+);
+
+const TOAST_ICONS = { positive: "check_circle", critical: "error", warning: "warning", info: "info" };
+const Toast = ({ tone = "positive", title, children, onDismiss }) => (
+  <div role="status" className={["sx-toast", tone !== "positive" && `sx-toast--${tone}`].filter(Boolean).join(" ")}>
+    <span className="material-symbols-rounded sx-toast__icon" aria-hidden="true">{TOAST_ICONS[tone] || "check_circle"}</span>
+    <div className="sx-toast__body">{title && <div className="sx-toast__title">{title}</div>}{children && <div className="sx-toast__text">{children}</div>}</div>
+    {onDismiss && <button type="button" className="sx-toast__close" onClick={onDismiss} aria-label="Dismiss"><span className="material-symbols-rounded">close</span></button>}
+  </div>
+);
+
+/* ===========================================================================
+   Mockup data + copy (copy authored in StraitsX brand voice — see report note
+   on the unavailable straitsx-web3-copywriter skill; strings reuse the PRD's
+   own specified messages where defined).
+   =========================================================================== */
+const TODAY = new Date("2026-05-29");
+const REASONS = {
+  idv: "ID verification",
+  screening: "Screening hit",
+  highrisk: "High-risk review",
+  bankva: "Bank–VA",
+};
+const fmtDate = (iso) => new Date(iso + "T00:00:00").toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+const daysLeft = (iso) => Math.round((new Date(iso + "T00:00:00") - TODAY) / 86400000);
+
+const CASES = [
+  { id: "RFI-2026-0148", name: "Aisyah Binte Rahman", email: "aisyah.r@example.com", sub: "SX-88213", reason: "idv", received: "2026-05-26", expiry: "2026-06-09", status: "received" },
+  { id: "RFI-2026-0147", name: "Daniel Tan Wei Ming", email: "daniel.tan@example.com", sub: "SX-88207", reason: "screening", received: "2026-05-24", expiry: "2026-06-02", status: "received" },
+  { id: "RFI-2026-0145", name: "Nurul Huda", email: "nurul.h@example.com", sub: "SX-88190", reason: "highrisk", received: "2026-05-20", expiry: "2026-05-31", status: "received" },
+  { id: "RFI-2026-0143", name: "Wong Jia Hao", email: "jiahao.w@example.com", sub: "SX-88172", reason: "bankva", received: "2026-05-18", expiry: "2026-06-01", status: "submitted" },
+  { id: "RFI-2026-0142", name: "Priya Nair", email: "priya.n@example.com", sub: "SX-88164", reason: "idv", received: "2026-05-15", expiry: "2026-05-29", status: "received" },
+  { id: "RFI-2026-0139", name: "Farah Lim", email: "farah.lim@example.com", sub: "SX-88150", reason: "screening", received: "2026-05-12", expiry: "2026-05-26", status: "expired" },
+  { id: "RFI-2026-0137", name: "Arjun Mehta", email: "arjun.m@example.com", sub: "SX-88141", reason: "highrisk", received: "2026-05-10", expiry: "2026-05-24", status: "completed" },
+  { id: "RFI-2026-0135", name: "Siti Aminah", email: "siti.a@example.com", sub: "SX-88133", reason: "bankva", received: "2026-05-22", expiry: "2026-06-05", status: "received" },
+  { id: "RFI-2026-0132", name: "Kevin Goh", email: "kevin.goh@example.com", sub: "SX-88120", reason: "idv", received: "2026-05-08", expiry: "2026-05-22", status: "completed" },
+  { id: "RFI-2026-0130", name: "Mei Ling Chua", email: "meiling.c@example.com", sub: "SX-88112", reason: "screening", received: "2026-05-23", expiry: "2026-06-06", status: "submitted" },
+  { id: "RFI-2026-0128", name: "Hafiz Osman", email: "hafiz.o@example.com", sub: "SX-88104", reason: "highrisk", received: "2026-05-19", expiry: "2026-05-30", status: "received" },
+  { id: "RFI-2026-0125", name: "Rebecca Lee", email: "rebecca.lee@example.com", sub: "SX-88098", reason: "bankva", received: "2026-05-05", expiry: "2026-05-19", status: "expired" },
+];
+
+// Status badge: tones limited to the documented Tag tones (no invented variants).
+// PRD design note colours -> nearest catalog tone. Completed has no "teal" tone; mapped to brand.
+const STATUS = {
+  received:  { label: "Received",  tone: "info" },
+  submitted: { label: "Submitted", tone: "positive" },
+  expired:   { label: "Expired",   tone: "critical" },
+  completed: { label: "Completed", tone: "brand" },
+};
+const StatusTag = ({ status }) => <Tag tone={STATUS[status].tone} shape="pill">{STATUS[status].label}</Tag>;
+
+const SlaIndicator = ({ caseRow }) => {
+  if (caseRow.status === "expired") return <span className="sla"><Badge tone="critical" dot /><span className="sla__text">Expired</span></span>;
+  if (caseRow.status !== "received") return <span className="muted">—</span>;
+  const d = daysLeft(caseRow.expiry);
+  const tone = d > 7 ? "brand" : d >= 4 ? "warning" : "critical";
+  const text = d <= 0 ? "Due today" : d === 1 ? "1 day left" : `${d} days left`;
+  return <span className="sla"><Badge tone={tone} dot /><span className="sla__text"><span className="num">{text}</span></span></span>;
+};
+
+const QUESTIONS = [
+  { id: "q1", type: "file", required: true, title: "Upload a valid proof of address",
+    hint: "Issued within the last 3 months. JPG, PNG or PDF up to 10 MB. You can attach more than one file." },
+  { id: "q2", type: "choice", required: true, title: "What type of document are you providing?",
+    options: ["Utility bill", "Bank statement", "Tenancy agreement", "Government-issued letter"] },
+  { id: "q3", type: "text", required: true, title: "Confirm the end-user's residential address",
+    placeholder: "Enter the full address exactly as it appears on the document." },
+];
+const TYPE_PILL = { file: { label: "File upload", tone: "info" }, choice: { label: "Multiple choice", tone: "neutral" }, text: { label: "Free text", tone: "neutral" } };
+const COPY_ALL_TEXT = [
+  "RFI-2026-0148 — Request for Information",
+  "",
+  "1. Upload a valid proof of address  (File upload · required)",
+  "   Accepted: JPG, PNG or PDF, up to 10 MB.",
+  "",
+  "2. What type of document are you providing?  (Multiple choice · required)",
+  "   - Utility bill",
+  "   - Bank statement",
+  "   - Tenancy agreement",
+  "   - Government-issued letter",
+  "",
+  "3. Confirm the end-user's residential address  (Free text · required)",
+].join("\n");
+
+const ACCEPTED = ["image/jpeg", "image/png", "application/pdf"];
+const ACCEPTED_EXT = /\.(jpe?g|png|pdf)$/i;
+const MAX_BYTES = 10 * 1024 * 1024;
+
+/* ===========================================================================
+   Story 1 — RFI Case Management (list)
+   =========================================================================== */
+function CaseList({ role, onOpen }) {
+  const counts = { total: 24, received: 9, submitted: 6, completed: 5, expired: 4, expiring: 3 };
+  const stats = [
+    { key: "all", num: counts.total, label: "Total cases", icon: "inbox", tone: null },
+    { key: "received", num: counts.received, label: "Received", icon: "mark_email_unread", tone: "info" },
+    { key: "submitted", num: counts.submitted, label: "Submitted", icon: "task_alt", tone: "positive" },
+    { key: "completed", num: counts.completed, label: "Completed", icon: "verified", tone: "brand" },
+    { key: "expired", num: counts.expired, label: "Expired", icon: "schedule", tone: "critical" },
+    { key: "expiring", num: counts.expiring, label: "Expiring ≤3 days", icon: "warning", tone: "warning" },
+  ];
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [reasonFilter, setReasonFilter] = useState("all");
+  const [query, setQuery] = useState("");
+  const [page, setPage] = useState(1);
+
+  let rows = CASES.filter((c) => {
+    if (statusFilter === "expiring") { if (c.status !== "received") return false; const d = daysLeft(c.expiry); if (!(d <= 3)) return false; }
+    else if (statusFilter !== "all" && c.status !== statusFilter) return false;
+    if (reasonFilter !== "all" && c.reason !== reasonFilter) return false;
+    if (query.trim()) { const q = query.toLowerCase(); if (![c.name, c.email, c.sub, c.id].some((v) => v.toLowerCase().includes(q))) return false; }
+    return true;
+  });
+
+  const columns = [
+    { key: "id", header: "RFI ID", render: (r) => <span className="cell-mono">{r.id}</span> },
+    { key: "name", header: "Full name", render: (r) => <div><div className="cell-strong">{r.name}</div><div className="member__email">{r.email}</div></div> },
+    { key: "reason", header: "Reason", render: (r) => <Tag tone="neutral">{REASONS[r.reason]}</Tag> },
+    { key: "received", header: "Date received", render: (r) => fmtDate(r.received) },
+    { key: "expiry", header: "Expiry date", render: (r) => <div>{fmtDate(r.expiry)}<div style={{ marginTop: 4 }}><SlaIndicator caseRow={r} /></div></div> },
+    { key: "status", header: "Status", render: (r) => <StatusTag status={r.status} /> },
+    { key: "action", header: "Action", align: "right", render: (r) => (
+      <div className="row-actions">
+        <LinkButton trailingIcon="arrow_forward" onClick={() => onOpen(r.id)}>View</LinkButton>
+        <Menu align="right" trigger={({ onClick }) => <IconButton icon="more_vert" variant="ghost" size="sm" label="More actions" onClick={onClick} />}>
+          <Menu.Item icon="open_in_new" onSelect={() => onOpen(r.id)}>Open case</Menu.Item>
+          {role !== "viewer" && <Menu.Item icon="reply" onSelect={() => onOpen(r.id)}>Respond</Menu.Item>}
+          <Menu.Item icon="content_copy">Copy RFI ID</Menu.Item>
+        </Menu>
+      </div>
+    ) },
+  ];
+
+  return (
+    <div>
+      <PageTitle
+        title="RFI cases"
+        subtitle="Track and resolve Requests for Information across all your end-users — no email threads required."
+        actions={role !== "viewer"
+          ? <><Button variant="secondary" size="md"><span className="material-symbols-rounded" style={{ fontSize: 18 }}>download</span>Export CSV</Button></>
+          : <Tag tone="neutral" shape="pill">Read-only access</Tag>}
+      />
+
+      <div className="stat-grid">
+        {stats.map((s) => (
+          <Card key={s.key} surface="default" className={"stat-card" + (statusFilter === s.key ? " is-active" : "")}
+            role="button" tabIndex={0} aria-pressed={statusFilter === s.key}
+            onClick={() => { setStatusFilter(s.key); setPage(1); }}>
+            <div className="stat-card__top">
+              {s.tone ? <Badge tone={s.tone} dot /> : <span className="material-symbols-rounded" style={{ fontSize: 18, color: "var(--sx-fg-3)" }}>{s.icon}</span>}
+              <span className="stat-card__label">{s.label}</span>
+            </div>
+            <div className="stat-card__num">{s.num}</div>
+          </Card>
+        ))}
+      </div>
+
+      <div className="toolbar">
+        <div className="toolbar__search">
+          <Input type="search" label="Search" placeholder="Search by name, email, submission ID or case ID"
+            value={query} onChange={(e) => { setQuery(e.target.value); setPage(1); }} />
+        </div>
+        <Select className="toolbar__filter" label="Status" value={statusFilter} onChange={(e) => { setStatusFilter(e.target.value); setPage(1); }} placeholder={false}
+          options={[{ value: "all", label: "All statuses" }, { value: "received", label: "Received" }, { value: "submitted", label: "Submitted" }, { value: "completed", label: "Completed" }, { value: "expired", label: "Expired" }, { value: "expiring", label: "Expiring ≤3 days" }]} />
+        <Select className="toolbar__filter" label="RFI reason" value={reasonFilter} onChange={(e) => { setReasonFilter(e.target.value); setPage(1); }} placeholder={false}
+          options={[{ value: "all", label: "All reasons" }, { value: "idv", label: "ID verification" }, { value: "screening", label: "Screening hit" }, { value: "highrisk", label: "High-risk review" }, { value: "bankva", label: "Bank–VA" }]} />
+        <div className="toolbar__dates">
+          <DateInput label="From" defaultValue="2026-05-01" />
+          <DateInput label="To" defaultValue="2026-05-29" />
+        </div>
+      </div>
+
+      <Table columns={columns} rows={rows} rowKey="id"
+        empty={<EmptyState title="No cases match your filters" sub="Try adjusting status, reason or date range — or clear your search to see all cases." />} />
+
+      <div className="list-meta">
+        <div className="sla-legend">
+          <strong style={{ color: "var(--sx-fg-2)", fontWeight: 700 }}>SLA</strong>
+          <span><Badge tone="brand" dot /> &gt;7 days</span>
+          <span><Badge tone="warning" dot /> 4–7 days</span>
+          <span><Badge tone="critical" dot /> ≤3 days</span>
+        </div>
+        <Pagination page={page} totalPages={2} pageSize={12} total={24} showSummary onChange={setPage} />
+      </div>
+    </div>
+  );
+}
+
+/* ===========================================================================
+   Story 1 detail (full page) + Story 2 inline Respond panel
+   =========================================================================== */
+function CaseDetail({ role, caseId, onBack }) {
+  const c = CASES.find((x) => x.id === caseId) || CASES[0];
+  const [respondOpen, setRespondOpen] = useState(false);
+  const [status, setStatus] = useState(c.status);
+  const [toast, setToast] = useState(null);
+
+  // Respond state
+  const [files, setFiles] = useState([]);
+  const [fileError, setFileError] = useState(null);
+  const [choices, setChoices] = useState([]);
+  const [addr, setAddr] = useState("");
+  const [note, setNote] = useState("");
+
+  const resolved = status === "completed";
+
+  const onFiles = (next) => {
+    // keep only the newly-evaluated set; validate the last-added file
+    const bad = next.find((f) => !(ACCEPTED.includes(f.type) || ACCEPTED_EXT.test(f.name)));
+    const big = next.find((f) => f.size > MAX_BYTES);
+    if (bad) { setFileError("Unsupported format. Please upload JPG, PNG, or PDF."); setFiles(next.filter((f) => f !== bad)); return; }
+    if (big) { setFileError("File exceeds 10MB. Please compress or use a different file."); setFiles(next.filter((f) => f !== big)); return; }
+    setFileError(null); setFiles(next);
+  };
+  const toggleChoice = (opt) => setChoices((cur) => cur.includes(opt) ? cur.filter((x) => x !== opt) : [...cur, opt]);
+
+  const canSubmit = files.length > 0 && !fileError && choices.length > 0 && addr.trim().length > 0;
+
+  const submit = () => {
+    if (resolved) { setToast({ tone: "critical", title: "Case already resolved", msg: "This case has already been resolved." }); return; }
+    setStatus("submitted"); setRespondOpen(false);
+    setToast({ tone: "positive", title: "Response submitted", msg: "We've sent this to our operations team for review. You'll see an update within 1–2 business days." });
+  };
+
+  const history = [
+    { label: "RFI created", sub: `${fmtDate(c.received)}, 09:14 · Automated (RFI API)` },
+    { label: "Notification sent to merchant", sub: `${fmtDate(c.received)}, 09:15 · ops@straitsx.com` },
+    ...(status === "submitted" ? [{ label: "Response submitted — under review", sub: "29 May 2026, 14:22 · you@merchant.com" }] : []),
+    { label: status === "submitted" ? "Awaiting operations review" : "Awaiting response", sub: "Current" },
+  ];
+
+  return (
+    <div>
+      <PageTitle
+        breadcrumb={<Breadcrumb items={[{ label: "RFI cases", onClick: onBack }, { label: c.id }]} />}
+        title={c.id}
+        subtitle={`Request for Information · ${REASONS[c.reason]}`}
+        actions={
+          <>
+            <Button variant="tertiary" size="md" onClick={onBack}>Back to list</Button>
+            {role !== "viewer" && !respondOpen && (
+              <Button variant="primary" size="md" onClick={() => resolved ? setToast({ tone: "critical", title: "Case already resolved", msg: "This case has already been resolved." }) : setRespondOpen(true)}>
+                <span className="material-symbols-rounded" style={{ fontSize: 18 }}>reply</span>Respond
+              </Button>
+            )}
+          </>
+        }
+      />
+
+      {role === "viewer" && <div style={{ marginBottom: 20 }}><Alert tone="neutral" title="You're previewing as Viewer">Viewers have read-only access. Respond, upload and export actions are hidden.</Alert></div>}
+      {status === "submitted" && <div style={{ marginBottom: 20 }}><Alert tone="positive" title="Submitted — under review">Documents were submitted to StraitsX operations. Typical review time is 1–2 business days.</Alert></div>}
+      {resolved && <div style={{ marginBottom: 20 }}><Alert tone="info" title="This case has been resolved">No further action is needed. The submission history below is kept for your records.</Alert></div>}
+
+      <div className="detail-grid">
+        <div className="stack">
+          <Card>
+            <div className="section-head"><h2>End-user</h2><StatusTag status={status} /></div>
+            <dl className="kv">
+              <dt>Full name</dt><dd>{c.name}</dd>
+              <dt>Email</dt><dd>{c.email}</dd>
+              <dt>Submission ID</dt><dd className="cell-mono" style={{ fontWeight: 400 }}>{c.sub}</dd>
+              <dt>RFI reason</dt><dd>{REASONS[c.reason]}</dd>
+              <dt>Date received</dt><dd>{fmtDate(c.received)}</dd>
+              <dt>Expiry date</dt><dd>{fmtDate(c.expiry)} &nbsp; <SlaIndicator caseRow={{ ...c, status }} /></dd>
+            </dl>
+          </Card>
+
+          <Card>
+            <div className="section-head"><h2>RFI questions</h2><span className="muted">{QUESTIONS.length} questions · {QUESTIONS.filter(q=>q.required).length} required</span></div>
+            {!respondOpen && (
+              <>
+                {QUESTIONS.map((q) => (
+                  <div className="q-block" key={q.id}>
+                    <div className="q-head">
+                      <span className="q-title">{q.title}</span>
+                      <Tag tone={TYPE_PILL[q.type].tone}>{TYPE_PILL[q.type].label}</Tag>
+                      {q.required && <Tag tone="critical">Required</Tag>}
+                    </div>
+                    {q.type === "choice" && <div className="muted">Options: {q.options.join(", ")} · select all that apply</div>}
+                    {q.hint && <div className="muted">{q.hint}</div>}
+                    {q.placeholder && <div className="muted">{q.placeholder}</div>}
+                  </div>
+                ))}
+                {role !== "viewer" && !resolved && (
+                  <div style={{ marginTop: 18 }}>
+                    <Button variant="primary" size="md" onClick={() => setRespondOpen(true)}><span className="material-symbols-rounded" style={{ fontSize: 18 }}>reply</span>Respond to this RFI</Button>
+                  </div>
+                )}
+              </>
+            )}
+
+            {respondOpen && (
+              <div>
+                <Alert tone="info" title="Responding on behalf of your end-user">Answer each question below. You can also copy the full request to share through your own channel (e.g. email or WhatsApp).</Alert>
+                <div style={{ height: 16 }} />
+                <Copybox multiline label="Copy all questions" value={COPY_ALL_TEXT} />
+                <div style={{ height: 20 }} />
+
+                {QUESTIONS.map((q) => (
+                  <div className="q-block" key={q.id}>
+                    <div className="q-head">
+                      <span className="q-title">{q.title}{q.required && <span className="q-req"> *</span>}</span>
+                      <Tag tone={TYPE_PILL[q.type].tone}>{TYPE_PILL[q.type].label}</Tag>
+                    </div>
+                    {q.type === "file" && (
+                      <div className="q-body">
+                        <Upload multiple accept=".jpg,.jpeg,.png,.pdf" hint={q.hint} files={files} onChange={onFiles} error={fileError} />
+                      </div>
+                    )}
+                    {q.type === "choice" && (
+                      <div className="q-body">
+                        <div className="muted" style={{ marginBottom: 4 }}>Select all that apply.</div>
+                        <div className="choice-grid">
+                          {q.options.map((opt) => (
+                            <div key={opt} className={"choice" + (choices.includes(opt) ? " is-on" : "")}>
+                              <Checkbox label={opt} checked={choices.includes(opt)} onChange={() => toggleChoice(opt)} />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    {q.type === "text" && (
+                      <div className="q-body">
+                        <Textarea placeholder={q.placeholder} showCount maxLength={280} value={addr} onChange={(e) => setAddr(e.target.value)} />
+                      </div>
+                    )}
+                  </div>
+                ))}
+
+                <div className="q-block">
+                  <Textarea label="Add a note for our operations team (optional)" rows={3}
+                    placeholder="e.g. End-user shared documents via WhatsApp on 18 Mar 2026."
+                    value={note} onChange={(e) => setNote(e.target.value)} />
+                </div>
+
+                <div className="respond-foot">
+                  <span className="muted">{canSubmit ? "All required questions answered." : "Answer all required questions to submit."}</span>
+                  <div style={{ display: "flex", gap: 8 }}>
+                    <Button variant="secondary" size="md" onClick={() => setRespondOpen(false)}>Cancel</Button>
+                    <Button variant="primary" size="md" disabled={!canSubmit} onClick={submit}>Submit response for review</Button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </Card>
+        </div>
+
+        <div className="stack">
+          <Card>
+            <div className="section-head"><h2>Required documents</h2></div>
+            <div className="checklist">
+              <Checkbox label="Proof of address" sub="Utility bill or bank statement, issued ≤3 months ago" defaultChecked={false} disabled />
+              <Checkbox label="Government-issued ID (front)" sub="NRIC, passport or driver's licence" defaultChecked={false} disabled />
+              <Checkbox label="Selfie holding ID" sub="Face and ID clearly visible" defaultChecked={false} disabled />
+            </div>
+            <div className="muted" style={{ marginTop: 12 }}>Checklist reflects what operations requires for this RFI reason.</div>
+          </Card>
+
+          <Card>
+            <div className="section-head"><h2>Submission history</h2></div>
+            <Steps orientation="vertical" items={history} current={history.length - 1} />
+          </Card>
+        </div>
+      </div>
+
+      {toast && <div className="sx-toast-region"><Toast tone={toast.tone} title={toast.title} onDismiss={() => setToast(null)}>{toast.msg}</Toast></div>}
+    </div>
+  );
+}
+
+/* ===========================================================================
+   Story 3 — RBAC / Team management
+   =========================================================================== */
+const ROLE_TAG = { Admin: "brand", "Ops User": "info", Viewer: "neutral" };
+const MEMBERS = [
+  { name: "Dwina Apriyanti", email: "dwina@merchant.com", role: "Admin", status: "active", last: "Today, 09:42" },
+  { name: "Fuad Baskara", email: "fuad@merchant.com", role: "Ops User", status: "active", last: "Today, 08:10" },
+  { name: "Yuan Wang Po", email: "yuan@merchant.com", role: "Ops User", status: "active", last: "Yesterday, 17:55" },
+  { name: "Samuel C. Swandi", email: "samuel@merchant.com", role: "Ops User", status: "invited", last: "—" },
+  { name: "Nastiti Yesiastuti", email: "nastiti@merchant.com", role: "Viewer", status: "active", last: "26 May 2026" },
+];
+const SEATS = { Admin: 1, "Ops User": 5, Viewer: 3 };
+const AUDIT = [
+  { user: "fuad@merchant.com", action: "Submitted response", caseId: "RFI-2026-0143", at: "29 May 2026, 14:22" },
+  { user: "dwina@merchant.com", action: "Exported case list (CSV)", caseId: "—", at: "29 May 2026, 11:03" },
+  { user: "yuan@merchant.com", action: "Uploaded document", caseId: "RFI-2026-0135", at: "28 May 2026, 16:40" },
+  { user: "dwina@merchant.com", action: "Changed role: Samuel → Ops User", caseId: "—", at: "28 May 2026, 09:18" },
+  { user: "nastiti@merchant.com", action: "Viewed case detail", caseId: "RFI-2026-0137", at: "26 May 2026, 10:02" },
+];
+
+function TeamManagement({ role }) {
+  const [inviteEmail, setInviteEmail] = useState("");
+  const [inviteRole, setInviteRole] = useState("ops");
+  const [seatError, setSeatError] = useState(null);
+  const [sent, setSent] = useState(false);
+
+  if (role !== "admin") {
+    return (
+      <div>
+        <PageTitle title="Team management" subtitle="Control who can access RFI cases and what they can do." />
+        <Card>
+          <div className="access-denied">
+            <span className="material-symbols-rounded">lock</span>
+            <EmptyState title="Team management is available to Admins only"
+              sub={`You're previewing as ${role === "ops" ? "Ops User" : "Viewer"}. Only the master merchant (Admin) can invite members, assign roles, or revoke access.`} />
+          </div>
+        </Card>
+      </div>
+    );
+  }
+
+  const used = MEMBERS.reduce((m, x) => { m[x.role] = (m[x.role] || 0) + 1; return m; }, {});
+  const roleLabel = { admin: "Admin", ops: "Ops User", viewer: "Viewer" }[inviteRole];
+
+  const invite = () => {
+    setSent(false);
+    if ((used[roleLabel] || 0) >= SEATS[roleLabel]) {
+      setSeatError(`You have reached the maximum ${roleLabel} seats. Remove an existing user to add a new one.`);
+      return;
+    }
+    if (!inviteEmail.trim()) return;
+    setSeatError(null); setSent(true);
+  };
+
+  const membersTable = (
+    <>
+      {seatError && <div style={{ marginBottom: 16 }}><Alert tone="critical" title="Seat limit reached" onDismiss={() => setSeatError(null)}>{seatError}</Alert></div>}
+      {sent && <div style={{ marginBottom: 16 }}><Alert tone="positive" title="Invitation sent" onDismiss={() => setSent(false)}>We've emailed an invitation to {inviteEmail || "the new member"}. They'll get {roleLabel} access once they join.</Alert></div>}
+      <Card style={{ marginBottom: 20 }}>
+        <div className="section-head"><h2>Invite a team member</h2><span className="muted">Admin {used.Admin || 0}/{SEATS.Admin} · Ops User {used["Ops User"] || 0}/{SEATS["Ops User"]} · Viewer {used.Viewer || 0}/{SEATS.Viewer} seats used</span></div>
+        <div className="invite-row">
+          <div className="toolbar__search"><Input label="Email address" placeholder="name@company.com" value={inviteEmail} onChange={(e) => setInviteEmail(e.target.value)} /></div>
+          <Select className="toolbar__filter" label="Role" value={inviteRole} onChange={(e) => setInviteRole(e.target.value)} placeholder={false}
+            options={[{ value: "admin", label: "Admin" }, { value: "ops", label: "Ops User" }, { value: "viewer", label: "Viewer" }]} />
+          <Button variant="primary" size="lg" onClick={invite}>Send invitation</Button>
+        </div>
+      </Card>
+
+      <Table rowKey="email"
+        columns={[
+          { key: "name", header: "Member", render: (m) => (
+            <div className="member"><span className="member__avatar">{m.name.split(" ").map((w) => w[0]).slice(0, 2).join("")}</span>
+              <div><div className="member__name">{m.name}</div><div className="member__email">{m.email}</div></div></div>) },
+          { key: "role", header: "Role", render: (m) => <Tag tone={ROLE_TAG[m.role]} shape="pill">{m.role}</Tag> },
+          { key: "status", header: "Status", render: (m) => m.status === "active" ? <Tag tone="positive">Active</Tag> : <Tag tone="warning">Invited</Tag> },
+          { key: "last", header: "Last active", render: (m) => <span className="muted">{m.last}</span> },
+          { key: "actions", header: "Actions", align: "right", render: (m) => (
+            <div className="row-actions">
+              <Menu align="right" trigger={({ onClick }) => <IconButton icon="more_vert" variant="ghost" size="sm" label={`Manage ${m.name}`} onClick={onClick} />}>
+                <Menu.Label>Change role</Menu.Label>
+                <Menu.Item icon="shield_person">Make Admin</Menu.Item>
+                <Menu.Item icon="badge">Make Ops User</Menu.Item>
+                <Menu.Item icon="visibility">Make Viewer</Menu.Item>
+                <Menu.Divider />
+                {m.status === "invited" && <Menu.Item icon="forward_to_inbox">Resend invitation</Menu.Item>}
+                <Menu.Item icon="block" tone="critical">Revoke access</Menu.Item>
+              </Menu>
+            </div>) },
+        ]}
+        rows={MEMBERS} />
+      <div className="muted" style={{ marginTop: 12 }}>Revoking access or changing a role invalidates active sessions within 5 minutes.</div>
+    </>
+  );
+
+  const PERMS = [
+    ["View case list", true, true, true], ["View case detail", true, true, true], ["Search & filter", true, true, true],
+    ["Export CSV", true, true, false], ["Respond & upload documents", true, true, false],
+    ["Team management", true, false, false], ["Settings", true, false, false],
+  ];
+  const matrix = (
+    <Table rowKey="cap"
+      columns={[
+        { key: "cap", header: "Capability", render: (r) => <span className="cell-strong" style={{ fontWeight: 400, color: "var(--sx-fg-1)" }}>{r.cap}</span> },
+        { key: "admin", header: "Admin", align: "right", render: (r) => r.admin ? <span className="material-symbols-rounded matrix-yes">check_circle</span> : <span className="material-symbols-rounded matrix-no">remove</span> },
+        { key: "ops", header: "Ops User", align: "right", render: (r) => r.ops ? <span className="material-symbols-rounded matrix-yes">check_circle</span> : <span className="material-symbols-rounded matrix-no">remove</span> },
+        { key: "viewer", header: "Viewer", align: "right", render: (r) => r.viewer ? <span className="material-symbols-rounded matrix-yes">check_circle</span> : <span className="material-symbols-rounded matrix-no">remove</span> },
+      ]}
+      rows={PERMS.map((p) => ({ cap: p[0], admin: p[1], ops: p[2], viewer: p[3] }))} />
+  );
+  const audit = (
+    <Table rowKey="at" zebra
+      columns={[
+        { key: "user", header: "User", render: (r) => <span className="cell-mono">{r.user}</span> },
+        { key: "action", header: "Action" },
+        { key: "caseId", header: "Case", render: (r) => r.caseId === "—" ? <span className="muted">—</span> : <span className="cell-mono">{r.caseId}</span> },
+        { key: "at", header: "Timestamp", align: "right", render: (r) => <span className="cell-mono">{r.at}</span> },
+      ]}
+      rows={AUDIT} />
+  );
+
+  return (
+    <div>
+      <PageTitle title="Team management"
+        subtitle="Control who can access RFI cases and what they can do. Roles keep sensitive end-user documents protected." />
+      <Tabs items={[
+        { id: "members", label: "Members", content: membersTable },
+        { id: "perms", label: "Permissions", content: <><div className="muted" style={{ marginBottom: 12 }}>All roles are scoped to your organisation only. There is no cross-merchant visibility at any role level.</div>{matrix}</> },
+        { id: "audit", label: "Activity log", content: <><div className="muted" style={{ marginBottom: 12 }}>Every dashboard action is logged with the authenticated user, action, case ID and timestamp — queryable by StraitsX operations.</div>{audit}</> },
+      ]} />
+    </div>
+  );
+}
+
+/* ===========================================================================
+   App shell
+   =========================================================================== */
+const NAV = [
+  { id: "home", icon: "home", label: "Home" },
+  { id: "rfi", icon: "fact_check", label: "RFI cases", tag: "9" },
+  { id: "history", icon: "receipt_long", label: "Transaction History" },
+  { id: "users", icon: "group", label: "Users" },
+  { id: "team", icon: "badge", label: "Team management" },
+  { id: "settings", icon: "tune", label: "Settings" },
+  { id: "support", icon: "support_agent", label: "Support" },
+];
+
+function App() {
+  const [route, setRoute] = useState("list"); // list | detail | team
+  const [role, setRole] = useState("admin");  // admin | ops | viewer
+  const [caseId, setCaseId] = useState(CASES[0].id);
+  const activeNav = route === "team" ? "team" : "rfi";
+
+  const onNav = (id) => {
+    if (id === "rfi") setRoute("list");
+    else if (id === "team") setRoute("team");
+    else setRoute("list");
+  };
+
+  return (
+    <div className="app">
+      <div className="app__sidebar"><Sidebar items={NAV} active={activeNav} onSelect={onNav} brandName="StraitsX" brandSub="Business Account" /></div>
+      <div className="app__main">
+        <div className="app__bar">
+          <div className="app__bar-left">
+            <div className="preview-as" role="group" aria-label="Preview as role">
+              <span className="preview-as__label">Preview as</span>
+              {[["admin", "Admin"], ["ops", "Ops User"], ["viewer", "Viewer"]].map(([v, l]) => (
+                <button key={v} className={"preview-as__btn" + (role === v ? " is-active" : "")} onClick={() => setRole(v)} aria-pressed={role === v}>{l}</button>
+              ))}
+            </div>
+          </div>
+          <TopBar unread={9} name="Dwina Apriyanti" company="Merchant Pte. Ltd." />
+        </div>
+        <div className="app__content">
+          {route === "list" && <CaseList role={role} onOpen={(id) => { setCaseId(id); setRoute("detail"); }} />}
+          {route === "detail" && <CaseDetail role={role} caseId={caseId} onBack={() => setRoute("list")} />}
+          {route === "team" && <TeamManagement role={role} />}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>
