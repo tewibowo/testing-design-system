@@ -18,13 +18,19 @@ specs + design tokens**:
 - Each React component re-implements the real markup + class names from `src/components/<C>/<C>.jsx`, so the verbatim DS CSS applies and the documented prop API is preserved.
 - Fonts (Red Hat Display, Hanken Grotesk, Red Hat Mono, Material Symbols Rounded) load from Google Fonts, as the brand guideline specifies these are Google-hosted.
 
-**Copy source — important deviation.** The required `straitsx-web3-copywriter` skill is **not
-available in this environment** (absent from `/mnt/skills`, `~/.claude/skills`, and plugin paths).
-Per the "no bluffing" rule this is flagged rather than faked. All user-facing copy was instead
-authored in the StraitsX brand voice using the in-repo **`brand_guidelines.txt`** (compliance-first,
-secure, transparent, professional-yet-approachable) and reuses the **PRD's own specified strings**
-for error/empty/status messages where the PRD defines them (e.g. the seat-limit message and file
-errors are quoted verbatim from PRD §9 and Story 3 Req 4).
+**Copy source.** The `straitsx-web3-copywriter` skill was initially **missing** from this cloud
+container (it was a claude.ai Personal skill that had not synced in). It was then supplied by the
+user, installed to `~/.claude/skills/straitsx-web3-copywriter/SKILL.md`, and **applied** to all
+user-facing copy. Copy follows the skill's rules: **BLUF** (action first), active voice, **"Your"**
+perspective, **UK English**, the **Oxford comma**, capitalised product nouns (StraitsX Operations
+team, Request for Information), and the hard **CTA constraint** (1–2 words, ≤10 characters) — so
+primary buttons read *Respond*, *Submit*, *Invite*, *Back*, *Export CSV* (10), *Cancel*. PRD-defined
+strings (file errors, the seat-limit message) are kept verbatim from PRD §9 and Story 3 Req 4, as
+they already match the skill's empathetic, solution-oriented tone. *Judgement call:* the ≤10-char
+rule was applied to primary/secondary CTA buttons; multi-word **menu items** (e.g. "Resend
+invitation", "Revoke access") and field labels were kept readable rather than truncated, since the
+constraint targets CTAs/labels in tight UI, not dropdown list items. The in-repo `brand_guidelines.txt`
+informed visual tone and colour usage.
 
 **In-browser verification — pending.** The sandbox has no browser, and its network allowlist blocks
 CDN access, so Babel could not be fetched to compile-check or render the file here. The mockup was
@@ -136,6 +142,5 @@ hidden for Viewer); navigating to Team management as Ops/Viewer shows an access-
 5. **Pagination** is visual (2 pages shown); the sample dataset isn't sliced across pages.
 6. **Side drawer** for case detail was not used — per approval, detail is a **full-page view**
    (adds a Back action / breadcrumb the PRD flow did not explicitly specify).
-7. **Copywriter skill unavailable** — copy authored from `brand_guidelines.txt` + PRD strings (see
-   Build path). Recommend a copy pass once `straitsx-web3-copywriter` is available.
+7. **Copywriter skill** — now installed and applied (see Build path). Resolved.
 8. **In-browser render not verified** in-sandbox (no browser; CDN blocked by network allowlist).

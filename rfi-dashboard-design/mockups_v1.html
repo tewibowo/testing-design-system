@@ -1082,7 +1082,7 @@ function CaseList({ role, onOpen }) {
       </div>
 
       <Table columns={columns} rows={rows} rowKey="id"
-        empty={<EmptyState title="No cases match your filters" sub="Try adjusting status, reason or date range — or clear your search to see all cases." />} />
+        empty={<EmptyState title="No cases match your filters" sub="Adjust your status, reason, or date range — or clear your search to see all cases." />} />
 
       <div className="list-meta">
         <div className="sla-legend">
@@ -1130,14 +1130,14 @@ function CaseDetail({ role, caseId, onBack }) {
   const submit = () => {
     if (resolved) { setToast({ tone: "critical", title: "Case already resolved", msg: "This case has already been resolved." }); return; }
     setStatus("submitted"); setRespondOpen(false);
-    setToast({ tone: "positive", title: "Response submitted", msg: "We've sent this to our operations team for review. You'll see an update within 1–2 business days." });
+    setToast({ tone: "positive", title: "Response submitted", msg: "Your response is now with the StraitsX Operations team. Expect an update within 1–2 business days." });
   };
 
   const history = [
     { label: "RFI created", sub: `${fmtDate(c.received)}, 09:14 · Automated (RFI API)` },
     { label: "Notification sent to merchant", sub: `${fmtDate(c.received)}, 09:15 · ops@straitsx.com` },
     ...(status === "submitted" ? [{ label: "Response submitted — under review", sub: "29 May 2026, 14:22 · you@merchant.com" }] : []),
-    { label: status === "submitted" ? "Awaiting operations review" : "Awaiting response", sub: "Current" },
+    { label: status === "submitted" ? "Awaiting Operations review" : "Awaiting response", sub: "Current" },
   ];
 
   return (
@@ -1148,7 +1148,7 @@ function CaseDetail({ role, caseId, onBack }) {
         subtitle={`Request for Information · ${REASONS[c.reason]}`}
         actions={
           <>
-            <Button variant="tertiary" size="md" onClick={onBack}>Back to list</Button>
+            <Button variant="tertiary" size="md" onClick={onBack}>Back</Button>
             {role !== "viewer" && !respondOpen && (
               <Button variant="primary" size="md" onClick={() => resolved ? setToast({ tone: "critical", title: "Case already resolved", msg: "This case has already been resolved." }) : setRespondOpen(true)}>
                 <span className="material-symbols-rounded" style={{ fontSize: 18 }}>reply</span>Respond
@@ -1159,7 +1159,7 @@ function CaseDetail({ role, caseId, onBack }) {
       />
 
       {role === "viewer" && <div style={{ marginBottom: 20 }}><Alert tone="neutral" title="You're previewing as Viewer">Viewers have read-only access. Respond, upload and export actions are hidden.</Alert></div>}
-      {status === "submitted" && <div style={{ marginBottom: 20 }}><Alert tone="positive" title="Submitted — under review">Documents were submitted to StraitsX operations. Typical review time is 1–2 business days.</Alert></div>}
+      {status === "submitted" && <div style={{ marginBottom: 20 }}><Alert tone="positive" title="Submitted — under review">Your documents are now with the StraitsX Operations team. Expect a review within 1–2 business days.</Alert></div>}
       {resolved && <div style={{ marginBottom: 20 }}><Alert tone="info" title="This case has been resolved">No further action is needed. The submission history below is kept for your records.</Alert></div>}
 
       <div className="detail-grid">
@@ -1194,7 +1194,7 @@ function CaseDetail({ role, caseId, onBack }) {
                 ))}
                 {role !== "viewer" && !resolved && (
                   <div style={{ marginTop: 18 }}>
-                    <Button variant="primary" size="md" onClick={() => setRespondOpen(true)}><span className="material-symbols-rounded" style={{ fontSize: 18 }}>reply</span>Respond to this RFI</Button>
+                    <Button variant="primary" size="md" onClick={() => setRespondOpen(true)}><span className="material-symbols-rounded" style={{ fontSize: 18 }}>reply</span>Respond</Button>
                   </div>
                 )}
               </>
@@ -1202,7 +1202,7 @@ function CaseDetail({ role, caseId, onBack }) {
 
             {respondOpen && (
               <div>
-                <Alert tone="info" title="Responding on behalf of your end-user">Answer each question below. You can also copy the full request to share through your own channel (e.g. email or WhatsApp).</Alert>
+                <Alert tone="info" title="Responding on behalf of your end-user">Answer each question below on behalf of your end-user. To collect documents elsewhere, copy the full request and share it through your own channel — for example, email or WhatsApp.</Alert>
                 <div style={{ height: 16 }} />
                 <Copybox multiline label="Copy all questions" value={COPY_ALL_TEXT} />
                 <div style={{ height: 20 }} />
@@ -1239,7 +1239,7 @@ function CaseDetail({ role, caseId, onBack }) {
                 ))}
 
                 <div className="q-block">
-                  <Textarea label="Add a note for our operations team (optional)" rows={3}
+                  <Textarea label="Add a note for the StraitsX Operations team (optional)" rows={3}
                     placeholder="e.g. End-user shared documents via WhatsApp on 18 Mar 2026."
                     value={note} onChange={(e) => setNote(e.target.value)} />
                 </div>
@@ -1248,7 +1248,7 @@ function CaseDetail({ role, caseId, onBack }) {
                   <span className="muted">{canSubmit ? "All required questions answered." : "Answer all required questions to submit."}</span>
                   <div style={{ display: "flex", gap: 8 }}>
                     <Button variant="secondary" size="md" onClick={() => setRespondOpen(false)}>Cancel</Button>
-                    <Button variant="primary" size="md" disabled={!canSubmit} onClick={submit}>Submit response for review</Button>
+                    <Button variant="primary" size="md" disabled={!canSubmit} onClick={submit}>Submit</Button>
                   </div>
                 </div>
               </div>
@@ -1264,7 +1264,7 @@ function CaseDetail({ role, caseId, onBack }) {
               <Checkbox label="Government-issued ID (front)" sub="NRIC, passport or driver's licence" defaultChecked={false} disabled />
               <Checkbox label="Selfie holding ID" sub="Face and ID clearly visible" defaultChecked={false} disabled />
             </div>
-            <div className="muted" style={{ marginTop: 12 }}>Checklist reflects what operations requires for this RFI reason.</div>
+            <div className="muted" style={{ marginTop: 12 }}>The StraitsX Operations team requires these documents to resolve this RFI.</div>
           </Card>
 
           <Card>
@@ -1343,7 +1343,7 @@ function TeamManagement({ role }) {
           <div className="toolbar__search"><Input label="Email address" placeholder="name@company.com" value={inviteEmail} onChange={(e) => setInviteEmail(e.target.value)} /></div>
           <Select className="toolbar__filter" label="Role" value={inviteRole} onChange={(e) => setInviteRole(e.target.value)} placeholder={false}
             options={[{ value: "admin", label: "Admin" }, { value: "ops", label: "Ops User" }, { value: "viewer", label: "Viewer" }]} />
-          <Button variant="primary" size="lg" onClick={invite}>Send invitation</Button>
+          <Button variant="primary" size="lg" onClick={invite}>Invite</Button>
         </div>
       </Card>
 
@@ -1406,7 +1406,7 @@ function TeamManagement({ role }) {
       <Tabs items={[
         { id: "members", label: "Members", content: membersTable },
         { id: "perms", label: "Permissions", content: <><div className="muted" style={{ marginBottom: 12 }}>All roles are scoped to your organisation only. There is no cross-merchant visibility at any role level.</div>{matrix}</> },
-        { id: "audit", label: "Activity log", content: <><div className="muted" style={{ marginBottom: 12 }}>Every dashboard action is logged with the authenticated user, action, case ID and timestamp — queryable by StraitsX operations.</div>{audit}</> },
+        { id: "audit", label: "Activity log", content: <><div className="muted" style={{ marginBottom: 12 }}>Every dashboard action is logged with the authenticated user, action, case ID, and timestamp — queryable by the StraitsX Operations team.</div>{audit}</> },
       ]} />
     </div>
   );
