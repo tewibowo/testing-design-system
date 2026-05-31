@@ -14,6 +14,7 @@ export { Badge } from "./components/Badge/Badge.jsx";
 export { Input } from "./components/Input/Input.jsx";
 export { Textarea } from "./components/Textarea/Textarea.jsx";
 export { Select } from "./components/Select/Select.jsx";
+export { MultiSelect } from "./components/MultiSelect/MultiSelect.jsx";
 export { DateInput } from "./components/DateInput/DateInput.jsx";
 export { Copybox } from "./components/Copybox/Copybox.jsx";
 export { Checkbox } from "./components/Checkbox/Checkbox.jsx";
