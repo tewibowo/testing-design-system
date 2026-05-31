@@ -82,3 +82,4 @@ export { ModalAssetSelection } from "./components/ModalAssetSelection/ModalAsset
 export { BottomSheetNetwork } from "./components/BottomSheetNetwork/BottomSheetNetwork.jsx";
 export { Modal2FA } from "./components/Modal2FA/Modal2FA.jsx";
 export { TransactionHistoryTable } from "./components/TransactionHistoryTable/TransactionHistoryTable.jsx";
+export { AssetMark } from "./components/AssetMark/AssetMark.jsx";

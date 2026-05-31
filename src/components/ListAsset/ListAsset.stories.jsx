@@ -1,22 +1,6 @@
 import React from "react";
 import { ListAsset } from "./ListAsset.jsx";
-
-const CoinIcon = ({ label = "XS", bg = "var(--sx-brand-xsgd)" }) => (
-  <span
-    style={{
-      display: "inline-flex",
-      alignItems: "center",
-      justifyContent: "center",
-      width: "100%",
-      height: "100%",
-      background: bg,
-      color: "var(--sx-text-inverse)",
-      font: "var(--sx-label-small)",
-    }}
-  >
-    {label}
-  </span>
-);
+import { AssetMark } from "../AssetMark/AssetMark.jsx";
 
 const Net = ({ label, bg }) => (
   <span
@@ -56,7 +40,7 @@ export default {
     subtitle: "1:1 to SGD",
     balance: "1,123,456,789.00",
     balanceSub: "~2,032 SGD",
-    icon: <CoinIcon />,
+    icon: <AssetMark asset="XSGD" />,
     variant: "stablecoin",
     platform: "desktop",
     networks,
@@ -82,7 +66,7 @@ export const Fiat = {
     subtitle: "Singapore Dollar",
     balance: "1,123,456,789.00",
     balanceSub: "Balance",
-    icon: <CoinIcon label="SG" bg="var(--sx-status-critical)" />,
+    icon: <AssetMark asset="SGD" />,
   },
 };
 
@@ -106,7 +90,7 @@ export const List = {
         subtitle="1:1 to SGD"
         balance="22,345,672.87"
         balanceSub="~2,032 SGD"
-        icon={<CoinIcon />}
+        icon={<AssetMark asset="XSGD" />}
         networks={networks}
         networkOverflow={3}
         networkIsNew
@@ -117,7 +101,7 @@ export const List = {
         subtitle="Singapore Dollar"
         balance="1,123,456,789.00"
         balanceSub="Balance"
-        icon={<CoinIcon label="SG" bg="var(--sx-status-critical)" />}
+        icon={<AssetMark asset="SGD" />}
       />
     </div>
   ),
