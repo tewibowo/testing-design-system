@@ -9,6 +9,7 @@ const preview = {
         date: /Date$/i,
       },
     },
+
     backgrounds: {
       default: "surface",
       values: [
@@ -20,20 +21,29 @@ const preview = {
         { name: "teal", value: "#054948" },
       ],
     },
+
     options: {
       storySort: {
+        method: "alphabetical",
         order: [
           "Introduction",
-          "Tokens",
+          "Foundations",
           ["Colors", "Typography", "Spacing & Elevation"],
+          "Atoms",
           "Components",
-          ["Button", "Tag", "Input", "Card", "EmptyState"],
-          "Composition",
-          "Brand",
+          "Compositions",
           "Examples",
+          "*",
         ],
       },
     },
+
+    a11y: {
+      // 'todo' - show a11y violations in the test UI only
+      // 'error' - fail CI on a11y violations
+      // 'off' - skip a11y checks entirely
+      test: "todo"
+    }
   },
 };
 

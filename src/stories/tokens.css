@@ -12,23 +12,29 @@
   border: 1px solid rgba(0, 0, 0, 0.04);
 }
 .tk-swatch .name {
-  font: var(--sx-label-medium);
-  color: var(--sx-text-primary);
+  font: var(--label-medium);
+  color: var(--text-primary);
   white-space: nowrap;
 }
 .tk-swatch .hex {
-  font: var(--sx-body-small);
-  font-family: var(--sx-font-mono);
-  color: var(--sx-text-secondary);
+  font: var(--body-small);
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
 }
-.tk-swatch .role { font: var(--sx-body-small); color: var(--sx-text-secondary); }
+.tk-swatch .role { font: var(--body-small); color: var(--text-secondary); }
 .tk-grid { display: grid; gap: 12px; }
 .tk-grid--5 { grid-template-columns: repeat(5, 1fr); }
 .tk-grid--4 { grid-template-columns: repeat(4, 1fr); }
-.tk-divider { border-top: 1px solid var(--sx-border); padding-top: 16px; margin-top: 16px; }
+.tk-divider { border-top: 1px solid var(--border); padding-top: 16px; margin-top: 16px; }
 .tk-row--baseline { display: flex; flex-direction: column; gap: 14px; }
 .tk-meta {
-  font: var(--sx-body-small);
-  color: var(--sx-text-secondary);
-  font-family: var(--sx-font-mono);
+  font: var(--body-small);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+.tk-section-label {
+  font: var(--label-medium);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }

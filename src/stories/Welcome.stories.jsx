@@ -12,9 +12,9 @@ export default {
 const Pre = ({ children }) => (
   <pre
     style={{
-      font: "13px/1.55 var(--sx-font-mono)",
+      font: "13px/1.55 var(--font-mono)",
       background: "#F6F7F9",
-      border: "1px solid var(--sx-border)",
+      border: "1px solid var(--border)",
       borderRadius: 8,
       padding: 16,
       margin: "12px 0 24px",
@@ -27,7 +27,7 @@ const Pre = ({ children }) => (
 
 const Section = ({ title, children }) => (
   <section style={{ marginTop: 32 }}>
-    <h2 style={{ font: "var(--sx-title-large)", color: "#002B2A", margin: "0 0 8px" }}>{title}</h2>
+    <h2 style={{ font: "var(--title-large)", color: "#002B2A", margin: "0 0 8px" }}>{title}</h2>
     {children}
   </section>
 );
@@ -38,16 +38,16 @@ export const Welcome = {
       <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24 }}>
         <Logomark size={56} />
         <div>
-          <div style={{ font: "var(--sx-label-medium)", color: "#054948", textTransform: "uppercase", letterSpacing: "0.12em" }}>
+          <div style={{ font: "var(--label-medium)", color: "#054948", textTransform: "uppercase", letterSpacing: "0.12em" }}>
             Design System
           </div>
-          <h1 style={{ font: "700 36px/1.1 var(--sx-font-display)", margin: "4px 0 0", letterSpacing: "-0.01em" }}>
+          <h1 style={{ font: "700 36px/1.1 var(--font-display)", margin: "4px 0 0", letterSpacing: "-0.01em" }}>
             StraitsX
           </h1>
         </div>
       </div>
 
-      <p style={{ font: "var(--sx-body-large)", color: "var(--sx-text-secondary)", margin: 0 }}>
+      <p style={{ font: "var(--body-large)", color: "var(--text-secondary)", margin: 0 }}>
         A React + plain-CSS design system rebuilt from the official StraitsX brand guidelines and the internal{" "}
         <strong>FDS 3</strong> Figma file. This Storybook is the canonical view of every token and component
         shipped from the package; <strong>Chromatic</strong> runs against it on every pull request to catch
@@ -55,7 +55,7 @@ export const Welcome = {
       </p>
 
       <Section title="What's inside">
-        <ul style={{ font: "var(--sx-body-medium)", color: "var(--sx-text-primary)", paddingLeft: 20, lineHeight: 1.7 }}>
+        <ul style={{ font: "var(--body-medium)", color: "var(--text-primary)", paddingLeft: 20, lineHeight: 1.7 }}>
           <li><strong>Tokens</strong> — colours (primary, secondary, stablecoin, semantic, surface), typography, spacing, radii, elevation.</li>
           <li><strong>Components</strong> — Button, Tag, Input, Card, EmptyState.</li>
           <li><strong>Composition</strong> — Sidebar, TopBar, OnboardingSteps, TransferPanel, OtcBanner.</li>
@@ -75,14 +75,14 @@ export default function Example() {
     </Card>
   );
 }`}</Pre>
-        <p style={{ font: "var(--sx-body-medium)", color: "var(--sx-text-secondary)" }}>
-          All components consume CSS custom properties (<code style={{ fontFamily: "var(--sx-font-mono)" }}>--sx-*</code>).
+        <p style={{ font: "var(--body-medium)", color: "var(--text-secondary)" }}>
+          All components consume CSS custom properties (<code style={{ fontFamily: "var(--font-mono)" }}>--*</code>).
           Override them in your own stylesheet to re-theme without forking.
         </p>
       </Section>
 
       <Section title="Brand voice — quick reference">
-        <ul style={{ font: "var(--sx-body-medium)", color: "var(--sx-text-primary)", paddingLeft: 20, lineHeight: 1.7 }}>
+        <ul style={{ font: "var(--body-medium)", color: "var(--text-primary)", paddingLeft: 20, lineHeight: 1.7 }}>
           <li>Plain, confident, security-first. Sentence case. No emoji.</li>
           <li><strong style={{ color: "#00D37E" }}>Vibrant Green</strong> #00D37E for highlights;{" "}
             <strong style={{ color: "#054948" }}>Secure Teal</strong> #054948 and{" "}
