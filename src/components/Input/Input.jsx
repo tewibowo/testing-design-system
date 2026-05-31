@@ -19,6 +19,7 @@ export function Input({
   prefix,
   suffix,
   type = "text",
+  size = "large",
   disabled = false,
   id: idProp,
   className = "",
@@ -45,6 +46,7 @@ export function Input({
 
   const wrapCls = [
     "sx-input",
+    `sx-input--${size === "small" ? "small" : "large"}`,
     isError && "is-error",
     disabled && "is-disabled",
     trailingButton && "sx-input--with-button",

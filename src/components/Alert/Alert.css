@@ -18,6 +18,9 @@
 .sx-alert__title { font: var(--sx-label-medium); }
 .sx-alert__text { font: var(--sx-body-medium); color: var(--sx-text-secondary); margin-top: 2px; }
 .sx-alert__actions { display: flex; gap: var(--sx-space-2); margin-top: 10px; }
+/* Right-aligned inline CTA — sits beside the body, vertically centered. */
+.sx-alert--actions-right { align-items: center; }
+.sx-alert__actions--right { flex: 0 0 auto; margin-top: 0; align-self: center; }
 .sx-alert__close {
   flex: 0 0 auto;
   background: transparent;

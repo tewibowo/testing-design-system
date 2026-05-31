@@ -1,0 +1,140 @@
+/* SelectionBox — Figma "Selection - Radio" / "Selection - Check".
+ * Bordered tappable row: indicator + optional icon + label/description.
+ * Tokens only. */
+.sx-selbox {
+  display: flex;
+  align-items: center;
+  gap: var(--sx-space-3);
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--sx-space-3) var(--sx-space-4);
+  border: 1.5px solid var(--sx-border);
+  border-radius: var(--sx-radius-md);
+  background: var(--sx-surface);
+  color: var(--sx-text-primary);
+  cursor: pointer;
+  transition: border-color var(--sx-dur-1) var(--sx-ease),
+              background var(--sx-dur-1) var(--sx-ease),
+              box-shadow var(--sx-dur-1) var(--sx-ease);
+}
+.sx-selbox:hover { background: var(--sx-surface-hovered); }
+
+/* visually-hidden native input drives state + a11y */
+.sx-selbox__input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+}
+.sx-selbox:focus-within {
+  outline: 2px solid var(--sx-status-information);
+  outline-offset: 2px;
+}
+
+/* ── Indicator: control (radio dot / checkbox) ── */
+.sx-selbox__box {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--sx-border);
+  background: var(--sx-surface);
+  transition: border-color var(--sx-dur-1) var(--sx-ease), background var(--sx-dur-1) var(--sx-ease);
+}
+.sx-selbox__box--radio { border-radius: var(--sx-radius-full); }
+.sx-selbox__box--check { border-radius: var(--sx-radius-sm); }
+
+/* radio dot */
+.sx-selbox__box--radio::after {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: var(--sx-radius-full);
+  background: var(--sx-interactive-active);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity var(--sx-dur-1) var(--sx-ease), transform var(--sx-dur-1) var(--sx-ease);
+}
+/* checkbox glyph */
+.sx-selbox__box--check svg {
+  width: 14px;
+  height: 14px;
+  color: var(--sx-text-inverse);
+  opacity: 0;
+  transform: scale(0.7);
+  transition: opacity var(--sx-dur-1) var(--sx-ease), transform var(--sx-dur-1) var(--sx-ease);
+}
+
+/* ── Indicator: icon (check glyph that appears on select) ── */
+.sx-selbox__indicator--icon {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--sx-radius-full);
+  color: var(--sx-text-inverse);
+  background: transparent;
+  transition: background var(--sx-dur-1) var(--sx-ease), color var(--sx-dur-1) var(--sx-ease);
+}
+.sx-selbox__indicator--icon svg { opacity: 0; transition: opacity var(--sx-dur-1) var(--sx-ease); }
+
+/* ── Leading content icon ── */
+.sx-selbox__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  color: var(--sx-text-secondary);
+}
+
+/* ── Text content ── */
+.sx-selbox__content { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.sx-selbox__label { font: var(--sx-body-bold-medium); color: var(--sx-text-primary); }
+.sx-selbox__desc { font: var(--sx-body-small); color: var(--sx-text-secondary); }
+
+/* ════════ Selected ════════ */
+.sx-selbox.is-selected {
+  border-color: var(--sx-primary);
+  background: var(--sx-sidebar-active);
+}
+.sx-selbox.is-selected:hover { background: var(--sx-sidebar-active); }
+
+.sx-selbox.is-selected .sx-selbox__box--radio { border-color: var(--sx-interactive-active); }
+.sx-selbox.is-selected .sx-selbox__box--radio::after { opacity: 1; transform: scale(1); }
+
+.sx-selbox.is-selected .sx-selbox__box--check {
+  background: var(--sx-interactive-active);
+  border-color: var(--sx-interactive-active);
+}
+.sx-selbox.is-selected .sx-selbox__box--check svg { opacity: 1; transform: scale(1); }
+
+.sx-selbox.is-selected .sx-selbox__indicator--icon { background: var(--sx-interactive-active); }
+.sx-selbox.is-selected .sx-selbox__indicator--icon svg { opacity: 1; }
+.sx-selbox.is-selected .sx-selbox__icon { color: var(--sx-interactive-active); }
+
+/* ════════ Disabled ════════ */
+.sx-selbox.is-disabled {
+  cursor: not-allowed;
+  background: var(--sx-surface-disabled);
+  border-color: var(--sx-border);
+  color: var(--sx-disabled-on-surface);
+}
+.sx-selbox.is-disabled:hover { background: var(--sx-surface-disabled); }
+.sx-selbox.is-disabled .sx-selbox__label,
+.sx-selbox.is-disabled .sx-selbox__desc,
+.sx-selbox.is-disabled .sx-selbox__icon { color: var(--sx-disabled-on-surface); }
+.sx-selbox.is-disabled .sx-selbox__box {
+  background: var(--sx-surface-secondary);
+  border-color: var(--sx-border);
+}
+.sx-selbox.is-disabled .sx-selbox__box--radio::after { background: var(--sx-disabled-on-surface); }
+.sx-selbox.is-disabled.is-selected .sx-selbox__box--check {
+  background: var(--sx-disabled-on-surface);
+  border-color: var(--sx-disabled-on-surface);
+}
+.sx-selbox.is-disabled .sx-selbox__indicator--icon { background: var(--sx-disabled-on-surface); }

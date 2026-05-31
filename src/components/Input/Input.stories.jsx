@@ -13,6 +13,7 @@ export default {
     suffix: { control: "text" },
     placeholder: { control: "text" },
     disabled: { control: "boolean" },
+    size: { control: "inline-radio", options: ["large", "small"] },
   },
   decorators: [(Story) => <div style={{ maxWidth: 360 }}><Story /></div>],
 };
@@ -59,6 +60,26 @@ export const ErrorState = {
 
 export const Disabled = {
   args: { label: "Account number", defaultValue: "0123 4567 8901", disabled: true },
+};
+
+export const Small = {
+  args: {
+    label: "Email",
+    size: "small",
+    placeholder: "hello@straitsx.com",
+    helper: "Compact 40px field.",
+  },
+};
+
+export const Sizes = {
+  render: () => (
+    <div style={{ display: "grid", gap: 16, maxWidth: 360 }}>
+      <Input size="large" label="Large (48px)" placeholder="hello@straitsx.com" />
+      <Input size="small" label="Small (40px)" placeholder="hello@straitsx.com" />
+      <Input size="large" label="Large + suffix" suffix="SGD" defaultValue="1,250.00" />
+      <Input size="small" label="Small + suffix" suffix="SGD" defaultValue="1,250.00" />
+    </div>
+  ),
 };
 
 export const Composition = {

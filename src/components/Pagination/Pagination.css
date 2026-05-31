@@ -42,3 +42,35 @@
   font: var(--sx-body-small);
   font-family: var(--sx-font-mono);
 }
+.sx-pagination__goto {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+}
+.sx-pagination__goto-input {
+  width: 56px;
+  height: 36px;
+  padding: 0 8px;
+  border: 1px solid var(--sx-border);
+  border-radius: var(--sx-radius-md);
+  background: var(--sx-surface);
+  color: var(--sx-text-primary);
+  font: var(--sx-body-medium);
+}
+.sx-pagination__goto-input:focus-visible {
+  outline: none;
+  border-color: var(--sx-text-primary);
+}
+.sx-pagination__goto-btn {
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--sx-border);
+  border-radius: var(--sx-radius-md);
+  background: var(--sx-surface);
+  color: var(--sx-text-primary);
+  font: 700 14px/1 var(--sx-font-display);
+  cursor: pointer;
+  transition: background var(--sx-dur-1) var(--sx-ease);
+}
+.sx-pagination__goto-btn:hover { background: var(--sx-surface-secondary); }

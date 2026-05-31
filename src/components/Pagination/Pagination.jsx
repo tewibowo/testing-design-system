@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Pagination.css";
 
 function range(from, to) {
@@ -28,6 +28,9 @@ function buildPages(current, total, siblings = 1) {
 /**
  * Pagination control.
  *   <Pagination page={p} totalPages={42} onChange={setP} />
+ *
+ * `disabledPages`: array of page numbers to render disabled/non-interactive.
+ * `showGoTo`: renders a small "go to page" number input + Go that calls onChange.
  */
 export function Pagination({
   page = 1,
@@ -37,12 +40,21 @@ export function Pagination({
   showSummary = false,
   total,
   pageSize,
+  disabledPages = [],
+  showGoTo = false,
   className = "",
 }) {
   const pages = buildPages(page, totalPages, siblings);
+  const isDisabled = (p) => disabledPages.includes(p);
   const go = (p) => {
-    if (p < 1 || p > totalPages || p === page) return;
+    if (p < 1 || p > totalPages || p === page || isDisabled(p)) return;
     onChange && onChange(p);
+  };
+  const [goToValue, setGoToValue] = useState("");
+  const submitGoTo = () => {
+    const n = parseInt(goToValue, 10);
+    if (!Number.isNaN(n)) go(n);
+    setGoToValue("");
   };
   return (
     <nav aria-label="Pagination" className={"sx-pagination " + className}>
@@ -64,6 +76,7 @@ export function Pagination({
             type="button"
             className={"sx-pagination__btn" + (p === page ? " is-active" : "")}
             aria-current={p === page ? "page" : undefined}
+            disabled={isDisabled(p)}
             onClick={() => go(p)}
           >
             {p}
@@ -79,6 +92,28 @@ export function Pagination({
       >
         <span className="material-symbols-rounded">chevron_right</span>
       </button>
+      {showGoTo && (
+        <span className="sx-pagination__goto">
+          <input
+            type="number"
+            className="sx-pagination__goto-input"
+            min={1}
+            max={totalPages}
+            value={goToValue}
+            onChange={(e) => setGoToValue(e.target.value)}
+            onKeyDown={(e) => { if (e.key === "Enter") submitGoTo(); }}
+            aria-label="Go to page"
+            placeholder="Page"
+          />
+          <button
+            type="button"
+            className="sx-pagination__goto-btn"
+            onClick={submitGoTo}
+          >
+            Go
+          </button>
+        </span>
+      )}
       {showSummary && total != null && pageSize != null && (
         <span className="sx-pagination__summary">
           {(page - 1) * pageSize + 1}–{Math.min(page * pageSize, total)} of {total}

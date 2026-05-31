@@ -30,6 +30,30 @@ export const Default = {
   },
 };
 
+export const WithDotsAndClose = {
+  render: () => {
+    const ref = useRef(null);
+    const [open, setOpen] = useState(true);
+    const [step, setStep] = useState(2);
+    return (
+      <div style={{ padding: 64 }}>
+        <Button ref={ref} onClick={() => { setStep(2); setOpen(true); }}>Earn</Button>
+        <Coachmark
+          target={ref}
+          open={open}
+          onDismiss={() => setOpen(false)}
+          title="Try the Earn feature"
+          body="Park your stablecoins and earn yield, with no lock-up period."
+          step={step}
+          totalSteps={4}
+          onNext={() => setStep((s) => Math.min(4, s + 1))}
+          onPrev={() => setStep((s) => Math.max(1, s - 1))}
+        />
+      </div>
+    );
+  },
+};
+
 export const Tour = {
   render: () => {
     const a = useRef(null);
