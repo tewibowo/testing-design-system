@@ -1,17 +1,17 @@
 .sx-otc {
   position: relative;
   overflow: hidden;
-  background: var(--sx-secure-teal);
-  color: #fff;
+  background: var(--sx-interactive-active);
+  color: var(--sx-text-inverse);
   padding: 24px 26px;
   min-height: 200px;
   display: flex;
-  border-radius: var(--sx-radius-card);
+  border-radius: var(--sx-radius-md);
 }
 .sx-otc__text { position: relative; z-index: 2; max-width: 80%; }
 .sx-otc__title { font: 700 22px/1.2 var(--sx-font-display); }
 .sx-otc__body {
-  font: var(--sx-body-m);
+  font: var(--sx-body-medium);
   color: rgba(255, 255, 255, 0.85);
   margin: 8px 0 16px;
   max-width: 30ch;
@@ -20,7 +20,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: var(--sx-vibrant-green);
+  color: var(--sx-primary);
   font: 700 16px/1 var(--sx-font-display);
   text-decoration: none;
   background: transparent;
@@ -29,7 +29,7 @@
   cursor: pointer;
 }
 .sx-otc__cta .material-symbols-rounded { font-size: 20px; }
-.sx-otc__cta:hover { color: var(--sx-mint); }
+.sx-otc__cta:hover { color: var(--sx-brand-seamless-mint); }
 .sx-otc__deco {
   position: absolute;
   right: -20px;

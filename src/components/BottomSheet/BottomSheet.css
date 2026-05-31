@@ -11,8 +11,8 @@
 .sx-bsheet {
   width: 100%;
   max-width: 560px;
-  background: #fff;
-  border-radius: var(--sx-radius-control) var(--sx-radius-control) 0 0;
+  background: var(--sx-surface);
+  border-radius: var(--sx-radius-lg) var(--sx-radius-lg) 0 0;
   box-shadow: var(--sx-shadow-3);
   max-height: calc(100vh - 24px);
   display: flex;
@@ -27,7 +27,7 @@
   width: 40px;
   height: 4px;
   border-radius: 999px;
-  background: var(--sx-line-strong);
+  background: var(--sx-border);
   margin: 8px auto 4px;
   flex: 0 0 auto;
 }
@@ -37,16 +37,16 @@
   gap: 8px;
   padding: 8px 20px 0;
 }
-.sx-bsheet__title { flex: 1; font: 700 18px/1.3 var(--sx-font-display); color: var(--sx-deep-ivy); }
+.sx-bsheet__title { flex: 1; font: 700 18px/1.3 var(--sx-font-display); color: var(--sx-text-primary); }
 .sx-bsheet__close {
   flex: 0 0 auto;
   background: transparent;
   border: 0;
   cursor: pointer;
-  color: var(--sx-fg-2);
+  color: var(--sx-text-secondary);
   padding: 6px;
   margin: -6px;
-  border-radius: var(--sx-radius-card);
+  border-radius: var(--sx-radius-md);
 }
-.sx-bsheet__close:hover { background: var(--sx-bg-subtle); color: var(--sx-fg-1); }
-.sx-bsheet__body { padding: 16px 20px 24px; overflow-y: auto; font: var(--sx-body-m); color: var(--sx-fg-2); }
+.sx-bsheet__close:hover { background: var(--sx-surface-secondary); color: var(--sx-text-primary); }
+.sx-bsheet__body { padding: 16px 20px 24px; overflow-y: auto; font: var(--sx-body-medium); color: var(--sx-text-secondary); }

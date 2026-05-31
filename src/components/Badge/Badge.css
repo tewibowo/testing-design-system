@@ -1,3 +1,4 @@
+/* Badge — migrated to STX semantic tokens (Figma: Badge = Counter + Dot). */
 .sx-badge {
   display: inline-flex;
   align-items: center;
@@ -6,20 +7,20 @@
   height: 18px;
   padding: 0 5px;
   border-radius: var(--sx-radius-full);
-  background: var(--sx-vibrant-green);
-  color: var(--sx-deep-ivy);
+  background: var(--sx-primary);
+  color: var(--sx-text-primary);
   font: 700 11px/18px var(--sx-font-display);
-  border: 2px solid #fff;
+  border: 2px solid var(--sx-surface);
   font-variant-numeric: tabular-nums;
 }
 .sx-badge--lg { min-width: 22px; height: 22px; padding: 0 7px; font-size: 12px; line-height: 22px; }
 .sx-badge--sm { min-width: 14px; height: 14px; padding: 0 4px; font-size: 10px; line-height: 14px; border-width: 1.5px; }
 .sx-badge--dot { width: 10px; height: 10px; min-width: 0; padding: 0; border-width: 2px; }
 
-.sx-badge--critical { background: var(--sx-critical); color: #fff; }
-.sx-badge--warning  { background: var(--sx-warning);  color: var(--sx-deep-ivy); }
-.sx-badge--info     { background: var(--sx-information); color: #fff; }
-.sx-badge--neutral  { background: var(--sx-neutral); color: #fff; }
+.sx-badge--critical { background: var(--sx-status-critical); color: var(--sx-text-inverse); }
+.sx-badge--warning  { background: var(--sx-status-warning);  color: var(--sx-text-primary); }
+.sx-badge--info     { background: var(--sx-status-information); color: var(--sx-text-inverse); }
+.sx-badge--neutral  { background: var(--sx-text-primary); color: var(--sx-text-inverse); }
 
 .sx-badge-wrap { position: relative; display: inline-flex; }
 .sx-badge-wrap .sx-badge {

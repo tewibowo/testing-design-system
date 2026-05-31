@@ -1,0 +1,35 @@
+import React from "react";
+import "./StatusIcon.css";
+
+/**
+ * Small circular status indicator with a material-symbols icon.
+ * Figma: Status Icon / Success (5700:9327).
+ *
+ * variant:
+ *   - "success"      → positive green circle + check
+ *   - "needApproval" → warning amber circle + hourglass
+ *
+ * Pass a custom `icon` (material symbol name) to override the default.
+ */
+export function StatusIcon({
+  variant = "success",
+  icon,
+  size = 36,
+  className = "",
+  ...rest
+}) {
+  const defaultIcon = variant === "needApproval" ? "hourglass_top" : "check";
+  const cls = ["sx-status-icon", `sx-status-icon--${variant}`, className]
+    .filter(Boolean)
+    .join(" ");
+  return (
+    <span
+      className={cls}
+      style={{ "--sx-status-icon-size": `${size}px` }}
+      role="img"
+      {...rest}
+    >
+      <span className="material-symbols-rounded">{icon || defaultIcon}</span>
+    </span>
+  );
+}

@@ -8,9 +8,9 @@
 *, *::before, *::after { box-sizing: border-box; }
 html, body, #root, #storybook-root { margin: 0; padding: 0; }
 body {
-  font: var(--sx-body-m);
-  color: var(--sx-fg-1);
-  background: var(--sx-bg);
+  font: var(--sx-body-medium);
+  color: var(--sx-text-primary);
+  background: var(--sx-surface);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;

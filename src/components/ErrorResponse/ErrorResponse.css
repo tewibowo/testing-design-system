@@ -10,9 +10,9 @@
 }
 .sx-error__code {
   font: 800 80px/1 var(--sx-font-display);
-  color: var(--sx-secure-teal);
+  color: var(--sx-interactive-active);
   letter-spacing: -0.04em;
 }
-.sx-error__title { font: 700 24px/1.2 var(--sx-font-display); color: var(--sx-deep-ivy); }
-.sx-error__body { font: var(--sx-body-l); color: var(--sx-fg-2); max-width: 48ch; }
+.sx-error__title { font: 700 24px/1.2 var(--sx-font-display); color: var(--sx-text-primary); }
+.sx-error__body { font: var(--sx-body-large); color: var(--sx-text-secondary); max-width: 48ch; }
 .sx-error__actions { display: flex; gap: 8px; margin-top: 8px; }

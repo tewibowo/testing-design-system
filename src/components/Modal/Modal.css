@@ -14,8 +14,8 @@
   to { opacity: 1; }
 }
 .sx-modal {
-  background: #fff;
-  border-radius: var(--sx-radius-control);
+  background: var(--sx-surface);
+  border-radius: var(--sx-radius-lg);
   box-shadow: var(--sx-shadow-3);
   width: 100%;
   max-width: 480px;
@@ -41,23 +41,23 @@
 .sx-modal__title {
   flex: 1;
   font: 700 20px/1.3 var(--sx-font-display);
-  color: var(--sx-deep-ivy);
+  color: var(--sx-text-primary);
 }
 .sx-modal__close {
   flex: 0 0 auto;
   background: transparent;
   border: 0;
   cursor: pointer;
-  color: var(--sx-fg-2);
+  color: var(--sx-text-secondary);
   margin: -8px -8px -8px 0;
   padding: 8px;
-  border-radius: var(--sx-radius-card);
+  border-radius: var(--sx-radius-md);
 }
-.sx-modal__close:hover { background: var(--sx-bg-subtle); color: var(--sx-fg-1); }
+.sx-modal__close:hover { background: var(--sx-surface-secondary); color: var(--sx-text-primary); }
 .sx-modal__body {
   padding: 8px 24px 24px;
-  font: var(--sx-body-m);
-  color: var(--sx-fg-2);
+  font: var(--sx-body-medium);
+  color: var(--sx-text-secondary);
   overflow-y: auto;
 }
 .sx-modal__foot {
@@ -65,5 +65,5 @@
   justify-content: flex-end;
   gap: 8px;
   padding: 12px 24px 20px;
-  border-top: 1px solid var(--sx-line-soft);
+  border-top: 1px solid var(--sx-border);
 }

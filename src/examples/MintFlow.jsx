@@ -68,12 +68,12 @@ function MintInner() {
 
         {step === 1 && (
           <>
-            <h2 style={{ font: "var(--sx-title-s)", color: "var(--sx-deep-ivy)", margin: "0 0 12px" }}>Review</h2>
+            <h2 style={{ font: "var(--sx-title-small)", color: "var(--sx-text-primary)", margin: "0 0 12px" }}>Review</h2>
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
               <Row label="Currency" value={currency.toUpperCase()} />
               <Row label="Amount" value={numericAmount.toLocaleString(undefined, { minimumFractionDigits: 2 })} />
               <Row label="Fee" value={fee.toFixed(2)} />
-              <div style={{ height: 1, background: "var(--sx-line-soft)", margin: "8px 0" }} />
+              <div style={{ height: 1, background: "var(--sx-border)", margin: "8px 0" }} />
               <Row label="You'll receive" value={`${total.toLocaleString(undefined, { minimumFractionDigits: 2 })} ${currency.toUpperCase()}`} strong />
             </div>
             <div style={{ display: "flex", justifyContent: "space-between", marginTop: 16 }}>
@@ -114,8 +114,8 @@ function MintInner() {
 function Row({ label, value, strong = false }) {
   return (
     <div style={{ display: "flex", justifyContent: "space-between" }}>
-      <span style={{ font: "var(--sx-body-m)", color: "var(--sx-fg-2)" }}>{label}</span>
-      <span style={{ font: strong ? "700 16px/1.4 var(--sx-font-mono)" : "var(--sx-body-m)", color: "var(--sx-fg-1)", fontVariantNumeric: "tabular-nums" }}>
+      <span style={{ font: "var(--sx-body-medium)", color: "var(--sx-text-secondary)" }}>{label}</span>
+      <span style={{ font: strong ? "700 16px/1.4 var(--sx-font-mono)" : "var(--sx-body-medium)", color: "var(--sx-text-primary)", fontVariantNumeric: "tabular-nums" }}>
         {value}
       </span>
     </div>

@@ -4,12 +4,12 @@
   gap: 8px;
   padding: 0 4px 0 14px;
   height: 48px;
-  background: var(--sx-bg-subtle);
-  border: 1px solid var(--sx-line);
-  border-radius: var(--sx-radius-control);
+  background: var(--sx-surface-secondary);
+  border: 1px solid var(--sx-border);
+  border-radius: var(--sx-radius-lg);
   font-family: var(--sx-font-mono);
   font-size: 14px;
-  color: var(--sx-fg-1);
+  color: var(--sx-text-primary);
 }
 .sx-copybox__value {
   flex: 1;
@@ -36,12 +36,12 @@
   background: transparent;
   border: 0;
   cursor: pointer;
-  color: var(--sx-deep-ivy);
+  color: var(--sx-text-primary);
   font: 700 13px/1 var(--sx-font-display);
   padding: 8px 12px;
-  border-radius: var(--sx-radius-card);
+  border-radius: var(--sx-radius-md);
   transition: background var(--sx-dur-1) var(--sx-ease);
 }
-.sx-copybox__btn:hover { background: var(--sx-light-grey); }
+.sx-copybox__btn:hover { background: var(--sx-surface-disabled); }
 .sx-copybox__btn .material-symbols-rounded { font-size: 18px; }
-.sx-copybox.is-copied .sx-copybox__btn { color: var(--sx-positive); }
+.sx-copybox.is-copied .sx-copybox__btn { color: var(--sx-status-positive); }

@@ -1,0 +1,77 @@
+/* DropdownAsset — Figma "Dropdown / Asset" (5072:46251). STX semantic tokens. */
+.sx-dropdown-asset {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: var(--sx-surface);
+  border-radius: var(--sx-radius-lg);
+  box-shadow: var(--sx-shadow-3);
+  overflow: hidden;
+}
+
+.sx-dropdown-asset__row {
+  display: flex;
+  align-items: center;
+  gap: var(--sx-space-2);
+  padding: var(--sx-space-3);
+  cursor: pointer;
+  color: var(--sx-text-primary);
+  transition: background var(--sx-dur-1) var(--sx-ease);
+}
+.sx-dropdown-asset__row:hover { background: var(--sx-surface-hovered); }
+.sx-dropdown-asset__row.is-selected { background: var(--sx-surface-secondary); }
+.sx-dropdown-asset__row.is-disabled {
+  background: var(--sx-surface-disabled);
+  color: var(--sx-disabled-on-surface);
+  cursor: not-allowed;
+}
+
+.sx-dropdown-asset__mark {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+.sx-dropdown-asset__mark > * { width: 24px; height: 24px; }
+.sx-dropdown-asset__initials {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--sx-radius-full);
+  background: var(--sx-surface-secondary);
+  color: var(--sx-text-secondary);
+  font: var(--sx-label-small);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sx-dropdown-asset__text {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sx-space-1);
+}
+.sx-dropdown-asset__name {
+  font: var(--sx-body-large);
+  color: inherit;
+}
+.sx-dropdown-asset__secondary {
+  font: var(--sx-body-medium);
+  color: var(--sx-text-secondary);
+}
+.sx-dropdown-asset__row.is-disabled .sx-dropdown-asset__secondary {
+  color: var(--sx-disabled-on-surface);
+}
+
+.sx-dropdown-asset__balance {
+  flex: 0 0 auto;
+  font-family: var(--sx-font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 14px;
+  color: var(--sx-text-primary);
+}

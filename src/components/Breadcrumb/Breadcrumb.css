@@ -1,6 +1,6 @@
-.sx-breadcrumb { display: flex; align-items: center; gap: 6px; font: var(--sx-body-m); }
+.sx-breadcrumb { display: flex; align-items: center; gap: 6px; font: var(--sx-body-medium); }
 .sx-breadcrumb__item {
-  color: var(--sx-fg-3);
+  color: var(--sx-text-secondary);
   text-decoration: none;
   background: transparent;
   border: 0;
@@ -9,10 +9,10 @@
   font: inherit;
   transition: color var(--sx-dur-1) var(--sx-ease);
 }
-.sx-breadcrumb__item:hover { color: var(--sx-fg-1); }
-.sx-breadcrumb__item.is-current { color: var(--sx-deep-ivy); font-weight: 700; cursor: default; }
+.sx-breadcrumb__item:hover { color: var(--sx-text-primary); }
+.sx-breadcrumb__item.is-current { color: var(--sx-text-primary); font-weight: 700; cursor: default; }
 .sx-breadcrumb__sep {
-  color: var(--sx-fg-4);
+  color: var(--sx-disabled-on-surface);
   font-size: 18px;
   line-height: 1;
 }

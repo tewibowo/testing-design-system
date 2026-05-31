@@ -4,9 +4,9 @@
   align-items: center;
   gap: 12px;
   padding: 16px;
-  background: #fff;
-  border: 1px solid var(--sx-line);
-  border-radius: var(--sx-radius-control);
+  background: var(--sx-surface);
+  border: 1px solid var(--sx-border);
+  border-radius: var(--sx-radius-lg);
 }
 .sx-qr__img {
   width: 200px;
@@ -15,12 +15,12 @@
 }
 .sx-qr__label {
   font: 700 14px/1.2 var(--sx-font-display);
-  color: var(--sx-deep-ivy);
+  color: var(--sx-text-primary);
   text-align: center;
 }
 .sx-qr__sub {
-  font: var(--sx-body-s);
-  color: var(--sx-fg-3);
+  font: var(--sx-body-small);
+  color: var(--sx-text-secondary);
   text-align: center;
   font-family: var(--sx-font-mono);
   word-break: break-all;

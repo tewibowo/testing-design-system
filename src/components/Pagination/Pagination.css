@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  font: var(--sx-body-m);
+  font: var(--sx-body-medium);
 }
 .sx-pagination__btn {
   min-width: 36px;
@@ -10,9 +10,9 @@
   padding: 0 8px;
   background: transparent;
   border: 1px solid transparent;
-  border-radius: var(--sx-radius-card);
+  border-radius: var(--sx-radius-md);
   cursor: pointer;
-  color: var(--sx-fg-1);
+  color: var(--sx-text-primary);
   font: 700 14px/1 var(--sx-font-display);
   display: inline-flex;
   align-items: center;
@@ -20,13 +20,13 @@
   transition: background var(--sx-dur-1) var(--sx-ease), border-color var(--sx-dur-1) var(--sx-ease);
 }
 .sx-pagination__btn:hover:not(.is-active):not([disabled]) {
-  background: var(--sx-bg-subtle);
+  background: var(--sx-surface-secondary);
 }
 .sx-pagination__btn.is-active {
-  background: var(--sx-deep-ivy);
-  color: #fff;
+  background: var(--sx-text-primary);
+  color: var(--sx-text-inverse);
 }
-.sx-pagination__btn[disabled] { color: var(--sx-fg-4); cursor: not-allowed; }
+.sx-pagination__btn[disabled] { color: var(--sx-disabled-on-surface); cursor: not-allowed; }
 .sx-pagination__btn .material-symbols-rounded { font-size: 20px; }
 .sx-pagination__ellipsis {
   width: 36px;
@@ -34,11 +34,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--sx-fg-3);
+  color: var(--sx-text-secondary);
 }
 .sx-pagination__summary {
   margin-left: 12px;
-  color: var(--sx-fg-3);
-  font: var(--sx-body-s);
+  color: var(--sx-text-secondary);
+  font: var(--sx-body-small);
   font-family: var(--sx-font-mono);
 }

@@ -7,7 +7,7 @@
 }
 .sx-coachmark-spot {
   position: absolute;
-  border-radius: var(--sx-radius-card);
+  border-radius: var(--sx-radius-md);
   box-shadow: 0 0 0 9999px rgba(0, 43, 42, 0.55);
   pointer-events: none;
   transition: all var(--sx-dur-3) var(--sx-ease);
@@ -15,8 +15,8 @@
 .sx-coachmark {
   position: absolute;
   z-index: 1201;
-  background: #fff;
-  border-radius: var(--sx-radius-control);
+  background: var(--sx-surface);
+  border-radius: var(--sx-radius-lg);
   box-shadow: var(--sx-shadow-3);
   padding: 16px;
   width: 280px;
@@ -24,8 +24,8 @@
   flex-direction: column;
   gap: 8px;
 }
-.sx-coachmark__title { font: 700 14px/1.4 var(--sx-font-display); color: var(--sx-deep-ivy); }
-.sx-coachmark__body { font: var(--sx-body-m); color: var(--sx-fg-2); }
+.sx-coachmark__title { font: 700 14px/1.4 var(--sx-font-display); color: var(--sx-text-primary); }
+.sx-coachmark__body { font: var(--sx-body-medium); color: var(--sx-text-secondary); }
 .sx-coachmark__foot {
   display: flex;
   align-items: center;
@@ -33,8 +33,8 @@
   margin-top: 8px;
 }
 .sx-coachmark__count {
-  font: var(--sx-body-s);
-  color: var(--sx-fg-3);
+  font: var(--sx-body-small);
+  color: var(--sx-text-secondary);
   font-family: var(--sx-font-mono);
 }
 .sx-coachmark__actions { display: flex; gap: 8px; }

@@ -1,0 +1,19 @@
+/* AssetMark — circular brand mark for coins / fiat / networks. */
+.sx-asset-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  border-radius: var(--sx-radius-full);
+  font-family: var(--sx-font-display);
+  font-weight: 700;
+  line-height: 1;
+  overflow: hidden;
+  user-select: none;
+}
+.sx-asset-mark > img,
+.sx-asset-mark > svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
