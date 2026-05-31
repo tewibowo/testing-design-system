@@ -2,7 +2,7 @@ import React from "react";
 import { CardSwap } from "./CardSwap.jsx";
 
 export default {
-  title: "Components/CardSwap",
+  title: "Components/Card/Swap",
   component: CardSwap,
   parameters: { layout: "centered" },
 };

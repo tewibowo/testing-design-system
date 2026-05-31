@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Tag } from "./Tag.jsx";
 
 export default {
-  title: "Components/Tag",
+  title: "Atoms/Tag",
   component: Tag,
   parameters: { layout: "centered" },
   argTypes: {

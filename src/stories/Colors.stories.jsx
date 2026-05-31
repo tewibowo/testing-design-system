@@ -2,7 +2,7 @@ import React from "react";
 import "./tokens.css";
 
 export default {
-  title: "Tokens/Colors",
+  title: "Foundations/Colors",
   parameters: { layout: "padded" },
 };
 

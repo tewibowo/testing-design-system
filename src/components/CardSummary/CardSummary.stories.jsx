@@ -2,7 +2,7 @@ import React from "react";
 import { CardSummary } from "./CardSummary.jsx";
 
 export default {
-  title: "Components/CardSummary",
+  title: "Components/Card/Summary",
   component: CardSummary,
   parameters: { layout: "centered" },
 };

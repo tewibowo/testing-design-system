@@ -2,7 +2,7 @@ import React from "react";
 import { DropdownNetwork } from "./DropdownNetwork.jsx";
 
 export default {
-  title: "Components/DropdownNetwork",
+  title: "Components/Dropdown/Network",
   component: DropdownNetwork,
   parameters: { layout: "padded" },
   decorators: [(S) => <div style={{ maxWidth: 328 }}><S /></div>],

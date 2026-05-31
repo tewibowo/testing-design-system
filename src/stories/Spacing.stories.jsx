@@ -2,7 +2,7 @@ import React from "react";
 import "./tokens.css";
 
 export default {
-  title: "Tokens/Spacing & Elevation",
+  title: "Foundations/Spacing & Elevation",
   parameters: { layout: "padded" },
 };
 

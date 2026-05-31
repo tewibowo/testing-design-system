@@ -2,7 +2,7 @@ import React from "react";
 import { EstimatedBalance } from "./EstimatedBalance.jsx";
 
 export default {
-  title: "Components/EstimatedBalance",
+  title: "Components/Estimated Balance",
   component: EstimatedBalance,
   parameters: { layout: "padded" },
   argTypes: {

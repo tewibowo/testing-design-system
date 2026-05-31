@@ -2,7 +2,7 @@ import React from "react";
 import { EmptyState } from "./EmptyState.jsx";
 
 export default {
-  title: "Components/EmptyState",
+  title: "Components/Empty State",
   component: EmptyState,
   parameters: { layout: "padded" },
   args: {

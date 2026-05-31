@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Checkbox } from "./Checkbox.jsx";
 
 export default {
-  title: "Components/Checkbox",
+  title: "Atoms/Checkbox",
   component: Checkbox,
   parameters: { layout: "padded" },
   args: { label: "I agree to the terms" },

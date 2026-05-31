@@ -2,7 +2,7 @@ import React from "react";
 import { TransactionHistoryTable } from "./TransactionHistoryTable.jsx";
 
 export default {
-  title: "Components/TransactionHistoryTable",
+  title: "Compositions/Transaction History Table",
   component: TransactionHistoryTable,
   parameters: { layout: "padded" },
 };

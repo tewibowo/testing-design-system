@@ -2,7 +2,7 @@ import React from "react";
 import { FieldNetwork } from "./FieldNetwork.jsx";
 
 export default {
-  title: "Components/FieldNetwork",
+  title: "Components/Field/Network",
   component: FieldNetwork,
   parameters: { layout: "padded" },
   decorators: [(S) => <div style={{ maxWidth: 400, minHeight: 360 }}><S /></div>],

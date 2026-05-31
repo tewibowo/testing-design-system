@@ -3,7 +3,7 @@ import { ModalAssetOverview } from "./ModalAssetOverview.jsx";
 import { Button } from "../Button/Button.jsx";
 
 export default {
-  title: "Components/ModalAssetOverview",
+  title: "Components/Modal/Asset Overview",
   component: ModalAssetOverview,
   parameters: { layout: "centered" },
 };

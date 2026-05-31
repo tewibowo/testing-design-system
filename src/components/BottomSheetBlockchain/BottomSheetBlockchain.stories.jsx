@@ -4,7 +4,7 @@ import { AssetMark } from "../AssetMark/AssetMark.jsx";
 import { Button } from "../Button/Button.jsx";
 
 export default {
-  title: "Components/BottomSheetBlockchain",
+  title: "Components/Bottom Sheet/Blockchain",
   component: BottomSheetBlockchain,
   parameters: { layout: "centered" },
 };

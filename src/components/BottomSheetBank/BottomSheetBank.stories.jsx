@@ -4,7 +4,7 @@ import { AssetMark } from "../AssetMark/AssetMark.jsx";
 import { Button } from "../Button/Button.jsx";
 
 export default {
-  title: "Components/BottomSheetBank",
+  title: "Components/Bottom Sheet/Bank",
   component: BottomSheetBank,
   parameters: { layout: "centered" },
 };

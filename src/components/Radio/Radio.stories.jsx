@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Radio, RadioGroup } from "./Radio.jsx";
 
 export default {
-  title: "Components/Radio",
+  title: "Atoms/Radio",
   component: Radio,
   parameters: { layout: "padded" },
 };

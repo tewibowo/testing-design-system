@@ -2,7 +2,7 @@ import React from "react";
 import { QR } from "./QR.jsx";
 
 export default {
-  title: "Components/QR",
+  title: "Atoms/QR",
   component: QR,
   parameters: { layout: "centered" },
 };

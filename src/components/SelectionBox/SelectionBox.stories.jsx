@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { SelectionBox } from "./SelectionBox.jsx";
 
 export default {
-  title: "Components/SelectionBox",
+  title: "Components/Selection Box",
   component: SelectionBox,
   parameters: { layout: "padded" },
   argTypes: {

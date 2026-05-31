@@ -25,7 +25,7 @@ const xusd = <Coin label="XU" bg="var(--sx-brand-xusd)" />;
 const usd = <Coin label="US" bg="var(--sx-brand-credible-blue)" />;
 
 export default {
-  title: "Components/InlineCrossAsset",
+  title: "Components/Inline Cross Asset",
   component: InlineCrossAsset,
   parameters: { layout: "padded" },
   args: {

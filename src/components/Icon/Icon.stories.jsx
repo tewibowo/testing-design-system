@@ -2,7 +2,7 @@ import React from "react";
 import { Icon } from "./Icon.jsx";
 
 export default {
-  title: "Components/Icon",
+  title: "Atoms/Icon",
   component: Icon,
   parameters: { layout: "padded" },
   argTypes: {

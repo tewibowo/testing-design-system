@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { OnboardingSteps } from "./OnboardingSteps.jsx";
 
 export default {
-  title: "Composition/OnboardingSteps",
+  title: "Compositions/Onboarding Steps",
   component: OnboardingSteps,
   parameters: { layout: "padded" },
 };

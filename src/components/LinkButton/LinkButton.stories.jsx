@@ -2,7 +2,7 @@ import React from "react";
 import { LinkButton } from "./LinkButton.jsx";
 
 export default {
-  title: "Components/LinkButton",
+  title: "Atoms/Link Button",
   component: LinkButton,
   parameters: { layout: "centered" },
   argTypes: {

@@ -2,7 +2,7 @@ import React from "react";
 import { CompanyProfileMenu } from "./CompanyProfileMenu.jsx";
 
 export default {
-  title: "Components/CompanyProfileMenu",
+  title: "Components/Company Profile Menu",
   component: CompanyProfileMenu,
   parameters: { layout: "padded" },
   decorators: [(S) => <div style={{ minHeight: 320 }}><S /></div>],

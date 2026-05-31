@@ -2,7 +2,7 @@ import React from "react";
 import { FieldBlockchain } from "./FieldBlockchain.jsx";
 
 export default {
-  title: "Components/FieldBlockchain",
+  title: "Components/Field/Blockchain",
   component: FieldBlockchain,
   parameters: { layout: "padded" },
   decorators: [(S) => <div style={{ maxWidth: 400, minHeight: 420 }}><S /></div>],

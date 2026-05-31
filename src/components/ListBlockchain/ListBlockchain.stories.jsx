@@ -22,7 +22,7 @@ const ChainIcon = ({ label = "Ξ", bg = "var(--sx-brand-stable-deep-ivy)" }) => 
 const ADDRESS = "0x934ddab12av012345c1ertf897fec124f2gyb1";
 
 export default {
-  title: "Components/ListBlockchain",
+  title: "Components/List/Blockchain",
   component: ListBlockchain,
   parameters: { layout: "padded" },
   argTypes: {

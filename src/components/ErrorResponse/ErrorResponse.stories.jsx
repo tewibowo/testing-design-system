@@ -3,7 +3,7 @@ import { ErrorResponse } from "./ErrorResponse.jsx";
 import { Button } from "../Button/Button.jsx";
 
 export default {
-  title: "Components/ErrorResponse",
+  title: "Components/Error Response",
   component: ErrorResponse,
   parameters: { layout: "fullscreen" },
 };

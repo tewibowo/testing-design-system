@@ -2,7 +2,7 @@ import React from "react";
 import { TopNavProfileMenu } from "./TopNavProfileMenu.jsx";
 
 export default {
-  title: "Components/TopNavProfileMenu",
+  title: "Components/Top Nav Profile Menu",
   component: TopNavProfileMenu,
   parameters: { layout: "padded" },
   decorators: [(S) => <div style={{ minHeight: 360 }}><S /></div>],

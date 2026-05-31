@@ -2,7 +2,7 @@ import React from "react";
 import { AppTopNav } from "./AppTopNav.jsx";
 
 export default {
-  title: "Composition/AppTopNav",
+  title: "Compositions/App Top Nav",
   component: AppTopNav,
   parameters: { layout: "fullscreen" },
   argTypes: {

@@ -2,7 +2,7 @@ import React from "react";
 import { FieldBank } from "./FieldBank.jsx";
 
 export default {
-  title: "Components/FieldBank",
+  title: "Components/Field/Bank",
   component: FieldBank,
   parameters: { layout: "padded" },
   decorators: [(S) => <div style={{ maxWidth: 400, minHeight: 420 }}><S /></div>],
