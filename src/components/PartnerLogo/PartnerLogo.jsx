@@ -34,11 +34,11 @@ export function PartnerLogo({ name, size = 32, monochrome = true, className = ""
   if (Custom) return <Custom size={size} monochrome={monochrome} />;
 
   // Fallback monochrome wordmark pill
-  const bg = monochrome ? "transparent" : "var(--sx-surface-secondary)";
-  const fg = monochrome ? "var(--sx-text-primary)" : "var(--sx-text-primary)";
+  const bg = monochrome ? "transparent" : "var(--surface-secondary)";
+  const fg = monochrome ? "var(--text-primary)" : "var(--text-primary)";
   return (
     <span
-      className={"sx-partner-logo " + className}
+      className={"partner-logo " + className}
       title={prettify(name)}
       style={{
         display: "inline-flex",
@@ -46,9 +46,9 @@ export function PartnerLogo({ name, size = 32, monochrome = true, className = ""
         height: size,
         padding: `0 ${Math.max(8, size / 3)}px`,
         background: bg,
-        border: `1px solid var(--sx-border)`,
+        border: `1px solid var(--border)`,
         borderRadius: 4,
-        font: `700 ${Math.max(10, size / 2.7)}px/1 var(--sx-font-display)`,
+        font: `700 ${Math.max(10, size / 2.7)}px/1 var(--font-display)`,
         color: fg,
         letterSpacing: "0.04em",
         textTransform: "uppercase",

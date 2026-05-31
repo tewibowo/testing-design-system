@@ -19,13 +19,13 @@ export function StatusIcon({
   ...rest
 }) {
   const defaultIcon = variant === "needApproval" ? "hourglass_top" : "check";
-  const cls = ["sx-status-icon", `sx-status-icon--${variant}`, className]
+  const cls = ["status-icon", `status-icon--${variant}`, className]
     .filter(Boolean)
     .join(" ");
   return (
     <span
       className={cls}
-      style={{ "--sx-status-icon-size": `${size}px` }}
+      style={{ "--status-icon-size": `${size}px` }}
       role="img"
       {...rest}
     >

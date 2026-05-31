@@ -14,7 +14,7 @@ export function Logomark({ size = 36, fill = "#00D37E", tone, variant, style, ..
       viewBox="0 0 219.184 89.975"
       fill="none"
       aria-hidden="true"
-      style={isMono ? { color: "var(--sx-text-inverse)", ...style } : style}
+      style={isMono ? { color: "var(--text-inverse)", ...style } : style}
       {...rest}
     >
       <path

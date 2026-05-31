@@ -2,7 +2,7 @@ import React from "react";
 import { MultiSelect } from "./MultiSelect.jsx";
 
 export default {
-  title: "Components/MultiSelect",
+  title: "Components/Multi Select",
   component: MultiSelect,
   parameters: { layout: "padded" },
   decorators: [(S) => <div style={{ maxWidth: 360, minHeight: 360 }}><S /></div>],

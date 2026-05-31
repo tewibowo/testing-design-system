@@ -16,20 +16,20 @@ export function ListSupportedNetwork({
   className = "",
   ...rest
 }) {
-  const cls = ["sx-supported-network", className].filter(Boolean).join(" ");
+  const cls = ["supported-network", className].filter(Boolean).join(" ");
   return (
     <div className={cls} {...rest}>
-      <div className="sx-supported-network__stack">
+      <div className="supported-network__stack">
         {networks.map((node, i) => (
-          <span className="sx-supported-network__icon" key={i}>
+          <span className="supported-network__icon" key={i}>
             {node}
           </span>
         ))}
       </div>
       {overflow > 0 && (
-        <span className="sx-supported-network__more">+{overflow}</span>
+        <span className="supported-network__more">+{overflow}</span>
       )}
-      {isNew && <span className="sx-supported-network__badge">NEW</span>}
+      {isNew && <span className="supported-network__badge">NEW</span>}
     </div>
   );
 }

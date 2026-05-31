@@ -32,10 +32,10 @@ function FilePreview({ file }) {
   }, [file]);
 
   if (url) {
-    return <img className="sx-upload__thumb" src={url} alt="" aria-hidden="true" />;
+    return <img className="upload__thumb" src={url} alt="" aria-hidden="true" />;
   }
   return (
-    <span className="sx-upload__thumb sx-upload__thumb--placeholder" aria-hidden="true">
+    <span className="upload__thumb upload__thumb--placeholder" aria-hidden="true">
       <span className="material-symbols-rounded">image</span>
     </span>
   );
@@ -97,14 +97,14 @@ export function Upload({
   };
 
   const dropCls = [
-    "sx-upload__drop",
+    "upload__drop",
     dragging && "is-dragging",
     error && "is-error",
   ].filter(Boolean).join(" ");
 
   return (
-    <div className={"sx-upload " + className}>
-      {label && <span className="sx-field__label">{label}</span>}
+    <div className={"upload " + className}>
+      {label && <span className="field__label">{label}</span>}
       <label
         className={dropCls}
         onDragOver={(e) => { e.preventDefault(); if (!disabled) setDragging(true); }}
@@ -116,11 +116,11 @@ export function Upload({
           handleSelect(e.dataTransfer.files);
         }}
       >
-        <span className="material-symbols-rounded sx-upload__icon" aria-hidden="true">cloud_upload</span>
-        <span className="sx-upload__primary">
-          <span className="sx-upload__link">Click to upload</span> or drag and drop
+        <span className="material-symbols-rounded upload__icon" aria-hidden="true">cloud_upload</span>
+        <span className="upload__primary">
+          <span className="upload__link">Click to upload</span> or drag and drop
         </span>
-        <span className="sx-upload__hint">{hint}</span>
+        <span className="upload__hint">{hint}</span>
         <input
           ref={inputRef}
           type="file"
@@ -130,32 +130,32 @@ export function Upload({
           onChange={(e) => handleSelect(e.target.files)}
         />
       </label>
-      {error && <span className="sx-field__helper is-error">{error}</span>}
+      {error && <span className="field__helper is-error">{error}</span>}
       {/* Scoped, hidden picker used by per-file "Replace". */}
       <input
         ref={replaceRef}
         type="file"
         accept={accept}
         disabled={disabled}
-        className="sx-upload__replace-input"
+        className="upload__replace-input"
         onChange={(e) => { handleReplace(e.target.files); e.target.value = ""; }}
       />
       {files.length > 0 && (
-        <div className="sx-upload__list">
+        <div className="upload__list">
           {files.map((file, i) => (
-            <div key={i} className="sx-upload__file">
+            <div key={i} className="upload__file">
               {isImageFile(file) ? (
                 <FilePreview file={file} />
               ) : (
-                <span className="sx-upload__thumb sx-upload__thumb--placeholder" aria-hidden="true">
+                <span className="upload__thumb upload__thumb--placeholder" aria-hidden="true">
                   <span className="material-symbols-rounded">description</span>
                 </span>
               )}
-              <span className="sx-upload__file-meta">
-                <span className="sx-upload__file-name">{file.name}</span>
-                <span className="sx-upload__file-size">{formatBytes(file.size)}</span>
+              <span className="upload__file-meta">
+                <span className="upload__file-name">{file.name}</span>
+                <span className="upload__file-size">{formatBytes(file.size)}</span>
               </span>
-              <span className="sx-upload__file-actions">
+              <span className="upload__file-actions">
                 <Button
                   variant="secondary"
                   size="sm"

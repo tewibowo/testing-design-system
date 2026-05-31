@@ -67,7 +67,7 @@ export const Small = {
     label: "Email",
     size: "small",
     placeholder: "hello@straitsx.com",
-    helper: "Compact 40px field.",
+    helper: "Compact 36px field.",
   },
 };
 
@@ -75,7 +75,7 @@ export const Sizes = {
   render: () => (
     <div style={{ display: "grid", gap: 16, maxWidth: 360 }}>
       <Input size="large" label="Large (48px)" placeholder="hello@straitsx.com" />
-      <Input size="small" label="Small (40px)" placeholder="hello@straitsx.com" />
+      <Input size="small" label="Small (36px)" placeholder="hello@straitsx.com" />
       <Input size="large" label="Large + suffix" suffix="SGD" defaultValue="1,250.00" />
       <Input size="small" label="Small + suffix" suffix="SGD" defaultValue="1,250.00" />
     </div>
@@ -90,7 +90,7 @@ export const States = {
       <Input label="Focused" className="is-focused" placeholder="hello@straitsx.com" />
       <Input label="Error" defaultValue="0xa1B…f2" error="Address checksum doesn't match." />
       <Input label="Disabled" defaultValue="0123 4567 8901" disabled />
-      <Input label="Small" size="small" placeholder="Compact 40px field" />
+      <Input label="Small" size="small" placeholder="Compact 36px field" />
       <Input label="With prefix" prefix="S$" defaultValue="250,000.00" />
       <Input label="With suffix" suffix="SGD" defaultValue="1,250.00" />
     </div>

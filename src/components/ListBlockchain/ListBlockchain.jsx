@@ -28,23 +28,23 @@ export function ListBlockchain({
 }) {
   const isPending = variant === "pending";
   const isVerify = variant === "verify";
-  const cls = ["sx-list-blockchain", `sx-list-blockchain--${variant}`, className]
+  const cls = ["list-blockchain", `list-blockchain--${variant}`, className]
     .filter(Boolean)
     .join(" ");
 
   return (
     <div className={cls} {...rest}>
-      <div className="sx-list-blockchain__main">
-        {icon != null && <span className="sx-list-blockchain__icon">{icon}</span>}
-        <div className="sx-list-blockchain__text">
-          <span className="sx-list-blockchain__name">{name}</span>
-          {address && <span className="sx-list-blockchain__sub">{address}</span>}
-          {meta && <span className="sx-list-blockchain__sub">{meta}</span>}
+      <div className="list-blockchain__main">
+        {icon != null && <span className="list-blockchain__icon">{icon}</span>}
+        <div className="list-blockchain__text">
+          <span className="list-blockchain__name">{name}</span>
+          {address && <span className="list-blockchain__sub">{address}</span>}
+          {meta && <span className="list-blockchain__sub">{meta}</span>}
         </div>
       </div>
 
       {isPending && (
-        <Tag tone="warning" className="sx-list-blockchain__tag">
+        <Tag tone="warning" className="list-blockchain__tag">
           Pending
         </Tag>
       )}
@@ -52,7 +52,7 @@ export function ListBlockchain({
       {isVerify && (
         <button
           type="button"
-          className="sx-list-blockchain__link"
+          className="list-blockchain__link"
           onClick={onAction}
         >
           {actionLabel}

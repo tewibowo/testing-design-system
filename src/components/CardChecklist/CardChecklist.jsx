@@ -29,20 +29,20 @@ export function CardChecklist({
   className = "",
   ...rest
 }) {
-  const cls = ["sx-card-checklist", className].filter(Boolean).join(" ");
+  const cls = ["card-checklist", className].filter(Boolean).join(" ");
   return (
     <section className={cls} {...rest}>
-      <h3 className="sx-card-checklist__title">{title}</h3>
+      <h3 className="card-checklist__title">{title}</h3>
 
       {tabs.length > 0 && (
-        <div className="sx-card-checklist__tabs" role="tablist">
+        <div className="card-checklist__tabs" role="tablist">
           {tabs.map((t) => (
             <button
               key={t.value}
               type="button"
               role="tab"
               aria-selected={t.value === active}
-              className={"sx-card-checklist__tab" + (t.value === active ? " is-active" : "")}
+              className={"card-checklist__tab" + (t.value === active ? " is-active" : "")}
               onClick={onTabChange ? () => onTabChange(t.value) : undefined}
             >
               {t.label}
@@ -51,26 +51,26 @@ export function CardChecklist({
         </div>
       )}
 
-      <div className="sx-card-checklist__progress">
-        <div className="sx-card-checklist__progress-track">
+      <div className="card-checklist__progress">
+        <div className="card-checklist__progress-track">
           <div
-            className="sx-card-checklist__progress-fill"
+            className="card-checklist__progress-fill"
             style={{ width: `${Math.max(0, Math.min(100, progress))}%` }}
           />
         </div>
-        <span className="sx-card-checklist__progress-pct num">{progress}%</span>
+        <span className="card-checklist__progress-pct num">{progress}%</span>
       </div>
 
-      <ul className="sx-card-checklist__list">
+      <ul className="card-checklist__list">
         {items.map((item, i) => (
           <li
             key={item.title || i}
-            className={"sx-card-checklist__item" + (item.status === "active" ? " is-active" : "")}
+            className={"card-checklist__item" + (item.status === "active" ? " is-active" : "")}
           >
             <ChecklistMark status={item.status} />
-            <div className="sx-card-checklist__item-body">
-              <p className="sx-card-checklist__item-title">{item.title}</p>
-              {item.description && <p className="sx-card-checklist__item-desc">{item.description}</p>}
+            <div className="card-checklist__item-body">
+              <p className="card-checklist__item-title">{item.title}</p>
+              {item.description && <p className="card-checklist__item-desc">{item.description}</p>}
               {item.linkText && (
                 <LinkButton size="sm" trailingIcon="arrow_forward" onClick={item.onLink}>
                   {item.linkText}
@@ -80,7 +80,7 @@ export function CardChecklist({
             <Icon
               name={item.status === "locked" ? "lock" : "chevron_right"}
               size={20}
-              className="sx-card-checklist__item-trailing"
+              className="card-checklist__item-trailing"
             />
           </li>
         ))}
@@ -92,7 +92,7 @@ export function CardChecklist({
 function ChecklistMark({ status }) {
   const icon = status === "done" ? "check_circle" : status === "locked" ? "lock" : "radio_button_unchecked";
   return (
-    <span className={"sx-card-checklist__mark sx-card-checklist__mark--" + (status || "active")} aria-hidden="true">
+    <span className={"card-checklist__mark card-checklist__mark--" + (status || "active")} aria-hidden="true">
       <span className="material-symbols-rounded">{icon}</span>
     </span>
   );

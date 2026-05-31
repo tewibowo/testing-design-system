@@ -62,11 +62,11 @@ export function AppTopNav({
       .toUpperCase();
 
   const avatar = (
-    <span className="sx-app-topnav__avatar" aria-hidden="true">
+    <span className="app-topnav__avatar" aria-hidden="true">
       {user.avatar ? (
-        <img className="sx-app-topnav__avatar-img" src={user.avatar} alt="" />
+        <img className="app-topnav__avatar-img" src={user.avatar} alt="" />
       ) : initials ? (
-        <span className="sx-app-topnav__initials">{initials}</span>
+        <span className="app-topnav__initials">{initials}</span>
       ) : (
         <span className="material-symbols-rounded">person</span>
       )}
@@ -77,18 +77,18 @@ export function AppTopNav({
 
   if (isMobile) {
     return (
-      <header className="sx-app-topnav sx-app-topnav--mobile" data-account={account}>
+      <header className="app-topnav app-topnav--mobile" data-account={account}>
         <IconButton
           icon="menu"
           variant="ghost"
           label="Open menu"
           onClick={onMenuClick}
-          className="sx-app-topnav__menu"
+          className="app-topnav__menu"
         />
-        <span className="sx-app-topnav__logo sx-app-topnav__logo--center">{brand}</span>
+        <span className="app-topnav__logo app-topnav__logo--center">{brand}</span>
         <button
           type="button"
-          className="sx-app-topnav__profile sx-app-topnav__profile--compact"
+          className="app-topnav__profile app-topnav__profile--compact"
           onClick={onProfileClick}
           aria-label={primaryLabel ? `Account: ${primaryLabel}` : "Account"}
           aria-haspopup="menu"
@@ -100,24 +100,24 @@ export function AppTopNav({
   }
 
   return (
-    <header className="sx-app-topnav sx-app-topnav--desktop" data-account={account}>
-      <div className="sx-app-topnav__left">
-        <span className="sx-app-topnav__logo">{brand}</span>
+    <header className="app-topnav app-topnav--desktop" data-account={account}>
+      <div className="app-topnav__left">
+        <span className="app-topnav__logo">{brand}</span>
         {isSandbox && (
-          <Tag tone="warning" shape="pill" size="small" className="sx-app-topnav__sandbox">
+          <Tag tone="warning" shape="pill" size="small" className="app-topnav__sandbox">
             Sandbox
           </Tag>
         )}
       </div>
 
       {Array.isArray(links) && links.length > 0 && (
-        <nav className="sx-app-topnav__nav" aria-label="Primary">
+        <nav className="app-topnav__nav" aria-label="Primary">
           {links.map((link) => (
             <a
               key={link.id || link.label}
               href={link.href || "#"}
               className={
-                "sx-app-topnav__link" + (link.active ? " is-active" : "")
+                "app-topnav__link" + (link.active ? " is-active" : "")
               }
               aria-current={link.active ? "page" : undefined}
               onClick={link.onClick}
@@ -128,7 +128,7 @@ export function AppTopNav({
         </nav>
       )}
 
-      <div className="sx-app-topnav__right">
+      <div className="app-topnav__right">
         {children}
 
         <Badge.Wrap
@@ -149,21 +149,21 @@ export function AppTopNav({
 
         <button
           type="button"
-          className="sx-app-topnav__profile"
+          className="app-topnav__profile"
           onClick={onProfileClick}
           aria-haspopup="menu"
         >
           {avatar}
           {primaryLabel && (
-            <span className="sx-app-topnav__profile-text">
-              <span className="sx-app-topnav__profile-name">{primaryLabel}</span>
+            <span className="app-topnav__profile-text">
+              <span className="app-topnav__profile-name">{primaryLabel}</span>
               {(isBusiness || isSandbox) && user.name && (
-                <span className="sx-app-topnav__profile-sub">{user.name}</span>
+                <span className="app-topnav__profile-sub">{user.name}</span>
               )}
             </span>
           )}
           <span
-            className="material-symbols-rounded sx-app-topnav__chevron"
+            className="material-symbols-rounded app-topnav__chevron"
             aria-hidden="true"
           >
             expand_more

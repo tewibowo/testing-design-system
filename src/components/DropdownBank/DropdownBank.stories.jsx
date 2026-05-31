@@ -10,10 +10,10 @@ export default {
 };
 
 const banks = [
-  { value: "dbs", name: "DBS Bank", logo: <AssetMark label="DBS" color="var(--sx-brand-secure-teal)" size={24} /> },
-  { value: "uob", name: "UOB", logo: <AssetMark label="UOB" color="var(--sx-brand-credible-blue)" size={24} /> },
-  { value: "scb", name: "Standard Chartered", logo: <AssetMark label="SC" color="var(--sx-status-positive)" size={24} /> },
-  { value: "ocbc", name: "OCBC", logo: <AssetMark label="OC" color="var(--sx-brand-wealthy-gold)" size={24} /> },
+  { value: "dbs", name: "DBS Bank", logo: <AssetMark label="DBS" color="var(--brand-secure-teal)" size={24} /> },
+  { value: "uob", name: "UOB", logo: <AssetMark label="UOB" color="var(--brand-credible-blue)" size={24} /> },
+  { value: "scb", name: "Standard Chartered", logo: <AssetMark label="SC" color="var(--status-positive)" size={24} /> },
+  { value: "ocbc", name: "OCBC", logo: <AssetMark label="OC" color="var(--brand-wealthy-gold)" size={24} /> },
 ];
 
 export const Default = { args: { options: banks, value: "dbs" } };
@@ -32,8 +32,8 @@ export const WithStatus = {
   args: {
     value: "dbs",
     options: [
-      { value: "dbs", name: "DBS Bank", account: "•••• 1234", logo: <AssetMark label="DBS" color="var(--sx-brand-secure-teal)" size={24} />, tag: { label: "Verified", variant: "positive" } },
-      { value: "uob", name: "UOB", account: "•••• 9981", logo: <AssetMark label="UOB" color="var(--sx-brand-credible-blue)" size={24} />, tag: { label: "Pending", variant: "warning" } },
+      { value: "dbs", name: "DBS Bank", account: "•••• 1234", logo: <AssetMark label="DBS" color="var(--brand-secure-teal)" size={24} />, tag: { label: "Verified", variant: "positive" } },
+      { value: "uob", name: "UOB", account: "•••• 9981", logo: <AssetMark label="UOB" color="var(--brand-credible-blue)" size={24} />, tag: { label: "Pending", variant: "warning" } },
     ],
   },
 };

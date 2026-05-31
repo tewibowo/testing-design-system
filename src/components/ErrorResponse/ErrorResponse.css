@@ -1,4 +1,4 @@
-.sx-error {
+.error {
   max-width: 560px;
   margin: 64px auto;
   padding: 32px 24px;
@@ -8,11 +8,11 @@
   align-items: center;
   gap: 12px;
 }
-.sx-error__code {
-  font: 800 80px/1 var(--sx-font-display);
-  color: var(--sx-interactive-active);
+.error__code {
+  font: 800 80px/1 var(--font-display);
+  color: var(--interactive-active);
   letter-spacing: -0.04em;
 }
-.sx-error__title { font: 700 24px/1.2 var(--sx-font-display); color: var(--sx-text-primary); }
-.sx-error__body { font: var(--sx-body-large); color: var(--sx-text-secondary); max-width: 48ch; }
-.sx-error__actions { display: flex; gap: 8px; margin-top: 8px; }
+.error__title { font: 700 24px/1.2 var(--font-display); color: var(--text-primary); }
+.error__body { font: var(--body-large); color: var(--text-secondary); max-width: 48ch; }
+.error__actions { display: flex; gap: 8px; margin-top: 8px; }

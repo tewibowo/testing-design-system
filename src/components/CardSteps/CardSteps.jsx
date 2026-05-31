@@ -15,17 +15,17 @@ import "./CardSteps.css";
  *   </CardSteps>
  */
 export function CardSteps({ step = 1, title, helperText, children, className = "", ...rest }) {
-  const cls = ["sx-card-steps", className].filter(Boolean).join(" ");
+  const cls = ["card-steps", className].filter(Boolean).join(" ");
   return (
     <section className={cls} {...rest}>
-      <div className="sx-card-steps__head">
-        <span className="sx-card-steps__counter num">{step}</span>
-        <p className="sx-card-steps__title">{title}</p>
+      <div className="card-steps__head">
+        <span className="card-steps__counter num">{step}</span>
+        <p className="card-steps__title">{title}</p>
       </div>
       {(children || helperText) && (
-        <div className="sx-card-steps__content">
+        <div className="card-steps__content">
           {children}
-          {helperText && <p className="sx-card-steps__helper">{helperText}</p>}
+          {helperText && <p className="card-steps__helper">{helperText}</p>}
         </div>
       )}
     </section>
@@ -38,18 +38,18 @@ export function CardSteps({ step = 1, title, helperText, children, className = "
  */
 CardSteps.Options = function CardStepsOptions({ options = [], selected, onSelect }) {
   return (
-    <div className="sx-card-steps__options" role="radiogroup">
+    <div className="card-steps__options" role="radiogroup">
       {options.map((opt) => (
         <button
           key={opt.id}
           type="button"
           role="radio"
           aria-checked={opt.id === selected}
-          className={"sx-card-steps__option" + (opt.id === selected ? " is-selected" : "")}
+          className={"card-steps__option" + (opt.id === selected ? " is-selected" : "")}
           onClick={onSelect ? () => onSelect(opt.id) : undefined}
         >
-          {opt.icon && <span className="material-symbols-rounded sx-card-steps__option-icon">{opt.icon}</span>}
-          <span className="sx-card-steps__option-label">{opt.label}</span>
+          {opt.icon && <span className="material-symbols-rounded card-steps__option-icon">{opt.icon}</span>}
+          <span className="card-steps__option-label">{opt.label}</span>
         </button>
       ))}
     </div>

@@ -10,10 +10,10 @@ export default {
 };
 
 const banks = [
-  { id: "dbs", name: "DBS Bank", description: "•••• 1234", mark: <AssetMark label="DBS" color="var(--sx-brand-secure-teal)" size={32} /> },
-  { id: "uob", name: "UOB", description: "•••• 9981", mark: <AssetMark label="UOB" color="var(--sx-brand-credible-blue)" size={32} /> },
-  { id: "scb", name: "Standard Chartered", description: "•••• 4420", mark: <AssetMark label="SC" color="var(--sx-status-positive)" size={32} /> },
-  { id: "ocbc", name: "OCBC", description: "•••• 0073", mark: <AssetMark label="OC" color="var(--sx-brand-wealthy-gold)" size={32} /> },
+  { id: "dbs", name: "DBS Bank", description: "•••• 1234", mark: <AssetMark label="DBS" color="var(--brand-secure-teal)" size={32} /> },
+  { id: "uob", name: "UOB", description: "•••• 9981", mark: <AssetMark label="UOB" color="var(--brand-credible-blue)" size={32} /> },
+  { id: "scb", name: "Standard Chartered", description: "•••• 4420", mark: <AssetMark label="SC" color="var(--status-positive)" size={32} /> },
+  { id: "ocbc", name: "OCBC", description: "•••• 0073", mark: <AssetMark label="OC" color="var(--brand-wealthy-gold)" size={32} /> },
 ];
 
 function Demo(props) {

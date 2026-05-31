@@ -1,59 +1,59 @@
 /* shared base for checkbox + radio + switch */
-.sx-control {
+.control {
   display: inline-flex;
   align-items: flex-start;
   gap: 10px;
   cursor: pointer;
-  font: var(--sx-body-medium);
-  color: var(--sx-text-primary);
+  font: var(--body-medium);
+  color: var(--text-primary);
 }
-.sx-control input {
+.control input {
   position: absolute;
   opacity: 0;
   pointer-events: none;
   width: 0;
   height: 0;
 }
-.sx-control__label { padding-top: 1px; }
-.sx-control__sub { display: block; font: var(--sx-body-small); color: var(--sx-text-secondary); margin-top: 2px; }
-.sx-control.is-disabled { color: var(--sx-disabled-on-surface); cursor: not-allowed; }
-.sx-control:focus-within .sx-control__box {
-  outline: 2px solid var(--sx-status-information);
+.control__label { padding-top: 1px; }
+.control__sub { display: block; font: var(--body-small); color: var(--text-secondary); margin-top: 2px; }
+.control.is-disabled { color: var(--disabled-on-surface); cursor: not-allowed; }
+.control:focus-within .control__box {
+  outline: 2px solid var(--status-information);
   outline-offset: 2px;
 }
 
 /* Checkbox box */
-.sx-checkbox__box {
+.checkbox__box {
   width: 18px;
   height: 18px;
   border-radius: 4px;
-  border: 1.5px solid var(--sx-border);
-  background: var(--sx-surface);
+  border: 1.5px solid var(--border);
+  background: var(--surface);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  transition: background var(--sx-dur-1) var(--sx-ease), border-color var(--sx-dur-1) var(--sx-ease);
+  transition: background var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease);
 }
-.sx-checkbox__box svg { width: 14px; height: 14px; color: var(--sx-text-inverse); opacity: 0; transform: scale(0.7); transition: opacity var(--sx-dur-1) var(--sx-ease), transform var(--sx-dur-1) var(--sx-ease); }
-.sx-control input:checked + .sx-checkbox__box {
-  background: var(--sx-interactive-active);
-  border-color: var(--sx-interactive-active);
+.checkbox__box svg { width: 14px; height: 14px; color: var(--text-inverse); opacity: 0; transform: scale(0.7); transition: opacity var(--dur-1) var(--ease), transform var(--dur-1) var(--ease); }
+.control input:checked + .checkbox__box {
+  background: var(--interactive-active);
+  border-color: var(--interactive-active);
 }
-.sx-control input:checked + .sx-checkbox__box svg { opacity: 1; transform: scale(1); }
-.sx-control input:indeterminate + .sx-checkbox__box,
-.sx-control[data-indeterminate="true"] .sx-checkbox__box {
-  background: var(--sx-interactive-active);
-  border-color: var(--sx-interactive-active);
+.control input:checked + .checkbox__box svg { opacity: 1; transform: scale(1); }
+.control input:indeterminate + .checkbox__box,
+.control[data-indeterminate="true"] .checkbox__box {
+  background: var(--interactive-active);
+  border-color: var(--interactive-active);
 }
-.sx-control[data-indeterminate="true"] .sx-checkbox__box::after {
+.control[data-indeterminate="true"] .checkbox__box::after {
   content: "";
   width: 10px;
   height: 2px;
-  background: var(--sx-surface);
+  background: var(--surface);
   border-radius: 1px;
 }
-.sx-control[data-indeterminate="true"] .sx-checkbox__box svg { display: none; }
+.control[data-indeterminate="true"] .checkbox__box svg { display: none; }
 
-.sx-control.is-error .sx-checkbox__box { border-color: var(--sx-status-critical); }
-.sx-control.is-disabled .sx-checkbox__box { background: var(--sx-surface-secondary); border-color: var(--sx-border); }
+.control.is-error .checkbox__box { border-color: var(--status-critical); }
+.control.is-disabled .checkbox__box { background: var(--surface-secondary); border-color: var(--border); }

@@ -24,14 +24,14 @@ export function Select({
   const id = useId();
   const isError = !!error;
   const wrapCls = [
-    "sx-select",
-    `sx-select--${size === "small" ? "small" : "large"}`,
+    "select",
+    `select--${size === "small" ? "small" : "large"}`,
     isError && "is-error",
     disabled && "is-disabled",
   ].filter(Boolean).join(" ");
   return (
-    <div className={"sx-field " + className}>
-      {label && <label htmlFor={idProp || id} className="sx-field__label">{label}</label>}
+    <div className={"field " + className}>
+      {label && <label htmlFor={idProp || id} className="field__label">{label}</label>}
       <div className={wrapCls}>
         <select id={idProp || id} disabled={disabled} {...selectProps}>
           {placeholder !== false && <option value="" disabled hidden>{placeholder}</option>}
@@ -39,10 +39,10 @@ export function Select({
             <option key={o.value} value={o.value} disabled={o.disabled}>{o.label}</option>
           ))}
         </select>
-        <span className="material-symbols-rounded sx-select__chevron" aria-hidden="true">expand_more</span>
+        <span className="material-symbols-rounded select__chevron" aria-hidden="true">expand_more</span>
       </div>
       {(helper || error) && (
-        <span className={"sx-field__helper" + (isError ? " is-error" : "")}>{error || helper}</span>
+        <span className={"field__helper" + (isError ? " is-error" : "")}>{error || helper}</span>
       )}
     </div>
   );

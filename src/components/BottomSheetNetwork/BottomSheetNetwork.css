@@ -1,40 +1,40 @@
 /* BottomSheetNetwork — single-select network list inside the BottomSheet shell. */
 
-.sx-bsn .sx-bsheet__body { padding-left: 0; padding-right: 0; }
+.bsn .bsheet__body { padding-left: 0; padding-right: 0; }
 
-.sx-bsn__list { list-style: none; margin: 0; padding: 0; }
-.sx-bsn__item {
+.bsn__list { list-style: none; margin: 0; padding: 0; }
+.bsn__item {
   width: 100%;
   display: flex;
   align-items: center;
-  gap: var(--sx-space-3);
-  padding: var(--sx-space-3) var(--sx-space-5);
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
   background: transparent;
   border: 0;
   text-align: left;
   cursor: pointer;
 }
-.sx-bsn__item:hover { background: var(--sx-surface-hovered); }
-.sx-bsn__item.is-selected { background: var(--sx-surface-secondary); }
+.bsn__item:hover { background: var(--surface-hovered); }
+.bsn__item.is-selected { background: var(--surface-secondary); }
 
-.sx-bsn__mark {
+.bsn__mark {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 32px;
   height: 32px;
-  border-radius: var(--sx-radius-full);
-  background: var(--sx-surface-secondary);
-  color: var(--sx-text-primary);
-  font: var(--sx-label-small);
+  border-radius: var(--radius-full);
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+  font: var(--label-small);
   overflow: hidden;
 }
-.sx-bsn__mark > * { width: 100%; height: 100%; }
+.bsn__mark > * { width: 100%; height: 100%; }
 
-.sx-bsn__text { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
-.sx-bsn__name { font: var(--sx-label-medium); color: var(--sx-text-primary); }
-.sx-bsn__desc { font: var(--sx-body-small); color: var(--sx-text-secondary); }
+.bsn__text { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.bsn__name { font: var(--label-medium); color: var(--text-primary); }
+.bsn__desc { font: var(--body-small); color: var(--text-secondary); }
 
-.sx-bsn__check { flex: 0 0 auto; color: var(--sx-text-secondary); font-size: 22px; }
-.sx-bsn__item.is-selected .sx-bsn__check { color: var(--sx-primary); }
+.bsn__check { flex: 0 0 auto; color: var(--text-secondary); font-size: 22px; }
+.bsn__item.is-selected .bsn__check { color: var(--primary); }

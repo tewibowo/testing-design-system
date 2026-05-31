@@ -55,34 +55,34 @@ export function MultiSelect({
   const labelFor = (val) => options.find((o) => o.value === val)?.label ?? val;
 
   const wrapCls = [
-    "sx-multiselect",
+    "multiselect",
     open && "is-open",
     isError && "is-error",
     disabled && "is-disabled",
   ].filter(Boolean).join(" ");
 
   return (
-    <div className={"sx-field " + className} ref={rootRef}>
-      {label && <span className="sx-field__label" id={`${id}-label`}>{label}</span>}
+    <div className={"field " + className} ref={rootRef}>
+      {label && <span className="field__label" id={`${id}-label`}>{label}</span>}
       <div className={wrapCls}>
         <button
           type="button"
-          className="sx-multiselect__control"
+          className="multiselect__control"
           disabled={disabled}
           aria-haspopup="listbox"
           aria-expanded={open}
           aria-labelledby={label ? `${id}-label` : undefined}
           onClick={() => setOpen((o) => !o)}
         >
-          <span className="sx-multiselect__values">
+          <span className="multiselect__values">
             {selected.length === 0 ? (
-              <span className="sx-multiselect__placeholder">{placeholder}</span>
+              <span className="multiselect__placeholder">{placeholder}</span>
             ) : (
               selected.map((val) => (
-                <span className="sx-multiselect__chip" key={val}>
+                <span className="multiselect__chip" key={val}>
                   {labelFor(val)}
                   <span
-                    className="material-symbols-rounded sx-multiselect__chip-x"
+                    className="material-symbols-rounded multiselect__chip-x"
                     role="button"
                     aria-label={`Remove ${labelFor(val)}`}
                     onClick={(e) => { e.stopPropagation(); if (!disabled) remove(val); }}
@@ -93,13 +93,13 @@ export function MultiSelect({
               ))
             )}
           </span>
-          <span className="material-symbols-rounded sx-multiselect__chevron" aria-hidden="true">
+          <span className="material-symbols-rounded multiselect__chevron" aria-hidden="true">
             expand_more
           </span>
         </button>
 
         {open && !disabled && (
-          <ul className="sx-multiselect__menu" role="listbox" aria-multiselectable="true">
+          <ul className="multiselect__menu" role="listbox" aria-multiselectable="true">
             {options.map((o) => {
               const on = selected.includes(o.value);
               return (
@@ -107,11 +107,11 @@ export function MultiSelect({
                   key={o.value}
                   role="option"
                   aria-selected={on}
-                  className={"sx-multiselect__option" + (on ? " is-selected" : "")}
+                  className={"multiselect__option" + (on ? " is-selected" : "")}
                   aria-disabled={o.disabled || undefined}
                   onClick={() => !o.disabled && toggle(o.value)}
                 >
-                  <span className="sx-multiselect__check material-symbols-rounded" aria-hidden="true">
+                  <span className="multiselect__check material-symbols-rounded" aria-hidden="true">
                     {on ? "check_box" : "check_box_outline_blank"}
                   </span>
                   {o.label}
@@ -122,7 +122,7 @@ export function MultiSelect({
         )}
       </div>
       {(helper || error) && (
-        <span className={"sx-field__helper" + (isError ? " is-error" : "")}>{error || helper}</span>
+        <span className={"field__helper" + (isError ? " is-error" : "")}>{error || helper}</span>
       )}
     </div>
   );

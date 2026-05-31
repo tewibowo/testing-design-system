@@ -99,7 +99,7 @@ export const Illustration = {
           onClose={() => setOpen(false)}
           title="You're all set!"
           illustration={
-            <span className="material-symbols-rounded" style={{ fontSize: 64, color: "var(--sx-primary)" }}>
+            <span className="material-symbols-rounded" style={{ fontSize: 64, color: "var(--primary)" }}>
               verified
             </span>
           }
@@ -132,8 +132,8 @@ export const NewFeature = {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "var(--sx-text-secondary)",
-                font: "var(--sx-label-large)",
+                color: "var(--text-secondary)",
+                font: "var(--label-large)",
               }}
             >
               Screenshot / media

@@ -17,14 +17,14 @@ export function Table({
   className = "",
 }) {
   return (
-    <div className={"sx-table-wrap " + className}>
-      <table className={"sx-table" + (zebra ? " sx-table--zebra" : "")}>
+    <div className={"table-wrap " + className}>
+      <table className={"table" + (zebra ? " table--zebra" : "")}>
         <thead>
           <tr>
             {columns.map((c) => (
               <th
                 key={c.key}
-                className={c.numeric || c.align === "right" ? "sx-table__num" : undefined}
+                className={c.numeric || c.align === "right" ? "table__num" : undefined}
                 style={c.width ? { width: c.width } : undefined}
               >
                 {c.header}
@@ -35,7 +35,7 @@ export function Table({
         <tbody>
           {rows.length === 0 && (
             <tr>
-              <td className="sx-table__empty" colSpan={columns.length}>{empty}</td>
+              <td className="table__empty" colSpan={columns.length}>{empty}</td>
             </tr>
           )}
           {rows.map((row, i) => (
@@ -43,7 +43,7 @@ export function Table({
               {columns.map((c) => (
                 <td
                   key={c.key}
-                  className={c.numeric || c.align === "right" ? "sx-table__num" : undefined}
+                  className={c.numeric || c.align === "right" ? "table__num" : undefined}
                 >
                   {c.render ? c.render(row) : row[c.key]}
                 </td>

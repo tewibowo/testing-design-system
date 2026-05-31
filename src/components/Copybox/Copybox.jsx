@@ -7,6 +7,7 @@ import "./Copybox.css";
  *
  * Props:
  *   value, multiline          — original behaviour (copied state preserved)
+ *   size        "large"|"sm"  — 48px (default) or 36px
  *   action      (default true)  — false = display-only (no copy button)
  *   error                       — critical border + helper message
  *   buttonVariant "icon"|"text" — icon-only vs icon+label copy button
@@ -18,6 +19,7 @@ import "./Copybox.css";
 export function Copybox({
   value = "",
   multiline = false,
+  size = "large",
   label,
   helper,
   info,
@@ -45,15 +47,16 @@ export function Copybox({
     }
   };
 
-  const cls = [
-    "sx-copybox",
-    multiline && "sx-copybox--multiline",
+  const wrapCls = [
+    "copybox",
+    action && "copybox--action",
+    multiline && "copybox--multiline",
+    size === "sm" && "copybox--sm",
     isError && "is-error",
     copied && "is-copied",
     className,
   ].filter(Boolean).join(" ");
 
-  // Middle-truncation for long single-line values (start…end).
   const doTruncate = truncate && !multiline && typeof value === "string" && value.length > 20;
   const renderValue = () => {
     if (!doTruncate) return value;
@@ -61,34 +64,36 @@ export function Copybox({
     const tail = value.slice(-8);
     return (
       <>
-        <span className="sx-copybox__trunc-start">{head}</span>
-        <span className="sx-copybox__trunc-ellipsis">…</span>
-        <span className="sx-copybox__trunc-end">{tail}</span>
+        <span className="copybox__trunc-start">{head}</span>
+        <span className="copybox__trunc-ellipsis">…</span>
+        <span className="copybox__trunc-end">{tail}</span>
       </>
     );
   };
 
   return (
-    <div className="sx-field" {...rest}>
+    <div className="field" {...rest}>
       {(label || info) && (
-        <span className="sx-field__label sx-copybox__label">
+        <span className="field__label copybox__label">
           {label}
           {info && (
-            <span className="sx-copybox__info" tabIndex={0} aria-label={info} title={info}>
+            <span className="copybox__info" tabIndex={0} aria-label={info} title={info}>
               <span className="material-symbols-rounded">info</span>
             </span>
           )}
         </span>
       )}
-      <div className={cls}>
-        {lead && <span className="sx-copybox__lead" aria-hidden="true">{lead}</span>}
-        <span className="sx-copybox__value" title={doTruncate ? value : undefined}>
-          {renderValue()}
-        </span>
+      <div className={wrapCls}>
+        <div className="copybox__body">
+          {lead && <span className="copybox__lead" aria-hidden="true">{lead}</span>}
+          <span className="copybox__value" title={doTruncate ? value : undefined}>
+            {renderValue()}
+          </span>
+        </div>
         {action && (
           <button
             type="button"
-            className={"sx-copybox__btn" + (iconOnly ? " sx-copybox__btn--icon" : "")}
+            className="copybox__btn"
             onClick={copy}
             aria-label={copied ? "Copied" : "Copy"}
           >
@@ -98,7 +103,7 @@ export function Copybox({
         )}
       </div>
       {(helper || error) && (
-        <span className={"sx-field__helper" + (isError ? " is-error" : "")}>{error || helper}</span>
+        <span className={"field__helper" + (isError ? " is-error" : "")}>{error || helper}</span>
       )}
     </div>
   );

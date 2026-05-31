@@ -26,16 +26,16 @@ export function Tabs({
   };
   const activeItem = items.find((i) => i.id === current);
   const cls = [
-    "sx-tabs",
-    variant === "pill" && "sx-tabs--pill",
-    variant === "secondary" && "sx-tabs--secondary",
-    size === "small" && "sx-tabs--small",
-    fill && "sx-tabs--fill",
+    "tabs",
+    variant === "pill" && "tabs--pill",
+    variant === "secondary" && "tabs--secondary",
+    size === "small" && "tabs--small",
+    fill && "tabs--fill",
     className,
   ].filter(Boolean).join(" ");
   return (
     <div className={cls}>
-      <div className="sx-tabs__strip" role="tablist">
+      <div className="tabs__strip" role="tablist">
         {items.map((t) => (
           <button
             key={t.id}
@@ -43,7 +43,7 @@ export function Tabs({
             role="tab"
             aria-selected={current === t.id}
             disabled={t.disabled}
-            className={"sx-tabs__tab" + (current === t.id ? " is-active" : "")}
+            className={"tabs__tab" + (current === t.id ? " is-active" : "")}
             onClick={() => setCurrent(t.id)}
           >
             {t.label}
@@ -51,7 +51,7 @@ export function Tabs({
         ))}
       </div>
       {activeItem && activeItem.content !== undefined && (
-        <div role="tabpanel" className="sx-tabs__panel">{activeItem.content}</div>
+        <div role="tabpanel" className="tabs__panel">{activeItem.content}</div>
       )}
     </div>
   );

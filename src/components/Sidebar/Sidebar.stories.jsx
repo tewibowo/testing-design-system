@@ -9,7 +9,7 @@ export default {
 
 function Frame({ children }) {
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "240px 1fr", height: 720, background: "var(--sx-background)" }}>
+    <div style={{ display: "grid", gridTemplateColumns: "240px 1fr", height: 720, background: "var(--background)" }}>
       {children}
     </div>
   );
@@ -28,7 +28,7 @@ export const Personal = {
           activeSubItem={sub}
           onSelect={(id) => (id.startsWith("mint-") ? setSub(id) : setActive(id))}
         />
-        <div style={{ padding: 32, color: "var(--sx-text-secondary)" }}>Personal account</div>
+        <div style={{ padding: 32, color: "var(--text-secondary)" }}>Personal account</div>
       </Frame>
     );
   },
@@ -56,7 +56,7 @@ export const BusinessWithCompanyDropdown = {
           activeSubItem={sub}
           onSelect={(id) => (id.startsWith("mint-") ? setSub(id) : setActive(id))}
         />
-        <div style={{ padding: 32, color: "var(--sx-text-secondary)" }}>
+        <div style={{ padding: 32, color: "var(--text-secondary)" }}>
           Business — click the company profile to open the dropdown
         </div>
       </Frame>
@@ -75,7 +75,7 @@ export const CompanyDropdownOpen = {
         defaultMenuOpen
         active="home"
       />
-      <div style={{ padding: 32, color: "var(--sx-text-secondary)" }}>
+      <div style={{ padding: 32, color: "var(--text-secondary)" }}>
         Company-profile dropdown (open)
       </div>
     </Frame>
@@ -87,7 +87,7 @@ export const NavHover = {
   render: () => (
     <Frame>
       <Sidebar account="personal" items={DEFAULT_NAV_ITEMS} active="home" hoveredItem="history" />
-      <div style={{ padding: 32, color: "var(--sx-text-secondary)" }}>Nav item hover state</div>
+      <div style={{ padding: 32, color: "var(--text-secondary)" }}>Nav item hover state</div>
     </Frame>
   ),
 };
@@ -97,7 +97,7 @@ export const NoMasBadge = {
   render: () => (
     <Frame>
       <Sidebar account="personal" items={DEFAULT_NAV_ITEMS} active="home" masBadge={false} />
-      <div style={{ padding: 32, color: "var(--sx-text-secondary)" }}>No MAS badge</div>
+      <div style={{ padding: 32, color: "var(--text-secondary)" }}>No MAS badge</div>
     </Frame>
   ),
 };
@@ -106,7 +106,7 @@ export const Sandbox = {
   render: () => (
     <Frame>
       <Sidebar account="sandbox" company={{ name: "ABC Pte. Ltd", type: "Sandbox" }} onCompanyClick={() => {}} active="home" />
-      <div style={{ padding: 32, color: "var(--sx-text-secondary)" }}>Sandbox environment</div>
+      <div style={{ padding: 32, color: "var(--text-secondary)" }}>Sandbox environment</div>
     </Frame>
   ),
 };

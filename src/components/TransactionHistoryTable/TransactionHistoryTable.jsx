@@ -34,23 +34,23 @@ function statusTag(status) {
   return <Tag tone={tone} shape="pill">{label}</Tag>;
 }
 
-const mono = (key) => (row) => <span className="sx-txn__mono">{row[key]}</span>;
+const mono = (key) => (row) => <span className="txn__mono">{row[key]}</span>;
 
 const COLUMNS = {
   funding: [
-    { key: "id", header: "Transaction ID", render: (r) => <span className="sx-txn__id">{r.id}</span> },
+    { key: "id", header: "Transaction ID", render: (r) => <span className="txn__id">{r.id}</span> },
     { key: "date", header: "Transaction Date" },
     { key: "amount", header: "Amount", numeric: true, render: mono("amount") },
     { key: "network", header: "Network" },
     {
       key: "wallet",
       header: "Wallet Address",
-      render: (r) => <span className="sx-txn__mono sx-txn__truncate">{r.wallet}</span>,
+      render: (r) => <span className="txn__mono txn__truncate">{r.wallet}</span>,
     },
     { key: "status", header: "Status", render: (r) => statusTag(r.status) },
   ],
   otc: [
-    { key: "id", header: "Transaction ID", render: (r) => <span className="sx-txn__id">{r.id}</span> },
+    { key: "id", header: "Transaction ID", render: (r) => <span className="txn__id">{r.id}</span> },
     { key: "date", header: "Transaction Date" },
     { key: "amountToBuy", header: "Amount to buy", numeric: true, render: mono("amountToBuy") },
     { key: "amountToSell", header: "Amount to sell", numeric: true, render: mono("amountToSell") },
@@ -59,7 +59,7 @@ const COLUMNS = {
     { key: "status", header: "Status", render: (r) => statusTag(r.status) },
   ],
   swap: [
-    { key: "id", header: "Transaction ID", render: (r) => <span className="sx-txn__id">{r.id}</span> },
+    { key: "id", header: "Transaction ID", render: (r) => <span className="txn__id">{r.id}</span> },
     { key: "date", header: "Created Date" },
     { key: "details", header: "Details" },
     { key: "pair", header: "Pair", render: mono("pair") },
@@ -83,7 +83,7 @@ export function TransactionHistoryTable({
       columns={columns}
       rows={rows}
       empty={empty}
-      className={"sx-txn " + className}
+      className={"txn " + className}
     />
   );
 }

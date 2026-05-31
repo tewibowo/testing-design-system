@@ -49,7 +49,7 @@ export function Tooltip({
 
   return (
     <span
-      className="sx-tooltip"
+      className="tooltip"
       data-open={open || undefined}
       data-side={side}
       data-rich={isRich || undefined}
@@ -59,10 +59,10 @@ export function Tooltip({
       onBlur={() => setOpen(false)}
     >
       {children}
-      <span role="tooltip" className="sx-tooltip__bubble">
+      <span role="tooltip" className="tooltip__bubble">
         {(title || tag) && (
-          <span className="sx-tooltip__header">
-            {title && <span className="sx-tooltip__title">{title}</span>}
+          <span className="tooltip__header">
+            {title && <span className="tooltip__title">{title}</span>}
             {tag && (
               <Tag tone={tag.tone || "neutral"} shape={tag.shape || "default"}>
                 {tag.label}
@@ -70,14 +70,14 @@ export function Tooltip({
             )}
           </span>
         )}
-        {body && <span className="sx-tooltip__content">{body}</span>}
+        {body && <span className="tooltip__content">{body}</span>}
         {hasLinks && (
-          <span className="sx-tooltip__links">
+          <span className="tooltip__links">
             {links.map((link, i) => (
               <button
                 key={i}
                 type="button"
-                className="sx-tooltip__link"
+                className="tooltip__link"
                 onClick={link.onClick}
               >
                 {link.label}

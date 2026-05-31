@@ -24,7 +24,7 @@ export function Checkbox({
     if (ref.current) ref.current.indeterminate = indeterminate;
   }, [indeterminate]);
   const cls = [
-    "sx-control",
+    "control",
     disabled && "is-disabled",
     error && "is-error",
     className,
@@ -41,15 +41,15 @@ export function Checkbox({
         onChange={onChange}
         {...inputProps}
       />
-      <span className="sx-checkbox__box" aria-hidden="true">
+      <span className="checkbox__box" aria-hidden="true">
         <svg viewBox="0 0 16 16" fill="none">
           <path d="M3 8.5 L6.5 12 L13 4.5" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </span>
       {label && (
-        <span className="sx-control__label">
+        <span className="control__label">
           {label}
-          {sub && <span className="sx-control__sub">{sub}</span>}
+          {sub && <span className="control__sub">{sub}</span>}
         </span>
       )}
     </label>

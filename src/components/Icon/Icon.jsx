@@ -10,7 +10,7 @@ import "./Icon.css";
  *
  *   <Icon name="home" />
  *   <Icon name="account_circle" size={32} filled />
- *   <Icon name="arrow_forward" color="var(--sx-primary)" />
+ *   <Icon name="arrow_forward" color="var(--primary)" />
  */
 export function Icon({
   name,
@@ -21,7 +21,7 @@ export function Icon({
   style,
   ...rest
 }) {
-  const cls = ["sx-icon", filled && "sx-icon--filled", className].filter(Boolean).join(" ");
+  const cls = ["icon", filled && "icon--filled", className].filter(Boolean).join(" ");
   return (
     <span
       className={cls}

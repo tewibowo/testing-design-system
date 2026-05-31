@@ -6,10 +6,10 @@ import "./OnboardingSteps.css";
 
 function StepConnector({ states }) {
   return (
-    <div className="sx-steps" aria-hidden="true">
+    <div className="steps" aria-hidden="true">
       {states.map((s, i) => (
         <React.Fragment key={i}>
-          <div className={"sx-step-dot is-" + s}>
+          <div className={"step-dot is-" + s}>
             {s === "done" ? (
               <span className="material-symbols-rounded">check</span>
             ) : (
@@ -17,7 +17,7 @@ function StepConnector({ states }) {
             )}
           </div>
           {i < states.length - 1 && (
-            <div className={"sx-step-line is-" + (s === "done" ? "done" : "todo")} />
+            <div className={"step-line is-" + (s === "done" ? "done" : "todo")} />
           )}
         </React.Fragment>
       ))}
@@ -61,20 +61,20 @@ export function OnboardingSteps({
   ];
 
   return (
-    <Card surface="raised" className="sx-onboard">
-      <h1 className="sx-onboard__heading" style={{ font: "700 24px/1.2 var(--sx-font-display)" }}>
+    <Card surface="raised" className="onboard">
+      <h1 className="onboard__heading" style={{ font: "700 24px/1.2 var(--font-display)" }}>
         {heading}
       </h1>
-      <p className="sx-onboard__sub">{subheading}</p>
+      <p className="onboard__sub">{subheading}</p>
       <StepConnector states={stepStates} />
-      <div className="sx-onboard__grid">
+      <div className="onboard__grid">
         {steps.map((s) => (
-          <div key={s.key} className="sx-step">
-            <div className="sx-step__text">
-              <div className="sx-step__title">{s.title}</div>
-              <div className="sx-step__body">{s.body}</div>
+          <div key={s.key} className="step">
+            <div className="step__text">
+              <div className="step__title">{s.title}</div>
+              <div className="step__body">{s.body}</div>
             </div>
-            <div className="sx-step__cta">{s.cta}</div>
+            <div className="step__cta">{s.cta}</div>
           </div>
         ))}
       </div>

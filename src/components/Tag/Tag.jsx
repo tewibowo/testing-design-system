@@ -39,12 +39,12 @@ export function Tag({
   const effectiveAppearance = clickable && selected ? "filled" : appearance;
 
   const cls = [
-    "sx-tag",
-    `sx-tag--${tone}`,
-    `sx-tag--${size}`,
-    `sx-tag--${effectiveAppearance}`,
-    shape === "pill" && "sx-tag--pill",
-    clickable && "sx-tag--clickable",
+    "tag",
+    `tag--${tone}`,
+    `tag--${size}`,
+    `tag--${effectiveAppearance}`,
+    shape === "pill" && "tag--pill",
+    clickable && "tag--clickable",
     selected && "is-selected",
     disabled && "is-disabled",
     className,
@@ -62,15 +62,15 @@ export function Tag({
   // ReactNode is rendered as-is.
   const leadingIcon =
     icon == null ? null : typeof icon === "string" ? (
-      <span className="material-symbols-rounded sx-tag__icon" aria-hidden="true">{icon}</span>
+      <span className="material-symbols-rounded tag__icon" aria-hidden="true">{icon}</span>
     ) : (
-      <span className="sx-tag__icon" aria-hidden="true">{icon}</span>
+      <span className="tag__icon" aria-hidden="true">{icon}</span>
     );
 
   const closeBtn = removable ? (
     <button
       type="button"
-      className="sx-tag__remove"
+      className="tag__remove"
       aria-label="Remove"
       onClick={handleRemove}
       disabled={disabled}
@@ -94,7 +94,7 @@ export function Tag({
         {...rest}
       >
         {leadingIcon}
-        <span className="sx-tag__label">{children}</span>
+        <span className="tag__label">{children}</span>
         {closeBtn}
       </button>
     );
@@ -103,7 +103,7 @@ export function Tag({
   return (
     <span className={cls} {...rest}>
       {leadingIcon}
-      <span className="sx-tag__label">{children}</span>
+      <span className="tag__label">{children}</span>
       {closeBtn}
     </span>
   );

@@ -56,21 +56,21 @@ export function Modal({
   const centered = isIllustration || isNewFeature;
 
   return createPortal(
-    <div className="sx-modal-scrim" role="presentation" onClick={handleScrim}>
+    <div className="modal-scrim" role="presentation" onClick={handleScrim}>
       <div
         className={[
-          "sx-modal",
-          `sx-modal--${size}`,
-          `sx-modal--v-${variant}`,
+          "modal",
+          `modal--${size}`,
+          `modal--v-${variant}`,
           className,
         ].filter(Boolean).join(" ")}
         role="dialog"
         aria-modal="true"
-        aria-labelledby={title ? "sx-modal-title" : undefined}
+        aria-labelledby={title ? "modal-title" : undefined}
       >
         {/* new-feature: top media/screenshot block spans the modal width */}
         {isNewFeature && media && (
-          <div className="sx-modal__media">{media}</div>
+          <div className="modal__media">{media}</div>
         )}
 
         {centered ? (
@@ -79,38 +79,38 @@ export function Modal({
             {!hideClose && (
               <button
                 type="button"
-                className="sx-modal__close sx-modal__close--float"
+                className="modal__close modal__close--float"
                 onClick={onClose}
                 aria-label="Close"
               >
                 <span className="material-symbols-rounded">close</span>
               </button>
             )}
-            <div className="sx-modal__centered">
+            <div className="modal__centered">
               {isIllustration && illustration && (
-                <div className="sx-modal__illustration">{illustration}</div>
+                <div className="modal__illustration">{illustration}</div>
               )}
-              {title && <div id="sx-modal-title" className="sx-modal__title">{title}</div>}
+              {title && <div id="modal-title" className="modal__title">{title}</div>}
               {children !== undefined && children !== null && (
-                <div className="sx-modal__body">{children}</div>
+                <div className="modal__body">{children}</div>
               )}
-              {footer && <div className="sx-modal__foot">{footer}</div>}
+              {footer && <div className="modal__foot">{footer}</div>}
             </div>
           </>
         ) : (
           <>
             {(title || !hideClose) && (
-              <div className="sx-modal__head">
-                {title && <div id="sx-modal-title" className="sx-modal__title">{title}</div>}
+              <div className="modal__head">
+                {title && <div id="modal-title" className="modal__title">{title}</div>}
                 {!hideClose && (
-                  <button type="button" className="sx-modal__close" onClick={onClose} aria-label="Close">
+                  <button type="button" className="modal__close" onClick={onClose} aria-label="Close">
                     <span className="material-symbols-rounded">close</span>
                   </button>
                 )}
               </div>
             )}
-            <div className="sx-modal__body">{children}</div>
-            {footer && <div className="sx-modal__foot">{footer}</div>}
+            <div className="modal__body">{children}</div>
+            {footer && <div className="modal__foot">{footer}</div>}
           </>
         )}
       </div>

@@ -57,10 +57,10 @@ export function Pagination({
     setGoToValue("");
   };
   return (
-    <nav aria-label="Pagination" className={"sx-pagination " + className}>
+    <nav aria-label="Pagination" className={"pagination " + className}>
       <button
         type="button"
-        className="sx-pagination__btn"
+        className="pagination__btn"
         disabled={page <= 1}
         onClick={() => go(page - 1)}
         aria-label="Previous page"
@@ -69,12 +69,12 @@ export function Pagination({
       </button>
       {pages.map((p, i) =>
         p === "…" ? (
-          <span key={`e${i}`} className="sx-pagination__ellipsis" aria-hidden="true">…</span>
+          <span key={`e${i}`} className="pagination__ellipsis" aria-hidden="true">…</span>
         ) : (
           <button
             key={p}
             type="button"
-            className={"sx-pagination__btn" + (p === page ? " is-active" : "")}
+            className={"pagination__btn" + (p === page ? " is-active" : "")}
             aria-current={p === page ? "page" : undefined}
             disabled={isDisabled(p)}
             onClick={() => go(p)}
@@ -85,7 +85,7 @@ export function Pagination({
       )}
       <button
         type="button"
-        className="sx-pagination__btn"
+        className="pagination__btn"
         disabled={page >= totalPages}
         onClick={() => go(page + 1)}
         aria-label="Next page"
@@ -93,10 +93,10 @@ export function Pagination({
         <span className="material-symbols-rounded">chevron_right</span>
       </button>
       {showGoTo && (
-        <span className="sx-pagination__goto">
+        <span className="pagination__goto">
           <input
             type="number"
-            className="sx-pagination__goto-input"
+            className="pagination__goto-input"
             min={1}
             max={totalPages}
             value={goToValue}
@@ -107,7 +107,7 @@ export function Pagination({
           />
           <button
             type="button"
-            className="sx-pagination__goto-btn"
+            className="pagination__goto-btn"
             onClick={submitGoTo}
           >
             Go
@@ -115,7 +115,7 @@ export function Pagination({
         </span>
       )}
       {showSummary && total != null && pageSize != null && (
-        <span className="sx-pagination__summary">
+        <span className="pagination__summary">
           {(page - 1) * pageSize + 1}–{Math.min(page * pageSize, total)} of {total}
         </span>
       )}

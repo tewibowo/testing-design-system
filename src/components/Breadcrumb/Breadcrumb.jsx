@@ -14,12 +14,12 @@ export function Breadcrumb({ items = [], separator = "/", className = "" }) {
   // Anything else (like "/") renders as a plain text separator.
   const isSymbol = typeof separator === "string" && /^[a-z_]+$/.test(separator);
   const sepCls =
-    "sx-breadcrumb__sep" + (isSymbol ? " material-symbols-rounded" : "");
+    "breadcrumb__sep" + (isSymbol ? " material-symbols-rounded" : "");
   return (
-    <nav aria-label="Breadcrumb" className={"sx-breadcrumb " + className}>
+    <nav aria-label="Breadcrumb" className={"breadcrumb " + className}>
       {items.map((item, i) => {
         const isLast = i === items.length - 1;
-        const cls = "sx-breadcrumb__item" + (isLast ? " is-current" : "");
+        const cls = "breadcrumb__item" + (isLast ? " is-current" : "");
         return (
           <React.Fragment key={i}>
             {isLast ? (

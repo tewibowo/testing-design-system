@@ -29,38 +29,38 @@ export function CardAttribute({
   className = "",
   ...rest
 }) {
-  const cls = ["sx-card-attribute", className].filter(Boolean).join(" ");
+  const cls = ["card-attribute", className].filter(Boolean).join(" ");
   return (
     <section className={cls} {...rest}>
-      <header className="sx-card-attribute__head">
-        <h3 className="sx-card-attribute__title">{title}</h3>
+      <header className="card-attribute__head">
+        <h3 className="card-attribute__title">{title}</h3>
         {status && <Tag tone={status.tone || "positive"}>{status.label}</Tag>}
       </header>
 
-      <div className="sx-card-attribute__divider" />
+      <div className="card-attribute__divider" />
 
-      <dl className="sx-card-attribute__grid">
+      <dl className="card-attribute__grid">
         {attributes.map((attr, i) => (
           <div
             key={attr.label || i}
-            className={"sx-card-attribute__item" + (attr.columns === 2 || attr.columns === "full" ? " is-full" : "")}
+            className={"card-attribute__item" + (attr.columns === 2 || attr.columns === "full" ? " is-full" : "")}
           >
-            <dt className="sx-card-attribute__label">
+            <dt className="card-attribute__label">
               {attr.label}
-              {attr.info && <Icon name="info" size={20} className="sx-card-attribute__info" />}
+              {attr.info && <Icon name="info" size={20} className="card-attribute__info" />}
             </dt>
-            <dd className="sx-card-attribute__value-row">
+            <dd className="card-attribute__value-row">
               {attr.link ? (
-                <a className="sx-card-attribute__link" href={attr.link} target="_blank" rel="noreferrer">
+                <a className="card-attribute__link" href={attr.link} target="_blank" rel="noreferrer">
                   {attr.value}
                 </a>
               ) : (
-                <span className="sx-card-attribute__value">{attr.value}</span>
+                <span className="card-attribute__value">{attr.value}</span>
               )}
               {attr.copyable && (
                 <button
                   type="button"
-                  className="sx-card-attribute__copy"
+                  className="card-attribute__copy"
                   aria-label="Copy"
                   onClick={onCopy ? () => onCopy(attr) : undefined}
                 >
@@ -74,8 +74,8 @@ export function CardAttribute({
 
       {actions && (
         <>
-          <div className="sx-card-attribute__divider" />
-          <div className="sx-card-attribute__actions">
+          <div className="card-attribute__divider" />
+          <div className="card-attribute__actions">
             <Button variant="secondary" size="sm" onClick={actions.onReject}>
               {actions.rejectLabel || "Reject"}
             </Button>

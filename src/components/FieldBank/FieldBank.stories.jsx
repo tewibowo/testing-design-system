@@ -13,7 +13,7 @@ const bankLogo = (label, bg) => (
     style={{
       minWidth: 44, height: 24, padding: "0 6px", borderRadius: 4, background: bg,
       color: "#fff", display: "inline-flex", alignItems: "center", justifyContent: "center",
-      font: "var(--sx-label-small)",
+      font: "var(--label-small)",
     }}
   >
     {label}

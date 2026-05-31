@@ -70,35 +70,35 @@ export function Sidebar({
   const toggle = (id) => setExpanded((e) => ({ ...e, [id]: !e[id] }));
 
   return (
-    <aside className="sx-sidebar">
-      <div className="sx-sidebar__top">
-        <div className="sx-sidebar__brand">
+    <aside className="sidebar">
+      <div className="sidebar__top">
+        <div className="sidebar__brand">
           <Logomark size={36} />
           <div>
-            <div className="sx-sidebar__brand-name">{brandName}</div>
-            <div className="sx-sidebar__brand-sub">{ACCOUNT_LABEL[account] || ACCOUNT_LABEL.personal}</div>
+            <div className="sidebar__brand-name">{brandName}</div>
+            <div className="sidebar__brand-sub">{ACCOUNT_LABEL[account] || ACCOUNT_LABEL.personal}</div>
           </div>
         </div>
 
         {company && (
-          <div className="sx-sidebar__company-wrap">
+          <div className="sidebar__company-wrap">
             <button
               type="button"
-              className={"sx-sidebar__company" + (menuOpen ? " is-open" : "")}
+              className={"sidebar__company" + (menuOpen ? " is-open" : "")}
               onClick={() => { if (hasMenu) setMenuOpen((o) => !o); else if (onCompanyClick) onCompanyClick(); }}
               aria-haspopup={hasMenu || onCompanyClick ? "menu" : undefined}
               aria-expanded={hasMenu ? menuOpen : undefined}
             >
-              <span className="sx-sidebar__company-text">
-                <span className="sx-sidebar__company-name">{company.name}</span>
-                <span className="sx-sidebar__company-type">{company.type}</span>
+              <span className="sidebar__company-text">
+                <span className="sidebar__company-name">{company.name}</span>
+                <span className="sidebar__company-type">{company.type}</span>
               </span>
               {(hasMenu || onCompanyClick) && (
-                <span className={"material-symbols-rounded sx-sidebar__company-chevron" + (menuOpen ? " is-open" : "")} aria-hidden="true">expand_more</span>
+                <span className={"material-symbols-rounded sidebar__company-chevron" + (menuOpen ? " is-open" : "")} aria-hidden="true">expand_more</span>
               )}
             </button>
             {hasMenu && menuOpen && (
-              <div className="sx-sidebar__company-menu">
+              <div className="sidebar__company-menu">
                 <CompanyProfileMenu
                   switchCompany={!!companies}
                   companies={companies || []}
@@ -111,35 +111,35 @@ export function Sidebar({
           </div>
         )}
 
-        <nav className="sx-sidebar__nav" aria-label="Main">
+        <nav className="sidebar__nav" aria-label="Main">
           {items.map((item) => {
             const hasSub = item.subItems && item.subItems.length > 0;
             const isOpen = !!expanded[item.id];
             const isActive = active === item.id;
             return (
-              <div key={item.id} className="sx-sidebar__group">
+              <div key={item.id} className="sidebar__group">
                 <button
                   type="button"
-                  className={"sx-nav-item" + (isActive ? " is-active" : "") + (hoveredItem === item.id ? " is-hovered" : "")}
+                  className={"nav-item" + (isActive ? " is-active" : "") + (hoveredItem === item.id ? " is-hovered" : "")}
                   aria-expanded={hasSub ? isOpen : undefined}
                   onClick={() => { if (hasSub) toggle(item.id); else if (onSelect) onSelect(item.id); }}
                 >
                   <span className="material-symbols-rounded" aria-hidden="true">{item.icon}</span>
-                  <span className="sx-nav-item__label">{item.label}</span>
-                  {item.tag && <span className="sx-nav-item__tag">{item.tag}</span>}
+                  <span className="nav-item__label">{item.label}</span>
+                  {item.tag && <span className="nav-item__tag">{item.tag}</span>}
                   {hasSub && (
-                    <span className={"material-symbols-rounded sx-nav-item__chevron" + (isOpen ? " is-open" : "")} aria-hidden="true">
+                    <span className={"material-symbols-rounded nav-item__chevron" + (isOpen ? " is-open" : "")} aria-hidden="true">
                       keyboard_arrow_down
                     </span>
                   )}
                 </button>
                 {hasSub && isOpen && (
-                  <div className="sx-sidebar__subnav">
+                  <div className="sidebar__subnav">
                     {item.subItems.map((sub) => (
                       <button
                         key={sub.id}
                         type="button"
-                        className={"sx-subitem" + (activeSubItem === sub.id ? " is-active" : "")}
+                        className={"subitem" + (activeSubItem === sub.id ? " is-active" : "")}
                         onClick={() => onSelect && onSelect(sub.id)}
                       >
                         {sub.label}
@@ -154,9 +154,9 @@ export function Sidebar({
       </div>
 
       {masBadge && (
-        <div className="sx-sidebar__mas">
+        <div className="sidebar__mas">
           <span className="material-symbols-rounded" aria-hidden="true">verified_user</span>
-          <span className="sx-sidebar__mas-text">Licensed &amp; Regulated by Monetary Authority of Singapore</span>
+          <span className="sidebar__mas-text">Licensed &amp; Regulated by Monetary Authority of Singapore</span>
         </div>
       )}
     </aside>

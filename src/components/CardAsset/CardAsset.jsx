@@ -32,14 +32,14 @@ export function CardAsset({
   className = "",
   ...rest
 }) {
-  const cls = ["sx-card-asset", className].filter(Boolean).join(" ");
+  const cls = ["card-asset", className].filter(Boolean).join(" ");
   return (
     <section className={cls} {...rest}>
-      <header className="sx-card-asset__header">
-        <div className="sx-card-asset__title">
+      <header className="card-asset__header">
+        <div className="card-asset__title">
           <span>{title}</span>
           {onRefresh && (
-            <button type="button" className="sx-card-asset__refresh" onClick={onRefresh} aria-label="Refresh">
+            <button type="button" className="card-asset__refresh" onClick={onRefresh} aria-label="Refresh">
               <Icon name="refresh" size={20} />
             </button>
           )}
@@ -47,40 +47,40 @@ export function CardAsset({
       </header>
 
       {banner && (
-        <div className="sx-card-asset__banner" role="status">
-          <Icon name="info" size={24} className="sx-card-asset__banner-icon" />
-          <p className="sx-card-asset__banner-text">{banner}</p>
+        <div className="card-asset__banner" role="status">
+          <Icon name="info" size={24} className="card-asset__banner-icon" />
+          <p className="card-asset__banner-text">{banner}</p>
         </div>
       )}
 
-      <ul className="sx-card-asset__list">
+      <ul className="card-asset__list">
         {assets.map((a, i) => (
-          <li key={a.symbol || i} className="sx-card-asset__row">
-            <div className="sx-card-asset__coin">
+          <li key={a.symbol || i} className="card-asset__row">
+            <div className="card-asset__coin">
               <Coin logo={a.logo} symbol={a.symbol} />
-              <div className="sx-card-asset__currency">
-                <span className="sx-card-asset__symbol">{a.symbol}</span>
-                {a.subtitle && <span className="sx-card-asset__subtitle">{a.subtitle}</span>}
+              <div className="card-asset__currency">
+                <span className="card-asset__symbol">{a.symbol}</span>
+                {a.subtitle && <span className="card-asset__subtitle">{a.subtitle}</span>}
               </div>
             </div>
 
-            <div className="sx-card-asset__balance">
-              <span className="sx-card-asset__amount num">{a.balance}</span>
-              {a.fiat && <span className="sx-card-asset__fiat">{a.fiat}</span>}
+            <div className="card-asset__balance">
+              <span className="card-asset__amount num">{a.balance}</span>
+              {a.fiat && <span className="card-asset__fiat">{a.fiat}</span>}
             </div>
 
             {a.networks && a.networks.length > 0 && (
-              <div className="sx-card-asset__networks">
+              <div className="card-asset__networks">
                 {a.networks.slice(0, 4).map((n, j) => (
                   <Network key={n.name || j} logo={n.logo} name={n.name} />
                 ))}
                 {a.networks.length > 4 && (
-                  <span className="sx-card-asset__networks-more">+{a.networks.length - 4}</span>
+                  <span className="card-asset__networks-more">+{a.networks.length - 4}</span>
                 )}
               </div>
             )}
 
-            <div className="sx-card-asset__actions">
+            <div className="card-asset__actions">
               <IconButton variant="outline" size="sm" icon="add" label="Add" onClick={onAdd ? () => onAdd(a) : undefined} />
               <IconButton variant="outline" size="sm" icon="arrow_outward" label="Send" onClick={onSend ? () => onSend(a) : undefined} />
             </div>
@@ -92,9 +92,9 @@ export function CardAsset({
 }
 
 function Coin({ logo, symbol }) {
-  if (logo) return <span className="sx-card-asset__coin-logo">{logo}</span>;
+  if (logo) return <span className="card-asset__coin-logo">{logo}</span>;
   return (
-    <span className="sx-card-asset__coin-logo sx-card-asset__coin-logo--placeholder" aria-hidden="true">
+    <span className="card-asset__coin-logo card-asset__coin-logo--placeholder" aria-hidden="true">
       {(symbol || "?").slice(0, 2)}
     </span>
   );
@@ -102,8 +102,8 @@ function Coin({ logo, symbol }) {
 
 function Network({ logo, name }) {
   return (
-    <span className="sx-card-asset__network" title={name}>
-      {logo || <span className="sx-card-asset__network-initial" aria-hidden="true">{(name || "?").charAt(0)}</span>}
+    <span className="card-asset__network" title={name}>
+      {logo || <span className="card-asset__network-initial" aria-hidden="true">{(name || "?").charAt(0)}</span>}
     </span>
   );
 }

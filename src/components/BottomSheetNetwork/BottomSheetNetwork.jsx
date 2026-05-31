@@ -25,26 +25,26 @@ export function BottomSheetNetwork({
   className = "",
 }) {
   return (
-    <BottomSheet open={open} onClose={onClose} title={title} className={"sx-bsn " + className}>
-      <ul className="sx-bsn__list">
+    <BottomSheet open={open} onClose={onClose} title={title} className={"bsn " + className}>
+      <ul className="bsn__list">
         {networks.map((n) => {
           const selected = n.id === selectedId;
           return (
             <li key={n.id ?? n.name}>
               <button
                 type="button"
-                className={"sx-bsn__item" + (selected ? " is-selected" : "")}
+                className={"bsn__item" + (selected ? " is-selected" : "")}
                 onClick={() => onSelect && onSelect(n)}
                 aria-pressed={selected}
               >
-                <span className="sx-bsn__mark" aria-hidden="true">
+                <span className="bsn__mark" aria-hidden="true">
                   {n.mark || (n.name ? n.name.slice(0, 1) : "")}
                 </span>
-                <span className="sx-bsn__text">
-                  <span className="sx-bsn__name">{n.name}</span>
-                  {n.description && <span className="sx-bsn__desc">{n.description}</span>}
+                <span className="bsn__text">
+                  <span className="bsn__name">{n.name}</span>
+                  {n.description && <span className="bsn__desc">{n.description}</span>}
                 </span>
-                <span className="material-symbols-rounded sx-bsn__check" aria-hidden="true">
+                <span className="material-symbols-rounded bsn__check" aria-hidden="true">
                   {selected ? "radio_button_checked" : "radio_button_unchecked"}
                 </span>
               </button>

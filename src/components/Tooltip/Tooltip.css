@@ -1,74 +1,74 @@
-.sx-tooltip {
+.tooltip {
   display: inline-flex;
   position: relative;
 }
-.sx-tooltip__bubble {
+.tooltip__bubble {
   position: absolute;
   z-index: 50;
-  background: var(--sx-text-primary);
-  color: var(--sx-text-inverse);
-  font: var(--sx-body-small);
+  background: var(--text-primary);
+  color: var(--text-inverse);
+  font: var(--body-small);
   padding: 8px 10px;
-  border-radius: var(--sx-radius-sm);
+  border-radius: var(--radius-sm);
   max-width: 240px;
   width: max-content;
-  box-shadow: var(--sx-shadow-2);
+  box-shadow: var(--shadow-2);
   opacity: 0;
   pointer-events: none;
-  transition: opacity var(--sx-dur-1) var(--sx-ease), transform var(--sx-dur-1) var(--sx-ease);
+  transition: opacity var(--dur-1) var(--ease), transform var(--dur-1) var(--ease);
 }
-.sx-tooltip__bubble::after {
+.tooltip__bubble::after {
   content: "";
   position: absolute;
   width: 8px;
   height: 8px;
-  background: var(--sx-text-primary);
+  background: var(--text-primary);
   transform: rotate(45deg);
 }
-.sx-tooltip[data-open="true"] .sx-tooltip__bubble {
+.tooltip[data-open="true"] .tooltip__bubble {
   opacity: 1;
 }
 
 /* ── Rich content ── */
-.sx-tooltip[data-rich] .sx-tooltip__bubble {
+.tooltip[data-rich] .tooltip__bubble {
   display: flex;
   flex-direction: column;
-  gap: var(--sx-space-2);
-  padding: var(--sx-space-3);
-  border-radius: var(--sx-radius-md);
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
   max-width: 280px;
   pointer-events: auto;
 }
-.sx-tooltip__header {
+.tooltip__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--sx-space-2);
+  gap: var(--space-2);
 }
-.sx-tooltip__title { font: var(--sx-body-bold-small); color: var(--sx-text-inverse); }
-.sx-tooltip__content { font: var(--sx-body-small); color: var(--sx-text-inverse); }
-.sx-tooltip__links {
+.tooltip__title { font: var(--body-bold-small); color: var(--text-inverse); }
+.tooltip__content { font: var(--body-small); color: var(--text-inverse); }
+.tooltip__links {
   display: flex;
-  gap: var(--sx-space-3);
+  gap: var(--space-3);
   flex-wrap: wrap;
 }
-.sx-tooltip__link {
+.tooltip__link {
   background: transparent;
   border: 0;
   padding: 0;
   cursor: pointer;
-  font: var(--sx-body-bold-small);
-  color: var(--sx-link);
+  font: var(--body-bold-small);
+  color: var(--link);
   text-decoration: underline;
 }
-.sx-tooltip__link:hover { opacity: 0.85; }
+.tooltip__link:hover { opacity: 0.85; }
 
 /* placements */
-.sx-tooltip[data-side="top"] .sx-tooltip__bubble { bottom: 100%; left: 50%; transform: translate(-50%, -8px); }
-.sx-tooltip[data-side="top"] .sx-tooltip__bubble::after { bottom: -4px; left: 50%; margin-left: -4px; }
-.sx-tooltip[data-side="bottom"] .sx-tooltip__bubble { top: 100%; left: 50%; transform: translate(-50%, 8px); }
-.sx-tooltip[data-side="bottom"] .sx-tooltip__bubble::after { top: -4px; left: 50%; margin-left: -4px; }
-.sx-tooltip[data-side="left"] .sx-tooltip__bubble { right: 100%; top: 50%; transform: translate(-8px, -50%); }
-.sx-tooltip[data-side="left"] .sx-tooltip__bubble::after { right: -4px; top: 50%; margin-top: -4px; }
-.sx-tooltip[data-side="right"] .sx-tooltip__bubble { left: 100%; top: 50%; transform: translate(8px, -50%); }
-.sx-tooltip[data-side="right"] .sx-tooltip__bubble::after { left: -4px; top: 50%; margin-top: -4px; }
+.tooltip[data-side="top"] .tooltip__bubble { bottom: 100%; left: 50%; transform: translate(-50%, -8px); }
+.tooltip[data-side="top"] .tooltip__bubble::after { bottom: -4px; left: 50%; margin-left: -4px; }
+.tooltip[data-side="bottom"] .tooltip__bubble { top: 100%; left: 50%; transform: translate(-50%, 8px); }
+.tooltip[data-side="bottom"] .tooltip__bubble::after { top: -4px; left: 50%; margin-left: -4px; }
+.tooltip[data-side="left"] .tooltip__bubble { right: 100%; top: 50%; transform: translate(-8px, -50%); }
+.tooltip[data-side="left"] .tooltip__bubble::after { right: -4px; top: 50%; margin-top: -4px; }
+.tooltip[data-side="right"] .tooltip__bubble { left: 100%; top: 50%; transform: translate(8px, -50%); }
+.tooltip[data-side="right"] .tooltip__bubble::after { left: -4px; top: 50%; margin-top: -4px; }

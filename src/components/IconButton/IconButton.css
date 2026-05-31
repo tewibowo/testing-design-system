@@ -1,59 +1,57 @@
-.sx-icon-btn {
+.icon-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border: 0;
   cursor: pointer;
   background: transparent;
-  color: var(--sx-text-primary);
-  transition: background var(--sx-dur-1) var(--sx-ease), color var(--sx-dur-1) var(--sx-ease);
+  color: var(--text-primary);
+  transition: background var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
 }
-.sx-icon-btn:focus-visible,
-.sx-icon-btn.is-focused {
-  outline: 2px solid var(--sx-status-information);
+.icon-btn:focus-visible,
+.icon-btn.is-focused {
+  outline: 2px solid var(--status-information);
   outline-offset: 2px;
 }
 
 /* sizes */
-.sx-icon-btn--lg { width: 48px; height: 48px; }
-.sx-icon-btn--md { width: 40px; height: 40px; }
-.sx-icon-btn--sm { width: 32px; height: 32px; }
-.sx-icon-btn--lg .material-symbols-rounded { font-size: 24px; }
-.sx-icon-btn--md .material-symbols-rounded { font-size: 22px; }
-.sx-icon-btn--sm .material-symbols-rounded { font-size: 18px; }
+.icon-btn--lg { width: 48px; height: 48px; }
+.icon-btn--sm { width: 36px; height: 36px; }
+.icon-btn--lg .material-symbols-rounded { font-size: 24px; }
+.icon-btn--sm .material-symbols-rounded { font-size: 20px; }
 
 /* shapes */
-.sx-icon-btn--circle { border-radius: var(--sx-radius-full); }
-.sx-icon-btn--square { border-radius: var(--sx-radius-md); }
+.icon-btn--circle { border-radius: var(--radius-full); }
+.icon-btn--square { border-radius: var(--radius-md); }
 
 /* variants */
-.sx-icon-btn--ghost { background: transparent; }
-.sx-icon-btn--ghost:hover,
-.sx-icon-btn--ghost.is-hovered { background: var(--sx-surface-secondary); }
-.sx-icon-btn--ghost:active,
-.sx-icon-btn--ghost.is-pressed { background: var(--sx-surface-disabled); }
+.icon-btn--ghost { background: transparent; }
+.icon-btn--ghost:hover,
+.icon-btn--ghost.is-hovered { background: var(--surface-secondary); }
+.icon-btn--ghost:active,
+.icon-btn--ghost.is-pressed { background: var(--surface-disabled); }
 
-.sx-icon-btn--outline {
-  background: var(--sx-surface);
-  border: 1px solid var(--sx-border);
+.icon-btn--outline {
+  background: var(--surface);
+  border: 1px solid var(--border);
 }
-.sx-icon-btn--outline:hover,
-.sx-icon-btn--outline.is-hovered { background: var(--sx-surface-secondary); }
-.sx-icon-btn--outline:active,
-.sx-icon-btn--outline.is-pressed { background: var(--sx-surface-disabled); }
+.icon-btn--outline:hover,
+.icon-btn--outline.is-hovered { background: var(--surface-secondary); }
+.icon-btn--outline:active,
+.icon-btn--outline.is-pressed { background: var(--surface-disabled); }
 
-.sx-icon-btn--filled {
-  background: var(--sx-text-primary);
-  color: var(--sx-text-inverse);
+.icon-btn--filled {
+  background: var(--text-primary);
+  color: var(--text-inverse);
 }
-.sx-icon-btn--filled:hover,
-.sx-icon-btn--filled.is-hovered { background: var(--sx-interactive-active); }
-.sx-icon-btn--filled:active,
-.sx-icon-btn--filled.is-pressed { background: var(--sx-interactive-active); }
+.icon-btn--filled:hover,
+.icon-btn--filled.is-hovered { background: var(--interactive-active); }
+.icon-btn--filled:active,
+.icon-btn--filled.is-pressed { background: var(--interactive-active); }
 
-.sx-icon-btn[disabled] {
-  background: var(--sx-surface-disabled);
-  color: var(--sx-disabled-on-surface);
+.icon-btn[disabled] {
+  background: var(--surface-disabled);
+  color: var(--disabled-on-surface);
   cursor: not-allowed;
   border-color: transparent;
 }

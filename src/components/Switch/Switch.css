@@ -1,28 +1,28 @@
-.sx-switch__track {
+.switch__track {
   position: relative;
   width: 36px;
   height: 20px;
-  background: var(--sx-border);
+  background: var(--border);
   border-radius: 999px;
   flex: 0 0 auto;
-  transition: background var(--sx-dur-1) var(--sx-ease);
+  transition: background var(--dur-1) var(--ease);
 }
-.sx-switch__thumb {
+.switch__thumb {
   position: absolute;
   top: 2px;
   left: 2px;
   width: 16px;
   height: 16px;
-  background: var(--sx-surface);
+  background: var(--surface);
   border-radius: 999px;
   box-shadow: 0 1px 2px rgba(10, 13, 18, 0.25);
-  transition: transform var(--sx-dur-1) var(--sx-ease);
+  transition: transform var(--dur-1) var(--ease);
 }
-.sx-control input:checked + .sx-switch__track {
-  background: var(--sx-interactive-active);
+.control input:checked + .switch__track {
+  background: var(--interactive-active);
 }
-.sx-control input:checked + .sx-switch__track .sx-switch__thumb {
+.control input:checked + .switch__track .switch__thumb {
   transform: translateX(16px);
 }
-.sx-control.is-disabled .sx-switch__track { background: var(--sx-border); }
-.sx-control.is-disabled .sx-switch__thumb { box-shadow: none; }
+.control.is-disabled .switch__track { background: var(--border); }
+.control.is-disabled .switch__thumb { box-shadow: none; }

@@ -11,7 +11,7 @@ const Net = ({ label, bg }) => (
       width: "100%",
       height: "100%",
       background: bg,
-      color: "var(--sx-text-inverse)",
+      color: "var(--text-inverse)",
       fontSize: 9,
       fontWeight: 700,
     }}
@@ -21,9 +21,9 @@ const Net = ({ label, bg }) => (
 );
 
 const networks = [
-  <Net key="e" label="E" bg="var(--sx-brand-stable-deep-ivy)" />,
-  <Net key="p" label="P" bg="var(--sx-brand-credible-blue)" />,
-  <Net key="a" label="A" bg="var(--sx-status-critical)" />,
+  <Net key="e" label="E" bg="var(--brand-stable-deep-ivy)" />,
+  <Net key="p" label="P" bg="var(--brand-credible-blue)" />,
+  <Net key="a" label="A" bg="var(--status-critical)" />,
 ];
 
 export default {
@@ -50,7 +50,7 @@ export default {
   },
   decorators: [
     (S) => (
-      <div style={{ maxWidth: 560, border: "1px solid var(--sx-border)", borderRadius: 8, padding: 12 }}>
+      <div style={{ maxWidth: 560, border: "1px solid var(--border)", borderRadius: 8, padding: 12 }}>
         <S />
       </div>
     ),
@@ -74,7 +74,7 @@ export const MobileStablecoin = {
   args: { platform: "mobile", balance: "22,345,672.87" },
   decorators: [
     (S) => (
-      <div style={{ maxWidth: 360, border: "1px solid var(--sx-border)", borderRadius: 8, padding: 12 }}>
+      <div style={{ maxWidth: 360, border: "1px solid var(--border)", borderRadius: 8, padding: 12 }}>
         <S />
       </div>
     ),
@@ -84,7 +84,7 @@ export const MobileStablecoin = {
 export const List = {
   decorators: [(S) => <div style={{ maxWidth: 560 }}><S /></div>],
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: 4, border: "1px solid var(--sx-border)", borderRadius: 8, padding: 12 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 4, border: "1px solid var(--border)", borderRadius: 8, padding: 12 }}>
       <ListAsset
         symbol="XSGD"
         subtitle="1:1 to SGD"

@@ -14,6 +14,7 @@ export default {
     multiline: { control: "boolean" },
     action: { control: "boolean" },
     truncate: { control: "boolean" },
+    size: { control: "inline-radio", options: ["large", "sm"] },
     buttonVariant: { control: "inline-radio", options: ["text", "icon"] },
   },
   decorators: [(S) => <div style={{ maxWidth: 480 }}><S /></div>],
@@ -97,4 +98,13 @@ export const Truncated = {
     value: "0xA1B2C3D4E5F60718293AeCb98765FaB1234567890",
     helper: "Long value is middle-truncated; full value copies.",
   },
+};
+
+export const Sizes = {
+  render: () => (
+    <div style={{ display: "grid", gap: 16, maxWidth: 480 }}>
+      <Copybox label="Large (48px)" size="large" value="0xA1B2C3D4E5F60718293AeCb98765FaB1234567890" />
+      <Copybox label="Small (36px)" size="sm" value="0xA1B2C3D4E5F60718293AeCb98765FaB1234567890" />
+    </div>
+  ),
 };

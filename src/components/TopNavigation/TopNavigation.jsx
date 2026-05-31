@@ -18,17 +18,17 @@ export function TopNavigation({
   appearance = "light",
   className = "",
 }) {
-  const cls = ["sx-topnav", appearance === "dark" && "sx-topnav--dark", className].filter(Boolean).join(" ");
+  const cls = ["topnav", appearance === "dark" && "topnav--dark", className].filter(Boolean).join(" ");
   return (
     <nav className={cls} aria-label="Primary">
-      <a href="/" className="sx-topnav__brand">
+      <a href="/" className="topnav__brand">
         <Logomark size={28} fill={appearance === "dark" ? "#00D37E" : undefined} />
         <span>{brand}</span>
       </a>
-      <div className="sx-topnav__links">
+      <div className="topnav__links">
         {links.map((l) => {
           const isActive = l.active ?? (activeHref && l.href === activeHref);
-          const cls = "sx-topnav__link" + (isActive ? " is-active" : "");
+          const cls = "topnav__link" + (isActive ? " is-active" : "");
           return l.href ? (
             <a key={l.label} className={cls} href={l.href}>
               {l.label}
@@ -42,7 +42,7 @@ export function TopNavigation({
           );
         })}
       </div>
-      {actions && <div className="sx-topnav__actions">{actions}</div>}
+      {actions && <div className="topnav__actions">{actions}</div>}
     </nav>
   );
 }

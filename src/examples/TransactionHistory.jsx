@@ -41,7 +41,7 @@ export function TransactionHistory() {
 
   const columns = [
     { key: "date", header: "Date" },
-    { key: "ref", header: "Reference", render: (r) => <code style={{ fontFamily: "var(--sx-font-mono)" }}>{r.ref}</code> },
+    { key: "ref", header: "Reference", render: (r) => <code style={{ fontFamily: "var(--font-mono)" }}>{r.ref}</code> },
     { key: "to", header: "Counterparty" },
     { key: "asset", header: "Asset" },
     { key: "amount", header: "Amount", numeric: true, render: (r) => r.amount.toLocaleString(undefined, { minimumFractionDigits: 2 }) },

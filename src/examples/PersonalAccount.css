@@ -13,9 +13,9 @@
   gap: 24px;
 }
 .ex-pa__footnote {
-  font: var(--sx-body-small);
-  color: var(--sx-disabled-on-surface);
+  font: var(--body-small);
+  color: var(--disabled-on-surface);
   margin-top: 32px;
   line-height: 1.6;
 }
-.ex-pa__footnote a { color: var(--sx-text-secondary); text-decoration: underline; }
+.ex-pa__footnote a { color: var(--text-secondary); text-decoration: underline; }

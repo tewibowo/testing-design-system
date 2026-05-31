@@ -1,46 +1,46 @@
 /* ModalAssetSelection — header + tappable asset list. Composes Modal shell. */
 
-.sx-asset-sel .sx-modal__body { padding-top: 0; padding-left: 0; padding-right: 0; }
+.asset-sel .modal__body { padding-top: 0; padding-left: 0; padding-right: 0; }
 
-.sx-asset-sel__header { display: flex; flex-direction: column; gap: 2px; }
-.sx-asset-sel__title { font: var(--sx-title-small); color: var(--sx-text-primary); }
-.sx-asset-sel__desc { font: var(--sx-body-medium); color: var(--sx-text-secondary); }
+.asset-sel__header { display: flex; flex-direction: column; gap: 2px; }
+.asset-sel__title { font: var(--title-small); color: var(--text-primary); }
+.asset-sel__desc { font: var(--body-medium); color: var(--text-secondary); }
 
-.sx-asset-sel__label {
-  font: var(--sx-body-medium);
-  color: var(--sx-text-primary);
-  margin: 0 0 var(--sx-space-2);
-  padding: 0 var(--sx-space-5);
+.asset-sel__label {
+  font: var(--body-medium);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-2);
+  padding: 0 var(--space-5);
 }
 
-.sx-asset-sel__list { list-style: none; margin: 0; padding: 0; }
-.sx-asset-sel__item {
+.asset-sel__list { list-style: none; margin: 0; padding: 0; }
+.asset-sel__item {
   width: 100%;
   display: flex;
   align-items: center;
-  gap: var(--sx-space-3);
-  padding: var(--sx-space-3) var(--sx-space-5);
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
   background: transparent;
   border: 0;
   text-align: left;
   cursor: pointer;
 }
-.sx-asset-sel__item:hover { background: var(--sx-surface-hovered); }
-.sx-asset-sel__mark {
+.asset-sel__item:hover { background: var(--surface-hovered); }
+.asset-sel__mark {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 32px;
   height: 32px;
-  border-radius: var(--sx-radius-full);
-  background: var(--sx-surface-secondary);
-  color: var(--sx-text-primary);
-  font: var(--sx-label-small);
+  border-radius: var(--radius-full);
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+  font: var(--label-small);
   overflow: hidden;
 }
-.sx-asset-sel__mark > * { width: 100%; height: 100%; }
-.sx-asset-sel__text { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
-.sx-asset-sel__symbol { font: var(--sx-title-mobile-small); color: var(--sx-text-primary); }
-.sx-asset-sel__subtitle { font: var(--sx-body-medium); color: var(--sx-text-secondary); }
-.sx-asset-sel__chevron { flex: 0 0 auto; color: var(--sx-text-secondary); font-size: 16px; }
+.asset-sel__mark > * { width: 100%; height: 100%; }
+.asset-sel__text { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
+.asset-sel__symbol { font: var(--title-mobile-small); color: var(--text-primary); }
+.asset-sel__subtitle { font: var(--body-medium); color: var(--text-secondary); }
+.asset-sel__chevron { flex: 0 0 auto; color: var(--text-secondary); font-size: 16px; }

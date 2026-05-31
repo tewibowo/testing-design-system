@@ -1,32 +1,32 @@
-.sx-select {
+.select {
   position: relative;
   display: flex;
   align-items: center;
   height: 48px;
   padding: 0 14px;
-  background: var(--sx-surface);
-  border: 1px solid var(--sx-border);
-  border-radius: var(--sx-radius-lg);
-  font: var(--sx-body-large);
-  color: var(--sx-text-primary);
-  transition: border-color var(--sx-dur-1) var(--sx-ease), box-shadow var(--sx-dur-1) var(--sx-ease);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  font: var(--body-large);
+  color: var(--text-primary);
+  transition: border-color var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease);
   cursor: pointer;
 }
-/* Size axis — large (48px, default) | small (40px) — matches Input */
-.sx-select--large { height: 48px; padding: 0 14px; font: var(--sx-body-large); }
-.sx-select--small {
-  height: 40px;
-  padding: 0 var(--sx-space-3);
-  font: var(--sx-body-medium);
-  border-radius: var(--sx-radius-md);
+/* Size axis — large (48px, default) | small (36px) — matches Input */
+.select--large { height: 48px; padding: 0 14px; font: var(--body-large); }
+.select--small {
+  height: 36px;
+  padding: 0 var(--space-3);
+  font: var(--body-medium);
+  border-radius: var(--radius-md);
 }
-.sx-select:focus-within {
-  border-color: var(--sx-interactive-active);
+.select:focus-within {
+  border-color: var(--interactive-active);
   box-shadow: 0 0 0 3px rgba(0, 211, 126, 0.16);
 }
-.sx-select.is-error { border-color: var(--sx-status-critical); }
-.sx-select.is-disabled { background: var(--sx-surface-secondary); color: var(--sx-disabled-on-surface); cursor: not-allowed; }
-.sx-select select {
+.select.is-error { border-color: var(--status-critical); }
+.select.is-disabled { background: var(--surface-secondary); color: var(--disabled-on-surface); cursor: not-allowed; }
+.select select {
   flex: 1;
   appearance: none;
   border: 0;
@@ -37,12 +37,12 @@
   cursor: inherit;
   padding-right: 24px;
 }
-.sx-select__chevron {
+.select__chevron {
   position: absolute;
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
-  color: var(--sx-text-secondary);
+  color: var(--text-secondary);
   font-size: 22px;
 }

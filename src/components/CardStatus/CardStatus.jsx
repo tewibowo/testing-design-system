@@ -31,28 +31,28 @@ export function CardStatus({
   className = "",
   ...rest
 }) {
-  const cls = ["sx-card-status", className].filter(Boolean).join(" ");
+  const cls = ["card-status", className].filter(Boolean).join(" ");
   return (
     <div className={cls} {...rest}>
-      <section className="sx-card-status__card">
-        <header className="sx-card-status__head">
+      <section className="card-status__card">
+        <header className="card-status__head">
           <StatusIcon variant={status} icon={statusIcon} size={36} />
-          {title && <h3 className="sx-card-status__title">{title}</h3>}
+          {title && <h3 className="card-status__title">{title}</h3>}
         </header>
 
-        {description && <p className="sx-card-status__desc">{description}</p>}
+        {description && <p className="card-status__desc">{description}</p>}
 
         {sections.map((section, i) => (
-          <div key={section.title || i} className="sx-card-status__section">
-            {section.title && <p className="sx-card-status__section-title">{section.title}</p>}
-            <dl className="sx-card-status__items">
+          <div key={section.title || i} className="card-status__section">
+            {section.title && <p className="card-status__section-title">{section.title}</p>}
+            <dl className="card-status__items">
               {section.items.map((item, j) => (
-                <div key={item.label || j} className="sx-card-status__item">
-                  <dt className="sx-card-status__item-label">
+                <div key={item.label || j} className="card-status__item">
+                  <dt className="card-status__item-label">
                     {item.label}
-                    {item.info && <Icon name="info" size={16} className="sx-card-status__info" />}
+                    {item.info && <Icon name="info" size={16} className="card-status__info" />}
                   </dt>
-                  <dd className="sx-card-status__item-value">{item.value}</dd>
+                  <dd className="card-status__item-value">{item.value}</dd>
                 </div>
               ))}
             </dl>
@@ -60,11 +60,11 @@ export function CardStatus({
         ))}
 
         {total && (
-          <div className="sx-card-status__total-wrap">
-            <div className="sx-card-status__divider" />
-            <div className="sx-card-status__total">
-              <span className="sx-card-status__total-label">{total.label}</span>
-              <span className="sx-card-status__total-value">{total.value}</span>
+          <div className="card-status__total-wrap">
+            <div className="card-status__divider" />
+            <div className="card-status__total">
+              <span className="card-status__total-label">{total.label}</span>
+              <span className="card-status__total-value">{total.value}</span>
             </div>
           </div>
         )}

@@ -5,12 +5,12 @@ import "./AssetMark.css";
  * these are brand identities, not themeable design tokens). StraitsX
  * stablecoins resolve to the design-system brand tokens. */
 const ASSETS = {
-  XSGD: { glyph: "S$", var: "--sx-brand-xsgd" },
-  XIDR: { glyph: "Rp", var: "--sx-brand-xidr" },
-  XUSD: { glyph: "$",  var: "--sx-brand-xusd" },
-  SGD:  { glyph: "S$", var: "--sx-brand-xsgd" },
-  IDR:  { glyph: "Rp", var: "--sx-brand-xidr" },
-  USD:  { glyph: "$",  var: "--sx-brand-xusd" },
+  XSGD: { glyph: "S$", var: "--brand-xsgd" },
+  XIDR: { glyph: "Rp", var: "--brand-xidr" },
+  XUSD: { glyph: "$",  var: "--brand-xusd" },
+  SGD:  { glyph: "S$", var: "--brand-xsgd" },
+  IDR:  { glyph: "Rp", var: "--brand-xidr" },
+  USD:  { glyph: "$",  var: "--brand-xusd" },
   USDC: { glyph: "C",  color: "#2775CA" },
   USDT: { glyph: "T",  color: "#26A17B" },
   ETH:  { glyph: "Ξ",  color: "#627EEA" },
@@ -40,7 +40,7 @@ const ASSETS = {
  *
  *   <AssetMark asset="XSGD" />
  *   <AssetMark asset="USDC" size={24} />
- *   <AssetMark label="DBS" color="var(--sx-brand-secure-teal)" />
+ *   <AssetMark label="DBS" color="var(--brand-secure-teal)" />
  *   <AssetMark asset="ETH" tone="white" />   // mono mark for on-dark surfaces
  *   <AssetMark><img src={dbsLogo} alt="" /></AssetMark>
  *
@@ -51,7 +51,7 @@ export function AssetMark({ asset, label, color, size = 40, tone = "brand", clas
   const def = asset ? ASSETS[asset.toUpperCase()] : undefined;
   const glyph = label ?? def?.glyph ?? (asset ? asset.slice(0, 2).toUpperCase() : "?");
   const isWhite = tone === "white";
-  const bg = color ?? (def?.var ? `var(${def.var})` : def?.color) ?? "var(--sx-surface-secondary)";
+  const bg = color ?? (def?.var ? `var(${def.var})` : def?.color) ?? "var(--surface-secondary)";
   const hasBrand = !!(color || def);
   const style = {
     width: size,
@@ -60,11 +60,11 @@ export function AssetMark({ asset, label, color, size = 40, tone = "brand", clas
     color: isWhite
       ? "currentColor"
       : hasBrand
-        ? "var(--sx-text-inverse)"
-        : "var(--sx-text-secondary)",
+        ? "var(--text-inverse)"
+        : "var(--text-secondary)",
     fontSize: Math.round(size * 0.4),
   };
-  const cls = "sx-asset-mark" + (isWhite ? " sx-asset-mark--white" : "") + (className ? " " + className : "");
+  const cls = "asset-mark" + (isWhite ? " asset-mark--white" : "") + (className ? " " + className : "");
   return (
     <span className={cls} style={style} aria-label={asset || label} role="img">
       {children ?? glyph}

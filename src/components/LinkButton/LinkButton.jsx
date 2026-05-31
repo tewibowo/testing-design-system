@@ -19,9 +19,9 @@ export function LinkButton({
   ...rest
 }) {
   const cls = [
-    "sx-link-btn",
-    `sx-link-btn--${size}`,
-    onDark && "sx-link-btn--onDark",
+    "link-btn",
+    `link-btn--${size}`,
+    onDark && "link-btn--onDark",
     className,
   ].filter(Boolean).join(" ");
   const props = Tag === "button" ? { type: "button", disabled } : {};

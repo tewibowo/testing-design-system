@@ -1,45 +1,45 @@
 /* ListSupportedNetwork — Figma: List - Supported Network (5551:8211) */
-.sx-supported-network {
+.supported-network {
   display: inline-flex;
   align-items: center;
-  gap: var(--sx-space-1);
+  gap: var(--space-1);
 }
-.sx-supported-network__stack {
+.supported-network__stack {
   display: flex;
   align-items: center;
 }
-.sx-supported-network__icon {
+.supported-network__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 20px;
   height: 20px;
-  border-radius: var(--sx-radius-full);
+  border-radius: var(--radius-full);
   overflow: hidden;
-  background: var(--sx-surface);
-  box-shadow: 0 0 0 1.5px var(--sx-surface);
+  background: var(--surface);
+  box-shadow: 0 0 0 1.5px var(--surface);
   flex-shrink: 0;
 }
-.sx-supported-network__icon:not(:first-child) {
+.supported-network__icon:not(:first-child) {
   margin-left: -6px;
 }
-.sx-supported-network__icon > * {
+.supported-network__icon > * {
   width: 100%;
   height: 100%;
 }
-.sx-supported-network__more {
-  font: var(--sx-body-bold-small);
-  color: var(--sx-text-secondary);
+.supported-network__more {
+  font: var(--body-bold-small);
+  color: var(--text-secondary);
 }
-.sx-supported-network__badge {
+.supported-network__badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 1px 3px;
-  border-radius: var(--sx-radius-sm);
-  background: var(--sx-status-positive);
-  color: var(--sx-text-inverse);
-  font: var(--sx-label-small);
+  border-radius: var(--radius-sm);
+  background: var(--status-positive);
+  color: var(--text-inverse);
+  font: var(--label-small);
   font-size: 8px;
   line-height: 1;
   letter-spacing: 0.02em;

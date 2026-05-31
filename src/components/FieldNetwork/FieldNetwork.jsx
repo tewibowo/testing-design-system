@@ -59,21 +59,21 @@ export function FieldNetwork({
   };
 
   const wrapCls = [
-    "sx-fieldnetwork",
+    "fieldnetwork",
     open && "is-open",
     isError && "is-error",
     disabled && "is-disabled",
   ].filter(Boolean).join(" ");
 
   return (
-    <div className={"sx-field " + className} ref={rootRef}>
+    <div className={"field " + className} ref={rootRef}>
       {label && (
-        <span className="sx-field__label" id={`${id}-label`}>{label}</span>
+        <span className="field__label" id={`${id}-label`}>{label}</span>
       )}
       <div className={wrapCls}>
         <button
           type="button"
-          className="sx-fieldnetwork__control"
+          className="fieldnetwork__control"
           disabled={disabled}
           aria-haspopup="listbox"
           aria-expanded={open}
@@ -81,9 +81,9 @@ export function FieldNetwork({
           onClick={() => setOpen((o) => !o)}
         >
           {selectedOption && (
-            <span className="sx-fieldnetwork__mark" aria-hidden="true">
+            <span className="fieldnetwork__mark" aria-hidden="true">
               {selectedOption.logo || (
-                <span className="sx-fieldnetwork__initials">
+                <span className="fieldnetwork__initials">
                   {(selectedOption.name || selectedOption.value).slice(0, 2).toUpperCase()}
                 </span>
               )}
@@ -91,13 +91,13 @@ export function FieldNetwork({
           )}
           <span
             className={
-              "sx-fieldnetwork__value" + (selectedOption ? "" : " is-placeholder")
+              "fieldnetwork__value" + (selectedOption ? "" : " is-placeholder")
             }
           >
             {selectedOption ? selectedOption.name ?? selectedOption.value : placeholder}
           </span>
           <span
-            className="material-symbols-rounded sx-fieldnetwork__chevron"
+            className="material-symbols-rounded fieldnetwork__chevron"
             aria-hidden="true"
           >
             expand_more
@@ -105,7 +105,7 @@ export function FieldNetwork({
         </button>
 
         {open && !disabled && (
-          <ul className="sx-fieldnetwork__menu" role="listbox">
+          <ul className="fieldnetwork__menu" role="listbox">
             {options.map((o) => {
               const on = o.value === selected;
               return (
@@ -115,29 +115,29 @@ export function FieldNetwork({
                   aria-selected={on}
                   aria-disabled={o.disabled || undefined}
                   className={
-                    "sx-fieldnetwork__option" +
+                    "fieldnetwork__option" +
                     (on ? " is-selected" : "") +
                     (o.disabled ? " is-disabled" : "")
                   }
                   onClick={() => commit(o.value, o)}
                 >
-                  <span className="sx-fieldnetwork__mark" aria-hidden="true">
+                  <span className="fieldnetwork__mark" aria-hidden="true">
                     {o.logo || (
-                      <span className="sx-fieldnetwork__initials">
+                      <span className="fieldnetwork__initials">
                         {(o.name || o.value).slice(0, 2).toUpperCase()}
                       </span>
                     )}
                   </span>
-                  <span className="sx-fieldnetwork__opt-text">
-                    <span className="sx-fieldnetwork__opt-name">{o.name ?? o.value}</span>
+                  <span className="fieldnetwork__opt-text">
+                    <span className="fieldnetwork__opt-name">{o.name ?? o.value}</span>
                     {o.secondary && (
-                      <span className="sx-fieldnetwork__opt-secondary">{o.secondary}</span>
+                      <span className="fieldnetwork__opt-secondary">{o.secondary}</span>
                     )}
                   </span>
                   {o.tag && (
                     <span
                       className={
-                        "sx-fieldnetwork__tag is-" + (o.tag.variant || "positive")
+                        "fieldnetwork__tag is-" + (o.tag.variant || "positive")
                       }
                     >
                       {o.tag.label}
@@ -150,7 +150,7 @@ export function FieldNetwork({
         )}
       </div>
       {(helper || error) && (
-        <span className={"sx-field__helper" + (isError ? " is-error" : "")}>
+        <span className={"field__helper" + (isError ? " is-error" : "")}>
           {error || helper}
         </span>
       )}

@@ -1,69 +1,67 @@
 /* Button — migrated to STX semantic tokens (Figma: Base Color/* + Component/Button/*).
  * Reference example for the token refactor: components consume the semantic
  * layer, not brand primitives. */
-.sx-btn {
+.btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  border-radius: var(--sx-radius-full);
+  border-radius: var(--radius-full);
   border: 0;
   cursor: pointer;
-  font-family: var(--sx-font-display);
+  font-family: var(--font-display);
   font-weight: 700;
   line-height: 1;
   white-space: nowrap;
-  transition: background var(--sx-dur-1) var(--sx-ease),
-              color var(--sx-dur-1) var(--sx-ease),
-              border-color var(--sx-dur-1) var(--sx-ease);
+  transition: background var(--dur-1) var(--ease),
+              color var(--dur-1) var(--ease),
+              border-color var(--dur-1) var(--ease);
 }
-.sx-btn:focus-visible,
-.sx-btn.is-focused {
-  outline: 2px solid var(--sx-status-information);
+.btn:focus-visible,
+.btn.is-focused {
+  outline: 2px solid var(--status-information);
   outline-offset: 2px;
 }
 
 /* sizes */
-.sx-btn--lg { height: 48px; padding: 0 var(--sx-space-6); font-size: 16px; }
-.sx-btn--md { height: 40px; padding: 0 var(--sx-space-4); font-size: 14px; }
-.sx-btn--sm { height: 32px; padding: 0 var(--sx-space-3); font-size: 12px; }
+.btn--lg { height: 48px; padding: 0 var(--space-6); font-size: 16px; }
+.btn--sm { height: 36px; padding: 0 var(--space-4); font-size: 14px; }
 
 /* variants */
-.sx-btn--primary {
-  background: var(--sx-primary);
-  color: var(--sx-text-primary);
+.btn--primary {
+  background: var(--primary);
+  color: var(--text-primary);
 }
-.sx-btn--primary:hover,
-.sx-btn--primary.is-hovered { background: var(--sx-btn-primary-hovered); }
-.sx-btn--primary:active,
-.sx-btn--primary.is-pressed { background: var(--sx-btn-primary-pressed); color: var(--sx-text-inverse); }
+.btn--primary:hover,
+.btn--primary.is-hovered { background: var(--btn-primary-hovered); }
+.btn--primary:active,
+.btn--primary.is-pressed { background: var(--btn-primary-pressed); color: var(--text-inverse); }
 
-.sx-btn--secondary {
+.btn--secondary {
   background: transparent;
-  color: var(--sx-btn-secondary-text);
-  border: 1.5px solid var(--sx-interactive-active);
+  color: var(--btn-secondary-text);
+  border: 1.5px solid var(--interactive-active);
 }
-.sx-btn--secondary:hover,
-.sx-btn--secondary.is-hovered { background: var(--sx-btn-secondary-hovered); }
-.sx-btn--secondary:active,
-.sx-btn--secondary.is-pressed { background: var(--sx-btn-secondary-pressed); }
+.btn--secondary:hover,
+.btn--secondary.is-hovered { background: var(--btn-secondary-hovered); }
+.btn--secondary:active,
+.btn--secondary.is-pressed { background: var(--btn-secondary-pressed); }
 
-.sx-btn--tertiary {
+.btn--tertiary {
   background: transparent;
-  color: var(--sx-btn-secondary-text);
-  padding: 0 var(--sx-space-2);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  color: var(--btn-secondary-text);
+  padding: 0 var(--space-4);
+  min-width: 100px;
 }
-.sx-btn--tertiary:hover,
-.sx-btn--tertiary.is-hovered { background: var(--sx-btn-tertiary-hovered); color: var(--sx-interactive-active); }
-.sx-btn--tertiary:active,
-.sx-btn--tertiary.is-pressed { background: var(--sx-btn-tertiary-pressed); }
+.btn--tertiary:hover,
+.btn--tertiary.is-hovered { background: var(--btn-tertiary-hovered); }
+.btn--tertiary:active,
+.btn--tertiary.is-pressed { background: var(--btn-tertiary-pressed); }
 
-.sx-btn[disabled],
-.sx-btn[aria-disabled="true"] {
-  background: var(--sx-surface-disabled);
-  color: var(--sx-disabled-on-surface);
+.btn[disabled],
+.btn[aria-disabled="true"] {
+  background: var(--surface-disabled);
+  color: var(--disabled-on-surface);
   border-color: transparent;
   cursor: not-allowed;
   text-decoration: none;

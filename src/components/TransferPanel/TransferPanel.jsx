@@ -27,14 +27,14 @@ export function TransferPanel({
     onTabChange && onTabChange(id);
   };
   return (
-    <Card surface="raised" className="sx-transfer">
-      <div className="sx-tabs" role="tablist">
+    <Card surface="raised" className="transfer">
+      <div className="tabs" role="tablist">
         {tabs.map((t) => (
           <button
             key={t.id}
             role="tab"
             aria-selected={current === t.id}
-            className={"sx-tab" + (current === t.id ? " is-active" : "")}
+            className={"tab" + (current === t.id ? " is-active" : "")}
             onClick={() => handleSelect(t.id)}
             type="button"
           >
@@ -42,7 +42,7 @@ export function TransferPanel({
           </button>
         ))}
       </div>
-      <div className="sx-transfer__body">
+      <div className="transfer__body">
         {children ?? (
           <EmptyState
             title="Verify your account and complete the assessment to transact."

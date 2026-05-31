@@ -26,7 +26,7 @@ export function DropdownBlockchain({
   ...rest
 }) {
   return (
-    <ul className={"sx-dropdown-blockchain " + className} role="listbox" {...rest}>
+    <ul className={"dropdown-blockchain " + className} role="listbox" {...rest}>
       {options.map((o) => {
         const selected = o.value === value;
         return (
@@ -36,23 +36,23 @@ export function DropdownBlockchain({
             aria-selected={selected}
             aria-disabled={o.disabled || undefined}
             className={
-              "sx-dropdown-blockchain__row" +
+              "dropdown-blockchain__row" +
               (selected ? " is-selected" : "") +
               (o.disabled ? " is-disabled" : "")
             }
             onClick={() => !o.disabled && onSelect && onSelect(o.value, o)}
           >
-            <span className="sx-dropdown-blockchain__mark" aria-hidden="true">
+            <span className="dropdown-blockchain__mark" aria-hidden="true">
               {o.logo || (
-                <span className="sx-dropdown-blockchain__initials">
+                <span className="dropdown-blockchain__initials">
                   {(o.name || o.value || "?").slice(0, 2).toUpperCase()}
                 </span>
               )}
             </span>
-            <span className="sx-dropdown-blockchain__text">
-              <span className="sx-dropdown-blockchain__name">{o.name ?? o.value}</span>
+            <span className="dropdown-blockchain__text">
+              <span className="dropdown-blockchain__name">{o.name ?? o.value}</span>
               {(o.address || o.secondary) && (
-                <span className="sx-dropdown-blockchain__secondary">
+                <span className="dropdown-blockchain__secondary">
                   {o.address ?? o.secondary}
                 </span>
               )}
@@ -60,7 +60,7 @@ export function DropdownBlockchain({
             {o.tag && (
               <span
                 className={
-                  "sx-dropdown-blockchain__tag is-" + (o.tag.variant || "positive")
+                  "dropdown-blockchain__tag is-" + (o.tag.variant || "positive")
                 }
               >
                 {o.tag.label}
