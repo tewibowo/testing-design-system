@@ -82,6 +82,26 @@ export const CompanyDropdownOpen = {
   ),
 };
 
+// Nav item shown in its hovered state (static for Chromatic).
+export const NavHover = {
+  render: () => (
+    <Frame>
+      <Sidebar account="personal" items={DEFAULT_NAV_ITEMS} active="home" hoveredItem="history" />
+      <div style={{ padding: 32, color: "var(--sx-text-secondary)" }}>Nav item hover state</div>
+    </Frame>
+  ),
+};
+
+// MAS regulatory badge hidden.
+export const NoMasBadge = {
+  render: () => (
+    <Frame>
+      <Sidebar account="personal" items={DEFAULT_NAV_ITEMS} active="home" masBadge={false} />
+      <div style={{ padding: 32, color: "var(--sx-text-secondary)" }}>No MAS badge</div>
+    </Frame>
+  ),
+};
+
 export const Sandbox = {
   render: () => (
     <Frame>

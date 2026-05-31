@@ -73,7 +73,8 @@
   width: 100%;
   transition: background var(--sx-dur-1) var(--sx-ease), color var(--sx-dur-1) var(--sx-ease);
 }
-.sx-nav-item:hover { background: var(--sx-surface-secondary); }
+.sx-nav-item:hover,
+.sx-nav-item.is-hovered { background: var(--sx-surface-secondary); }
 .sx-nav-item.is-active {
   background: var(--sx-sidebar-active);
   color: var(--sx-status-positive);

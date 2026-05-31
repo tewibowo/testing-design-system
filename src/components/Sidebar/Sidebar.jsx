@@ -53,6 +53,7 @@ export function Sidebar({
   items = DEFAULT_NAV_ITEMS,
   active,
   activeSubItem,
+  hoveredItem, // id of a nav item to render in its hovered state (stories/Chromatic)
   onSelect,
   brandName = "StraitsX",
   masBadge = true,
@@ -119,7 +120,7 @@ export function Sidebar({
               <div key={item.id} className="sx-sidebar__group">
                 <button
                   type="button"
-                  className={"sx-nav-item" + (isActive ? " is-active" : "")}
+                  className={"sx-nav-item" + (isActive ? " is-active" : "") + (hoveredItem === item.id ? " is-hovered" : "")}
                   aria-expanded={hasSub ? isOpen : undefined}
                   onClick={() => { if (hasSub) toggle(item.id); else if (onSelect) onSelect(item.id); }}
                 >

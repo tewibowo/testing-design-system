@@ -90,3 +90,4 @@ export { DropdownBank } from "./components/DropdownBank/DropdownBank.jsx";
 export { DropdownBlockchain } from "./components/DropdownBlockchain/DropdownBlockchain.jsx";
 export { BottomSheetBank } from "./components/BottomSheetBank/BottomSheetBank.jsx";
 export { TopNavProfileMenu } from "./components/TopNavProfileMenu/TopNavProfileMenu.jsx";
+export { BottomSheetBlockchain } from "./components/BottomSheetBlockchain/BottomSheetBlockchain.jsx";
