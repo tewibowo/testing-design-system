@@ -1,11 +1,34 @@
-/* StraitsX Design System — Foundations
- * Colors + Type tokens, plus semantic helpers.
- * Source: StraitsX Brand Guidelines 2025 + FDS3 Figma (Style-Guideline page).
- */
+/* StraitsX Design System — Design Tokens
+ * =====================================================================
+ * Source of truth: Figma "StraitsX - Design System" → collection
+ * "STX - New Token" (foundation page "↳ New Component", node 4742:28).
+ *
+ * Token architecture mirrors Figma's TWO-TIER model:
+ *   1. PRIMITIVES   — `Brand Color/*`   → `--sx-brand-*`
+ *   2. SEMANTIC     — `Base Color/*`, `Background/*`, `Surface/*`,
+ *                     `Status/*`, `Component/Button/*`
+ *   3. TYPOGRAPHY   — `Display/`, `Title/`, `Title - Mobile/`,
+ *                     `Headline/`, `Label/`, `Body/`, `Body-Bold/`
+ *   4. SPACING / RADIUS / ELEVATION
+ *
+ * Figma → CSS naming map (semantic layer):
+ *   Base Color/Text-Primary        → --sx-text-primary
+ *   Base Color/Primary             → --sx-primary
+ *   Surface/Surface                → --sx-surface
+ *   Background/Background          → --sx-background
+ *   Status/Critical                → --sx-status-critical
+ *   Component/Button/btn-*         → --sx-btn-*
+ *
+ * Components should consume the SEMANTIC layer (never brand primitives
+ * directly — Figma marks primitives "avoid using directly").
+ *
+ * NOTE: a "Legacy aliases" block at the bottom preserves the pre-refactor
+ * `--sx-*` names at their original values so existing components keep
+ * rendering unchanged. Migrate components onto the semantic tokens above,
+ * then the legacy block can be deleted.
+ * ===================================================================== */
 
-/* Red Hat Mono — used for numerals + technical figures. Loaded from Google Fonts
-   (per brand guideline: "available for download from Google Fonts").
-   NOTE: all @import rules must come before any other CSS statements. */
+/* all @import rules must come first */
 @import url("https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@300;400;500;600;700&display=swap");
 
 /* ───── FONTS ───── */
@@ -43,149 +66,258 @@
 }
 
 :root {
-  /* ─── BRAND COLORS — Primary (Brand Guidelines, p.20) ─── */
-  --sx-vibrant-green: #00D37E;   /* signature, growth */
-  --sx-secure-teal:   #054948;   /* grounding, security */
-  --sx-deep-ivy:      #002B2A;   /* near-black w/ green undertone */
+  /* ════════════════════════════════════════════════════════════════
+   * 1. PRIMITIVES  —  Figma `Brand Color/*`
+   * Do NOT use directly in components. Reference the semantic layer.
+   * ════════════════════════════════════════════════════════════════ */
+  --sx-brand-vibrant-green:     #00d37e;  /* Vibrant Green */
+  --sx-brand-stable-deep-ivy:   #002b2a;  /* Stable Deep Ivy */
+  --sx-brand-secure-teal:       #054948;  /* Secure Teal */
+  --sx-brand-wealthy-gold:      #b59b58;  /* Wealthy Gold */
+  --sx-brand-credible-blue:     #187d97;  /* Credible Blue */
+  --sx-brand-seamless-mint:     #79ffca;  /* Seamless Mint */
+  --sx-brand-innovative-grey:   #d8d8d8;  /* Innovative Grey */
+  --sx-brand-modern-light-grey: #f0f0f0;  /* Modern Light Grey */
+  /* Stablecoin marks (corrected vs legacy — XSGD & XIDR were swapped) */
+  --sx-brand-xsgd:              #0e3fc7;  /* XSGD */
+  --sx-brand-xidr:              #df1312;  /* XIDR */
+  --sx-brand-xusd:              #257c58;  /* XUSD */
 
-  /* ─── BRAND COLORS — Secondary (p.21) ─── */
-  --sx-mint:        #79FFCA;     /* "Seamless" */
-  --sx-grey:        #D8D8D8;     /* "Innovative" */
-  --sx-light-grey:  #F0F0F0;     /* "Modern" */
-  --sx-gold:        #B59B58;     /* "Wealthy" */
-  --sx-blue:        #187D97;     /* "Credible" */
+  /* ════════════════════════════════════════════════════════════════
+   * 2. SEMANTIC
+   * ════════════════════════════════════════════════════════════════ */
 
-  /* ─── Stablecoin marks (p.22) ─── */
-  --sx-xsgd: #DF1312;
-  --sx-xidr: #0E3FC7;
-  --sx-xusd: #257C58;
+  /* ── Base Color/* ── */
+  --sx-primary:             var(--sx-brand-vibrant-green); /* main actions, primary buttons */
+  --sx-interactive-active:  var(--sx-brand-secure-teal);   /* pressed/active interactive */
+  --sx-text-primary:        var(--sx-brand-stable-deep-ivy);
+  --sx-text-secondary:      #505454;
+  --sx-text-inverse:        #ffffff;
+  --sx-border:              var(--sx-brand-innovative-grey); /* #d8d8d8 default border */
+  --sx-link:                var(--sx-brand-credible-blue);
+  --sx-overlay:             rgba(5, 21, 19, 0.70);          /* #051513b2 dialog/sheet scrim */
+  --sx-on-container:        #ffffff;                        /* Base Color/On-Container */
 
-  /* ─── Surface / background / line (extracted from Figma) ─── */
-  --sx-bg:           #FFFFFF;
-  --sx-bg-subtle:    #F7F7F7;
-  --sx-bg-muted:     #F6F7F9;
-  --sx-bg-success:   #F0F9F4;
-  --sx-line-strong:  #C6C6C6;
-  --sx-line:         #E0E0E0;
-  --sx-line-soft:    #EBEBEB;
+  /* ── Background/* & Surface/* ── */
+  --sx-background:          #f6f7f9;  /* default app/dashboard viewport */
+  --sx-surface:             #ffffff;  /* cards, sidebars, highest-prominence surfaces */
+  --sx-surface-secondary:   #f6f7f9;
+  --sx-surface-disabled:    #f2f4f5;
+  --sx-disabled-on-surface: #9d9e9f;  /* disabled content/icon on surface */
+  --sx-surface-hovered:     #ececec;
+  --sx-surface-pressed:     #e3e3e3;
 
-  /* ─── Foreground / text ─── */
-  --sx-fg:           #121212;     /* default body, used over light backgrounds */
-  --sx-fg-1:         #002B2A;     /* primary text, ivy */
-  --sx-fg-2:         #505454;     /* secondary */
-  --sx-fg-3:         #6B6B6B;     /* helper / placeholder */
-  --sx-fg-4:         #9D9E9F;     /* disabled */
-  --sx-fg-inverse:   #FFFFFF;
+  /* ── Status/* ── */
+  --sx-status-positive:            #257c58;
+  --sx-status-critical:            #df1312;
+  --sx-status-warning:             #fc9a07;
+  --sx-status-information:         #0c45e1;
+  --sx-status-surface-positive:    #f0f9f4;
+  --sx-status-surface-critical:    #fff1f1;
+  --sx-status-surface-warning:     #fffaea;
+  --sx-status-surface-information: #eef6ff;
 
-  /* ─── Semantic / feedback ─── */
-  --sx-positive:        #007D00;
-  --sx-positive-soft:   #F0F9F4;
-  --sx-positive-border: #B6DDC4;
-  --sx-critical:        #DF1312;
-  --sx-critical-soft:   #FDECEC;
-  --sx-critical-border: #F2A89B;
-  --sx-warning:         #F79410;
-  --sx-warning-soft:    #FFF5E6;
-  --sx-warning-border:  #F7D7A7;
-  --sx-information:     #0D69D4;
-  --sx-information-soft:#EAF2FD;
-  --sx-information-border:#A8C8F2;
-  --sx-neutral:         #1B2736;
-  --sx-neutral-soft:    #F2F4F5;
-  --sx-neutral-border:  #C6C6C6;
+  /* ── Component/Button/* ── */
+  --sx-btn-secondary-text:    #002b2a;
+  --sx-btn-primary-hovered:   #00b86d;
+  --sx-btn-primary-pressed:   #009e5a;
+  --sx-btn-secondary-hovered: rgba(5, 73, 72, 0.10);  /* #0549481a */
+  --sx-btn-secondary-pressed: rgba(5, 73, 72, 0.15);  /* #05494826 */
+  --sx-btn-tertiary-hovered:  rgba(5, 73, 72, 0.10);
+  --sx-btn-tertiary-pressed:  rgba(5, 73, 72, 0.15);
 
-  /* ─── Type stacks ─── */
+  /* ════════════════════════════════════════════════════════════════
+   * 3. TYPOGRAPHY  —  font shorthand: `weight size/line-height family`
+   * Family/size/weight per Figma. Display/Title/Label = Red Hat Display
+   * Bold; Headline/Body = Hanken Grotesk Regular; Body-Bold = Hanken Bold.
+   * (Figma stores line-height as "Auto"; practical values used here.)
+   * ════════════════════════════════════════════════════════════════ */
   --sx-font-display: "Red Hat Display", "Inter", system-ui, -apple-system, Segoe UI, sans-serif;
   --sx-font-body:    "Hanken Grotesk", "Inter", system-ui, -apple-system, Segoe UI, sans-serif;
   --sx-font-mono:    "Red Hat Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* ─── Type scale (FDS3 Typography frame) ─── */
-  /* Display — Red Hat Display Bold; marketing only */
-  --sx-display-l: 700 64px/1.05 var(--sx-font-display);
-  --sx-display-m: 700 45px/1.05 var(--sx-font-display);
-  --sx-display-s: 700 36px/1.08 var(--sx-font-display);
-  /* Headline — Hanken Grotesk Regular; secondary marketing */
-  --sx-headline-l: 400 28px/1.25 var(--sx-font-body);
-  --sx-headline-m: 400 24px/1.30 var(--sx-font-body);
-  --sx-headline-s: 400 20px/1.35 var(--sx-font-body);
-  /* Title — Red Hat Display Bold; structural headings */
-  --sx-title-l: 700 28px/1.20 var(--sx-font-display);
-  --sx-title-m: 700 24px/1.25 var(--sx-font-display);
-  --sx-title-s: 700 20px/1.30 var(--sx-font-display);
-  /* Label — Red Hat Display Bold; functional UI text */
-  --sx-label-l: 700 16px/1.35 var(--sx-font-display);
-  --sx-label-m: 700 14px/1.35 var(--sx-font-display);
-  --sx-label-s: 700 12px/1.35 var(--sx-font-display);
-  /* Label (Hanken) — variant w/ more personality */
-  --sx-label-l-hk: 700 16px/1.35 var(--sx-font-body);
-  --sx-label-m-hk: 700 14px/1.35 var(--sx-font-body);
-  --sx-label-s-hk: 700 12px/1.35 var(--sx-font-body);
+  /* Display — Red Hat Display Bold */
+  --sx-display-large:  700 64px/1.05 var(--sx-font-display);
+  --sx-display-medium: 700 45px/1.05 var(--sx-font-display);
+  --sx-display-small:  700 36px/1.08 var(--sx-font-display);
+  /* Title — Red Hat Display Bold */
+  --sx-title-large:  700 28px/1.20 var(--sx-font-display);
+  --sx-title-medium: 700 24px/1.25 var(--sx-font-display);
+  --sx-title-small:  700 20px/1.30 var(--sx-font-display);
+  /* Title — Mobile — Red Hat Display Bold */
+  --sx-title-mobile-large:  700 24px/1.25 var(--sx-font-display);
+  --sx-title-mobile-medium: 700 20px/1.30 var(--sx-font-display);
+  --sx-title-mobile-small:  700 18px/1.33 var(--sx-font-display);
+  /* Headline — Hanken Grotesk Regular */
+  --sx-headline-large:  400 28px/1.25 var(--sx-font-body);
+  --sx-headline-medium: 400 24px/1.30 var(--sx-font-body);
+  --sx-headline-small:  400 20px/1.35 var(--sx-font-body);
+  /* Label — Red Hat Display Bold */
+  --sx-label-large:  700 16px/1.35 var(--sx-font-display);
+  --sx-label-medium: 700 14px/1.35 var(--sx-font-display);
+  --sx-label-small:  700 12px/1.35 var(--sx-font-display);
   /* Body — Hanken Grotesk Regular */
-  --sx-body-l: 400 16px/1.5  var(--sx-font-body);
-  --sx-body-m: 400 14px/1.5  var(--sx-font-body);
-  --sx-body-s: 400 12px/1.5  var(--sx-font-body);
+  --sx-body-large:  400 16px/1.5 var(--sx-font-body);
+  --sx-body-medium: 400 14px/1.5 var(--sx-font-body);
+  --sx-body-small:  400 12px/1.5 var(--sx-font-body);
+  /* Body-Bold — Hanken Grotesk Bold */
+  --sx-body-bold-large:  700 16px/1.5 var(--sx-font-body);
+  --sx-body-bold-medium: 700 14px/1.5 var(--sx-font-body);
+  --sx-body-bold-small:  700 12px/1.5 var(--sx-font-body);
 
-  /* ─── Radii (Style-Guideline / Box-Shadow + Table) ─── */
-  --sx-radius-card:    8px;   /* Alert, Card */
-  --sx-radius-control: 12px;  /* Input, Select, Copybox, Dialog */
-  --sx-radius-full:    999px; /* Button, Tag, Badge, Icon Button */
-  --sx-radius-sm:      4px;
-  --sx-radius-lg:      16px;  /* Style-Guideline panels */
-
-  /* ─── Elevation / shadows (Style-Guideline / Box-Shadow frame) ─── */
-  --sx-shadow-1: 0 1px 3px 0 rgba(10,13,18,0.10), 0 1px 2px 0 rgba(10,13,18,0.06);
-  --sx-shadow-2: 0 12px 16px -4px rgba(10,13,18,0.08), 0 4px 6px -2px rgba(10,13,18,0.03);
-  --sx-shadow-3: 0 20px 24px -4px rgba(10,13,18,0.08), 0 8px 8px -4px rgba(10,13,18,0.03);
-
-  /* ─── Spacing (4-px base, Figma gaps observed) ─── */
+  /* ════════════════════════════════════════════════════════════════
+   * 4. SPACING / RADIUS / ELEVATION
+   * ════════════════════════════════════════════════════════════════ */
+  /* Padding scale — Figma "Padding Scale": 4 8 12 16 20 24 40 */
   --sx-space-1: 4px;
   --sx-space-2: 8px;
   --sx-space-3: 12px;
   --sx-space-4: 16px;
-  --sx-space-5: 24px;
-  --sx-space-6: 32px;
+  --sx-space-5: 20px;
+  --sx-space-6: 24px;
   --sx-space-7: 40px;
-  --sx-space-8: 64px;
 
-  /* ─── Motion ─── */
-  --sx-ease:    cubic-bezier(0.2, 0.7, 0.2, 1);
-  --sx-dur-1:   120ms; /* hover, press */
-  --sx-dur-2:   200ms; /* enter/leave for chips, tooltips */
-  --sx-dur-3:   320ms; /* sheets, modals */
+  /* Corner radius — Figma "Corner Radius": 4 / 8 / 12 / full */
+  --sx-radius-sm:   4px;    /* tags, chips */
+  --sx-radius-md:   8px;    /* inputs, smaller cards */
+  --sx-radius-lg:   12px;   /* modals, larger cards */
+  --sx-radius-full: 999px;  /* pills — buttons, badges */
+
+  /* Elevation — Figma "Shadow/lv-1..3" (#0A0D12 alphas: 06 / 10 / 03 / 08) */
+  --sx-shadow-1: 0 1px 2px 0 rgba(10,13,18,0.06), 0 1px 3px 0 rgba(10,13,18,0.10);
+  --sx-shadow-2: 0 4px 6px -2px rgba(10,13,18,0.03), 0 12px 16px -4px rgba(10,13,18,0.08);
+  --sx-shadow-3: 0 8px 8px -4px rgba(10,13,18,0.03), 0 20px 24px -4px rgba(10,13,18,0.08);
+
+  /* ── Motion (repo convention; not yet tokenized in Figma) ── */
+  --sx-ease:  cubic-bezier(0.2, 0.7, 0.2, 1);
+  --sx-dur-1: 120ms;
+  --sx-dur-2: 200ms;
+  --sx-dur-3: 320ms;
+
+  /* ════════════════════════════════════════════════════════════════
+   * LEGACY ALIASES  —  pre-refactor names kept at ORIGINAL values so
+   * existing components render unchanged. Do not use in new code.
+   * Migrate consumers to the semantic tokens above, then delete.
+   * ════════════════════════════════════════════════════════════════ */
+  --sx-vibrant-green: var(--sx-brand-vibrant-green);
+  --sx-secure-teal:   var(--sx-brand-secure-teal);
+  --sx-deep-ivy:      var(--sx-brand-stable-deep-ivy);
+  --sx-mint:          var(--sx-brand-seamless-mint);
+  --sx-grey:          var(--sx-brand-innovative-grey);
+  --sx-light-grey:    var(--sx-brand-modern-light-grey);
+  --sx-gold:          var(--sx-brand-wealthy-gold);
+  --sx-blue:          var(--sx-brand-credible-blue);
+  --sx-xsgd: #DF1312;   /* legacy value (corrected token is --sx-brand-xsgd #0e3fc7) */
+  --sx-xidr: #0E3FC7;   /* legacy value (corrected token is --sx-brand-xidr #df1312) */
+  --sx-xusd: #257C58;
+
+  --sx-bg:          #FFFFFF;
+  --sx-bg-subtle:   #F7F7F7;
+  --sx-bg-muted:    #F6F7F9;
+  --sx-bg-success:  #F0F9F4;
+  --sx-line-strong: #C6C6C6;
+  --sx-line:        #E0E0E0;
+  --sx-line-soft:   #EBEBEB;
+
+  --sx-fg:         #121212;
+  --sx-fg-1:       var(--sx-text-primary);
+  --sx-fg-2:       var(--sx-text-secondary);
+  --sx-fg-3:       #6B6B6B;
+  --sx-fg-4:       var(--sx-disabled-on-surface);
+  --sx-fg-inverse: var(--sx-text-inverse);
+
+  --sx-positive:          #007D00;
+  --sx-positive-soft:     #F0F9F4;
+  --sx-positive-border:   #B6DDC4;
+  --sx-critical:          #DF1312;
+  --sx-critical-soft:     #FDECEC;
+  --sx-critical-border:   #F2A89B;
+  --sx-warning:           #F79410;
+  --sx-warning-soft:      #FFF5E6;
+  --sx-warning-border:    #F7D7A7;
+  --sx-information:       #0D69D4;
+  --sx-information-soft:  #EAF2FD;
+  --sx-information-border:#A8C8F2;
+  --sx-neutral:           #1B2736;
+  --sx-neutral-soft:      #F2F4F5;
+  --sx-neutral-border:    #C6C6C6;
+
+  --sx-radius-card:    8px;
+  --sx-radius-control: 12px;
+
+  /* legacy type aliases → new scale */
+  --sx-display-l: var(--sx-display-large);
+  --sx-display-m: var(--sx-display-medium);
+  --sx-display-s: var(--sx-display-small);
+  --sx-headline-l: var(--sx-headline-large);
+  --sx-headline-m: var(--sx-headline-medium);
+  --sx-headline-s: var(--sx-headline-small);
+  --sx-title-l: var(--sx-title-large);
+  --sx-title-m: var(--sx-title-medium);
+  --sx-title-s: var(--sx-title-small);
+  --sx-label-l: var(--sx-label-large);
+  --sx-label-m: var(--sx-label-medium);
+  --sx-label-s: var(--sx-label-small);
+  --sx-label-l-hk: var(--sx-body-bold-large);
+  --sx-label-m-hk: var(--sx-body-bold-medium);
+  --sx-label-s-hk: var(--sx-body-bold-small);
+  --sx-body-l: var(--sx-body-large);
+  --sx-body-m: var(--sx-body-medium);
+  --sx-body-s: var(--sx-body-small);
 }
 
 /* ───── Element defaults ───── */
 html, body {
-  font: var(--sx-body-m);
-  color: var(--sx-fg-1);
-  background: var(--sx-bg);
+  font: var(--sx-body-medium);
+  color: var(--sx-text-primary);
+  background: var(--sx-surface);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
-h1 { font: var(--sx-title-l); color: var(--sx-fg-1); margin: 0; letter-spacing: -0.01em; }
-h2 { font: var(--sx-title-m); color: var(--sx-fg-1); margin: 0; }
-h3 { font: var(--sx-title-s); color: var(--sx-fg-1); margin: 0; }
-h4 { font: var(--sx-label-l); color: var(--sx-fg-1); margin: 0; }
-p, li { font: var(--sx-body-m); color: var(--sx-fg-1); margin: 0; }
-small { font: var(--sx-body-s); color: var(--sx-fg-2); }
+h1 { font: var(--sx-title-large); color: var(--sx-text-primary); margin: 0; letter-spacing: -0.01em; }
+h2 { font: var(--sx-title-medium); color: var(--sx-text-primary); margin: 0; }
+h3 { font: var(--sx-title-small); color: var(--sx-text-primary); margin: 0; }
+h4 { font: var(--sx-label-large); color: var(--sx-text-primary); margin: 0; }
+p, li { font: var(--sx-body-medium); color: var(--sx-text-primary); margin: 0; }
+small { font: var(--sx-body-small); color: var(--sx-text-secondary); }
 code, pre, kbd, samp { font-family: var(--sx-font-mono); }
 .numeric, .num { font-family: var(--sx-font-mono); font-variant-numeric: tabular-nums; }
 
-/* Semantic shortcuts */
-.sx-display-l { font: var(--sx-display-l); letter-spacing: -0.02em; }
-.sx-display-m { font: var(--sx-display-m); letter-spacing: -0.01em; }
-.sx-display-s { font: var(--sx-display-s); letter-spacing: -0.01em; }
-.sx-headline-l { font: var(--sx-headline-l); }
-.sx-headline-m { font: var(--sx-headline-m); }
-.sx-headline-s { font: var(--sx-headline-s); }
-.sx-title-l { font: var(--sx-title-l); }
-.sx-title-m { font: var(--sx-title-m); }
-.sx-title-s { font: var(--sx-title-s); }
-.sx-label-l { font: var(--sx-label-l); }
-.sx-label-m { font: var(--sx-label-m); }
-.sx-label-s { font: var(--sx-label-s); }
-.sx-body-l { font: var(--sx-body-l); }
-.sx-body-m { font: var(--sx-body-m); }
-.sx-body-s { font: var(--sx-body-s); }
+/* ───── Typography utility classes (new scale) ───── */
+.sx-display-large { font: var(--sx-display-large); letter-spacing: -0.02em; }
+.sx-display-medium { font: var(--sx-display-medium); letter-spacing: -0.01em; }
+.sx-display-small { font: var(--sx-display-small); letter-spacing: -0.01em; }
+.sx-title-large { font: var(--sx-title-large); }
+.sx-title-medium { font: var(--sx-title-medium); }
+.sx-title-small { font: var(--sx-title-small); }
+.sx-headline-large { font: var(--sx-headline-large); }
+.sx-headline-medium { font: var(--sx-headline-medium); }
+.sx-headline-small { font: var(--sx-headline-small); }
+.sx-label-large { font: var(--sx-label-large); }
+.sx-label-medium { font: var(--sx-label-medium); }
+.sx-label-small { font: var(--sx-label-small); }
+.sx-body-large { font: var(--sx-body-large); }
+.sx-body-medium { font: var(--sx-body-medium); }
+.sx-body-small { font: var(--sx-body-small); }
+.sx-body-bold-large { font: var(--sx-body-bold-large); }
+.sx-body-bold-medium { font: var(--sx-body-bold-medium); }
+.sx-body-bold-small { font: var(--sx-body-bold-small); }
+
+/* legacy utility class aliases */
+.sx-display-l { font: var(--sx-display-large); letter-spacing: -0.02em; }
+.sx-display-m { font: var(--sx-display-medium); letter-spacing: -0.01em; }
+.sx-display-s { font: var(--sx-display-small); letter-spacing: -0.01em; }
+.sx-headline-l { font: var(--sx-headline-large); }
+.sx-headline-m { font: var(--sx-headline-medium); }
+.sx-headline-s { font: var(--sx-headline-small); }
+.sx-title-l { font: var(--sx-title-large); }
+.sx-title-m { font: var(--sx-title-medium); }
+.sx-title-s { font: var(--sx-title-small); }
+.sx-label-l { font: var(--sx-label-large); }
+.sx-label-m { font: var(--sx-label-medium); }
+.sx-label-s { font: var(--sx-label-small); }
+.sx-body-l { font: var(--sx-body-large); }
+.sx-body-m { font: var(--sx-body-medium); }
+.sx-body-s { font: var(--sx-body-small); }

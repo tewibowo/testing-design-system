@@ -1,3 +1,6 @@
+/* Button — migrated to STX semantic tokens (Figma: Base Color/* + Component/Button/*).
+ * Reference example for the token refactor: components consume the semantic
+ * layer, not brand primitives. */
 .sx-btn {
   display: inline-flex;
   align-items: center;
@@ -15,44 +18,45 @@
               border-color var(--sx-dur-1) var(--sx-ease);
 }
 .sx-btn:focus-visible {
-  outline: 2px solid var(--sx-information);
+  outline: 2px solid var(--sx-status-information);
   outline-offset: 2px;
 }
 
 /* sizes */
-.sx-btn--lg { height: 48px; padding: 0 24px; font-size: 16px; }
-.sx-btn--md { height: 40px; padding: 0 16px; font-size: 14px; }
-.sx-btn--sm { height: 32px; padding: 0 12px; font-size: 12px; }
+.sx-btn--lg { height: 48px; padding: 0 var(--sx-space-6); font-size: 16px; }
+.sx-btn--md { height: 40px; padding: 0 var(--sx-space-4); font-size: 14px; }
+.sx-btn--sm { height: 32px; padding: 0 var(--sx-space-3); font-size: 12px; }
 
 /* variants */
 .sx-btn--primary {
-  background: var(--sx-vibrant-green);
-  color: var(--sx-deep-ivy);
+  background: var(--sx-primary);
+  color: var(--sx-text-primary);
 }
-.sx-btn--primary:hover { background: #02B870; }
-.sx-btn--primary:active { background: var(--sx-secure-teal); color: #fff; }
+.sx-btn--primary:hover { background: var(--sx-btn-primary-hovered); }
+.sx-btn--primary:active { background: var(--sx-btn-primary-pressed); color: var(--sx-text-inverse); }
 
 .sx-btn--secondary {
   background: transparent;
-  color: var(--sx-deep-ivy);
-  border: 1.5px solid var(--sx-deep-ivy);
+  color: var(--sx-btn-secondary-text);
+  border: 1.5px solid var(--sx-interactive-active);
 }
-.sx-btn--secondary:hover { background: rgba(0, 43, 42, 0.06); }
-.sx-btn--secondary:active { background: rgba(0, 43, 42, 0.12); }
+.sx-btn--secondary:hover { background: var(--sx-btn-secondary-hovered); }
+.sx-btn--secondary:active { background: var(--sx-btn-secondary-pressed); }
 
 .sx-btn--tertiary {
   background: transparent;
-  color: var(--sx-deep-ivy);
-  padding: 0 8px;
+  color: var(--sx-btn-secondary-text);
+  padding: 0 var(--sx-space-2);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-.sx-btn--tertiary:hover { color: var(--sx-secure-teal); }
+.sx-btn--tertiary:hover { background: var(--sx-btn-tertiary-hovered); color: var(--sx-interactive-active); }
+.sx-btn--tertiary:active { background: var(--sx-btn-tertiary-pressed); }
 
 .sx-btn[disabled],
 .sx-btn[aria-disabled="true"] {
-  background: var(--sx-light-grey);
-  color: var(--sx-fg-4);
+  background: var(--sx-surface-disabled);
+  color: var(--sx-disabled-on-surface);
   border-color: transparent;
   cursor: not-allowed;
   text-decoration: none;

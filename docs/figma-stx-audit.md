@@ -36,6 +36,35 @@ Foundations / Components pages.
 
 ---
 
+## 0b. UPDATE 2026-05-31 — foundation CONFIRMED (page `4742:28` "↳ New Component")
+
+The Figma foundation token frames (`STX — Semantic Colors`, `STX — Typography`, `STX — Spacing &
+Radius`, `STX — Brand Colors`) were read directly, resolving the ⚠️ items above. Implemented in
+`src/styles/tokens.css` (two-tier model + legacy aliases). Confirmed facts:
+
+- **Fonts: NO migration needed.** Canonical type frame uses **Red Hat Display (Bold)** for
+  Display/Title/Label and **Hanken Grotesk** for Headline/Body/Body-Bold — exactly the repo's stack.
+  ("Fazz Neue" was a one-off in a single Header component, not the system.)
+- **Value bugs found & fixed in the new token layer:**
+  - `--sx-xsgd` / `--sx-xidr` were **swapped** — XSGD is `#0e3fc7`, XIDR is `#df1312`.
+  - `Background/Background` = `#f6f7f9` (git treated bg as `#FFFFFF`); `Surface/Surface` = `#ffffff`
+    — git had no background/surface split.
+  - `Base Color/Border` = `#d8d8d8` (git `--sx-line` was `#E0E0E0`).
+- **Full semantic set now implemented:** `Base Color/*` (Primary, Interactive-Active, Text-Primary/
+  -Secondary/-Inverse, Border, Link, Overlay, On-Container), `Background/*`, `Surface/*` (Surface,
+  -Secondary, -Disabled, Disabled-On-Surface, -Hovered, -Pressed), `Status/*` (Positive/Critical/
+  Warning/Information + Surface- variants), `Component/Button/*` (primary/secondary/tertiary
+  hover+press, secondary-text).
+- **Typography**: Display/Title/**Title-Mobile**/Headline/Label/Body/**Body-Bold** ramps (the last
+  two are new vs git; git's `label-*-hk` maps to `Body-Bold/*`).
+- **Spacing** = 4·8·12·16·**20**·24·40 (git had 32/64 instead of 20). **Radius** = 4·8·12·full
+  (git's `lg`/16 dropped). **Shadow** lv-1..3 confirmed (git values already matched).
+
+Remaining ⚠️ for later: full per-component specs across the other pages (in progress, component by
+component via `get_design_context`).
+
+---
+
 ## 1. Token & semantic naming — git does NOT follow Figma
 
 This is the core finding. Figma's `STX - New Token` collection uses a **two-tier, role-based**
