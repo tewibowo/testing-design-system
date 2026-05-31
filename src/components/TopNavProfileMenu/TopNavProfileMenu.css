@@ -1,0 +1,56 @@
+/* TopNavProfileMenu — Figma "Top Navigation / Dropdown" profile menu.
+ * 240px, Shadow/lv-2, surface, header + icon/label rows + dividers.
+ * Mirrors the Menu/CompanyProfileMenu visual pattern. Semantic tokens only. */
+.sx-topnav-menu {
+  width: 240px;
+  padding: var(--sx-space-2) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: var(--sx-surface);
+  border-radius: var(--sx-radius-lg);
+  box-shadow: var(--sx-shadow-2);
+  overflow: clip;
+}
+
+.sx-topnav-menu__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sx-space-1);
+  padding: var(--sx-space-2) var(--sx-space-4);
+  min-width: 0;
+}
+.sx-topnav-menu__name { font: var(--sx-label-medium); color: var(--sx-text-primary); }
+.sx-topnav-menu__sub { font: var(--sx-body-medium); color: var(--sx-text-secondary); }
+
+.sx-topnav-menu__divider {
+  height: 1px;
+  margin: var(--sx-space-1) 0;
+  background: var(--sx-border);
+}
+
+.sx-topnav-menu__row {
+  display: flex;
+  align-items: center;
+  gap: var(--sx-space-3);
+  padding: var(--sx-space-3) var(--sx-space-4);
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  color: var(--sx-text-secondary);
+  transition: background var(--sx-dur-1) var(--sx-ease);
+}
+.sx-topnav-menu__row:hover { background: var(--sx-surface-secondary); }
+.sx-topnav-menu__row .material-symbols-rounded { font-size: 22px; color: var(--sx-text-secondary); flex: 0 0 auto; }
+.sx-topnav-menu__label { font: var(--sx-body-large); color: var(--sx-text-secondary); }
+
+/* Static (non-interactive) info row, e.g. timezone */
+.sx-topnav-menu__row--static { cursor: default; }
+.sx-topnav-menu__row--static:hover { background: transparent; }
+
+/* Destructive row (Log out) */
+.sx-topnav-menu__row--critical .material-symbols-rounded,
+.sx-topnav-menu__row--critical .sx-topnav-menu__label {
+  color: var(--sx-status-critical);
+}

@@ -18,6 +18,7 @@ export const WithSubtext = {
   },
 };
 export const Disabled = { args: { disabled: true } };
+export const SelectedDisabled = { args: { defaultChecked: true, disabled: true } };
 
 export const SettingsList = {
   render: () => {

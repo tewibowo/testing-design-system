@@ -66,3 +66,25 @@ export const Mobile = {
     onProfileClick: () => {},
   },
 };
+
+export const MobilePersonal = {
+  args: {
+    account: "personal",
+    platform: "mobile",
+    notifications: 3,
+    user: { name: "John Doe", initials: "JD" },
+    onMenuClick: () => {},
+    onProfileClick: () => {},
+  },
+};
+
+export const MobileSandbox = {
+  args: {
+    account: "sandbox",
+    platform: "mobile",
+    notifications: 0,
+    user: { name: "John Doe", company: "ABC Pte. Ltd.", initials: "AB" },
+    onMenuClick: () => {},
+    onProfileClick: () => {},
+  },
+};

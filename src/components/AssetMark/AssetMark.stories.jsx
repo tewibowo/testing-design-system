@@ -25,6 +25,34 @@ export const Networks = {
   ),
 };
 
+export const MoreCoinsAndWallets = {
+  render: () => (
+    <div style={row}>
+      {["BNB", "XRP", "HBAR", "AVAX", "MATIC", "METAMASK", "WALLETCONNECT"].map((a) => (
+        <AssetMark key={a} asset={a} />
+      ))}
+    </div>
+  ),
+};
+
+export const WhiteTone = {
+  render: () => (
+    <div
+      style={{
+        ...row,
+        background: "var(--sx-text-primary)",
+        color: "var(--sx-text-inverse)",
+        padding: 16,
+        borderRadius: 12,
+      }}
+    >
+      {["XSGD", "ETH", "BNB", "AVAX", "METAMASK"].map((a) => (
+        <AssetMark key={a} asset={a} tone="white" />
+      ))}
+    </div>
+  ),
+};
+
 export const Sizes = {
   render: () => (
     <div style={row}>

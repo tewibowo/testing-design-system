@@ -55,11 +55,29 @@ export const Error = {
   },
 };
 
+export const NoActionError = {
+  args: {
+    label: "Transaction reference",
+    action: false,
+    value: "TXN-2026-0042-XSGD",
+    error: "This reference could not be verified.",
+  },
+};
+
 export const IconButton = {
   args: {
     label: "API key",
     buttonVariant: "icon",
     value: "sx_live_5f4d7a2e9b3c1f8d0a6e2b5c8d4e7f1a",
+  },
+};
+
+export const IconButtonError = {
+  args: {
+    label: "Wallet address",
+    buttonVariant: "icon",
+    value: "0xA1B2C3D4E5F60718293AeCb98765FaB1234567890",
+    error: "This address failed checksum validation.",
   },
 };
 

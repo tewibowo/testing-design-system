@@ -30,6 +30,36 @@ export const AllSizes = {
   ),
 };
 
+export const Disabled = { args: { variant: "filled", disabled: true, icon: "notifications", label: "Notifications" } };
+
+/* Interaction states forced via state-class hooks so Chromatic can snapshot
+ * hover / pressed without driving real pointer events. */
+export const States = {
+  parameters: { layout: "padded" },
+  render: () => {
+    const variants = ["filled", "outline", "ghost"];
+    const colHead = { font: "var(--sx-label-small)", color: "var(--sx-text-secondary)" };
+    return (
+      <div style={{ display: "grid", gridTemplateColumns: "auto repeat(4, max-content)", gap: 16, alignItems: "center" }}>
+        <span />
+        <span style={colHead}>Enabled</span>
+        <span style={colHead}>Hovered</span>
+        <span style={colHead}>Pressed</span>
+        <span style={colHead}>Disabled</span>
+        {variants.map((v) => (
+          <React.Fragment key={v}>
+            <span style={{ ...colHead, textTransform: "capitalize" }}>{v}</span>
+            <IconButton icon="notifications" variant={v} label={`${v} enabled`} />
+            <IconButton icon="notifications" variant={v} className="is-hovered" label={`${v} hovered`} />
+            <IconButton icon="notifications" variant={v} className="is-pressed" label={`${v} pressed`} />
+            <IconButton icon="notifications" variant={v} disabled label={`${v} disabled`} />
+          </React.Fragment>
+        ))}
+      </div>
+    );
+  },
+};
+
 export const Showcase = {
   parameters: { layout: "padded" },
   render: () => (

@@ -84,6 +84,20 @@ export const MultiSelect = {
   },
 };
 
+export const WithDisabledItem = {
+  parameters: { layout: "padded" },
+  render: () => (
+    <div style={{ minHeight: 220 }}>
+      <Menu defaultOpen trigger={({ onClick }) => <IconButton icon="more_vert" variant="outline" onClick={onClick} label="More" />}>
+        <Menu.Item icon="download" onSelect={() => {}}>Download statement</Menu.Item>
+        <Menu.Item icon="share" disabled onSelect={() => {}}>Share (disabled)</Menu.Item>
+        <Menu.Divider />
+        <Menu.Item icon="delete" tone="critical" disabled onSelect={() => {}}>Delete (disabled)</Menu.Item>
+      </Menu>
+    </div>
+  ),
+};
+
 export const WithSecondaryText = {
   render: () => (
     <Menu trigger={({ onClick }) => <IconButton icon="more_vert" variant="outline" onClick={onClick} label="More" />}>

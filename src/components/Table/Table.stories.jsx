@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Table } from "./Table.jsx";
 import { Tag } from "../Tag/Tag.jsx";
 import { Pagination } from "../Pagination/Pagination.jsx";
+import { Button } from "../Button/Button.jsx";
+import { IconButton } from "../IconButton/IconButton.jsx";
 
 export default {
   title: "Components/Table",
@@ -30,6 +32,59 @@ const columns = [
 export const Default = { args: { columns, rows } };
 export const Zebra = { args: { columns, rows, zebra: true } };
 export const Empty = { args: { columns, rows: [] } };
+
+/* ── Cell variants: 2-line, inline button, copy-link, leading/trailing icon ── */
+export const CellVariants = {
+  render: () => {
+    const cellRows = [
+      { id: 1, name: "John Doe", email: "john@acme.co", ref: "TX-1029384", network: "Ethereum", chain: "Mainnet" },
+      { id: 2, name: "Acme Pte. Ltd.", email: "ops@acme.co", ref: "TX-1029301", network: "Polygon", chain: "PoS" },
+      { id: 3, name: "Mei Lin", email: "mei@example.sg", ref: "TX-1029220", network: "Solana", chain: "Mainnet" },
+    ];
+    const cellColumns = [
+      {
+        key: "recipient",
+        header: "Recipient",
+        render: (r) => (
+          <span style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+            <span style={{ font: "var(--sx-body-bold-medium)", color: "var(--sx-text-primary)" }}>{r.name}</span>
+            <span style={{ font: "var(--sx-body-small)", color: "var(--sx-text-secondary)" }}>{r.email}</span>
+          </span>
+        ),
+      },
+      {
+        key: "reference",
+        header: "Reference",
+        render: (r) => (
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+            <code style={{ fontFamily: "var(--sx-font-mono)" }}>{r.ref}</code>
+            <IconButton icon="content_copy" variant="ghost" size="sm" label="Copy reference" />
+          </span>
+        ),
+      },
+      {
+        key: "network",
+        header: "Network",
+        render: (r) => (
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+            <span className="material-symbols-rounded" style={{ color: "var(--sx-text-secondary)", fontSize: 18 }}>hub</span>
+            <span>{r.network}</span>
+            <span className="material-symbols-rounded" style={{ color: "var(--sx-text-secondary)", fontSize: 18 }}>chevron_right</span>
+          </span>
+        ),
+      },
+      {
+        key: "action",
+        header: "Action",
+        align: "right",
+        render: () => (
+          <Button variant="secondary" size="sm">View</Button>
+        ),
+      },
+    ];
+    return <Table columns={cellColumns} rows={cellRows} />;
+  },
+};
 
 export const WithPagination = {
   render: () => {

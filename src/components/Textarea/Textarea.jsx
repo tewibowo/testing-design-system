@@ -18,6 +18,7 @@ export function Textarea({
   onChange,
   className = "",
   rows = 4,
+  state, // "hovered" | "focused" — visual-state hook for stories/Chromatic
   ...rest
 }) {
   const id = useId();
@@ -30,6 +31,8 @@ export function Textarea({
   };
   const wrapCls = [
     "sx-textarea-wrap",
+    state === "hovered" && "is-hovered",
+    state === "focused" && "is-focused",
     isError && "is-error",
     disabled && "is-disabled",
   ].filter(Boolean).join(" ");

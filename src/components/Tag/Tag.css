@@ -16,6 +16,14 @@
 }
 .sx-tag__label { display: inline-flex; align-items: center; gap: var(--sx-space-1); }
 
+/* ── Leading icon ── */
+.sx-tag__icon { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+.sx-tag__icon .material-symbols-rounded,
+.sx-tag__icon.material-symbols-rounded { font-size: 16px; line-height: 1; }
+.sx-tag--small .sx-tag__icon .material-symbols-rounded,
+.sx-tag--small .sx-tag__icon.material-symbols-rounded { font-size: 14px; }
+.sx-tag__icon svg { width: 1em; height: 1em; display: block; }
+
 .sx-tag--pill { border-radius: var(--sx-radius-full); }
 
 /* ── Size ── */

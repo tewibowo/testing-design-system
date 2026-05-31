@@ -1,7 +1,7 @@
 .sx-bsheet-scrim {
   position: fixed;
   inset: 0;
-  background: rgba(0, 43, 42, 0.4);
+  background: var(--sx-overlay);
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -50,3 +50,11 @@
 }
 .sx-bsheet__close:hover { background: var(--sx-surface-secondary); color: var(--sx-text-primary); }
 .sx-bsheet__body { padding: 16px 20px 24px; overflow-y: auto; font: var(--sx-body-medium); color: var(--sx-text-secondary); }
+.sx-bsheet__foot {
+  flex: 0 0 auto;
+  display: flex;
+  gap: var(--sx-space-3);
+  padding: var(--sx-space-4) var(--sx-space-5);
+  border-top: 1px solid var(--sx-border);
+}
+.sx-bsheet__foot > * { flex: 1; }

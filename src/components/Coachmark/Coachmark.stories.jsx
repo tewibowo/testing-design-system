@@ -30,6 +30,38 @@ export const Default = {
   },
 };
 
+function PlacementDemo({ placement }) {
+  const ref = useRef(null);
+  const [open, setOpen] = useState(true);
+  return (
+    <div
+      style={{
+        height: 480,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Button ref={ref} onClick={() => setOpen(true)}>Target</Button>
+      <Coachmark
+        target={ref}
+        open={open}
+        onDismiss={() => setOpen(false)}
+        placement={placement}
+        title={`Beak ${placement}`}
+        body={`This coachmark is placed to the ${placement} of its target, with a beak pointing back at it.`}
+        step={1}
+        totalSteps={3}
+        onNext={() => setOpen(false)}
+      />
+    </div>
+  );
+}
+
+export const Top = { render: () => <PlacementDemo placement="top" /> };
+export const Left = { render: () => <PlacementDemo placement="left" /> };
+export const Right = { render: () => <PlacementDemo placement="right" /> };
+
 export const WithDotsAndClose = {
   render: () => {
     const ref = useRef(null);

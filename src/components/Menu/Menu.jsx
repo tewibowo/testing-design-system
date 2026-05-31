@@ -11,8 +11,8 @@ import "./Menu.css";
  *     <Menu.Item icon="delete" tone="critical">Delete</Menu.Item>
  *   </Menu>
  */
-export function Menu({ trigger, align = "left", placement = "bottom", children, className = "" }) {
-  const [open, setOpen] = useState(false);
+export function Menu({ trigger, align = "left", placement = "bottom", defaultOpen = false, children, className = "" }) {
+  const [open, setOpen] = useState(defaultOpen);
   const ref = useRef(null);
 
   useEffect(() => {

@@ -20,3 +20,39 @@ export const Default = {
 export const TwoLevels = {
   args: { items: [{ label: "Settings", href: "#" }, { label: "Security" }] },
 };
+
+export const FourItems = {
+  args: {
+    items: [
+      { label: "Home", href: "#" },
+      { label: "Wallet", href: "#" },
+      { label: "Transactions", href: "#" },
+      { label: "Tx 0x9a1b…" },
+    ],
+  },
+};
+
+export const FiveItems = {
+  args: {
+    items: [
+      { label: "Home", href: "#" },
+      { label: "Wallet", href: "#" },
+      { label: "Transactions", href: "#" },
+      { label: "Deposits", href: "#" },
+      { label: "Tx 0x9a1b…" },
+    ],
+  },
+};
+
+export const SixItems = {
+  args: {
+    items: [
+      { label: "Home", href: "#" },
+      { label: "Wallet", href: "#" },
+      { label: "Transactions", href: "#" },
+      { label: "Deposits", href: "#" },
+      { label: "2026", href: "#" },
+      { label: "Tx 0x9a1b…" },
+    ],
+  },
+};

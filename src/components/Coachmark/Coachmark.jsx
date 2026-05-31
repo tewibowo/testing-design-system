@@ -87,7 +87,14 @@ export function Coachmark({
     <>
       <div className="sx-coachmark-scrim" onClick={onDismiss} />
       <div className="sx-coachmark-spot" style={spotStyle} aria-hidden="true" />
-      <div className={"sx-coachmark " + className} style={pop} role="dialog" aria-live="polite">
+      <div
+        className={"sx-coachmark " + className}
+        style={pop}
+        data-placement={placement}
+        role="dialog"
+        aria-live="polite"
+      >
+        <span className="sx-coachmark__beak" data-placement={placement} aria-hidden="true" />
         {(title || onDismiss) && (
           <div className="sx-coachmark__head">
             {title && <div className="sx-coachmark__title">{title}</div>}

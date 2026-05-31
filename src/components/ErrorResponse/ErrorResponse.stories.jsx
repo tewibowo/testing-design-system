@@ -17,6 +17,42 @@ export const NotFound = {
   },
 };
 
+export const Error400 = {
+  args: {
+    code: "400",
+    title: "Bad request",
+    body: "The request couldn't be processed. Please check your details and try again.",
+    actions: <Button>Try again</Button>,
+  },
+};
+
+export const Error401 = {
+  args: {
+    code: "401",
+    title: "Session expired",
+    body: "You've been signed out. Please log in again to continue.",
+    actions: <Button>Log in</Button>,
+  },
+};
+
+export const Error403 = {
+  args: {
+    code: "403",
+    title: "Access denied",
+    body: "You don't have permission to view this page. Contact your administrator if you think this is a mistake.",
+    actions: <Button variant="secondary">Go back</Button>,
+  },
+};
+
+export const Error408 = {
+  args: {
+    code: "408",
+    title: "Request timed out",
+    body: "The request took too long to complete. Please check your connection and try again.",
+    actions: <Button>Retry</Button>,
+  },
+};
+
 export const ServerError = {
   args: {
     code: "500",

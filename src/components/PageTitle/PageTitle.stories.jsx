@@ -33,3 +33,17 @@ export const WithBreadcrumb = {
     breadcrumb: <Breadcrumb items={[{ label: "Home", href: "#" }, { label: "Transaction History", href: "#" }, { label: "Tx 0x9a1b…" }]} />,
   },
 };
+
+export const Mobile = {
+  decorators: [(S) => <div style={{ width: 375 }}><S /></div>],
+  args: {
+    title: "Transaction History",
+    subtitle: "All transactions across XSGD, XIDR, and XUSD.",
+    actions: (
+      <>
+        <Button variant="secondary" size="md">Export CSV</Button>
+        <Button variant="primary" size="md">New transfer</Button>
+      </>
+    ),
+  },
+};

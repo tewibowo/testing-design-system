@@ -82,6 +82,21 @@ export const Sizes = {
   ),
 };
 
+export const States = {
+  render: () => (
+    <div style={{ display: "grid", gap: 16, maxWidth: 360 }}>
+      <Input label="Enabled" placeholder="hello@straitsx.com" />
+      <Input label="Hovered" className="is-hovered" placeholder="hello@straitsx.com" />
+      <Input label="Focused" className="is-focused" placeholder="hello@straitsx.com" />
+      <Input label="Error" defaultValue="0xa1B…f2" error="Address checksum doesn't match." />
+      <Input label="Disabled" defaultValue="0123 4567 8901" disabled />
+      <Input label="Small" size="small" placeholder="Compact 40px field" />
+      <Input label="With prefix" prefix="S$" defaultValue="250,000.00" />
+      <Input label="With suffix" suffix="SGD" defaultValue="1,250.00" />
+    </div>
+  ),
+};
+
 export const Composition = {
   render: () => (
     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, maxWidth: 560 }}>

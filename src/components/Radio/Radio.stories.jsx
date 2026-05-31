@@ -10,6 +10,7 @@ export default {
 export const Default = { args: { label: "XSGD", name: "stablecoin" } };
 export const Selected = { args: { label: "XSGD", defaultChecked: true, name: "stablecoin" } };
 export const Disabled = { args: { label: "XUSD", disabled: true, name: "stablecoin" } };
+export const SelectedDisabled = { args: { label: "XSGD", defaultChecked: true, disabled: true, name: "stablecoin" } };
 
 export const Group = {
   render: () => {

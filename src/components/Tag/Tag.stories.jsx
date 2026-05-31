@@ -10,6 +10,7 @@ export default {
     shape: { control: "inline-radio", options: ["default", "pill"] },
     size: { control: "inline-radio", options: ["large", "small"] },
     appearance: { control: "inline-radio", options: ["outlined", "filled"] },
+    icon: { control: "text" },
     removable: { control: "boolean" },
     clickable: { control: "boolean" },
     selected: { control: "boolean" },
@@ -77,6 +78,19 @@ export const Filled = {
       <Tag appearance="filled" tone="info">Information</Tag>
       <Tag appearance="filled" tone="neutral">Draft</Tag>
       <Tag appearance="filled" tone="brand">New</Tag>
+    </div>
+  ),
+};
+
+export const WithIcon = {
+  parameters: { layout: "padded" },
+  render: () => (
+    <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+      <Tag tone="positive" icon="check_circle">Verified</Tag>
+      <Tag tone="critical" icon="error">Failed</Tag>
+      <Tag tone="warning" icon="schedule">Pending</Tag>
+      <Tag tone="info" appearance="filled" icon="info">Information</Tag>
+      <Tag tone="brand" shape="pill" size="small" icon="star">New</Tag>
     </div>
   ),
 };

@@ -10,6 +10,8 @@ import "./Tag.css";
  * appearance: "outlined" (default) | "filled"        — Figma Filled/Outlined
  *               outlined = surface bg + colored border/text (current look)
  *               filled   = solid status bg + on-container text
+ * icon:       ReactNode | material-symbol name — leading icon before the label
+ *                (Figma "Small Tag - Small/XS Icon")
  * removable:  bool + onRemove → trailing close (×) affordance (Figma "Removable Tag")
  * clickable:  bool + onClick + selected → Figma "Clickable Tag"
  *               (selected = filled highlight)
@@ -22,6 +24,7 @@ export function Tag({
   shape = "default",
   size = "large",
   appearance = "outlined",
+  icon,
   removable = false,
   onRemove,
   clickable = false,
@@ -55,6 +58,15 @@ export function Tag({
     onRemove && onRemove(e);
   };
 
+  // Leading icon: a string is treated as a Material Symbol name, any other
+  // ReactNode is rendered as-is.
+  const leadingIcon =
+    icon == null ? null : typeof icon === "string" ? (
+      <span className="material-symbols-rounded sx-tag__icon" aria-hidden="true">{icon}</span>
+    ) : (
+      <span className="sx-tag__icon" aria-hidden="true">{icon}</span>
+    );
+
   const closeBtn = removable ? (
     <button
       type="button"
@@ -81,6 +93,7 @@ export function Tag({
         onClick={disabled ? undefined : onClick}
         {...rest}
       >
+        {leadingIcon}
         <span className="sx-tag__label">{children}</span>
         {closeBtn}
       </button>
@@ -89,6 +102,7 @@ export function Tag({
 
   return (
     <span className={cls} {...rest}>
+      {leadingIcon}
       <span className="sx-tag__label">{children}</span>
       {closeBtn}
     </span>

@@ -5,13 +5,17 @@ import "./BottomSheet.css";
 /**
  * Bottom sheet (mobile-first action sheet).
  *
- *   <BottomSheet open={open} onClose={…} title="Send to">…</BottomSheet>
+ *   <BottomSheet open={open} onClose={…} title="Send to" footer={<Button…/>}>…</BottomSheet>
+ *
+ * `footer` renders as a pinned footer region below the scrollable content slot
+ * (e.g. a button group). Children remain the content slot.
  */
 export function BottomSheet({
   open,
   onClose,
   title,
   children,
+  footer,
   dismissable = true,
   hideClose = false,
   className = "",
@@ -44,6 +48,7 @@ export function BottomSheet({
           </div>
         )}
         <div className="sx-bsheet__body">{children}</div>
+        {footer && <div className="sx-bsheet__foot">{footer}</div>}
       </div>
     </div>,
     document.body

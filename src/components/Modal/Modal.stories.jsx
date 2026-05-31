@@ -34,6 +34,57 @@ function Demo({ size = "md", title = "Confirm transfer" }) {
 export const Default = { render: () => <Demo /> };
 export const Small = { render: () => <Demo size="sm" title="Discard draft?" /> };
 export const Large = { render: () => <Demo size="lg" title="Customer Knowledge Assessment" /> };
+export const Small400 = { render: () => <Demo size={400} title="Discard draft?" /> };
+export const Medium600 = { render: () => <Demo size={600} title="Customer Knowledge Assessment" /> };
+
+export const HideClose = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Open modal (no close)</Button>
+        <Modal
+          open={open}
+          size="md"
+          hideClose
+          onClose={() => setOpen(false)}
+          title="Confirm transfer"
+          footer={
+            <>
+              <Button variant="secondary" size="md" onClick={() => setOpen(false)}>Cancel</Button>
+              <Button variant="primary" size="md" onClick={() => setOpen(false)}>Confirm</Button>
+            </>
+          }
+        >
+          This modal hides the header close button — use the footer actions to dismiss it.
+        </Modal>
+      </>
+    );
+  },
+};
+
+export const NonDismissable = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Open modal (non-dismissable)</Button>
+        <Modal
+          open={open}
+          size="md"
+          dismissable={false}
+          onClose={() => setOpen(false)}
+          title="Action required"
+          footer={
+            <Button variant="primary" size="md" onClick={() => setOpen(false)}>Acknowledge</Button>
+          }
+        >
+          Scrim clicks and the Escape key are disabled — you must use an explicit action to continue.
+        </Modal>
+      </>
+    );
+  },
+};
 
 export const Illustration = {
   render: () => {

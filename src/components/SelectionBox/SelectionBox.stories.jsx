@@ -123,7 +123,9 @@ export const States = {
       <SelectionBox type="radio" label="Selected + disabled" description="Locked choice" selected disabled />
       <SelectionBox type="check" label="Check selected" selected />
       <SelectionBox type="check" label="Check disabled" disabled />
+      <SelectionBox type="check" label="Check selected + disabled" description="Locked multi-select" selected disabled />
       <SelectionBox type="radio" indicator="icon" icon={WalletIcon} label="Icon selected" selected />
+      <SelectionBox type="radio" indicator="icon" icon={WalletIcon} label="Icon disabled" description="Not interactive" disabled />
     </Stack>
   ),
 };

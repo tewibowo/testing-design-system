@@ -28,3 +28,11 @@ export const KycReminder = {
     children: "Until verification is complete, your transaction limits are restricted to S$1,000 per month.",
   },
 };
+
+export const WithoutTitle = {
+  args: {
+    tone: "neutral",
+    title: null,
+    children: "This callout omits the title and renders body content only.",
+  },
+};
