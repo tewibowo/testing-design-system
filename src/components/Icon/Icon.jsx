@@ -10,7 +10,7 @@ import "./Icon.css";
  *
  *   <Icon name="home" />
  *   <Icon name="account_circle" size={32} filled />
- *   <Icon name="arrow_forward" color="var(--sx-vibrant-green)" />
+ *   <Icon name="arrow_forward" color="var(--sx-primary)" />
  */
 export function Icon({
   name,

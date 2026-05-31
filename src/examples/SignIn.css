@@ -5,7 +5,7 @@
   background: #fff;
 }
 .ex-signin__brand {
-  background: var(--sx-deep-ivy);
+  background: var(--sx-text-primary);
   color: #fff;
   padding: 48px 56px;
   display: flex;

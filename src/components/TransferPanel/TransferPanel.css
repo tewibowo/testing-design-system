@@ -1,5 +1,5 @@
 .sx-transfer { padding: 0; overflow: hidden; }
-.sx-tabs { display: flex; border-bottom: 1px solid var(--sx-line); }
+.sx-tabs { display: flex; border-bottom: 1px solid var(--sx-border); }
 .sx-tab {
   flex: 1;
   height: 56px;
@@ -7,11 +7,11 @@
   border: 0;
   cursor: pointer;
   font: 700 16px/1 var(--sx-font-display);
-  color: var(--sx-fg-3);
+  color: var(--sx-text-secondary);
   position: relative;
 }
-.sx-tab:hover { color: var(--sx-fg-1); }
-.sx-tab.is-active { color: var(--sx-deep-ivy); }
+.sx-tab:hover { color: var(--sx-text-primary); }
+.sx-tab.is-active { color: var(--sx-text-primary); }
 .sx-tab.is-active::after {
   content: "";
   position: absolute;
@@ -19,6 +19,6 @@
   right: 0;
   bottom: -1px;
   height: 3px;
-  background: var(--sx-deep-ivy);
+  background: var(--sx-text-primary);
 }
 .sx-transfer__body { padding: 36px 24px 28px; }

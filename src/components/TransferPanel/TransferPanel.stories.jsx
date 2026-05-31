@@ -18,7 +18,7 @@ export const WithCustomBody = {
   render: () => (
     <TransferPanel>
       <div style={{ padding: "8px 0" }}>
-        <p style={{ font: "var(--sx-body-m)", color: "var(--sx-fg-2)" }}>
+        <p style={{ font: "var(--sx-body-medium)", color: "var(--sx-text-secondary)" }}>
           Custom tab body — pass any node as <code>children</code>.
         </p>
       </div>

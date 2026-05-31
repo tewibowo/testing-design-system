@@ -18,7 +18,7 @@ export const SpacingScale = {
           </div>
         ))}
       </div>
-      <p style={{ font: "var(--sx-body-s)", color: "var(--sx-fg-3)", marginTop: 14 }}>
+      <p style={{ font: "var(--sx-body-small)", color: "var(--sx-text-secondary)", marginTop: 14 }}>
         4-px base grid. Inline gaps live in the 4–16 range; section gaps 24–64.
       </p>
     </div>
@@ -37,7 +37,7 @@ export const Radii = {
       ].map((r) => (
         <div key={r.v} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
           <div style={{ width: 96, height: 60, background: r.bg, borderRadius: r.v }} />
-          <div style={{ font: "var(--sx-label-m)" }}>{r.v}</div>
+          <div style={{ font: "var(--sx-label-medium)" }}>{r.v}</div>
           <div className="tk-meta">{r.label}</div>
         </div>
       ))}
@@ -57,7 +57,7 @@ export const Shadows = {
         ].map((s) => (
           <div key={s.name} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
             <div style={{ width: "100%", height: 88, background: "#fff", borderRadius: 8, boxShadow: s.shadow }} />
-            <div style={{ font: "var(--sx-label-m)" }}>{s.name}</div>
+            <div style={{ font: "var(--sx-label-medium)" }}>{s.name}</div>
             <div className="tk-meta">{s.role}</div>
           </div>
         ))}

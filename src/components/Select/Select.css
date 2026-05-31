@@ -5,19 +5,19 @@
   height: 48px;
   padding: 0 14px;
   background: #fff;
-  border: 1px solid var(--sx-line-strong);
-  border-radius: var(--sx-radius-control);
-  font: var(--sx-body-l);
-  color: var(--sx-fg-1);
+  border: 1px solid var(--sx-border);
+  border-radius: var(--sx-radius-lg);
+  font: var(--sx-body-large);
+  color: var(--sx-text-primary);
   transition: border-color var(--sx-dur-1) var(--sx-ease), box-shadow var(--sx-dur-1) var(--sx-ease);
   cursor: pointer;
 }
 .sx-select:focus-within {
-  border-color: var(--sx-secure-teal);
+  border-color: var(--sx-interactive-active);
   box-shadow: 0 0 0 3px rgba(0, 211, 126, 0.16);
 }
-.sx-select.is-error { border-color: var(--sx-critical); }
-.sx-select.is-disabled { background: var(--sx-bg-subtle); color: var(--sx-fg-4); cursor: not-allowed; }
+.sx-select.is-error { border-color: var(--sx-status-critical); }
+.sx-select.is-disabled { background: var(--sx-surface-secondary); color: var(--sx-disabled-on-surface); cursor: not-allowed; }
 .sx-select select {
   flex: 1;
   appearance: none;
@@ -35,6 +35,6 @@
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
-  color: var(--sx-fg-3);
+  color: var(--sx-text-secondary);
   font-size: 22px;
 }

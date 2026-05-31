@@ -1,5 +1,5 @@
-.sx-onboard__heading { color: var(--sx-deep-ivy); margin: 0; }
-.sx-onboard__sub { font: var(--sx-body-l); color: var(--sx-fg-2); margin: 8px 0 24px; }
+.sx-onboard__heading { color: var(--sx-text-primary); margin: 0; }
+.sx-onboard__sub { font: var(--sx-body-large); color: var(--sx-text-secondary); margin: 8px 0 24px; }
 
 .sx-steps { display: flex; align-items: center; gap: 0; padding: 4px 0 28px; }
 .sx-step-dot {
@@ -10,20 +10,20 @@
   align-items: center;
   justify-content: center;
   background: #fff;
-  border: 1.5px solid var(--sx-line-strong);
-  color: var(--sx-fg-1);
+  border: 1.5px solid var(--sx-border);
+  color: var(--sx-text-primary);
   font: 700 14px/1 var(--sx-font-display);
   flex: 0 0 auto;
 }
 .sx-step-dot.is-done {
-  background: var(--sx-secure-teal);
+  background: var(--sx-interactive-active);
   color: #fff;
-  border-color: var(--sx-secure-teal);
+  border-color: var(--sx-interactive-active);
 }
 .sx-step-dot.is-done .material-symbols-rounded { font-size: 18px; }
-.sx-step-dot.is-active { border-color: var(--sx-deep-ivy); border-width: 2px; }
-.sx-step-line { flex: 1; height: 1.5px; background: var(--sx-line-strong); }
-.sx-step-line.is-done { background: var(--sx-secure-teal); }
+.sx-step-dot.is-active { border-color: var(--sx-text-primary); border-width: 2px; }
+.sx-step-line { flex: 1; height: 1.5px; background: var(--sx-border); }
+.sx-step-line.is-done { background: var(--sx-interactive-active); }
 
 .sx-onboard__grid {
   display: grid;
@@ -31,8 +31,8 @@
   gap: 16px;
 }
 .sx-step {
-  border: 1px solid var(--sx-line);
-  border-radius: var(--sx-radius-card);
+  border: 1px solid var(--sx-border);
+  border-radius: var(--sx-radius-md);
   padding: 20px 20px 16px;
   display: flex;
   flex-direction: column;
@@ -43,10 +43,10 @@
 .sx-step__cta { margin-top: auto; }
 .sx-step__title {
   font: 700 18px/1.25 var(--sx-font-display);
-  color: var(--sx-deep-ivy);
+  color: var(--sx-text-primary);
 }
 .sx-step__body {
-  font: var(--sx-body-m);
-  color: var(--sx-fg-2);
+  font: var(--sx-body-medium);
+  color: var(--sx-text-secondary);
   margin-top: 6px;
 }

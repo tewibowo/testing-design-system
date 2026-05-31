@@ -15,7 +15,7 @@ function Demo({ title = "Send to" }) {
       <Button onClick={() => setOpen(true)}>Open bottom sheet</Button>
       <BottomSheet open={open} onClose={() => setOpen(false)} title={title}>
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          <p style={{ font: "var(--sx-body-m)", color: "var(--sx-fg-2)", margin: 0 }}>
+          <p style={{ font: "var(--sx-body-medium)", color: "var(--sx-text-secondary)", margin: 0 }}>
             Choose how you'd like to send funds.
           </p>
           <Button>Bank transfer</Button>

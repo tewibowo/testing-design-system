@@ -51,7 +51,7 @@ export function Radio({
 export function RadioGroup({ name, value, onChange, options = [], legend, className = "" }) {
   return (
     <fieldset style={{ border: 0, padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 }} className={className}>
-      {legend && <legend style={{ font: "var(--sx-label-m)", color: "var(--sx-fg-1)", padding: 0, marginBottom: 4 }}>{legend}</legend>}
+      {legend && <legend style={{ font: "var(--sx-label-medium)", color: "var(--sx-text-primary)", padding: 0, marginBottom: 4 }}>{legend}</legend>}
       {options.map((o) => (
         <Radio
           key={o.value}

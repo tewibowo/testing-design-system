@@ -15,10 +15,10 @@ import "./PersonalAccount.css";
 
 function Row({ title, sub, children }) {
   return (
-    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 16, padding: "16px 0", borderBottom: "1px solid var(--sx-line-soft)" }}>
+    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 16, padding: "16px 0", borderBottom: "1px solid var(--sx-border)" }}>
       <div style={{ maxWidth: 480 }}>
-        <div style={{ font: "700 14px/1.4 var(--sx-font-display)", color: "var(--sx-deep-ivy)" }}>{title}</div>
-        {sub && <div style={{ font: "var(--sx-body-s)", color: "var(--sx-fg-3)", marginTop: 2 }}>{sub}</div>}
+        <div style={{ font: "700 14px/1.4 var(--sx-font-display)", color: "var(--sx-text-primary)" }}>{title}</div>
+        {sub && <div style={{ font: "var(--sx-body-small)", color: "var(--sx-text-secondary)", marginTop: 2 }}>{sub}</div>}
       </div>
       <div style={{ flexShrink: 0 }}>{children}</div>
     </div>
@@ -32,8 +32,8 @@ export function Settings() {
   const tabContent = {
     profile: (
       <Card surface="raised">
-        <h2 style={{ font: "var(--sx-title-s)", color: "var(--sx-deep-ivy)", margin: "0 0 8px" }}>Profile</h2>
-        <p style={{ font: "var(--sx-body-m)", color: "var(--sx-fg-2)", margin: 0 }}>How you appear across StraitsX.</p>
+        <h2 style={{ font: "var(--sx-title-small)", color: "var(--sx-text-primary)", margin: "0 0 8px" }}>Profile</h2>
+        <p style={{ font: "var(--sx-body-medium)", color: "var(--sx-text-secondary)", margin: 0 }}>How you appear across StraitsX.</p>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 20 }}>
           <Input label="Full name" defaultValue="John Doe" />
           <Input label="Display name" defaultValue="John" />
@@ -48,7 +48,7 @@ export function Settings() {
     ),
     security: (
       <Card surface="raised">
-        <h2 style={{ font: "var(--sx-title-s)", color: "var(--sx-deep-ivy)", margin: "0 0 8px" }}>Security</h2>
+        <h2 style={{ font: "var(--sx-title-small)", color: "var(--sx-text-primary)", margin: "0 0 8px" }}>Security</h2>
         <Alert tone="warning" title="Two-factor authentication is recommended">
           Add an extra layer of protection to your account.
         </Alert>
@@ -75,7 +75,7 @@ export function Settings() {
           footer={
             <>
               <Button variant="secondary" size="md" onClick={() => setShowDelete(false)}>Cancel</Button>
-              <Button variant="primary" size="md" onClick={() => setShowDelete(false)} style={{ background: "var(--sx-critical)", color: "#fff" }}>I understand, delete</Button>
+              <Button variant="primary" size="md" onClick={() => setShowDelete(false)} style={{ background: "var(--sx-status-critical)", color: "#fff" }}>I understand, delete</Button>
             </>
           }
         >
@@ -85,7 +85,7 @@ export function Settings() {
     ),
     notifications: (
       <Card surface="raised">
-        <h2 style={{ font: "var(--sx-title-s)", color: "var(--sx-deep-ivy)", margin: "0 0 8px" }}>Notifications</h2>
+        <h2 style={{ font: "var(--sx-title-small)", color: "var(--sx-text-primary)", margin: "0 0 8px" }}>Notifications</h2>
         <Row title="Transaction confirmations" sub="Inbound and outbound transfers."><Switch defaultChecked /></Row>
         <Row title="Pending approvals" sub="Transfers awaiting your review."><Switch defaultChecked /></Row>
         <Row title="Product updates" sub="New features and announcements."><Switch /></Row>
@@ -94,8 +94,8 @@ export function Settings() {
     ),
     developers: (
       <Card surface="raised">
-        <h2 style={{ font: "var(--sx-title-s)", color: "var(--sx-deep-ivy)", margin: "0 0 8px" }}>Developers</h2>
-        <p style={{ font: "var(--sx-body-m)", color: "var(--sx-fg-2)", margin: "0 0 16px" }}>API access for programmatic transfers and reporting.</p>
+        <h2 style={{ font: "var(--sx-title-small)", color: "var(--sx-text-primary)", margin: "0 0 8px" }}>Developers</h2>
+        <p style={{ font: "var(--sx-body-medium)", color: "var(--sx-text-secondary)", margin: "0 0 16px" }}>API access for programmatic transfers and reporting.</p>
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           <Copybox label="Publishable key" value="sx_pub_a92f7e8c4d3b1f6a0e2d9c4b7f5a3e1d" />
           <Copybox label="Secret key (rotated 2 days ago)" value="sx_live_5f4d7a2e9b3c1f8d0a6e2b5c8d4e7f1a" />

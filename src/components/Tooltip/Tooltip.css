@@ -5,9 +5,9 @@
 .sx-tooltip__bubble {
   position: absolute;
   z-index: 50;
-  background: var(--sx-deep-ivy);
+  background: var(--sx-text-primary);
   color: #fff;
-  font: var(--sx-body-s);
+  font: var(--sx-body-small);
   padding: 8px 10px;
   border-radius: var(--sx-radius-sm);
   max-width: 240px;
@@ -22,7 +22,7 @@
   position: absolute;
   width: 8px;
   height: 8px;
-  background: var(--sx-deep-ivy);
+  background: var(--sx-text-primary);
   transform: rotate(45deg);
 }
 .sx-tooltip[data-open="true"] .sx-tooltip__bubble {
