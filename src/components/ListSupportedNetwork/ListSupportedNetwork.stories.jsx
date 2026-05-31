@@ -10,7 +10,7 @@ export default {
 const dot = (c) => (
   <span style={{
     display: "block", width: 20, height: 20, borderRadius: "50%",
-    background: c, border: "1.5px solid var(--sx-surface)",
+    background: c, border: "1.5px solid var(--surface)",
   }} />
 );
 const marks = [dot("#627EEA"), dot("#8247E5"), dot("#2775CA"), dot("#26A17B")];

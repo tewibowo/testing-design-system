@@ -22,7 +22,7 @@ const tone = { Completed: "positive", Pending: "warning", Failed: "critical" };
 
 const columns = [
   { key: "date", header: "Date" },
-  { key: "ref", header: "Reference", render: (r) => <code style={{ fontFamily: "var(--sx-font-mono)" }}>{r.ref}</code> },
+  { key: "ref", header: "Reference", render: (r) => <code style={{ fontFamily: "var(--font-mono)" }}>{r.ref}</code> },
   { key: "to", header: "To / From" },
   { key: "asset", header: "Asset" },
   { key: "amount", header: "Amount", numeric: true, render: (r) => r.amount.toLocaleString(undefined, { minimumFractionDigits: 2 }) },
@@ -47,8 +47,8 @@ export const CellVariants = {
         header: "Recipient",
         render: (r) => (
           <span style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-            <span style={{ font: "var(--sx-body-bold-medium)", color: "var(--sx-text-primary)" }}>{r.name}</span>
-            <span style={{ font: "var(--sx-body-small)", color: "var(--sx-text-secondary)" }}>{r.email}</span>
+            <span style={{ font: "var(--body-bold-medium)", color: "var(--text-primary)" }}>{r.name}</span>
+            <span style={{ font: "var(--body-small)", color: "var(--text-secondary)" }}>{r.email}</span>
           </span>
         ),
       },
@@ -57,7 +57,7 @@ export const CellVariants = {
         header: "Reference",
         render: (r) => (
           <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-            <code style={{ fontFamily: "var(--sx-font-mono)" }}>{r.ref}</code>
+            <code style={{ fontFamily: "var(--font-mono)" }}>{r.ref}</code>
             <IconButton icon="content_copy" variant="ghost" size="sm" label="Copy reference" />
           </span>
         ),
@@ -67,9 +67,9 @@ export const CellVariants = {
         header: "Network",
         render: (r) => (
           <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
-            <span className="material-symbols-rounded" style={{ color: "var(--sx-text-secondary)", fontSize: 18 }}>hub</span>
+            <span className="material-symbols-rounded" style={{ color: "var(--text-secondary)", fontSize: 18 }}>hub</span>
             <span>{r.network}</span>
-            <span className="material-symbols-rounded" style={{ color: "var(--sx-text-secondary)", fontSize: 18 }}>chevron_right</span>
+            <span className="material-symbols-rounded" style={{ color: "var(--text-secondary)", fontSize: 18 }}>chevron_right</span>
           </span>
         ),
       },

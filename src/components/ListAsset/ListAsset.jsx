@@ -34,9 +34,9 @@ export function ListAsset({
 }) {
   const isMobile = platform === "mobile";
   const cls = [
-    "sx-list-asset",
-    `sx-list-asset--${platform}`,
-    `sx-list-asset--${variant}`,
+    "list-asset",
+    `list-asset--${platform}`,
+    `list-asset--${variant}`,
     className,
   ]
     .filter(Boolean)
@@ -48,24 +48,24 @@ export function ListAsset({
 
   return (
     <div className={cls} {...rest}>
-      <div className="sx-list-asset__lead">
-        {icon != null && <span className="sx-list-asset__icon">{icon}</span>}
-        <div className="sx-list-asset__currency">
-          <span className="sx-list-asset__symbol">{symbol}</span>
-          {subtitle && <span className="sx-list-asset__subtitle">{subtitle}</span>}
+      <div className="list-asset__lead">
+        {icon != null && <span className="list-asset__icon">{icon}</span>}
+        <div className="list-asset__currency">
+          <span className="list-asset__symbol">{symbol}</span>
+          {subtitle && <span className="list-asset__subtitle">{subtitle}</span>}
         </div>
       </div>
 
-      <div className="sx-list-asset__balance">
-        <span className="sx-list-asset__balance-value numeric">{balance}</span>
+      <div className="list-asset__balance">
+        <span className="list-asset__balance-value numeric">{balance}</span>
         {balanceSub && (
-          <span className="sx-list-asset__balance-sub">{balanceSub}</span>
+          <span className="list-asset__balance-sub">{balanceSub}</span>
         )}
       </div>
 
       {hasNetworks && (
         <ListSupportedNetwork
-          className="sx-list-asset__networks"
+          className="list-asset__networks"
           networks={networks || []}
           overflow={networkOverflow}
           isNew={networkIsNew}
@@ -73,14 +73,14 @@ export function ListAsset({
       )}
 
       {showAction && !isMobile && (
-        <div className="sx-list-asset__actions">
+        <div className="list-asset__actions">
           {actions != null ? (
             actions
           ) : (
             <>
               <button
                 type="button"
-                className="sx-list-asset__icon-btn"
+                className="list-asset__icon-btn"
                 aria-label="Add"
                 onClick={onAdd}
               >
@@ -88,7 +88,7 @@ export function ListAsset({
               </button>
               <button
                 type="button"
-                className="sx-list-asset__icon-btn"
+                className="list-asset__icon-btn"
                 aria-label="Send"
                 onClick={onSend}
               >
@@ -100,7 +100,7 @@ export function ListAsset({
       )}
 
       {isMobile && (
-        <span className="sx-list-asset__chevron material-symbols-rounded" aria-hidden="true">
+        <span className="list-asset__chevron material-symbols-rounded" aria-hidden="true">
           arrow_forward_ios
         </span>
       )}

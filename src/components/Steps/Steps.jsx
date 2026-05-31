@@ -18,8 +18,8 @@ export function Steps({
   className = "",
 }) {
   const cls = [
-    "sx-steps",
-    orientation === "vertical" && "sx-steps--vertical",
+    "steps",
+    orientation === "vertical" && "steps--vertical",
     className,
   ].filter(Boolean).join(" ");
   return (
@@ -29,7 +29,7 @@ export function Steps({
           ? "failed"
           : i < current ? "done" : i === current ? "active" : "todo";
         const stepCls = [
-          "sx-steps__step",
+          "steps__step",
           `is-${state}`,
           onSelect && "is-clickable",
         ].filter(Boolean).join(" ");
@@ -43,16 +43,16 @@ export function Steps({
               aria-current={state === "active" ? "step" : undefined}
               style={onSelect ? { background: "transparent", border: 0, padding: 0, font: "inherit", color: "inherit", textAlign: "inherit" } : undefined}
             >
-              <span className="sx-steps__dot">
+              <span className="steps__dot">
                 {state === "done" ? <span className="material-symbols-rounded">check</span>
                   : state === "failed" ? <span className="material-symbols-rounded">close</span>
                   : i + 1}
               </span>
-              <span className="sx-steps__label">{item.label}</span>
-              {item.sub && <span className="sx-steps__sub">{item.sub}</span>}
+              <span className="steps__label">{item.label}</span>
+              {item.sub && <span className="steps__sub">{item.sub}</span>}
             </StepTag>
             {i < items.length - 1 && (
-              <span className={"sx-steps__connector" + (state === "done" ? " is-done" : "")} aria-hidden="true" />
+              <span className={"steps__connector" + (state === "done" ? " is-done" : "")} aria-hidden="true" />
             )}
           </React.Fragment>
         );
@@ -75,14 +75,14 @@ export function BadgeSteps({
   className = "",
 }) {
   const cls = [
-    "sx-badge-steps",
-    tone === "failed" && "sx-badge-steps--failed",
+    "badge-steps",
+    tone === "failed" && "badge-steps--failed",
     className,
   ].filter(Boolean).join(" ");
   return (
     <div className={cls}>
-      <span className="sx-badge-steps__count">{current}/{total}</span>
-      {label && <span className="sx-badge-steps__label">{label}</span>}
+      <span className="badge-steps__count">{current}/{total}</span>
+      {label && <span className="badge-steps__label">{label}</span>}
     </div>
   );
 }

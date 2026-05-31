@@ -30,15 +30,15 @@ export function Textarea({
     onChange && onChange(e);
   };
   const wrapCls = [
-    "sx-textarea-wrap",
+    "textarea-wrap",
     state === "hovered" && "is-hovered",
     state === "focused" && "is-focused",
     isError && "is-error",
     disabled && "is-disabled",
   ].filter(Boolean).join(" ");
   return (
-    <div className={"sx-field " + className}>
-      {label && <label htmlFor={idProp || id} className="sx-field__label">{label}</label>}
+    <div className={"field " + className}>
+      {label && <label htmlFor={idProp || id} className="field__label">{label}</label>}
       <div className={wrapCls}>
         <textarea
           id={idProp || id}
@@ -50,13 +50,13 @@ export function Textarea({
           {...rest}
         />
         {(showCount || maxLength) && (
-          <span className="sx-textarea-wrap__count">
+          <span className="textarea-wrap__count">
             {String(v).length}{maxLength ? `/${maxLength}` : ""}
           </span>
         )}
       </div>
       {(helper || error) && (
-        <span className={"sx-field__helper" + (isError ? " is-error" : "")}>{error || helper}</span>
+        <span className={"field__helper" + (isError ? " is-error" : "")}>{error || helper}</span>
       )}
     </div>
   );

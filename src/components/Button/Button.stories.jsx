@@ -7,7 +7,7 @@ export default {
   parameters: { layout: "centered" },
   argTypes: {
     variant: { control: "inline-radio", options: ["primary", "secondary", "tertiary"] },
-    size: { control: "inline-radio", options: ["lg", "md", "sm"] },
+    size: { control: "inline-radio", options: ["lg", "sm"] },
     disabled: { control: "boolean" },
     children: { control: "text" },
   },
@@ -36,8 +36,7 @@ export const AllSizes = {
   render: () => (
     <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
       <Button size="lg">Large 48</Button>
-      <Button size="md">Medium 40</Button>
-      <Button size="sm">Small 32</Button>
+      <Button size="sm">Small 36</Button>
     </div>
   ),
 };
@@ -49,7 +48,7 @@ export const States = {
   render: () => {
     const variants = ["primary", "secondary", "tertiary"];
     const cell = { display: "flex", flexDirection: "column", gap: 8 };
-    const colHead = { font: "var(--sx-label-small)", color: "var(--sx-text-secondary)" };
+    const colHead = { font: "var(--label-small)", color: "var(--text-secondary)" };
     return (
       <div style={{ display: "grid", gridTemplateColumns: "auto repeat(4, max-content)", gap: 16, alignItems: "center" }}>
         <span />

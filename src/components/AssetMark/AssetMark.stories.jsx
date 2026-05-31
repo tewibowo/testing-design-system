@@ -40,8 +40,8 @@ export const WhiteTone = {
     <div
       style={{
         ...row,
-        background: "var(--sx-text-primary)",
-        color: "var(--sx-text-inverse)",
+        background: "var(--text-primary)",
+        color: "var(--text-inverse)",
         padding: 16,
         borderRadius: 12,
       }}
@@ -64,8 +64,8 @@ export const Sizes = {
 export const CustomAndFallback = {
   render: () => (
     <div style={row}>
-      <AssetMark label="DBS" color="var(--sx-brand-secure-teal)" />
-      <AssetMark label="UOB" color="var(--sx-brand-credible-blue)" />
+      <AssetMark label="DBS" color="var(--brand-secure-teal)" />
+      <AssetMark label="UOB" color="var(--brand-credible-blue)" />
       <AssetMark asset="UNKNOWN" />
     </div>
   ),

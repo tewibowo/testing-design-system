@@ -1,39 +1,39 @@
-.sx-textarea-wrap {
+.textarea-wrap {
   display: flex;
   flex-direction: column;
   min-height: 96px;
   padding: 10px 14px;
-  border-radius: var(--sx-radius-lg);
-  border: 1px solid var(--sx-border);
-  background: var(--sx-surface);
-  transition: border-color var(--sx-dur-1) var(--sx-ease), box-shadow var(--sx-dur-1) var(--sx-ease);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition: border-color var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease);
 }
-.sx-textarea-wrap:hover,
-.sx-textarea-wrap.is-hovered {
-  border-color: var(--sx-text-secondary);
+.textarea-wrap:hover,
+.textarea-wrap.is-hovered {
+  border-color: var(--text-secondary);
 }
-.sx-textarea-wrap:focus-within,
-.sx-textarea-wrap.is-focused {
-  border-color: var(--sx-interactive-active);
+.textarea-wrap:focus-within,
+.textarea-wrap.is-focused {
+  border-color: var(--interactive-active);
   box-shadow: 0 0 0 3px rgba(0, 211, 126, 0.16);
 }
-.sx-textarea-wrap.is-error { border-color: var(--sx-status-critical); }
-.sx-textarea-wrap.is-disabled { background: var(--sx-surface-secondary); color: var(--sx-disabled-on-surface); }
-.sx-textarea-wrap textarea {
+.textarea-wrap.is-error { border-color: var(--status-critical); }
+.textarea-wrap.is-disabled { background: var(--surface-secondary); color: var(--disabled-on-surface); }
+.textarea-wrap textarea {
   flex: 1;
   border: 0;
   outline: 0;
   background: transparent;
-  font: var(--sx-body-large);
-  color: var(--sx-text-primary);
+  font: var(--body-large);
+  color: var(--text-primary);
   resize: vertical;
   min-height: 72px;
 }
-.sx-textarea-wrap textarea::placeholder { color: var(--sx-text-secondary); }
-.sx-textarea-wrap__count {
+.textarea-wrap textarea::placeholder { color: var(--input-placeholder); }
+.textarea-wrap__count {
   align-self: flex-end;
   margin-top: 6px;
-  font: var(--sx-body-small);
-  color: var(--sx-text-secondary);
-  font-family: var(--sx-font-mono);
+  font: var(--body-small);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
 }

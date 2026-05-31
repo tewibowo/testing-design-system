@@ -34,15 +34,15 @@ export function Menu({ trigger, align = "left", placement = "bottom", defaultOpe
     : null;
 
   return (
-    <div className={"sx-menu " + className} ref={ref}>
+    <div className={"menu " + className} ref={ref}>
       {triggerNode}
       {open && (
         <div
           role="menu"
           className={[
-            "sx-menu__list",
-            align === "right" && "sx-menu__list--right",
-            placement === "top" ? "sx-menu__list--top" : "sx-menu__list--bottom",
+            "menu__list",
+            align === "right" && "menu__list--right",
+            placement === "top" ? "menu__list--top" : "menu__list--bottom",
           ].filter(Boolean).join(" ")}
         >
           {React.Children.map(children, (child) => {
@@ -74,9 +74,9 @@ function MenuItem({
   const isSingle = selectable === "single";
   const isMultiple = selectable === "multiple";
   const cls = [
-    "sx-menu__item",
-    tone === "critical" && "sx-menu__item--critical",
-    selectable && "sx-menu__item--selectable",
+    "menu__item",
+    tone === "critical" && "menu__item--critical",
+    selectable && "menu__item--selectable",
     selected && "is-selected",
   ].filter(Boolean).join(" ");
   // role + aria reflect the selection affordance
@@ -100,18 +100,18 @@ function MenuItem({
       }}
     >
       {isMultiple && (
-        <span className="sx-menu__check sx-menu__check--box" aria-hidden="true">
+        <span className="menu__check menu__check--box" aria-hidden="true">
           {selected && <span className="material-symbols-rounded">check</span>}
         </span>
       )}
-      {icon && <span className="sx-menu__icon material-symbols-rounded">{icon}</span>}
-      <span className="sx-menu__item-text">
-        <span className="sx-menu__item-label">{children}</span>
-        {secondary && <span className="sx-menu__item-secondary">{secondary}</span>}
+      {icon && <span className="menu__icon material-symbols-rounded">{icon}</span>}
+      <span className="menu__item-text">
+        <span className="menu__item-label">{children}</span>
+        {secondary && <span className="menu__item-secondary">{secondary}</span>}
       </span>
-      {trailing && <span className="sx-menu__item-trailing">{trailing}</span>}
+      {trailing && <span className="menu__item-trailing">{trailing}</span>}
       {isSingle && (
-        <span className="sx-menu__check sx-menu__check--tick" aria-hidden="true">
+        <span className="menu__check menu__check--tick" aria-hidden="true">
           {selected && <span className="material-symbols-rounded">check</span>}
         </span>
       )}
@@ -120,11 +120,11 @@ function MenuItem({
 }
 
 function MenuDivider() {
-  return <div className="sx-menu__divider" />;
+  return <div className="menu__divider" />;
 }
 
 function MenuLabel({ children }) {
-  return <div className="sx-menu__label">{children}</div>;
+  return <div className="menu__label">{children}</div>;
 }
 
 Menu.Item = MenuItem;

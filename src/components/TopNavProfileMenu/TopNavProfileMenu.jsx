@@ -38,51 +38,51 @@ export function TopNavProfileMenu({
 
   return (
     <div
-      className={"sx-topnav-menu " + className}
+      className={"topnav-menu " + className}
       data-variant={variant}
       role="menu"
     >
       {(primary || secondary) && (
-        <div className="sx-topnav-menu__header">
-          {primary && <span className="sx-topnav-menu__name">{primary}</span>}
-          {secondary && <span className="sx-topnav-menu__sub">{secondary}</span>}
+        <div className="topnav-menu__header">
+          {primary && <span className="topnav-menu__name">{primary}</span>}
+          {secondary && <span className="topnav-menu__sub">{secondary}</span>}
         </div>
       )}
 
       {isPersonal ? (
         <>
-          <div className="sx-topnav-menu__divider" role="separator" />
+          <div className="topnav-menu__divider" role="separator" />
           {user.timezone && (
-            <div className="sx-topnav-menu__row sx-topnav-menu__row--static">
+            <div className="topnav-menu__row topnav-menu__row--static">
               <span className="material-symbols-rounded" aria-hidden="true">schedule</span>
-              <span className="sx-topnav-menu__label">{user.timezone}</span>
+              <span className="topnav-menu__label">{user.timezone}</span>
             </div>
           )}
-          <button type="button" role="menuitem" className="sx-topnav-menu__row" onClick={fire("account-settings")}>
+          <button type="button" role="menuitem" className="topnav-menu__row" onClick={fire("account-settings")}>
             <span className="material-symbols-rounded" aria-hidden="true">settings</span>
-            <span className="sx-topnav-menu__label">Account settings</span>
+            <span className="topnav-menu__label">Account settings</span>
           </button>
-          <div className="sx-topnav-menu__divider" role="separator" />
-          <button type="button" role="menuitem" className="sx-topnav-menu__row sx-topnav-menu__row--critical" onClick={fire("logout")}>
+          <div className="topnav-menu__divider" role="separator" />
+          <button type="button" role="menuitem" className="topnav-menu__row topnav-menu__row--critical" onClick={fire("logout")}>
             <span className="material-symbols-rounded" aria-hidden="true">logout</span>
-            <span className="sx-topnav-menu__label">Log out</span>
+            <span className="topnav-menu__label">Log out</span>
           </button>
         </>
       ) : (
         <>
-          <div className="sx-topnav-menu__divider" role="separator" />
-          <button type="button" role="menuitem" className="sx-topnav-menu__row" onClick={() => (onSwitch ? onSwitch() : onAction && onAction("switch-account"))}>
+          <div className="topnav-menu__divider" role="separator" />
+          <button type="button" role="menuitem" className="topnav-menu__row" onClick={() => (onSwitch ? onSwitch() : onAction && onAction("switch-account"))}>
             <span className="material-symbols-rounded" aria-hidden="true">swap_horiz</span>
-            <span className="sx-topnav-menu__label">Switch account</span>
+            <span className="topnav-menu__label">Switch account</span>
           </button>
-          <button type="button" role="menuitem" className="sx-topnav-menu__row" onClick={fire("settings")}>
+          <button type="button" role="menuitem" className="topnav-menu__row" onClick={fire("settings")}>
             <span className="material-symbols-rounded" aria-hidden="true">settings</span>
-            <span className="sx-topnav-menu__label">Settings</span>
+            <span className="topnav-menu__label">Settings</span>
           </button>
-          <div className="sx-topnav-menu__divider" role="separator" />
-          <button type="button" role="menuitem" className="sx-topnav-menu__row sx-topnav-menu__row--critical" onClick={fire("logout")}>
+          <div className="topnav-menu__divider" role="separator" />
+          <button type="button" role="menuitem" className="topnav-menu__row topnav-menu__row--critical" onClick={fire("logout")}>
             <span className="material-symbols-rounded" aria-hidden="true">logout</span>
-            <span className="sx-topnav-menu__label">Log out</span>
+            <span className="topnav-menu__label">Log out</span>
           </button>
         </>
       )}

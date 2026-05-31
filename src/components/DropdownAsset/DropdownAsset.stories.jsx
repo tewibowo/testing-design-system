@@ -13,7 +13,7 @@ const mark = (label, bg) => (
     style={{
       width: 24, height: 24, borderRadius: 999, background: bg, color: "#fff",
       display: "inline-flex", alignItems: "center", justifyContent: "center",
-      font: "var(--sx-label-small)",
+      font: "var(--label-small)",
     }}
   >
     {label}
@@ -21,10 +21,10 @@ const mark = (label, bg) => (
 );
 
 const assets = [
-  { value: "xsgd", name: "XSGD", logo: mark("S", "var(--sx-brand-xsgd)") },
-  { value: "xusd", name: "XUSD", logo: mark("U", "var(--sx-brand-xusd)") },
-  { value: "usdc", name: "USDC", logo: mark("C", "var(--sx-status-information)") },
-  { value: "usdt", name: "USDT", logo: mark("T", "var(--sx-status-positive)") },
+  { value: "xsgd", name: "XSGD", logo: mark("S", "var(--brand-xsgd)") },
+  { value: "xusd", name: "XUSD", logo: mark("U", "var(--brand-xusd)") },
+  { value: "usdc", name: "USDC", logo: mark("C", "var(--status-information)") },
+  { value: "usdt", name: "USDT", logo: mark("T", "var(--status-positive)") },
 ];
 
 export const Default = { args: { options: assets, value: "xsgd" } };
@@ -43,8 +43,8 @@ export const WithSecondary = {
   args: {
     value: "usdc",
     options: [
-      { value: "xsgd", name: "XSGD", secondary: "StraitsX Singapore Dollar", logo: mark("S", "var(--sx-brand-xsgd)") },
-      { value: "usdc", name: "USDC", secondary: "USD Coin", logo: mark("C", "var(--sx-status-information)") },
+      { value: "xsgd", name: "XSGD", secondary: "StraitsX Singapore Dollar", logo: mark("S", "var(--brand-xsgd)") },
+      { value: "usdc", name: "USDC", secondary: "USD Coin", logo: mark("C", "var(--status-information)") },
     ],
   },
 };

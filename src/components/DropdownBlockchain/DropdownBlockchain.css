@@ -1,34 +1,34 @@
 /* DropdownBlockchain — blockchain/wallet-selection menu body. STX tokens only. */
-.sx-dropdown-blockchain {
+.dropdown-blockchain {
   display: flex;
   flex-direction: column;
   margin: 0;
   padding: 0;
   list-style: none;
-  background: var(--sx-surface);
-  border-radius: var(--sx-radius-lg);
-  box-shadow: var(--sx-shadow-1);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
   overflow: hidden;
 }
 
-.sx-dropdown-blockchain__row {
+.dropdown-blockchain__row {
   display: flex;
   align-items: center;
-  gap: var(--sx-space-2);
-  padding: var(--sx-space-3);
+  gap: var(--space-2);
+  padding: var(--space-3);
   cursor: pointer;
-  color: var(--sx-text-primary);
-  transition: background var(--sx-dur-1) var(--sx-ease);
+  color: var(--text-primary);
+  transition: background var(--dur-1) var(--ease);
 }
-.sx-dropdown-blockchain__row:hover { background: var(--sx-surface-hovered); }
-.sx-dropdown-blockchain__row.is-selected { background: var(--sx-surface-secondary); }
-.sx-dropdown-blockchain__row.is-disabled {
-  background: var(--sx-surface-disabled);
-  color: var(--sx-disabled-on-surface);
+.dropdown-blockchain__row:hover { background: var(--surface-hovered); }
+.dropdown-blockchain__row.is-selected { background: var(--surface-secondary); }
+.dropdown-blockchain__row.is-disabled {
+  background: var(--surface-disabled);
+  color: var(--disabled-on-surface);
   cursor: not-allowed;
 }
 
-.sx-dropdown-blockchain__mark {
+.dropdown-blockchain__mark {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
@@ -36,56 +36,56 @@
   width: 24px;
   height: 24px;
 }
-.sx-dropdown-blockchain__mark > * { width: 24px; height: 24px; }
-.sx-dropdown-blockchain__initials {
+.dropdown-blockchain__mark > * { width: 24px; height: 24px; }
+.dropdown-blockchain__initials {
   width: 24px;
   height: 24px;
-  border-radius: var(--sx-radius-full);
-  background: var(--sx-surface-secondary);
-  color: var(--sx-text-secondary);
-  font: var(--sx-label-small);
+  border-radius: var(--radius-full);
+  background: var(--surface-secondary);
+  color: var(--text-secondary);
+  font: var(--label-small);
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
-.sx-dropdown-blockchain__text {
+.dropdown-blockchain__text {
   flex: 1 1 auto;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--sx-space-1);
+  gap: var(--space-1);
 }
-.sx-dropdown-blockchain__name {
-  font: var(--sx-body-large);
+.dropdown-blockchain__name {
+  font: var(--body-large);
   color: inherit;
 }
-.sx-dropdown-blockchain__secondary {
-  font: var(--sx-body-medium);
-  color: var(--sx-text-secondary);
-  font-family: var(--sx-font-mono);
+.dropdown-blockchain__secondary {
+  font: var(--body-medium);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.sx-dropdown-blockchain__row.is-disabled .sx-dropdown-blockchain__secondary {
-  color: var(--sx-disabled-on-surface);
+.dropdown-blockchain__row.is-disabled .dropdown-blockchain__secondary {
+  color: var(--disabled-on-surface);
 }
 
 /* Status tag (filled) — Figma "Static Tag - Filled" */
-.sx-dropdown-blockchain__tag {
+.dropdown-blockchain__tag {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-width: 40px;
   height: 24px;
-  padding: 0 var(--sx-space-2);
-  border-radius: var(--sx-radius-sm);
-  font: var(--sx-label-small);
-  color: var(--sx-text-inverse);
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-sm);
+  font: var(--label-small);
+  color: var(--text-inverse);
 }
-.sx-dropdown-blockchain__tag.is-positive { background: var(--sx-status-positive); }
-.sx-dropdown-blockchain__tag.is-critical { background: var(--sx-status-critical); }
-.sx-dropdown-blockchain__tag.is-warning { background: var(--sx-status-warning); }
-.sx-dropdown-blockchain__tag.is-information { background: var(--sx-status-information); }
+.dropdown-blockchain__tag.is-positive { background: var(--status-positive); }
+.dropdown-blockchain__tag.is-critical { background: var(--status-critical); }
+.dropdown-blockchain__tag.is-warning { background: var(--status-warning); }
+.dropdown-blockchain__tag.is-information { background: var(--status-information); }

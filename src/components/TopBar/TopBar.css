@@ -1,47 +1,47 @@
-.sx-topbar { display: inline-flex; align-items: center; gap: 18px; }
+.topbar { display: inline-flex; align-items: center; gap: 18px; }
 
-.sx-icon-button {
+.icon-button {
   position: relative;
   width: 40px;
   height: 40px;
-  border-radius: var(--sx-radius-full);
-  background: var(--sx-surface);
-  border: 1px solid var(--sx-border);
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  border: 1px solid var(--border);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--sx-text-primary);
+  color: var(--text-primary);
   cursor: pointer;
-  transition: background var(--sx-dur-1) var(--sx-ease);
+  transition: background var(--dur-1) var(--ease);
 }
-.sx-icon-button:hover { background: var(--sx-surface-secondary); }
-.sx-icon-button__badge {
+.icon-button:hover { background: var(--surface-secondary); }
+.icon-button__badge {
   position: absolute;
   top: -2px;
   right: -2px;
   min-width: 18px;
   height: 18px;
   padding: 0 5px;
-  border-radius: var(--sx-radius-full);
-  background: var(--sx-primary);
-  color: var(--sx-text-primary);
-  font: 700 11px/18px var(--sx-font-display);
+  border-radius: var(--radius-full);
+  background: var(--primary);
+  color: var(--text-primary);
+  font: 700 11px/18px var(--font-display);
   text-align: center;
-  border: 2px solid var(--sx-surface);
+  border: 2px solid var(--surface);
 }
 
-.sx-topbar__user { display: flex; align-items: center; gap: 10px; }
-.sx-topbar__avatar {
+.topbar__user { display: flex; align-items: center; gap: 10px; }
+.topbar__avatar {
   width: 36px;
   height: 36px;
-  border-radius: var(--sx-radius-full);
-  background: var(--sx-surface-secondary);
-  color: var(--sx-text-secondary);
+  border-radius: var(--radius-full);
+  background: var(--surface-secondary);
+  color: var(--text-secondary);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-size: 22px;
-  border: 1px solid var(--sx-border);
+  border: 1px solid var(--border);
 }
-.sx-topbar__user-name { font: var(--sx-label-medium); color: var(--sx-text-primary); }
-.sx-topbar__user-sub { font: var(--sx-body-small); color: var(--sx-text-secondary); }
+.topbar__user-name { font: var(--label-medium); color: var(--text-primary); }
+.topbar__user-sub { font: var(--body-small); color: var(--text-secondary); }

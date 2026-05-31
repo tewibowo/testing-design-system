@@ -1,34 +1,34 @@
 /* DropdownNetwork — Figma "Dropdown / Network" (5072:46599). STX semantic tokens. */
-.sx-dropdown-network {
+.dropdown-network {
   display: flex;
   flex-direction: column;
   margin: 0;
   padding: 0;
   list-style: none;
-  background: var(--sx-surface);
-  border-radius: var(--sx-radius-lg);
-  box-shadow: var(--sx-shadow-1);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
   overflow: hidden;
 }
 
-.sx-dropdown-network__row {
+.dropdown-network__row {
   display: flex;
   align-items: center;
-  gap: var(--sx-space-2);
-  padding: var(--sx-space-3);
+  gap: var(--space-2);
+  padding: var(--space-3);
   cursor: pointer;
-  color: var(--sx-text-primary);
-  transition: background var(--sx-dur-1) var(--sx-ease);
+  color: var(--text-primary);
+  transition: background var(--dur-1) var(--ease);
 }
-.sx-dropdown-network__row:hover { background: var(--sx-surface-hovered); }
-.sx-dropdown-network__row.is-selected { background: var(--sx-surface-secondary); }
-.sx-dropdown-network__row.is-disabled {
-  background: var(--sx-surface-disabled);
-  color: var(--sx-disabled-on-surface);
+.dropdown-network__row:hover { background: var(--surface-hovered); }
+.dropdown-network__row.is-selected { background: var(--surface-secondary); }
+.dropdown-network__row.is-disabled {
+  background: var(--surface-disabled);
+  color: var(--disabled-on-surface);
   cursor: not-allowed;
 }
 
-.sx-dropdown-network__mark {
+.dropdown-network__mark {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
@@ -36,52 +36,52 @@
   width: 24px;
   height: 24px;
 }
-.sx-dropdown-network__mark > * { width: 24px; height: 24px; }
-.sx-dropdown-network__initials {
+.dropdown-network__mark > * { width: 24px; height: 24px; }
+.dropdown-network__initials {
   width: 24px;
   height: 24px;
-  border-radius: var(--sx-radius-full);
-  background: var(--sx-surface-secondary);
-  color: var(--sx-text-secondary);
-  font: var(--sx-label-small);
+  border-radius: var(--radius-full);
+  background: var(--surface-secondary);
+  color: var(--text-secondary);
+  font: var(--label-small);
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
-.sx-dropdown-network__text {
+.dropdown-network__text {
   flex: 1 1 auto;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--sx-space-1);
+  gap: var(--space-1);
 }
-.sx-dropdown-network__name {
-  font: var(--sx-body-large);
+.dropdown-network__name {
+  font: var(--body-large);
   color: inherit;
 }
-.sx-dropdown-network__secondary {
-  font: var(--sx-body-medium);
-  color: var(--sx-text-secondary);
+.dropdown-network__secondary {
+  font: var(--body-medium);
+  color: var(--text-secondary);
 }
-.sx-dropdown-network__row.is-disabled .sx-dropdown-network__secondary {
-  color: var(--sx-disabled-on-surface);
+.dropdown-network__row.is-disabled .dropdown-network__secondary {
+  color: var(--disabled-on-surface);
 }
 
 /* Status tag (filled) — Figma "Static Tag - Filled" */
-.sx-dropdown-network__tag {
+.dropdown-network__tag {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-width: 40px;
   height: 24px;
-  padding: 0 var(--sx-space-2);
-  border-radius: var(--sx-radius-sm);
-  font: var(--sx-label-small);
-  color: var(--sx-text-inverse);
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-sm);
+  font: var(--label-small);
+  color: var(--text-inverse);
 }
-.sx-dropdown-network__tag.is-positive { background: var(--sx-status-positive); }
-.sx-dropdown-network__tag.is-critical { background: var(--sx-status-critical); }
-.sx-dropdown-network__tag.is-warning { background: var(--sx-status-warning); }
-.sx-dropdown-network__tag.is-information { background: var(--sx-status-information); }
+.dropdown-network__tag.is-positive { background: var(--status-positive); }
+.dropdown-network__tag.is-critical { background: var(--status-critical); }
+.dropdown-network__tag.is-warning { background: var(--status-warning); }
+.dropdown-network__tag.is-information { background: var(--status-information); }

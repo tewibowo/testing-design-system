@@ -1,63 +1,63 @@
 /* Table — migrated to STX semantic tokens (Figma: Table Cell - Single /
  * Table / Transaction History). Cell min-height 60, header 48, 16px padding. */
-.sx-table-wrap {
+.table-wrap {
   width: 100%;
   overflow-x: auto;
-  background: var(--sx-surface);
-  border-radius: var(--sx-radius-md);
-  border: 1px solid var(--sx-border);
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
 }
-.sx-table {
+.table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  font: var(--sx-body-medium);
-  color: var(--sx-text-primary);
+  font: var(--body-medium);
+  color: var(--text-primary);
 }
-.sx-table thead th {
+.table thead th {
   position: sticky;
   top: 0;
   height: 48px;
-  background: var(--sx-surface-secondary);
-  color: var(--sx-text-secondary);
-  font: var(--sx-label-small);
+  background: var(--surface-secondary);
+  color: var(--text-secondary);
+  font: var(--label-small);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   text-align: left;
-  padding: 0 var(--sx-space-4);
-  border-bottom: 1px solid var(--sx-border);
+  padding: 0 var(--space-4);
+  border-bottom: 1px solid var(--border);
 }
-.sx-table tbody td {
+.table tbody td {
   height: 60px;            /* Figma Table Cell - Single: min-height 60 */
-  padding: var(--sx-space-3) var(--sx-space-4);
-  border-bottom: 1px solid var(--sx-border);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border);
   vertical-align: middle;
 }
-.sx-table tbody tr:last-child td { border-bottom: 0; }
-.sx-table tbody tr:hover td { background: var(--sx-surface-hovered); }
+.table tbody tr:last-child td { border-bottom: 0; }
+.table tbody tr:hover td { background: var(--surface-hovered); }
 
-.sx-table--zebra tbody tr:nth-child(odd) td { background: var(--sx-surface-secondary); }
+.table--zebra tbody tr:nth-child(odd) td { background: var(--surface-secondary); }
 
-.sx-table th.sx-table__num,
-.sx-table td.sx-table__num {
+.table th.table__num,
+.table td.table__num {
   text-align: right;
-  font-family: var(--sx-font-mono);
+  font-family: var(--font-body);
   font-variant-numeric: tabular-nums;
 }
 
-.sx-table__cell-with-icon {
+.table__cell-with-icon {
   display: inline-flex;
   align-items: center;
-  gap: var(--sx-space-2);
+  gap: var(--space-2);
 }
-.sx-table__cell-with-icon .material-symbols-rounded {
+.table__cell-with-icon .material-symbols-rounded {
   font-size: 18px;
-  color: var(--sx-text-secondary);
+  color: var(--text-secondary);
 }
 
-.sx-table__empty {
-  padding: var(--sx-space-7) var(--sx-space-6);
+.table__empty {
+  padding: var(--space-7) var(--space-6);
   text-align: center;
-  color: var(--sx-text-secondary);
-  font: var(--sx-body-medium);
+  color: var(--text-secondary);
+  font: var(--body-medium);
 }

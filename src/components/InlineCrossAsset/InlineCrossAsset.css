@@ -1,51 +1,51 @@
 /* InlineCrossAsset — Figma: Inline Box / Cross Asset (5700:9286) */
-.sx-inline-cross-asset {
+.inline-cross-asset {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--sx-space-2);
-  padding: var(--sx-space-3);
-  border-radius: var(--sx-radius-sm);
-  background: var(--sx-surface-secondary);
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--surface-secondary);
   box-sizing: border-box;
 }
 
-.sx-inline-cross-asset__row {
+.inline-cross-asset__row {
   display: flex;
   align-items: center;
-  gap: var(--sx-space-3);
+  gap: var(--space-3);
 }
-.sx-inline-cross-asset__asset {
+.inline-cross-asset__asset {
   display: inline-flex;
   align-items: center;
-  gap: var(--sx-space-1);
+  gap: var(--space-1);
 }
-.sx-inline-cross-asset__icon {
+.inline-cross-asset__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 20px;
   height: 20px;
   flex-shrink: 0;
-  border-radius: var(--sx-radius-full);
+  border-radius: var(--radius-full);
   overflow: hidden;
-  background: var(--sx-surface);
+  background: var(--surface);
   font-size: 9px;
   font-weight: 700;
-  color: var(--sx-text-secondary);
+  color: var(--text-secondary);
 }
-.sx-inline-cross-asset__icon > * { width: 100%; height: 100%; }
-.sx-inline-cross-asset__symbol {
-  font: var(--sx-label-large);
-  color: var(--sx-text-primary);
+.inline-cross-asset__icon > * { width: 100%; height: 100%; }
+.inline-cross-asset__symbol {
+  font: var(--label-large);
+  color: var(--text-primary);
 }
-.sx-inline-cross-asset__arrow {
+.inline-cross-asset__arrow {
   font-size: 18px;
-  color: var(--sx-text-secondary);
+  color: var(--text-secondary);
 }
-.sx-inline-cross-asset__caption {
-  font: var(--sx-body-medium);
-  color: var(--sx-text-primary);
+.inline-cross-asset__caption {
+  font: var(--body-medium);
+  color: var(--text-primary);
   text-align: center;
 }

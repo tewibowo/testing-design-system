@@ -4,16 +4,16 @@ import "./Toast.css";
 const ICONS = { positive: "check_circle", critical: "error", warning: "warning", info: "info" };
 
 export function Toast({ tone = "positive", title, children, onDismiss, className = "", ...rest }) {
-  const cls = ["sx-toast", tone !== "positive" && `sx-toast--${tone}`, className].filter(Boolean).join(" ");
+  const cls = ["toast", tone !== "positive" && `toast--${tone}`, className].filter(Boolean).join(" ");
   return (
     <div role="status" className={cls} {...rest}>
-      <span className="material-symbols-rounded sx-toast__icon" aria-hidden="true">{ICONS[tone] || "check_circle"}</span>
-      <div className="sx-toast__body">
-        {title && <div className="sx-toast__title">{title}</div>}
-        {children && <div className="sx-toast__text">{children}</div>}
+      <span className="material-symbols-rounded toast__icon" aria-hidden="true">{ICONS[tone] || "check_circle"}</span>
+      <div className="toast__body">
+        {title && <div className="toast__title">{title}</div>}
+        {children && <div className="toast__text">{children}</div>}
       </div>
       {onDismiss && (
-        <button type="button" className="sx-toast__close" onClick={onDismiss} aria-label="Dismiss">
+        <button type="button" className="toast__close" onClick={onDismiss} aria-label="Dismiss">
           <span className="material-symbols-rounded">close</span>
         </button>
       )}
@@ -53,7 +53,7 @@ export function ToastProvider({ children, duration = 4000 }) {
   return (
     <ToastContext.Provider value={{ show, dismiss }}>
       {children}
-      <div className="sx-toast-region" role="region" aria-label="Notifications">
+      <div className="toast-region" role="region" aria-label="Notifications">
         {items.map((t) => (
           <Toast key={t.id} tone={t.tone} title={t.title} onDismiss={() => dismiss(t.id)}>
             {t.message}

@@ -14,7 +14,7 @@ export function Switch({
   ...inputProps
 }) {
   const id = useId();
-  const cls = ["sx-control", disabled && "is-disabled", className].filter(Boolean).join(" ");
+  const cls = ["control", disabled && "is-disabled", className].filter(Boolean).join(" ");
   return (
     <label htmlFor={idProp || id} className={cls}>
       <input
@@ -27,13 +27,13 @@ export function Switch({
         onChange={onChange}
         {...inputProps}
       />
-      <span className="sx-switch__track" aria-hidden="true">
-        <span className="sx-switch__thumb" />
+      <span className="switch__track" aria-hidden="true">
+        <span className="switch__thumb" />
       </span>
       {label && (
-        <span className="sx-control__label">
+        <span className="control__label">
           {label}
-          {sub && <span className="sx-control__sub">{sub}</span>}
+          {sub && <span className="control__sub">{sub}</span>}
         </span>
       )}
     </label>

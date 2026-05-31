@@ -34,21 +34,21 @@ export function BottomSheet({
   };
 
   return createPortal(
-    <div className="sx-bsheet-scrim" role="presentation" onClick={handleScrim}>
-      <div className={"sx-bsheet " + className} role="dialog" aria-modal="true" aria-labelledby={title ? "sx-bsheet-title" : undefined}>
-        <div className="sx-bsheet__handle" aria-hidden="true" />
+    <div className="bsheet-scrim" role="presentation" onClick={handleScrim}>
+      <div className={"bsheet " + className} role="dialog" aria-modal="true" aria-labelledby={title ? "bsheet-title" : undefined}>
+        <div className="bsheet__handle" aria-hidden="true" />
         {(title || !hideClose) && (
-          <div className="sx-bsheet__head">
-            {title && <div id="sx-bsheet-title" className="sx-bsheet__title">{title}</div>}
+          <div className="bsheet__head">
+            {title && <div id="bsheet-title" className="bsheet__title">{title}</div>}
             {!hideClose && (
-              <button type="button" className="sx-bsheet__close" onClick={onClose} aria-label="Close">
+              <button type="button" className="bsheet__close" onClick={onClose} aria-label="Close">
                 <span className="material-symbols-rounded">close</span>
               </button>
             )}
           </div>
         )}
-        <div className="sx-bsheet__body">{children}</div>
-        {footer && <div className="sx-bsheet__foot">{footer}</div>}
+        <div className="bsheet__body">{children}</div>
+        {footer && <div className="bsheet__foot">{footer}</div>}
       </div>
     </div>,
     document.body

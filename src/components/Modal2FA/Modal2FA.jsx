@@ -74,13 +74,13 @@ export function Modal2FA({
 
   const footer = (
     <>
-      <Button variant="secondary" size="lg" className="sx-2fa__action" onClick={handleCancel}>
+      <Button variant="secondary" size="lg" className="2fa__action" onClick={handleCancel}>
         {cancelLabel}
       </Button>
       <Button
         variant="primary"
         size="lg"
-        className="sx-2fa__action"
+        className="2fa__action"
         onClick={onVerify}
         disabled={isVerifyDisabled}
       >
@@ -96,19 +96,19 @@ export function Modal2FA({
       size="sm"
       hideClose={false}
       footer={footer}
-      className={"sx-2fa " + className}
+      className={"2fa " + className}
     >
-      <div className="sx-2fa__hero">
-        {illustration && <div className="sx-2fa__illustration" aria-hidden="true">{illustration}</div>}
-        <h2 className="sx-2fa__title">{title}</h2>
+      <div className="2fa__hero">
+        {illustration && <div className="2fa__illustration" aria-hidden="true">{illustration}</div>}
+        <h2 className="2fa__title">{title}</h2>
       </div>
-      {instruction && <p className="sx-2fa__instruction">{instruction}</p>}
-      <div className="sx-2fa__code" role="group" aria-label="Authentication code">
+      {instruction && <p className="2fa__instruction">{instruction}</p>}
+      <div className="2fa__code" role="group" aria-label="Authentication code">
         {Array.from({ length }).map((_, i) => (
           <input
             key={i}
             ref={(el) => (inputs.current[i] = el)}
-            className="sx-2fa__digit"
+            className="2fa__digit"
             type="text"
             inputMode="numeric"
             autoComplete={i === 0 ? "one-time-code" : "off"}
@@ -121,7 +121,7 @@ export function Modal2FA({
         ))}
       </div>
       {troubleText && (
-        <button type="button" className="sx-2fa__trouble" onClick={onTrouble}>
+        <button type="button" className="2fa__trouble" onClick={onTrouble}>
           {troubleText}
         </button>
       )}

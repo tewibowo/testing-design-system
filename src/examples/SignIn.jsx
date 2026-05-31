@@ -14,20 +14,20 @@ export function SignIn() {
       <aside className="ex-signin__brand">
         <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 32 }}>
           <Logomark size={42} />
-          <span style={{ font: "800 22px/1 var(--sx-font-display)", color: "#fff", letterSpacing: "-0.01em" }}>StraitsX</span>
+          <span style={{ font: "800 22px/1 var(--font-display)", color: "#fff", letterSpacing: "-0.01em" }}>StraitsX</span>
         </div>
-        <h1 style={{ font: "700 36px/1.1 var(--sx-font-display)", margin: 0, color: "#fff", letterSpacing: "-0.02em" }}>
+        <h1 style={{ font: "700 36px/1.1 var(--font-display)", margin: 0, color: "#fff", letterSpacing: "-0.02em" }}>
           Payments Infrastructure<br />for Digital Assets
         </h1>
-        <p style={{ font: "var(--sx-body-large)", color: "#79FFCA", maxWidth: 32, marginTop: 16, maxWidth: "32ch" }}>
+        <p style={{ font: "var(--body-large)", color: "#79FFCA", maxWidth: 32, marginTop: 16, maxWidth: "32ch" }}>
           Mint, send and earn on regulated stablecoins. Backed 1:1 by reserves held with Standard Chartered Bank.
         </p>
       </aside>
 
       <main className="ex-signin__panel">
         <div className="ex-signin__form">
-          <h2 style={{ font: "var(--sx-title-large)", color: "var(--sx-text-primary)", margin: 0 }}>Welcome back</h2>
-          <p style={{ font: "var(--sx-body-medium)", color: "var(--sx-text-secondary)", margin: "8px 0 24px" }}>
+          <h2 style={{ font: "var(--title-large)", color: "var(--text-primary)", margin: 0 }}>Welcome back</h2>
+          <p style={{ font: "var(--body-medium)", color: "var(--text-secondary)", margin: "8px 0 24px" }}>
             Sign in to your StraitsX account.
           </p>
 
@@ -55,7 +55,7 @@ export function SignIn() {
             <Button size="lg" type="submit">Sign in</Button>
           </form>
 
-          <p style={{ font: "var(--sx-body-medium)", color: "var(--sx-text-secondary)", textAlign: "center", marginTop: 24 }}>
+          <p style={{ font: "var(--body-medium)", color: "var(--text-secondary)", textAlign: "center", marginTop: 24 }}>
             Don't have an account? <LinkButton as="a" href="#signup" size="md">Open an account</LinkButton>
           </p>
         </div>

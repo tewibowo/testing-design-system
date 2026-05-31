@@ -12,26 +12,26 @@ export function TopBar({
   onUserClick,
 }) {
   return (
-    <div className="sx-topbar">
+    <div className="topbar">
       <button
         type="button"
-        className="sx-icon-button"
+        className="icon-button"
         aria-label="Notifications"
         onClick={onNotificationsClick}
       >
         <span className="material-symbols-rounded" aria-hidden="true">notifications</span>
-        {unread > 0 && <span className="sx-icon-button__badge">{unread}</span>}
+        {unread > 0 && <span className="icon-button__badge">{unread}</span>}
       </button>
       <button
         type="button"
-        className="sx-topbar__user"
+        className="topbar__user"
         onClick={onUserClick}
         style={{ background: "transparent", border: 0, cursor: "pointer", padding: 0 }}
       >
-        <span className="material-symbols-rounded sx-topbar__avatar" aria-hidden="true">person</span>
-        <div className="sx-topbar__user-text" style={{ textAlign: "left" }}>
-          <div className="sx-topbar__user-name">{name}</div>
-          <div className="sx-topbar__user-sub">{company}</div>
+        <span className="material-symbols-rounded topbar__avatar" aria-hidden="true">person</span>
+        <div className="topbar__user-text" style={{ textAlign: "left" }}>
+          <div className="topbar__user-name">{name}</div>
+          <div className="topbar__user-sub">{company}</div>
         </div>
       </button>
     </div>

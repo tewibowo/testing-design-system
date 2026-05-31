@@ -119,7 +119,7 @@ export const Removable = {
           </Tag>
         ))}
         <Tag tone="neutral" shape="pill" removable disabled>Locked</Tag>
-        {tags.length === 0 && <span style={{ color: "var(--sx-text-secondary)" }}>All removed</span>}
+        {tags.length === 0 && <span style={{ color: "var(--text-secondary)" }}>All removed</span>}
       </div>
     );
   },

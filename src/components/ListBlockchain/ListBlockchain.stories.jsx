@@ -1,7 +1,7 @@
 import React from "react";
 import { ListBlockchain } from "./ListBlockchain.jsx";
 
-const ChainIcon = ({ label = "Ξ", bg = "var(--sx-brand-stable-deep-ivy)" }) => (
+const ChainIcon = ({ label = "Ξ", bg = "var(--brand-stable-deep-ivy)" }) => (
   <span
     style={{
       display: "inline-flex",
@@ -10,7 +10,7 @@ const ChainIcon = ({ label = "Ξ", bg = "var(--sx-brand-stable-deep-ivy)" }) => 
       width: "100%",
       height: "100%",
       background: bg,
-      color: "var(--sx-text-inverse)",
+      color: "var(--text-inverse)",
       fontSize: 12,
       fontWeight: 700,
     }}
@@ -34,13 +34,13 @@ export default {
   args: {
     name: "Metamask",
     address: ADDRESS,
-    icon: <ChainIcon label="M" bg="var(--sx-status-warning)" />,
+    icon: <ChainIcon label="M" bg="var(--status-warning)" />,
     variant: "verifiedPrivateWallet",
     meta: "Last Used",
   },
   decorators: [
     (S) => (
-      <div style={{ maxWidth: 400, border: "1px solid var(--sx-border)", borderRadius: 8 }}>
+      <div style={{ maxWidth: 400, border: "1px solid var(--border)", borderRadius: 8 }}>
         <S />
       </div>
     ),
@@ -60,8 +60,8 @@ export const Verify = {
 
 export const List = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", border: "1px solid var(--sx-border)", borderRadius: 8 }}>
-      <ListBlockchain variant="verifiedPrivateWallet" name="Metamask" address={ADDRESS} meta="Last Used" icon={<ChainIcon label="M" bg="var(--sx-status-warning)" />} />
+    <div style={{ display: "flex", flexDirection: "column", border: "1px solid var(--border)", borderRadius: 8 }}>
+      <ListBlockchain variant="verifiedPrivateWallet" name="Metamask" address={ADDRESS} meta="Last Used" icon={<ChainIcon label="M" bg="var(--status-warning)" />} />
       <ListBlockchain variant="verifiedCustodial" name="Wallet 3" address={ADDRESS} icon={<ChainIcon />} />
       <ListBlockchain variant="pending" name="Wallet 2" address={ADDRESS} icon={<ChainIcon />} />
       <ListBlockchain variant="verify" name="Wallet 3" address={ADDRESS} icon={<ChainIcon />} />

@@ -1,59 +1,59 @@
 /* FieldNetwork — Figma "Field / Network" (5072:46588). STX semantic tokens. */
-.sx-fieldnetwork { position: relative; }
+.fieldnetwork { position: relative; }
 
-.sx-fieldnetwork__control {
+.fieldnetwork__control {
   display: flex;
   align-items: center;
-  gap: var(--sx-space-2);
+  gap: var(--space-2);
   width: 100%;
   min-height: 48px;
-  padding: var(--sx-space-3) var(--sx-space-4);
-  border-radius: var(--sx-radius-lg);
-  border: 1px solid var(--sx-border);
-  background: var(--sx-surface);
-  color: var(--sx-text-primary);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-primary);
   cursor: pointer;
   text-align: left;
-  transition: border-color var(--sx-dur-1) var(--sx-ease), box-shadow var(--sx-dur-1) var(--sx-ease);
+  transition: border-color var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease);
 }
-.sx-fieldnetwork.is-open .sx-fieldnetwork__control,
-.sx-fieldnetwork__control:focus-visible {
+.fieldnetwork.is-open .fieldnetwork__control,
+.fieldnetwork__control:focus-visible {
   outline: 0;
-  border-color: var(--sx-interactive-active);
+  border-color: var(--interactive-active);
   box-shadow: 0 0 0 3px rgba(0, 211, 126, 0.16);
 }
-.sx-fieldnetwork.is-error .sx-fieldnetwork__control { border-color: var(--sx-status-critical); }
-.sx-fieldnetwork.is-error.is-open .sx-fieldnetwork__control,
-.sx-fieldnetwork.is-error .sx-fieldnetwork__control:focus-visible {
+.fieldnetwork.is-error .fieldnetwork__control { border-color: var(--status-critical); }
+.fieldnetwork.is-error.is-open .fieldnetwork__control,
+.fieldnetwork.is-error .fieldnetwork__control:focus-visible {
   box-shadow: 0 0 0 3px rgba(223, 19, 18, 0.16);
 }
-.sx-fieldnetwork.is-disabled .sx-fieldnetwork__control {
-  background: var(--sx-surface-disabled);
-  color: var(--sx-disabled-on-surface);
+.fieldnetwork.is-disabled .fieldnetwork__control {
+  background: var(--surface-disabled);
+  color: var(--disabled-on-surface);
   cursor: not-allowed;
 }
 
-.sx-fieldnetwork__value {
+.fieldnetwork__value {
   flex: 1 1 auto;
   min-width: 0;
-  font: var(--sx-body-large);
-  color: var(--sx-text-primary);
+  font: var(--body-large);
+  color: var(--text-primary);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.sx-fieldnetwork__value.is-placeholder { color: var(--sx-text-secondary); }
-.sx-fieldnetwork.is-disabled .sx-fieldnetwork__value { color: var(--sx-disabled-on-surface); }
+.fieldnetwork__value.is-placeholder { color: var(--input-placeholder); }
+.fieldnetwork.is-disabled .fieldnetwork__value { color: var(--disabled-on-surface); }
 
-.sx-fieldnetwork__chevron {
+.fieldnetwork__chevron {
   flex: 0 0 auto;
-  color: var(--sx-text-secondary);
+  color: var(--text-secondary);
   font-size: 22px;
-  transition: transform var(--sx-dur-1) var(--sx-ease);
+  transition: transform var(--dur-1) var(--ease);
 }
-.sx-fieldnetwork.is-open .sx-fieldnetwork__chevron { transform: rotate(180deg); }
+.fieldnetwork.is-open .fieldnetwork__chevron { transform: rotate(180deg); }
 
-.sx-fieldnetwork__mark {
+.fieldnetwork__mark {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
@@ -61,24 +61,24 @@
   width: 24px;
   height: 24px;
 }
-.sx-fieldnetwork__mark > * { width: 24px; height: 24px; }
-.sx-fieldnetwork__initials {
+.fieldnetwork__mark > * { width: 24px; height: 24px; }
+.fieldnetwork__initials {
   width: 24px;
   height: 24px;
-  border-radius: var(--sx-radius-full);
-  background: var(--sx-surface-secondary);
-  color: var(--sx-text-secondary);
-  font: var(--sx-label-small);
+  border-radius: var(--radius-full);
+  background: var(--surface-secondary);
+  color: var(--text-secondary);
+  font: var(--label-small);
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
 /* Popover menu */
-.sx-fieldnetwork__menu {
+.fieldnetwork__menu {
   position: absolute;
   z-index: 20;
-  top: calc(100% + var(--sx-space-2));
+  top: calc(100% + var(--space-2));
   left: 0;
   right: 0;
   margin: 0;
@@ -86,50 +86,50 @@
   list-style: none;
   max-height: 320px;
   overflow-y: auto;
-  background: var(--sx-surface);
-  border-radius: var(--sx-radius-lg);
-  box-shadow: var(--sx-shadow-1);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
 }
-.sx-fieldnetwork__option {
+.fieldnetwork__option {
   display: flex;
   align-items: center;
-  gap: var(--sx-space-2);
-  padding: var(--sx-space-3);
-  color: var(--sx-text-primary);
+  gap: var(--space-2);
+  padding: var(--space-3);
+  color: var(--text-primary);
   cursor: pointer;
-  transition: background var(--sx-dur-1) var(--sx-ease);
+  transition: background var(--dur-1) var(--ease);
 }
-.sx-fieldnetwork__option:hover { background: var(--sx-surface-hovered); }
-.sx-fieldnetwork__option.is-selected { background: var(--sx-surface-secondary); }
-.sx-fieldnetwork__option.is-disabled {
-  background: var(--sx-surface-disabled);
-  color: var(--sx-disabled-on-surface);
+.fieldnetwork__option:hover { background: var(--surface-hovered); }
+.fieldnetwork__option.is-selected { background: var(--surface-secondary); }
+.fieldnetwork__option.is-disabled {
+  background: var(--surface-disabled);
+  color: var(--disabled-on-surface);
   cursor: not-allowed;
 }
 
-.sx-fieldnetwork__opt-text {
+.fieldnetwork__opt-text {
   flex: 1 1 auto;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--sx-space-1);
+  gap: var(--space-1);
 }
-.sx-fieldnetwork__opt-name { font: var(--sx-body-large); color: inherit; }
-.sx-fieldnetwork__opt-secondary { font: var(--sx-body-medium); color: var(--sx-text-secondary); }
+.fieldnetwork__opt-name { font: var(--body-large); color: inherit; }
+.fieldnetwork__opt-secondary { font: var(--body-medium); color: var(--text-secondary); }
 
-.sx-fieldnetwork__tag {
+.fieldnetwork__tag {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-width: 40px;
   height: 24px;
-  padding: 0 var(--sx-space-2);
-  border-radius: var(--sx-radius-sm);
-  font: var(--sx-label-small);
-  color: var(--sx-text-inverse);
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-sm);
+  font: var(--label-small);
+  color: var(--text-inverse);
 }
-.sx-fieldnetwork__tag.is-positive { background: var(--sx-status-positive); }
-.sx-fieldnetwork__tag.is-critical { background: var(--sx-status-critical); }
-.sx-fieldnetwork__tag.is-warning { background: var(--sx-status-warning); }
-.sx-fieldnetwork__tag.is-information { background: var(--sx-status-information); }
+.fieldnetwork__tag.is-positive { background: var(--status-positive); }
+.fieldnetwork__tag.is-critical { background: var(--status-critical); }
+.fieldnetwork__tag.is-warning { background: var(--status-warning); }
+.fieldnetwork__tag.is-information { background: var(--status-information); }

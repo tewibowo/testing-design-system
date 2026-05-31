@@ -7,14 +7,14 @@ import "./Card.css";
  */
 export function Card({ surface = "default", className = "", title, body, children, ...rest }) {
   const cls = [
-    "sx-card",
-    surface !== "default" && `sx-card--${surface}`,
+    "card",
+    surface !== "default" && `card--${surface}`,
     className,
   ].filter(Boolean).join(" ");
   return (
     <section className={cls} {...rest}>
-      {title && <h3 className="sx-card__title">{title}</h3>}
-      {body && <p className="sx-card__body">{body}</p>}
+      {title && <h3 className="card__title">{title}</h3>}
+      {body && <p className="card__body">{body}</p>}
       {children}
     </section>
   );

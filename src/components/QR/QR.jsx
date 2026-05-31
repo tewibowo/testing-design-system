@@ -20,16 +20,16 @@ export function QR({
   className = "",
 }) {
   return (
-    <div className={"sx-qr " + className}>
+    <div className={"qr " + className}>
       <img
-        className="sx-qr__img"
+        className="qr__img"
         style={{ width: size, height: size }}
         src={urlBuilder(value, size)}
         alt={label || "QR code"}
         loading="lazy"
       />
-      {label && <div className="sx-qr__label">{label}</div>}
-      {sub && <div className="sx-qr__sub">{sub || value}</div>}
+      {label && <div className="qr__label">{label}</div>}
+      {sub && <div className="qr__sub">{sub || value}</div>}
     </div>
   );
 }

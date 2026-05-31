@@ -1,4 +1,4 @@
-.sx-link-btn {
+.link-btn {
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -6,26 +6,26 @@
   border: 0;
   cursor: pointer;
   padding: 0;
-  font-family: var(--sx-font-display);
+  font-family: var(--font-display);
   font-weight: 700;
-  color: var(--sx-text-primary);
+  color: var(--text-primary);
   text-decoration: underline;
   text-underline-offset: 3px;
-  transition: color var(--sx-dur-1) var(--sx-ease);
+  transition: color var(--dur-1) var(--ease);
 }
-.sx-link-btn:hover { color: var(--sx-interactive-active); }
-.sx-link-btn:focus-visible {
-  outline: 2px solid var(--sx-status-information);
+.link-btn:hover { color: var(--interactive-active); }
+.link-btn:focus-visible {
+  outline: 2px solid var(--status-information);
   outline-offset: 2px;
   border-radius: 2px;
 }
 
-.sx-link-btn--lg { font-size: 16px; line-height: 1.4; }
-.sx-link-btn--md { font-size: 14px; line-height: 1.4; }
-.sx-link-btn--sm { font-size: 12px; line-height: 1.4; }
+.link-btn--lg { font-size: 16px; line-height: 1.4; }
+.link-btn--md { font-size: 14px; line-height: 1.4; }
+.link-btn--sm { font-size: 12px; line-height: 1.4; }
 
-.sx-link-btn--onDark { color: var(--sx-primary); }
-.sx-link-btn--onDark:hover { color: var(--sx-brand-seamless-mint); }
+.link-btn--onDark { color: var(--primary); }
+.link-btn--onDark:hover { color: var(--brand-seamless-mint); }
 
-.sx-link-btn .material-symbols-rounded { font-size: 1.15em; }
-.sx-link-btn[disabled] { color: var(--sx-disabled-on-surface); cursor: not-allowed; }
+.link-btn .material-symbols-rounded { font-size: 1.15em; }
+.link-btn[disabled] { color: var(--disabled-on-surface); cursor: not-allowed; }

@@ -16,9 +16,9 @@ export function Button({
   ...rest
 }) {
   const cls = [
-    "sx-btn",
-    `sx-btn--${variant}`,
-    `sx-btn--${size}`,
+    "btn",
+    `btn--${variant}`,
+    `btn--${size}`,
     className,
   ]
     .filter(Boolean)

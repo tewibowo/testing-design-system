@@ -13,7 +13,7 @@ const mark = (label, bg) => (
     style={{
       width: 24, height: 24, borderRadius: 999, background: bg, color: "#fff",
       display: "inline-flex", alignItems: "center", justifyContent: "center",
-      font: "var(--sx-label-small)",
+      font: "var(--label-small)",
     }}
   >
     {label}
@@ -21,15 +21,15 @@ const mark = (label, bg) => (
 );
 
 const wallets = [
-  { value: "mm", name: "Metamask", address: "0x934ddab12av012345c1ertf897fec124f2gyb1", logo: mark("M", "var(--sx-status-warning)") },
+  { value: "mm", name: "Metamask", address: "0x934ddab12av012345c1ertf897fec124f2gyb1", logo: mark("M", "var(--status-warning)") },
   {
     value: "w2", name: "Wallet 2", address: "0x934ddab12av012345c1ertf897fec124f2gyb1",
-    logo: mark("W", "var(--sx-text-secondary)"),
+    logo: mark("W", "var(--text-secondary)"),
     status: { label: "Pending", variant: "warning" },
   },
   {
     value: "w3", name: "Wallet 3", address: "0x934ddab12av012345c1ertf897fec124f2gyb1",
-    logo: mark("W", "var(--sx-text-secondary)"),
+    logo: mark("W", "var(--text-secondary)"),
     action: { label: "Verify", onClick: () => {} },
   },
 ];

@@ -10,7 +10,7 @@ const Coin = ({ label, bg }) => (
       width: "100%",
       height: "100%",
       background: bg,
-      color: "var(--sx-text-inverse)",
+      color: "var(--text-inverse)",
       fontSize: 8,
       fontWeight: 700,
     }}
@@ -19,10 +19,10 @@ const Coin = ({ label, bg }) => (
   </span>
 );
 
-const xsgd = <Coin label="XS" bg="var(--sx-brand-xsgd)" />;
-const sgd = <Coin label="SG" bg="var(--sx-status-critical)" />;
-const xusd = <Coin label="XU" bg="var(--sx-brand-xusd)" />;
-const usd = <Coin label="US" bg="var(--sx-brand-credible-blue)" />;
+const xsgd = <Coin label="XS" bg="var(--brand-xsgd)" />;
+const sgd = <Coin label="SG" bg="var(--status-critical)" />;
+const xusd = <Coin label="XU" bg="var(--brand-xusd)" />;
+const usd = <Coin label="US" bg="var(--brand-credible-blue)" />;
 
 export default {
   title: "Components/Inline Cross Asset",

@@ -17,30 +17,30 @@ export function InlineCrossAsset({
   className = "",
   ...rest
 }) {
-  const cls = ["sx-inline-cross-asset", className].filter(Boolean).join(" ");
+  const cls = ["inline-cross-asset", className].filter(Boolean).join(" ");
   return (
     <div className={cls} {...rest}>
-      <div className="sx-inline-cross-asset__row">
-        <span className="sx-inline-cross-asset__asset">
+      <div className="inline-cross-asset__row">
+        <span className="inline-cross-asset__asset">
           {fromIcon != null && (
-            <span className="sx-inline-cross-asset__icon">{fromIcon}</span>
+            <span className="inline-cross-asset__icon">{fromIcon}</span>
           )}
-          <span className="sx-inline-cross-asset__symbol">{from}</span>
+          <span className="inline-cross-asset__symbol">{from}</span>
         </span>
         <span
-          className="sx-inline-cross-asset__arrow material-symbols-rounded"
+          className="inline-cross-asset__arrow material-symbols-rounded"
           aria-hidden="true"
         >
           arrow_forward
         </span>
-        <span className="sx-inline-cross-asset__asset">
+        <span className="inline-cross-asset__asset">
           {toIcon != null && (
-            <span className="sx-inline-cross-asset__icon">{toIcon}</span>
+            <span className="inline-cross-asset__icon">{toIcon}</span>
           )}
-          <span className="sx-inline-cross-asset__symbol">{to}</span>
+          <span className="inline-cross-asset__symbol">{to}</span>
         </span>
       </div>
-      {caption && <p className="sx-inline-cross-asset__caption">{caption}</p>}
+      {caption && <p className="inline-cross-asset__caption">{caption}</p>}
     </div>
   );
 }

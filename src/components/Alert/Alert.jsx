@@ -28,9 +28,9 @@ export function Alert({
   ...rest
 }) {
   const cls = [
-    "sx-alert",
-    `sx-alert--${tone}`,
-    `sx-alert--actions-${actionPlacement}`,
+    "alert",
+    `alert--${tone}`,
+    `alert--actions-${actionPlacement}`,
     className,
   ]
     .filter(Boolean)
@@ -39,22 +39,22 @@ export function Alert({
   return (
     <div role="alert" className={cls} {...rest}>
       {symbol && (
-        <span className="material-symbols-rounded sx-alert__icon" aria-hidden="true">
+        <span className="material-symbols-rounded alert__icon" aria-hidden="true">
           {symbol}
         </span>
       )}
-      <div className="sx-alert__body">
-        {title && <div className="sx-alert__title">{title}</div>}
-        {children && <div className="sx-alert__text">{children}</div>}
+      <div className="alert__body">
+        {title && <div className="alert__title">{title}</div>}
+        {children && <div className="alert__text">{children}</div>}
         {actions && actionPlacement === "bottom" && (
-          <div className="sx-alert__actions">{actions}</div>
+          <div className="alert__actions">{actions}</div>
         )}
       </div>
       {actions && actionPlacement === "right" && (
-        <div className="sx-alert__actions sx-alert__actions--right">{actions}</div>
+        <div className="alert__actions alert__actions--right">{actions}</div>
       )}
       {onDismiss && (
-        <button type="button" className="sx-alert__close" onClick={onDismiss} aria-label="Dismiss">
+        <button type="button" className="alert__close" onClick={onDismiss} aria-label="Dismiss">
           <span className="material-symbols-rounded">close</span>
         </button>
       )}

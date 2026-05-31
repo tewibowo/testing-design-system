@@ -1,4 +1,4 @@
-.sx-toast-region {
+.toast-region {
   position: fixed;
   right: 24px;
   bottom: 24px;
@@ -8,29 +8,29 @@
   z-index: 1000;
   pointer-events: none;
 }
-.sx-toast {
+.toast {
   pointer-events: auto;
   min-width: 280px;
   max-width: 420px;
-  background: var(--sx-text-primary);
-  color: var(--sx-text-inverse);
-  border-radius: var(--sx-radius-md);
+  background: var(--text-primary);
+  color: var(--text-inverse);
+  border-radius: var(--radius-md);
   padding: 12px 14px;
-  box-shadow: var(--sx-shadow-2);
+  box-shadow: var(--shadow-2);
   display: flex;
   gap: 10px;
   align-items: flex-start;
-  animation: sx-toast-in 240ms var(--sx-ease);
+  animation: toast-in 240ms var(--ease);
 }
-@keyframes sx-toast-in {
+@keyframes toast-in {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
-.sx-toast__icon { flex: 0 0 auto; font-size: 22px; margin-top: 1px; color: var(--sx-primary); }
-.sx-toast__body { flex: 1; min-width: 0; }
-.sx-toast__title { font: 700 14px/1.3 var(--sx-font-display); }
-.sx-toast__text { font: var(--sx-body-medium); color: rgba(255, 255, 255, 0.85); margin-top: 2px; }
-.sx-toast__close {
+.toast__icon { flex: 0 0 auto; font-size: 22px; margin-top: 1px; color: var(--primary); }
+.toast__body { flex: 1; min-width: 0; }
+.toast__title { font: 700 14px/1.3 var(--font-display); }
+.toast__text { font: var(--body-medium); color: rgba(255, 255, 255, 0.85); margin-top: 2px; }
+.toast__close {
   flex: 0 0 auto;
   background: transparent;
   border: 0;
@@ -40,8 +40,8 @@
   padding: 2px;
   margin: -2px;
 }
-.sx-toast__close:hover { opacity: 1; }
+.toast__close:hover { opacity: 1; }
 
-.sx-toast--critical .sx-toast__icon { color: var(--sx-status-critical); }
-.sx-toast--warning  .sx-toast__icon { color: var(--sx-status-warning); }
-.sx-toast--info     .sx-toast__icon { color: var(--sx-status-information); }
+.toast--critical .toast__icon { color: var(--status-critical); }
+.toast--warning  .toast__icon { color: var(--status-warning); }
+.toast--info     .toast__icon { color: var(--status-information); }

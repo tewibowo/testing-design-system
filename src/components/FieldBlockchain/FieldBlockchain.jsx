@@ -65,9 +65,9 @@ export function FieldBlockchain({
   };
 
   const renderMark = (o) => (
-    <span className="sx-fieldblockchain__mark" aria-hidden="true">
+    <span className="fieldblockchain__mark" aria-hidden="true">
       {o.logo || (
-        <span className="sx-fieldblockchain__initials">
+        <span className="fieldblockchain__initials">
           {(o.name || o.value || "?").slice(0, 2).toUpperCase()}
         </span>
       )}
@@ -75,22 +75,22 @@ export function FieldBlockchain({
   );
 
   const wrapCls = [
-    "sx-fieldblockchain",
+    "fieldblockchain",
     open && "is-open",
     isError && "is-error",
     disabled && "is-disabled",
   ].filter(Boolean).join(" ");
 
   return (
-    <div className={"sx-field " + className} ref={rootRef}>
-      <div className="sx-fieldblockchain__header">
+    <div className={"field " + className} ref={rootRef}>
+      <div className="fieldblockchain__header">
         {label && (
-          <span className="sx-field__label" id={`${id}-label`}>{label}</span>
+          <span className="field__label" id={`${id}-label`}>{label}</span>
         )}
         {addAction && (
           <button
             type="button"
-            className="sx-fieldblockchain__link"
+            className="fieldblockchain__link"
             onClick={addAction.onClick}
           >
             {addAction.label}
@@ -101,7 +101,7 @@ export function FieldBlockchain({
       <div className={wrapCls}>
         <button
           type="button"
-          className="sx-fieldblockchain__control"
+          className="fieldblockchain__control"
           disabled={disabled}
           aria-haspopup="listbox"
           aria-expanded={open}
@@ -111,22 +111,22 @@ export function FieldBlockchain({
           {selectedOption ? (
             <>
               {renderMark(selectedOption)}
-              <span className="sx-fieldblockchain__text">
-                <span className="sx-fieldblockchain__name">
+              <span className="fieldblockchain__text">
+                <span className="fieldblockchain__name">
                   {selectedOption.name ?? selectedOption.value}
                 </span>
                 {selectedOption.address && (
-                  <span className="sx-fieldblockchain__secondary">
+                  <span className="fieldblockchain__secondary">
                     {selectedOption.address}
                   </span>
                 )}
               </span>
             </>
           ) : (
-            <span className="sx-fieldblockchain__placeholder">{placeholder}</span>
+            <span className="fieldblockchain__placeholder">{placeholder}</span>
           )}
           <span
-            className="material-symbols-rounded sx-fieldblockchain__chevron"
+            className="material-symbols-rounded fieldblockchain__chevron"
             aria-hidden="true"
           >
             expand_more
@@ -134,7 +134,7 @@ export function FieldBlockchain({
         </button>
 
         {open && !disabled && (
-          <ul className="sx-fieldblockchain__menu" role="listbox">
+          <ul className="fieldblockchain__menu" role="listbox">
             {options.map((o) => {
               const on = o.value === selected;
               return (
@@ -144,26 +144,26 @@ export function FieldBlockchain({
                   aria-selected={on}
                   aria-disabled={o.disabled || undefined}
                   className={
-                    "sx-fieldblockchain__option" +
+                    "fieldblockchain__option" +
                     (on ? " is-selected" : "") +
                     (o.disabled ? " is-disabled" : "")
                   }
                   onClick={() => commit(o.value, o)}
                 >
                   {renderMark(o)}
-                  <span className="sx-fieldblockchain__text">
-                    <span className="sx-fieldblockchain__name">{o.name ?? o.value}</span>
+                  <span className="fieldblockchain__text">
+                    <span className="fieldblockchain__name">{o.name ?? o.value}</span>
                     {o.address && (
-                      <span className="sx-fieldblockchain__secondary">{o.address}</span>
+                      <span className="fieldblockchain__secondary">{o.address}</span>
                     )}
                     {o.meta && (
-                      <span className="sx-fieldblockchain__secondary">{o.meta}</span>
+                      <span className="fieldblockchain__secondary">{o.meta}</span>
                     )}
                   </span>
                   {o.status && (
                     <span
                       className={
-                        "sx-fieldblockchain__tag is-" + (o.status.variant || "warning")
+                        "fieldblockchain__tag is-" + (o.status.variant || "warning")
                       }
                     >
                       {o.status.label}
@@ -171,7 +171,7 @@ export function FieldBlockchain({
                   )}
                   {o.action && (
                     <span
-                      className="sx-fieldblockchain__link"
+                      className="fieldblockchain__link"
                       role="button"
                       onClick={(e) => {
                         e.stopPropagation();
@@ -189,7 +189,7 @@ export function FieldBlockchain({
       </div>
 
       {(helper || error) && (
-        <span className={"sx-field__helper" + (isError ? " is-error" : "")}>
+        <span className={"field__helper" + (isError ? " is-error" : "")}>
           {error || helper}
         </span>
       )}

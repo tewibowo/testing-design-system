@@ -5,14 +5,14 @@ import "./IconButton.css";
  * Icon-only button.
  *   variant: "ghost" | "outline" | "filled"
  *   shape:   "circle" | "square"
- *   size:    "lg" | "md" | "sm"
+ *   size:    "lg" | "sm"
  *   icon: Material Symbol name (e.g. "close", "arrow_forward")
  */
 export function IconButton({
   icon,
   variant = "ghost",
   shape = "circle",
-  size = "md",
+  size = "lg",
   label,
   disabled = false,
   className = "",
@@ -20,10 +20,10 @@ export function IconButton({
   ...rest
 }) {
   const cls = [
-    "sx-icon-btn",
-    `sx-icon-btn--${variant}`,
-    `sx-icon-btn--${shape}`,
-    `sx-icon-btn--${size}`,
+    "icon-btn",
+    `icon-btn--${variant}`,
+    `icon-btn--${shape}`,
+    `icon-btn--${size}`,
     className,
   ].filter(Boolean).join(" ");
   return (

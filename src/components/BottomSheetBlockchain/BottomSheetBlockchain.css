@@ -1,47 +1,47 @@
 /* BottomSheetBlockchain — single-select chain/wallet list in the BottomSheet shell. */
 
-.sx-bsc .sx-bsheet__body { padding-left: 0; padding-right: 0; }
+.bsc .bsheet__body { padding-left: 0; padding-right: 0; }
 
-.sx-bsc__list { list-style: none; margin: 0; padding: 0; }
-.sx-bsc__item {
+.bsc__list { list-style: none; margin: 0; padding: 0; }
+.bsc__item {
   width: 100%;
   display: flex;
   align-items: center;
-  gap: var(--sx-space-3);
-  padding: var(--sx-space-3) var(--sx-space-5);
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
   background: transparent;
   border: 0;
   text-align: left;
   cursor: pointer;
 }
-.sx-bsc__item:hover { background: var(--sx-surface-hovered); }
-.sx-bsc__item.is-selected { background: var(--sx-surface-secondary); }
+.bsc__item:hover { background: var(--surface-hovered); }
+.bsc__item.is-selected { background: var(--surface-secondary); }
 
-.sx-bsc__mark {
+.bsc__mark {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 32px;
   height: 32px;
-  border-radius: var(--sx-radius-full);
-  background: var(--sx-surface-secondary);
-  color: var(--sx-text-primary);
-  font: var(--sx-label-small);
+  border-radius: var(--radius-full);
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+  font: var(--label-small);
   overflow: hidden;
 }
-.sx-bsc__mark > * { width: 100%; height: 100%; }
+.bsc__mark > * { width: 100%; height: 100%; }
 
-.sx-bsc__text { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
-.sx-bsc__name { font: var(--sx-label-medium); color: var(--sx-text-primary); }
-.sx-bsc__desc {
-  font: var(--sx-body-small);
-  color: var(--sx-text-secondary);
-  font-family: var(--sx-font-mono);
+.bsc__text { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.bsc__name { font: var(--label-medium); color: var(--text-primary); }
+.bsc__desc {
+  font: var(--body-small);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.sx-bsc__check { flex: 0 0 auto; color: var(--sx-text-secondary); font-size: 22px; }
-.sx-bsc__item.is-selected .sx-bsc__check { color: var(--sx-primary); }
+.bsc__check { flex: 0 0 auto; color: var(--text-secondary); font-size: 22px; }
+.bsc__item.is-selected .bsc__check { color: var(--primary); }

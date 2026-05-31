@@ -1,15 +1,15 @@
 /* TransactionHistoryTable — builds on Table; styles transaction-specific cells. */
 
-.sx-txn .sx-txn__mono {
-  font-family: var(--sx-font-mono);
+.txn .txn__mono {
+  font-family: var(--font-body);
   font-variant-numeric: tabular-nums;
-  color: var(--sx-text-primary);
+  color: var(--text-primary);
 }
-.sx-txn .sx-txn__id {
-  font-family: var(--sx-font-mono);
-  color: var(--sx-link);
+.txn .txn__id {
+  font-family: var(--font-mono);
+  color: var(--link);
 }
-.sx-txn .sx-txn__truncate {
+.txn .txn__truncate {
   display: inline-block;
   max-width: 220px;
   overflow: hidden;

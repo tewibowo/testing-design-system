@@ -1,78 +1,78 @@
 /* Tag — migrated to STX semantic tokens (Figma: Status/* + Base Color/*).
  * Axes: tone × size (large|small) × appearance (outlined|filled),
  * plus removable + clickable affordances. */
-.sx-tag {
+.tag {
   display: inline-flex;
   align-items: center;
-  gap: var(--sx-space-1);
-  font: var(--sx-body-bold-small);
+  gap: var(--space-1);
+  font: var(--body-bold-small);
   border: 1px solid transparent;
-  border-radius: var(--sx-radius-md);
+  border-radius: var(--radius-md);
   /* button reset (clickable variant) */
   background: none;
   font-family: inherit;
   text-align: left;
   white-space: nowrap;
 }
-.sx-tag__label { display: inline-flex; align-items: center; gap: var(--sx-space-1); }
+.tag__label { display: inline-flex; align-items: center; gap: var(--space-1); }
 
 /* ── Leading icon ── */
-.sx-tag__icon { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
-.sx-tag__icon .material-symbols-rounded,
-.sx-tag__icon.material-symbols-rounded { font-size: 16px; line-height: 1; }
-.sx-tag--small .sx-tag__icon .material-symbols-rounded,
-.sx-tag--small .sx-tag__icon.material-symbols-rounded { font-size: 14px; }
-.sx-tag__icon svg { width: 1em; height: 1em; display: block; }
+.tag__icon { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+.tag__icon .material-symbols-rounded,
+.tag__icon.material-symbols-rounded { font-size: 16px; line-height: 1; }
+.tag--small .tag__icon .material-symbols-rounded,
+.tag--small .tag__icon.material-symbols-rounded { font-size: 14px; }
+.tag__icon svg { width: 1em; height: 1em; display: block; }
 
-.sx-tag--pill { border-radius: var(--sx-radius-full); }
+.tag--pill { border-radius: var(--radius-full); }
 
 /* ── Size ── */
-.sx-tag--large { padding: var(--sx-space-1) var(--sx-space-3); font: var(--sx-body-bold-small); }
-.sx-tag--small { padding: 2px var(--sx-space-2); font: var(--sx-label-small); }
+.tag--large { padding: var(--space-1) var(--space-3); font: var(--body-bold-small); }
+.tag--small { padding: 2px var(--space-2); font: var(--label-small); }
 
 /* ════════ Outlined (default) — surface bg + colored border/text ════════ */
-.sx-tag--outlined.sx-tag--positive {
-  background: var(--sx-status-surface-positive);
-  border-color: var(--sx-status-positive);
-  color: var(--sx-status-positive);
+.tag--outlined.tag--positive {
+  background: var(--status-surface-positive);
+  border-color: var(--status-positive);
+  color: var(--status-positive);
 }
-.sx-tag--outlined.sx-tag--critical {
-  background: var(--sx-status-surface-critical);
-  border-color: var(--sx-status-critical);
-  color: var(--sx-status-critical);
+.tag--outlined.tag--critical {
+  background: var(--status-surface-critical);
+  border-color: var(--status-critical);
+  color: var(--status-critical);
 }
-.sx-tag--outlined.sx-tag--warning {
-  background: var(--sx-status-surface-warning);
-  border-color: var(--sx-status-warning);
-  color: var(--sx-status-warning);
+.tag--outlined.tag--warning {
+  background: var(--status-surface-warning);
+  border-color: var(--status-warning);
+  color: var(--status-warning);
 }
-.sx-tag--outlined.sx-tag--info {
-  background: var(--sx-status-surface-information);
-  border-color: var(--sx-status-information);
-  color: var(--sx-status-information);
+.tag--outlined.tag--info {
+  background: var(--status-surface-information);
+  border-color: var(--status-information);
+  color: var(--status-information);
 }
-.sx-tag--outlined.sx-tag--neutral {
-  background: var(--sx-surface-secondary);
-  border-color: var(--sx-border);
-  color: var(--sx-text-primary);
+.tag--outlined.tag--neutral {
+  background: var(--surface-secondary);
+  border-color: var(--border);
+  color: var(--text-primary);
 }
-.sx-tag--outlined.sx-tag--brand {
-  background: var(--sx-surface);
-  border-color: var(--sx-primary);
-  color: var(--sx-text-primary);
+.tag--outlined.tag--brand {
+  background: var(--surface);
+  border-color: var(--primary);
+  color: var(--text-primary);
 }
 
 /* ════════ Filled — solid status bg + on-container text ════════ */
-.sx-tag--filled { border-color: transparent; color: var(--sx-text-inverse); }
-.sx-tag--filled.sx-tag--positive { background: var(--sx-status-positive); }
-.sx-tag--filled.sx-tag--critical { background: var(--sx-status-critical); }
-.sx-tag--filled.sx-tag--warning  { background: var(--sx-status-warning); }
-.sx-tag--filled.sx-tag--info     { background: var(--sx-status-information); }
-.sx-tag--filled.sx-tag--neutral  { background: var(--sx-text-secondary); }
-.sx-tag--filled.sx-tag--brand    { background: var(--sx-primary); color: var(--sx-text-primary); }
+.tag--filled { border-color: transparent; color: var(--text-inverse); }
+.tag--filled.tag--positive { background: var(--status-positive); }
+.tag--filled.tag--critical { background: var(--status-critical); }
+.tag--filled.tag--warning  { background: var(--status-warning); }
+.tag--filled.tag--info     { background: var(--status-information); }
+.tag--filled.tag--neutral  { background: var(--text-secondary); }
+.tag--filled.tag--brand    { background: var(--primary); color: var(--text-primary); }
 
 /* ── Removable close affordance ── */
-.sx-tag__remove {
+.tag__remove {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -82,24 +82,24 @@
   background: none;
   color: currentColor;
   cursor: pointer;
-  border-radius: var(--sx-radius-full);
+  border-radius: var(--radius-full);
   opacity: 0.75;
-  transition: opacity var(--sx-dur-1) var(--sx-ease), background var(--sx-dur-1) var(--sx-ease);
+  transition: opacity var(--dur-1) var(--ease), background var(--dur-1) var(--ease);
 }
-.sx-tag__remove:hover { opacity: 1; background: var(--sx-surface-hovered); }
-.sx-tag__remove:disabled { cursor: not-allowed; opacity: 0.4; }
+.tag__remove:hover { opacity: 1; background: var(--surface-hovered); }
+.tag__remove:disabled { cursor: not-allowed; opacity: 0.4; }
 
 /* ── Clickable ── */
-.sx-tag--clickable { cursor: pointer; transition: background var(--sx-dur-1) var(--sx-ease), border-color var(--sx-dur-1) var(--sx-ease); }
-.sx-tag--clickable:hover { background: var(--sx-surface-hovered); }
-.sx-tag--clickable.is-selected { font: var(--sx-body-bold-small); }
-.sx-tag--clickable:focus-visible { outline: 2px solid var(--sx-status-information); outline-offset: 2px; }
+.tag--clickable { cursor: pointer; transition: background var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease); }
+.tag--clickable:hover { background: var(--surface-hovered); }
+.tag--clickable.is-selected { font: var(--body-bold-small); }
+.tag--clickable:focus-visible { outline: 2px solid var(--status-information); outline-offset: 2px; }
 
 /* ── Disabled ── */
-.sx-tag.is-disabled {
-  background: var(--sx-surface-disabled);
-  border-color: var(--sx-border);
-  color: var(--sx-disabled-on-surface);
+.tag.is-disabled {
+  background: var(--surface-disabled);
+  border-color: var(--border);
+  color: var(--disabled-on-surface);
   cursor: not-allowed;
 }
-.sx-tag.is-disabled .sx-tag__remove { opacity: 0.4; cursor: not-allowed; }
+.tag.is-disabled .tag__remove { opacity: 0.4; cursor: not-allowed; }

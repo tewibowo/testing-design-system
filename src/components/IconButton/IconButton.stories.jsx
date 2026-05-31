@@ -9,7 +9,7 @@ export default {
     icon: { control: "text" },
     variant: { control: "inline-radio", options: ["ghost", "outline", "filled"] },
     shape: { control: "inline-radio", options: ["circle", "square"] },
-    size: { control: "inline-radio", options: ["lg", "md", "sm"] },
+    size: { control: "inline-radio", options: ["lg", "sm"] },
     disabled: { control: "boolean" },
   },
   args: { icon: "notifications", label: "Notifications" },
@@ -24,7 +24,6 @@ export const AllSizes = {
   render: () => (
     <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
       <IconButton icon="search" variant="outline" size="lg" label="Search lg" />
-      <IconButton icon="search" variant="outline" size="md" label="Search md" />
       <IconButton icon="search" variant="outline" size="sm" label="Search sm" />
     </div>
   ),
@@ -38,7 +37,7 @@ export const States = {
   parameters: { layout: "padded" },
   render: () => {
     const variants = ["filled", "outline", "ghost"];
-    const colHead = { font: "var(--sx-label-small)", color: "var(--sx-text-secondary)" };
+    const colHead = { font: "var(--label-small)", color: "var(--text-secondary)" };
     return (
       <div style={{ display: "grid", gridTemplateColumns: "auto repeat(4, max-content)", gap: 16, alignItems: "center" }}>
         <span />

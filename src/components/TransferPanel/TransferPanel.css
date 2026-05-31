@@ -1,24 +1,24 @@
-.sx-transfer { padding: 0; overflow: hidden; }
-.sx-tabs { display: flex; border-bottom: 1px solid var(--sx-border); }
-.sx-tab {
+.transfer { padding: 0; overflow: hidden; }
+.tabs { display: flex; border-bottom: 1px solid var(--border); }
+.tab {
   flex: 1;
   height: 56px;
   background: transparent;
   border: 0;
   cursor: pointer;
-  font: 700 16px/1 var(--sx-font-display);
-  color: var(--sx-text-secondary);
+  font: 700 16px/1 var(--font-display);
+  color: var(--text-secondary);
   position: relative;
 }
-.sx-tab:hover { color: var(--sx-text-primary); }
-.sx-tab.is-active { color: var(--sx-text-primary); }
-.sx-tab.is-active::after {
+.tab:hover { color: var(--text-primary); }
+.tab.is-active { color: var(--text-primary); }
+.tab.is-active::after {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
   bottom: -1px;
   height: 3px;
-  background: var(--sx-text-primary);
+  background: var(--text-primary);
 }
-.sx-transfer__body { padding: 36px 24px 28px; }
+.transfer__body { padding: 36px 24px 28px; }

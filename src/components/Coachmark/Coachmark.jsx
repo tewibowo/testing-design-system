@@ -85,23 +85,23 @@ export function Coachmark({
 
   return createPortal(
     <>
-      <div className="sx-coachmark-scrim" onClick={onDismiss} />
-      <div className="sx-coachmark-spot" style={spotStyle} aria-hidden="true" />
+      <div className="coachmark-scrim" onClick={onDismiss} />
+      <div className="coachmark-spot" style={spotStyle} aria-hidden="true" />
       <div
-        className={"sx-coachmark " + className}
+        className={"coachmark " + className}
         style={pop}
         data-placement={placement}
         role="dialog"
         aria-live="polite"
       >
-        <span className="sx-coachmark__beak" data-placement={placement} aria-hidden="true" />
+        <span className="coachmark__beak" data-placement={placement} aria-hidden="true" />
         {(title || onDismiss) && (
-          <div className="sx-coachmark__head">
-            {title && <div className="sx-coachmark__title">{title}</div>}
+          <div className="coachmark__head">
+            {title && <div className="coachmark__title">{title}</div>}
             {onDismiss && (
               <button
                 type="button"
-                className="sx-coachmark__close"
+                className="coachmark__close"
                 onClick={onDismiss}
                 aria-label="Dismiss"
               >
@@ -110,14 +110,14 @@ export function Coachmark({
             )}
           </div>
         )}
-        {body && <div className="sx-coachmark__body">{body}</div>}
-        <div className="sx-coachmark__foot">
+        {body && <div className="coachmark__body">{body}</div>}
+        <div className="coachmark__foot">
           {step != null && totalSteps != null ? (
-            <div className="sx-coachmark__dots" role="tablist" aria-label={`Step ${step} of ${totalSteps}`}>
+            <div className="coachmark__dots" role="tablist" aria-label={`Step ${step} of ${totalSteps}`}>
               {Array.from({ length: totalSteps }).map((_, i) => (
                 <span
                   key={i}
-                  className="sx-coachmark__dot"
+                  className="coachmark__dot"
                   data-active={i + 1 === step || undefined}
                   aria-current={i + 1 === step ? "step" : undefined}
                 />
@@ -126,7 +126,7 @@ export function Coachmark({
           ) : (
             <span />
           )}
-          <div className="sx-coachmark__actions">
+          <div className="coachmark__actions">
             {onPrev && step > 1 && <Button variant="tertiary" size="sm" onClick={onPrev}>{prevLabel}</Button>}
             <Button variant="primary" size="sm" onClick={isLast ? onDismiss : onNext || onDismiss}>
               {isLast ? doneLabel : nextLabel}

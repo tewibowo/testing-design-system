@@ -1,22 +1,22 @@
 /* StatusIcon — Figma: Status Icon / Success (5700:9327) */
-.sx-status-icon {
-  --sx-status-icon-size: 36px; /* component-scoped override hook */
+.status-icon {
+  --status-icon-size: 36px; /* component-scoped override hook */
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--sx-status-icon-size, 36px);
-  height: var(--sx-status-icon-size, 36px);
-  border-radius: var(--sx-radius-full);
-  color: var(--sx-text-inverse);
+  width: var(--status-icon-size, 36px);
+  height: var(--status-icon-size, 36px);
+  border-radius: var(--radius-full);
+  color: var(--text-inverse);
   flex-shrink: 0;
 }
-.sx-status-icon .material-symbols-rounded {
-  font-size: calc(var(--sx-status-icon-size, 36px) * 0.56);
+.status-icon .material-symbols-rounded {
+  font-size: calc(var(--status-icon-size, 36px) * 0.56);
   line-height: 1;
 }
-.sx-status-icon--success {
-  background: var(--sx-status-positive);
+.status-icon--success {
+  background: var(--status-positive);
 }
-.sx-status-icon--needApproval {
-  background: var(--sx-status-warning);
+.status-icon--needApproval {
+  background: var(--status-warning);
 }

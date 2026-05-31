@@ -1,24 +1,24 @@
-.sx-page-title {
+.page-title {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   gap: 24px;
   flex-wrap: wrap;
   padding-bottom: 16px;
-  border-bottom: 1px solid var(--sx-border);
+  border-bottom: 1px solid var(--border);
   margin-bottom: 24px;
 }
-.sx-page-title__head { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-.sx-page-title__h1 {
-  font: 700 28px/1.2 var(--sx-font-display);
-  color: var(--sx-text-primary);
+.page-title__head { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.page-title__h1 {
+  font: 700 28px/1.2 var(--font-display);
+  color: var(--text-primary);
   letter-spacing: -0.01em;
   margin: 0;
 }
-.sx-page-title__sub {
-  font: var(--sx-body-large);
-  color: var(--sx-text-secondary);
+.page-title__sub {
+  font: var(--body-large);
+  color: var(--text-secondary);
   margin: 0;
   max-width: 64ch;
 }
-.sx-page-title__actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.page-title__actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }

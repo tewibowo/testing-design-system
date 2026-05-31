@@ -45,11 +45,11 @@ export function Input({
   };
 
   const wrapCls = [
-    "sx-input",
-    `sx-input--${size === "small" ? "small" : "large"}`,
+    "input",
+    `input--${size === "small" ? "small" : "large"}`,
     isError && "is-error",
     disabled && "is-disabled",
-    trailingButton && "sx-input--with-button",
+    trailingButton && "input--with-button",
     className,
   ].filter(Boolean).join(" ");
 
@@ -64,13 +64,13 @@ export function Input({
   };
 
   return (
-    <div className="sx-field">
-      {label && <label htmlFor={id} className="sx-field__label">{label}</label>}
+    <div className="field">
+      {label && <label htmlFor={id} className="field__label">{label}</label>}
       <div className={wrapCls}>
         {isSearch && (
-          <span className="material-symbols-rounded sx-input__lead" aria-hidden="true">search</span>
+          <span className="material-symbols-rounded input__lead" aria-hidden="true">search</span>
         )}
-        {prefix && !isSearch && <span className="sx-input__prefix">{prefix}</span>}
+        {prefix && !isSearch && <span className="input__prefix">{prefix}</span>}
         <input
           id={id}
           type={effectiveType}
@@ -82,7 +82,7 @@ export function Input({
         {isSearch && currentValue && !disabled && (
           <button
             type="button"
-            className="sx-input__icon-btn"
+            className="input__icon-btn"
             onClick={handleClear}
             aria-label="Clear"
           >
@@ -92,18 +92,18 @@ export function Input({
         {isPassword && !disabled && (
           <button
             type="button"
-            className="sx-input__icon-btn"
+            className="input__icon-btn"
             onClick={() => setReveal((r) => !r)}
             aria-label={reveal ? "Hide password" : "Show password"}
           >
             <span className="material-symbols-rounded">{reveal ? "visibility_off" : "visibility"}</span>
           </button>
         )}
-        {suffix && !isSearch && !isPassword && <span className="sx-input__suffix">{suffix}</span>}
+        {suffix && !isSearch && !isPassword && <span className="input__suffix">{suffix}</span>}
         {trailingButton && (
           <button
             type="button"
-            className="sx-input__trailing-btn"
+            className="input__trailing-btn"
             onClick={trailingButton.onClick}
             disabled={disabled || trailingButton.disabled}
           >
@@ -112,7 +112,7 @@ export function Input({
         )}
       </div>
       {(helper || error) && (
-        <span className={"sx-field__helper" + (isError ? " is-error" : "")}>
+        <span className={"field__helper" + (isError ? " is-error" : "")}>
           {error || helper}
         </span>
       )}

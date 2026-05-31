@@ -41,9 +41,9 @@ export function SelectionBox({
   const id = idProp || autoId;
 
   const cls = [
-    "sx-selbox",
-    `sx-selbox--${type}`,
-    `sx-selbox--indicator-${indicator}`,
+    "selbox",
+    `selbox--${type}`,
+    `selbox--indicator-${indicator}`,
     selected && "is-selected",
     disabled && "is-disabled",
     className,
@@ -61,7 +61,7 @@ export function SelectionBox({
   const renderIndicator = () => {
     if (indicator === "icon") {
       return (
-        <span className="sx-selbox__indicator sx-selbox__indicator--icon" aria-hidden="true">
+        <span className="selbox__indicator selbox__indicator--icon" aria-hidden="true">
           <svg viewBox="0 0 16 16" width="16" height="16" fill="none">
             <path
               d="M3 8.5 L6.5 12 L13 4.5"
@@ -76,7 +76,7 @@ export function SelectionBox({
     }
     if (type === "check") {
       return (
-        <span className="sx-selbox__indicator sx-selbox__box sx-selbox__box--check" aria-hidden="true">
+        <span className="selbox__indicator selbox__box selbox__box--check" aria-hidden="true">
           <svg viewBox="0 0 16 16" width="14" height="14" fill="none">
             <path
               d="M3 8.5 L6.5 12 L13 4.5"
@@ -89,7 +89,7 @@ export function SelectionBox({
         </span>
       );
     }
-    return <span className="sx-selbox__indicator sx-selbox__box sx-selbox__box--radio" aria-hidden="true" />;
+    return <span className="selbox__indicator selbox__box selbox__box--radio" aria-hidden="true" />;
   };
 
   return (
@@ -102,13 +102,13 @@ export function SelectionBox({
         checked={selected}
         disabled={disabled}
         onChange={handleChange}
-        className="sx-selbox__input"
+        className="selbox__input"
       />
       {renderIndicator()}
-      {icon && <span className="sx-selbox__icon" aria-hidden="true">{icon}</span>}
-      <span className="sx-selbox__content">
-        {label && <span className="sx-selbox__label">{label}</span>}
-        {description && <span className="sx-selbox__desc">{description}</span>}
+      {icon && <span className="selbox__icon" aria-hidden="true">{icon}</span>}
+      <span className="selbox__content">
+        {label && <span className="selbox__label">{label}</span>}
+        {description && <span className="selbox__desc">{description}</span>}
       </span>
     </label>
   );

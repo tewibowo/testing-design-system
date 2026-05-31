@@ -5,7 +5,7 @@ import "../Input/Input.css";
  * Date input — uses the native browser date picker (Calendar UI),
  * styled to match StraitsX inputs. For non-modern browsers, falls back to text.
  *
- * Size axis: "large" (48px, default) | "small" (40px) — matches Input.
+ * Size axis: "large" (48px, default) | "small" (36px) — matches Input.
  *
  * Date-range mode (`range`): renders start–end date fields sharing one
  * calendar adornment. Control via `startValue`/`endValue`/`onRangeChange`.
@@ -29,13 +29,13 @@ export function DateInput({
 }) {
   const id = useId();
   const isError = !!error;
-  const sizeCls = `sx-input--${size === "small" ? "small" : "large"}`;
+  const sizeCls = `input--${size === "small" ? "small" : "large"}`;
   const wrapCls = [
-    "sx-input",
+    "input",
     sizeCls,
     isError && "is-error",
     disabled && "is-disabled",
-    range && "sx-input--range",
+    range && "input--range",
   ].filter(Boolean).join(" ");
 
   const handleRange = (key) => (e) => {
@@ -45,8 +45,8 @@ export function DateInput({
   };
 
   return (
-    <div className={"sx-field " + className}>
-      {label && <label htmlFor={range ? undefined : idProp || id} className="sx-field__label">{label}</label>}
+    <div className={"field " + className}>
+      {label && <label htmlFor={range ? undefined : idProp || id} className="field__label">{label}</label>}
       <div className={wrapCls}>
         {range ? (
           <>
@@ -58,7 +58,7 @@ export function DateInput({
               aria-label="Start date"
               {...inputProps}
             />
-            <span className="sx-input__range-sep" aria-hidden="true">–</span>
+            <span className="input__range-sep" aria-hidden="true">–</span>
             <input
               type="date"
               disabled={disabled}
@@ -66,17 +66,17 @@ export function DateInput({
               onChange={onRangeChange ? handleRange("end") : undefined}
               aria-label="End date"
             />
-            <span className="material-symbols-rounded" style={{ color: "var(--sx-text-secondary)", pointerEvents: "none" }} aria-hidden="true">date_range</span>
+            <span className="material-symbols-rounded" style={{ color: "var(--text-secondary)", pointerEvents: "none" }} aria-hidden="true">date_range</span>
           </>
         ) : (
           <>
             <input id={idProp || id} type="date" disabled={disabled} {...inputProps} />
-            <span className="material-symbols-rounded" style={{ color: "var(--sx-text-secondary)", pointerEvents: "none" }} aria-hidden="true">calendar_today</span>
+            <span className="material-symbols-rounded" style={{ color: "var(--text-secondary)", pointerEvents: "none" }} aria-hidden="true">calendar_today</span>
           </>
         )}
       </div>
       {(helper || error) && (
-        <span className={"sx-field__helper" + (isError ? " is-error" : "")}>{error || helper}</span>
+        <span className={"field__helper" + (isError ? " is-error" : "")}>{error || helper}</span>
       )}
     </div>
   );

@@ -10,10 +10,10 @@ import "./Badge.css";
  */
 export function Badge({ tone = "brand", size = "md", dot = false, max = 99, children, className = "", ...rest }) {
   const cls = [
-    "sx-badge",
-    `sx-badge--${size}`,
-    tone !== "brand" && `sx-badge--${tone}`,
-    dot && "sx-badge--dot",
+    "badge",
+    `badge--${size}`,
+    tone !== "brand" && `badge--${tone}`,
+    dot && "badge--dot",
     className,
   ].filter(Boolean).join(" ");
   const content = dot
@@ -26,7 +26,7 @@ export function Badge({ tone = "brand", size = "md", dot = false, max = 99, chil
 
 Badge.Wrap = function BadgeWrap({ badge, children }) {
   return (
-    <span className="sx-badge-wrap">
+    <span className="badge-wrap">
       {children}
       {badge}
     </span>

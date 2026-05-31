@@ -10,9 +10,9 @@ const Logo = () => (
       width: 40,
       height: 24,
       borderRadius: 4,
-      background: "var(--sx-surface-secondary)",
-      font: "var(--sx-label-small)",
-      color: "var(--sx-text-secondary)",
+      background: "var(--surface-secondary)",
+      font: "var(--label-small)",
+      color: "var(--text-secondary)",
     }}
   >
     DBS
@@ -37,7 +37,7 @@ export default {
   },
   decorators: [
     (S) => (
-      <div style={{ maxWidth: 360, border: "1px solid var(--sx-border)", borderRadius: 8 }}>
+      <div style={{ maxWidth: 360, border: "1px solid var(--border)", borderRadius: 8 }}>
         <S />
       </div>
     ),
@@ -53,7 +53,7 @@ export const Rejected = { args: { variant: "rejected" } };
 export const List = {
   decorators: [(S) => <div style={{ maxWidth: 360 }}><S /></div>],
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", border: "1px solid var(--sx-border)", borderRadius: 8 }}>
+    <div style={{ display: "flex", flexDirection: "column", border: "1px solid var(--border)", borderRadius: 8 }}>
       <ListBank logo={<Logo />} name="John Doe" account="DBS - 0053105977203" />
       <ListBank logo={<Logo />} name="Jane Lim" account="DBS - 0053105977213" swift="UOVBSGSG" variant="verified" />
       <ListBank logo={<Logo />} name="Acme Pte Ltd" account="DBS - 0053105977299" variant="rejected" />

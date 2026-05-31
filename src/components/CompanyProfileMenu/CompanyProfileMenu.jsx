@@ -32,29 +32,29 @@ export function CompanyProfileMenu({
   className = "",
 }) {
   return (
-    <div className={"sx-company-menu " + className} role="menu">
+    <div className={"company-menu " + className} role="menu">
       {switchCompany && companies.length > 0 && (
         <>
-          <div className="sx-company-menu__header">Switch Company</div>
+          <div className="company-menu__header">Switch Company</div>
           {companies.map((c) => (
             <button
               key={c.id}
               type="button"
               role="menuitemradio"
               aria-checked={!!c.selected}
-              className={"sx-company-menu__company" + (c.selected ? " is-selected" : "")}
+              className={"company-menu__company" + (c.selected ? " is-selected" : "")}
               onClick={() => onSwitch && onSwitch(c.id)}
             >
-              <span className="sx-company-menu__company-text">
-                <span className="sx-company-menu__company-name">{c.name}</span>
-                <span className="sx-company-menu__company-type">{c.type}</span>
+              <span className="company-menu__company-text">
+                <span className="company-menu__company-name">{c.name}</span>
+                <span className="company-menu__company-type">{c.type}</span>
               </span>
               {c.selected && (
-                <span className="material-symbols-rounded sx-company-menu__check" aria-hidden="true">check</span>
+                <span className="material-symbols-rounded company-menu__check" aria-hidden="true">check</span>
               )}
             </button>
           ))}
-          <div className="sx-company-menu__divider" role="separator" />
+          <div className="company-menu__divider" role="separator" />
         </>
       )}
 
@@ -63,11 +63,11 @@ export function CompanyProfileMenu({
           key={a.id}
           type="button"
           role="menuitem"
-          className="sx-company-menu__action"
+          className="company-menu__action"
           onClick={() => onAction && onAction(a.id)}
         >
           <span className="material-symbols-rounded" aria-hidden="true">{a.icon}</span>
-          <span className="sx-company-menu__action-label">{a.label}</span>
+          <span className="company-menu__action-label">{a.label}</span>
         </button>
       ))}
     </div>

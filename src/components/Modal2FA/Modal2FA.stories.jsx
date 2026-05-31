@@ -9,7 +9,7 @@ export default {
 };
 
 const Illustration = () => (
-  <span className="material-symbols-rounded" style={{ fontSize: 96, color: "var(--sx-primary)" }}>
+  <span className="material-symbols-rounded" style={{ fontSize: 96, color: "var(--primary)" }}>
     phonelink_lock
   </span>
 );

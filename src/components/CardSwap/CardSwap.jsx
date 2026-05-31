@@ -30,19 +30,19 @@ export function CardSwap({
   className = "",
   ...rest
 }) {
-  const cls = ["sx-card-swap", className].filter(Boolean).join(" ");
+  const cls = ["card-swap", className].filter(Boolean).join(" ");
   return (
     <section className={cls} {...rest}>
-      <p className="sx-card-swap__title">{title}</p>
+      <p className="card-swap__title">{title}</p>
 
       <Leg label="From" leg={from} />
 
-      <div className="sx-card-swap__rate-row">
-        <div className="sx-card-swap__rate-col">
-          {rate && <span className="sx-card-swap__rate">{rate}</span>}
+      <div className="card-swap__rate-row">
+        <div className="card-swap__rate-col">
+          {rate && <span className="card-swap__rate">{rate}</span>}
           {highlight && (
-            <span className="sx-card-swap__highlight">
-              <Icon name="check_circle" size={18} className="sx-card-swap__highlight-icon" />
+            <span className="card-swap__highlight">
+              <Icon name="check_circle" size={18} className="card-swap__highlight-icon" />
               {highlight}
             </span>
           )}
@@ -52,35 +52,35 @@ export function CardSwap({
 
       <Leg label="To" leg={to} />
 
-      <Button variant="primary" size="lg" className="sx-card-swap__btn" onClick={onSwap}>
+      <Button variant="primary" size="lg" className="card-swap__btn" onClick={onSwap}>
         {buttonLabel}
       </Button>
 
-      {footnote && <p className="sx-card-swap__footnote">{footnote}</p>}
+      {footnote && <p className="card-swap__footnote">{footnote}</p>}
     </section>
   );
 }
 
 function Leg({ label, leg }) {
   return (
-    <div className="sx-card-swap__leg">
-      <div className="sx-card-swap__leg-labels">
-        <span className="sx-card-swap__leg-label">{label}</span>
-        {leg.balance && <span className="sx-card-swap__leg-balance">Balance: {leg.balance}</span>}
+    <div className="card-swap__leg">
+      <div className="card-swap__leg-labels">
+        <span className="card-swap__leg-label">{label}</span>
+        {leg.balance && <span className="card-swap__leg-balance">Balance: {leg.balance}</span>}
       </div>
-      <div className="sx-card-swap__field">
-        <div className="sx-card-swap__field-main">
-          <span className="sx-card-swap__amount num">{leg.amount}</span>
+      <div className="card-swap__field">
+        <div className="card-swap__field-main">
+          <span className="card-swap__amount num">{leg.amount}</span>
           {leg.onMax && (
-            <button type="button" className="sx-card-swap__max" onClick={leg.onMax}>Max</button>
+            <button type="button" className="card-swap__max" onClick={leg.onMax}>Max</button>
           )}
         </div>
-        <div className="sx-card-swap__suffix">
-          <span className="sx-card-swap__coin" aria-hidden="true">
-            {leg.logo || <span className="sx-card-swap__coin-initial">{(leg.currency || "?").charAt(0)}</span>}
+        <div className="card-swap__suffix">
+          <span className="card-swap__coin" aria-hidden="true">
+            {leg.logo || <span className="card-swap__coin-initial">{(leg.currency || "?").charAt(0)}</span>}
           </span>
-          <span className="sx-card-swap__currency">{leg.currency}</span>
-          <Icon name="expand_more" size={24} className="sx-card-swap__chevron" />
+          <span className="card-swap__currency">{leg.currency}</span>
+          <Icon name="expand_more" size={24} className="card-swap__chevron" />
         </div>
       </div>
     </div>

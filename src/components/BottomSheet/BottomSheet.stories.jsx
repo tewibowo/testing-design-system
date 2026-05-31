@@ -15,7 +15,7 @@ function Demo({ title = "Send to" }) {
       <Button onClick={() => setOpen(true)}>Open bottom sheet</Button>
       <BottomSheet open={open} onClose={() => setOpen(false)} title={title}>
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          <p style={{ font: "var(--sx-body-medium)", color: "var(--sx-text-secondary)", margin: 0 }}>
+          <p style={{ font: "var(--body-medium)", color: "var(--text-secondary)", margin: 0 }}>
             Choose how you'd like to send funds.
           </p>
           <Button>Bank transfer</Button>
@@ -46,7 +46,7 @@ export const WithFooter = {
             </>
           }
         >
-          <p style={{ font: "var(--sx-body-medium)", color: "var(--sx-text-secondary)", margin: 0 }}>
+          <p style={{ font: "var(--body-medium)", color: "var(--text-secondary)", margin: 0 }}>
             You are about to send 1,250 XSGD to John Doe. This action cannot be undone.
           </p>
         </BottomSheet>

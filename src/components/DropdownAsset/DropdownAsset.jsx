@@ -21,7 +21,7 @@ export function DropdownAsset({
   ...rest
 }) {
   return (
-    <ul className={"sx-dropdown-asset " + className} role="listbox" {...rest}>
+    <ul className={"dropdown-asset " + className} role="listbox" {...rest}>
       {options.map((o) => {
         const selected = o.value === value;
         return (
@@ -31,27 +31,27 @@ export function DropdownAsset({
             aria-selected={selected}
             aria-disabled={o.disabled || undefined}
             className={
-              "sx-dropdown-asset__row" +
+              "dropdown-asset__row" +
               (selected ? " is-selected" : "") +
               (o.disabled ? " is-disabled" : "")
             }
             onClick={() => !o.disabled && onSelect && onSelect(o.value, o)}
           >
-            <span className="sx-dropdown-asset__mark" aria-hidden="true">
+            <span className="dropdown-asset__mark" aria-hidden="true">
               {o.logo || (
-                <span className="sx-dropdown-asset__initials">
+                <span className="dropdown-asset__initials">
                   {(o.name || o.value || "?").slice(0, 2).toUpperCase()}
                 </span>
               )}
             </span>
-            <span className="sx-dropdown-asset__text">
-              <span className="sx-dropdown-asset__name">{o.name ?? o.value}</span>
+            <span className="dropdown-asset__text">
+              <span className="dropdown-asset__name">{o.name ?? o.value}</span>
               {o.secondary && (
-                <span className="sx-dropdown-asset__secondary">{o.secondary}</span>
+                <span className="dropdown-asset__secondary">{o.secondary}</span>
               )}
             </span>
             {o.balance != null && (
-              <span className="sx-dropdown-asset__balance">{o.balance}</span>
+              <span className="dropdown-asset__balance">{o.balance}</span>
             )}
           </li>
         );

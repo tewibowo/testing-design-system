@@ -27,26 +27,26 @@ export function BottomSheetBlockchain({
   className = "",
 }) {
   return (
-    <BottomSheet open={open} onClose={onClose} title={title} className={"sx-bsc " + className}>
-      <ul className="sx-bsc__list">
+    <BottomSheet open={open} onClose={onClose} title={title} className={"bsc " + className}>
+      <ul className="bsc__list">
         {chains.map((c) => {
           const selected = c.id === selectedId;
           return (
             <li key={c.id ?? c.name}>
               <button
                 type="button"
-                className={"sx-bsc__item" + (selected ? " is-selected" : "")}
+                className={"bsc__item" + (selected ? " is-selected" : "")}
                 onClick={() => onSelect && onSelect(c)}
                 aria-pressed={selected}
               >
-                <span className="sx-bsc__mark" aria-hidden="true">
+                <span className="bsc__mark" aria-hidden="true">
                   {c.mark || (c.name ? c.name.slice(0, 1) : "")}
                 </span>
-                <span className="sx-bsc__text">
-                  <span className="sx-bsc__name">{c.name}</span>
-                  {c.description && <span className="sx-bsc__desc">{c.description}</span>}
+                <span className="bsc__text">
+                  <span className="bsc__name">{c.name}</span>
+                  {c.description && <span className="bsc__desc">{c.description}</span>}
                 </span>
-                <span className="material-symbols-rounded sx-bsc__check" aria-hidden="true">
+                <span className="material-symbols-rounded bsc__check" aria-hidden="true">
                   {selected ? "radio_button_checked" : "radio_button_unchecked"}
                 </span>
               </button>

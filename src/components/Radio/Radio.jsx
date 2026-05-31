@@ -18,7 +18,7 @@ export function Radio({
 }) {
   const id = useId();
   const cls = [
-    "sx-control",
+    "control",
     disabled && "is-disabled",
     error && "is-error",
     className,
@@ -36,11 +36,11 @@ export function Radio({
         onChange={onChange}
         {...inputProps}
       />
-      <span className="sx-radio__box" aria-hidden="true" />
+      <span className="radio__box" aria-hidden="true" />
       {label && (
-        <span className="sx-control__label">
+        <span className="control__label">
           {label}
-          {sub && <span className="sx-control__sub">{sub}</span>}
+          {sub && <span className="control__sub">{sub}</span>}
         </span>
       )}
     </label>
@@ -51,7 +51,7 @@ export function Radio({
 export function RadioGroup({ name, value, onChange, options = [], legend, className = "" }) {
   return (
     <fieldset style={{ border: 0, padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 }} className={className}>
-      {legend && <legend style={{ font: "var(--sx-label-medium)", color: "var(--sx-text-primary)", padding: 0, marginBottom: 4 }}>{legend}</legend>}
+      {legend && <legend style={{ font: "var(--label-medium)", color: "var(--text-primary)", padding: 0, marginBottom: 4 }}>{legend}</legend>}
       {options.map((o) => (
         <Radio
           key={o.value}

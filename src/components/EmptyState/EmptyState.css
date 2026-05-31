@@ -1,4 +1,4 @@
-.sx-empty {
+.empty {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,14 +6,14 @@
   gap: 8px;
   padding: 32px 16px;
 }
-.sx-empty.is-compact { gap: 6px; padding: 20px 12px; }
-.sx-empty__title {
-  font: 700 16px/1.3 var(--sx-font-display);
-  color: var(--sx-text-primary);
+.empty.is-compact { gap: 6px; padding: 20px 12px; }
+.empty__title {
+  font: 700 16px/1.3 var(--font-display);
+  color: var(--text-primary);
   max-width: 480px;
 }
-.sx-empty__sub {
-  font: var(--sx-body-medium);
-  color: var(--sx-text-secondary);
+.empty__sub {
+  font: var(--body-medium);
+  color: var(--text-secondary);
   max-width: 480px;
 }
