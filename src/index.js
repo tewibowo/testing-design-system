@@ -83,3 +83,4 @@ export { BottomSheetNetwork } from "./components/BottomSheetNetwork/BottomSheetN
 export { Modal2FA } from "./components/Modal2FA/Modal2FA.jsx";
 export { TransactionHistoryTable } from "./components/TransactionHistoryTable/TransactionHistoryTable.jsx";
 export { AssetMark } from "./components/AssetMark/AssetMark.jsx";
+export { CompanyProfileMenu } from "./components/CompanyProfileMenu/CompanyProfileMenu.jsx";

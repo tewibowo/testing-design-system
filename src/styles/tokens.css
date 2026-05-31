@@ -126,6 +126,9 @@
   --sx-btn-tertiary-hovered:  rgba(5, 73, 72, 0.10);
   --sx-btn-tertiary-pressed:  rgba(5, 73, 72, 0.15);
 
+  /* ── Component/Sidebar ── */
+  --sx-sidebar-active: #d7efe2;  /* active nav item / sub-item highlight */
+
   /* ════════════════════════════════════════════════════════════════
    * 3. TYPOGRAPHY  —  font shorthand: `weight size/line-height family`
    * Family/size/weight per Figma. Display/Title/Label = Red Hat Display

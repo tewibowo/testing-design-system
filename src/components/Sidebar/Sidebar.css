@@ -1,49 +1,124 @@
+/* Sidebar — Figma "Sidebar - Base". 240px, surface bg, justify-between with
+ * MAS badge pinned at the bottom. Account variants, company dropdown,
+ * expandable sub-items, semantic tokens. */
 .sx-sidebar {
   background: var(--sx-surface);
-  padding: 32px 16px 24px;
+  padding: var(--sx-space-7) var(--sx-space-4);
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  justify-content: space-between;
+  gap: var(--sx-space-6);
   border-right: 1px solid var(--sx-border);
-  min-width: 248px;
-  height: 100%;
+  width: 240px;
+  min-height: 100%;
 }
-.sx-sidebar__brand { display: flex; align-items: center; gap: 10px; padding: 0 8px 12px; }
+.sx-sidebar__top { display: flex; flex-direction: column; gap: var(--sx-space-6); }
+
+.sx-sidebar__brand { display: flex; align-items: center; gap: var(--sx-space-2); }
 .sx-sidebar__brand-name {
-  font: 800 22px/1 var(--sx-font-display);
+  font: var(--sx-title-small);
   color: var(--sx-text-primary);
   letter-spacing: -0.01em;
 }
-.sx-sidebar__brand-sub { font: var(--sx-body-small); color: var(--sx-text-secondary); margin-top: 2px; }
-.sx-sidebar__nav { display: flex; flex-direction: column; gap: 4px; }
+.sx-sidebar__brand-sub { font: var(--sx-body-small); color: var(--sx-interactive-active); margin-top: 2px; }
+
+/* Company profile dropdown trigger */
+.sx-sidebar__company {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sx-space-2);
+  width: 100%;
+  padding: var(--sx-space-3);
+  border: 0;
+  border-radius: var(--sx-radius-md);
+  background: var(--sx-surface-secondary);
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--sx-dur-1) var(--sx-ease);
+}
+.sx-sidebar__company:hover { background: var(--sx-surface-hovered); }
+.sx-sidebar__company-text { display: flex; flex-direction: column; gap: var(--sx-space-1); min-width: 0; }
+.sx-sidebar__company-name {
+  font: var(--sx-label-medium);
+  color: var(--sx-text-secondary);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.sx-sidebar__company-type { font: var(--sx-body-small); color: var(--sx-text-secondary); }
+.sx-sidebar__company-chevron { color: var(--sx-text-secondary); font-size: 22px; flex: 0 0 auto; }
+
+.sx-sidebar__nav { display: flex; flex-direction: column; gap: var(--sx-space-2); }
+.sx-sidebar__group { display: flex; flex-direction: column; }
 
 .sx-nav-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
-  border-radius: var(--sx-radius-md);
+  gap: var(--sx-space-2);
+  padding: var(--sx-space-3);
+  border-radius: var(--sx-radius-sm);
   border: 0;
   background: transparent;
-  color: var(--sx-text-primary);
+  color: var(--sx-text-secondary);
   cursor: pointer;
   font: var(--sx-body-medium);
   text-align: left;
+  width: 100%;
   transition: background var(--sx-dur-1) var(--sx-ease), color var(--sx-dur-1) var(--sx-ease);
 }
 .sx-nav-item:hover { background: var(--sx-surface-secondary); }
 .sx-nav-item.is-active {
-  background: var(--sx-status-surface-positive);
-  color: var(--sx-interactive-active);
-  font-weight: 700;
+  background: var(--sx-sidebar-active);
+  color: var(--sx-status-positive);
+  font: var(--sx-body-bold-medium);
 }
-.sx-nav-item.is-active .material-symbols-rounded { color: var(--sx-interactive-active); }
-.sx-nav-item__label { flex: 1; }
+.sx-nav-item.is-active .material-symbols-rounded { color: var(--sx-status-positive); }
+.sx-nav-item__label { flex: 1; min-width: 0; }
 .sx-nav-item__tag {
-  font: 700 11px/1 var(--sx-font-display);
-  padding: 3px 8px;
-  border-radius: var(--sx-radius-full);
-  background: var(--sx-brand-seamless-mint);
-  color: var(--sx-text-primary);
+  font: var(--sx-label-small);
+  padding: 2px var(--sx-space-2);
+  border-radius: var(--sx-radius-sm);
+  background: var(--sx-status-positive);
+  color: var(--sx-text-inverse);
+  min-width: 40px;
+  text-align: center;
 }
+.sx-nav-item__chevron {
+  font-size: 22px; flex: 0 0 auto; color: var(--sx-text-secondary);
+  transition: transform var(--sx-dur-1) var(--sx-ease);
+}
+.sx-nav-item__chevron.is-open { transform: rotate(180deg); }
 .sx-nav-item .material-symbols-rounded { font-size: 22px; color: var(--sx-text-secondary); }
+
+/* Expandable sub-items */
+.sx-sidebar__subnav { display: flex; flex-direction: column; }
+.sx-subitem {
+  display: flex;
+  align-items: center;
+  padding: var(--sx-space-2) var(--sx-space-3) var(--sx-space-2) 44px;
+  border: 0;
+  background: transparent;
+  color: var(--sx-text-secondary);
+  font: var(--sx-body-medium);
+  text-align: left;
+  cursor: pointer;
+  border-radius: var(--sx-radius-sm);
+  transition: background var(--sx-dur-1) var(--sx-ease), color var(--sx-dur-1) var(--sx-ease);
+}
+.sx-subitem:hover { background: var(--sx-surface-secondary); }
+.sx-subitem.is-active {
+  background: var(--sx-sidebar-active);
+  color: var(--sx-status-positive);
+  font: var(--sx-body-bold-medium);
+}
+
+/* MAS regulatory badge */
+.sx-sidebar__mas {
+  display: flex;
+  align-items: center;
+  gap: var(--sx-space-2);
+  padding: var(--sx-space-2) 10px;
+  border-radius: var(--sx-radius-md);
+  background: var(--sx-surface-secondary);
+}
+.sx-sidebar__mas .material-symbols-rounded { font-size: 22px; color: var(--sx-text-secondary); flex: 0 0 auto; }
+.sx-sidebar__mas-text { font: var(--sx-body-small); color: var(--sx-text-secondary); }
