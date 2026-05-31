@@ -2,7 +2,7 @@ import React from "react";
 import "./tokens.css";
 
 export default {
-  title: "Tokens/Typography",
+  title: "Foundations/Typography",
   parameters: { layout: "padded" },
 };
 

@@ -2,7 +2,7 @@ import React from "react";
 import { TopBar } from "./TopBar.jsx";
 
 export default {
-  title: "Composition/TopBar",
+  title: "Compositions/Top Bar",
   component: TopBar,
   parameters: { layout: "padded" },
   argTypes: {

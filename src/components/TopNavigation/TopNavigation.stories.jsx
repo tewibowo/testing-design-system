@@ -3,7 +3,7 @@ import { TopNavigation } from "./TopNavigation.jsx";
 import { Button } from "../Button/Button.jsx";
 
 export default {
-  title: "Components/TopNavigation",
+  title: "Compositions/Top Navigation",
   component: TopNavigation,
   parameters: { layout: "fullscreen" },
 };

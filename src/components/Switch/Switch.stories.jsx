@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Switch } from "./Switch.jsx";
 
 export default {
-  title: "Components/Switch",
+  title: "Atoms/Switch",
   component: Switch,
   parameters: { layout: "padded" },
   args: { label: "Two-factor authentication" },

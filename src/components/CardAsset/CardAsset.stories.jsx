@@ -2,7 +2,7 @@ import React from "react";
 import { CardAsset } from "./CardAsset.jsx";
 
 export default {
-  title: "Components/CardAsset",
+  title: "Components/Card/Asset",
   component: CardAsset,
   parameters: { layout: "padded" },
 };

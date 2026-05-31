@@ -2,7 +2,7 @@ import React from "react";
 import { CardChecklist } from "./CardChecklist.jsx";
 
 export default {
-  title: "Components/CardChecklist",
+  title: "Components/Card/Checklist",
   component: CardChecklist,
   parameters: { layout: "padded" },
 };

@@ -4,7 +4,7 @@ import { Breadcrumb } from "../Breadcrumb/Breadcrumb.jsx";
 import { Button } from "../Button/Button.jsx";
 
 export default {
-  title: "Components/PageTitle",
+  title: "Components/Page Title",
   component: PageTitle,
   parameters: { layout: "padded" },
   decorators: [(S) => <div style={{ maxWidth: 960 }}><S /></div>],

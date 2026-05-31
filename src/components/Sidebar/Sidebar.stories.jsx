@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Sidebar, DEFAULT_NAV_ITEMS } from "./Sidebar.jsx";
 
 export default {
-  title: "Composition/Sidebar",
+  title: "Compositions/Sidebar",
   component: Sidebar,
   parameters: { layout: "fullscreen" },
 };

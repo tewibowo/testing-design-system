@@ -3,7 +3,7 @@ import { BottomSheet } from "./BottomSheet.jsx";
 import { Button } from "../Button/Button.jsx";
 
 export default {
-  title: "Components/BottomSheet",
+  title: "Components/Bottom Sheet",
   component: BottomSheet,
   parameters: { layout: "centered" },
 };

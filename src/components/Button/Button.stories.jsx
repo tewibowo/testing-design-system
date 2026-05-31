@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "./Button.jsx";
 
 export default {
-  title: "Components/Button",
+  title: "Atoms/Button",
   component: Button,
   parameters: { layout: "centered" },
   argTypes: {

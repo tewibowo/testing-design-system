@@ -2,7 +2,7 @@ import React from "react";
 import { StatusIcon } from "./StatusIcon.jsx";
 
 export default {
-  title: "Components/StatusIcon",
+  title: "Atoms/Status Icon",
   component: StatusIcon,
   parameters: { layout: "centered" },
   argTypes: {

@@ -2,7 +2,7 @@ import React from "react";
 import { CardAttribute } from "./CardAttribute.jsx";
 
 export default {
-  title: "Components/CardAttribute",
+  title: "Components/Card/Attribute",
   component: CardAttribute,
   parameters: { layout: "padded" },
 };

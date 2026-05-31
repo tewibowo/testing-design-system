@@ -2,7 +2,7 @@ import React from "react";
 import { DateInput } from "./DateInput.jsx";
 
 export default {
-  title: "Components/DateInput",
+  title: "Components/Date Input",
   component: DateInput,
   parameters: { layout: "padded" },
   decorators: [(S) => <div style={{ maxWidth: 320 }}><S /></div>],

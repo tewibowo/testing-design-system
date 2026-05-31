@@ -3,7 +3,7 @@ import { ModalAssetSelection } from "./ModalAssetSelection.jsx";
 import { Button } from "../Button/Button.jsx";
 
 export default {
-  title: "Components/ModalAssetSelection",
+  title: "Components/Modal/Asset Selection",
   component: ModalAssetSelection,
   parameters: { layout: "centered" },
 };

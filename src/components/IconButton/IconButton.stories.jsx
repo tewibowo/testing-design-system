@@ -2,7 +2,7 @@ import React from "react";
 import { IconButton } from "./IconButton.jsx";
 
 export default {
-  title: "Components/IconButton",
+  title: "Atoms/Icon Button",
   component: IconButton,
   parameters: { layout: "centered" },
   argTypes: {

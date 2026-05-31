@@ -2,7 +2,7 @@ import React from "react";
 import { ListSupportedNetwork } from "./ListSupportedNetwork.jsx";
 
 export default {
-  title: "Components/ListSupportedNetwork",
+  title: "Components/List/Supported Network",
   component: ListSupportedNetwork,
   parameters: { layout: "padded" },
 };

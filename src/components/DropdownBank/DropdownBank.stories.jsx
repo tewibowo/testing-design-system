@@ -3,7 +3,7 @@ import { DropdownBank } from "./DropdownBank.jsx";
 import { AssetMark } from "../AssetMark/AssetMark.jsx";
 
 export default {
-  title: "Components/DropdownBank",
+  title: "Components/Dropdown/Bank",
   component: DropdownBank,
   parameters: { layout: "padded" },
   decorators: [(S) => <div style={{ maxWidth: 328 }}><S /></div>],

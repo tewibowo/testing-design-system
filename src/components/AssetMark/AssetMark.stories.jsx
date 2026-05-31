@@ -2,7 +2,7 @@ import React from "react";
 import { AssetMark } from "./AssetMark.jsx";
 
 export default {
-  title: "Components/AssetMark",
+  title: "Atoms/Asset Mark",
   component: AssetMark,
   parameters: { layout: "padded" },
 };

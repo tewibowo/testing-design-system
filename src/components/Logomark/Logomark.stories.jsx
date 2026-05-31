@@ -2,7 +2,7 @@ import React from "react";
 import { Logomark } from "./Logomark.jsx";
 
 export default {
-  title: "Brand/Logomark",
+  title: "Atoms/Logomark",
   component: Logomark,
   parameters: { layout: "centered" },
   argTypes: {

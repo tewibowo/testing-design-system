@@ -2,7 +2,7 @@ import React from "react";
 import { ImportantNotes } from "./ImportantNotes.jsx";
 
 export default {
-  title: "Components/ImportantNotes",
+  title: "Components/Important Notes",
   component: ImportantNotes,
   parameters: { layout: "padded" },
   decorators: [(S) => <div style={{ maxWidth: 720 }}><S /></div>],

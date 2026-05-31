@@ -3,7 +3,7 @@ import { BottomSheetNetwork } from "./BottomSheetNetwork.jsx";
 import { Button } from "../Button/Button.jsx";
 
 export default {
-  title: "Components/BottomSheetNetwork",
+  title: "Components/Bottom Sheet/Network",
   component: BottomSheetNetwork,
   parameters: { layout: "centered" },
 };

@@ -2,7 +2,7 @@ import React from "react";
 import { OtcBanner } from "./OtcBanner.jsx";
 
 export default {
-  title: "Composition/OtcBanner",
+  title: "Compositions/OTC Banner",
   component: OtcBanner,
   parameters: { layout: "padded" },
   decorators: [(S) => <div style={{ maxWidth: 420 }}><S /></div>],

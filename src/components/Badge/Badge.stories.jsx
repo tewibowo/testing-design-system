@@ -3,7 +3,7 @@ import { Badge } from "./Badge.jsx";
 import { IconButton } from "../IconButton/IconButton.jsx";
 
 export default {
-  title: "Components/Badge",
+  title: "Atoms/Badge",
   component: Badge,
   parameters: { layout: "centered" },
   argTypes: {

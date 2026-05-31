@@ -3,7 +3,7 @@ import { Modal2FA } from "./Modal2FA.jsx";
 import { Button } from "../Button/Button.jsx";
 
 export default {
-  title: "Components/Modal2FA",
+  title: "Components/Modal/2FA",
   component: Modal2FA,
   parameters: { layout: "centered" },
 };

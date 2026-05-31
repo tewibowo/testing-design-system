@@ -2,7 +2,7 @@ import React from "react";
 import { TransferPanel } from "./TransferPanel.jsx";
 
 export default {
-  title: "Composition/TransferPanel",
+  title: "Compositions/Transfer Panel",
   component: TransferPanel,
   parameters: { layout: "padded" },
   decorators: [(S) => <div style={{ maxWidth: 720, background: '#F1F2F4', padding: 24 }}><S /></div>],

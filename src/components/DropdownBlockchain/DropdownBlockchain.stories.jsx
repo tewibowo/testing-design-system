@@ -3,7 +3,7 @@ import { DropdownBlockchain } from "./DropdownBlockchain.jsx";
 import { AssetMark } from "../AssetMark/AssetMark.jsx";
 
 export default {
-  title: "Components/DropdownBlockchain",
+  title: "Components/Dropdown/Blockchain",
   component: DropdownBlockchain,
   parameters: { layout: "padded" },
   decorators: [(S) => <div style={{ maxWidth: 328 }}><S /></div>],
