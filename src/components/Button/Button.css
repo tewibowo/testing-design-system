@@ -17,7 +17,8 @@
               color var(--sx-dur-1) var(--sx-ease),
               border-color var(--sx-dur-1) var(--sx-ease);
 }
-.sx-btn:focus-visible {
+.sx-btn:focus-visible,
+.sx-btn.is-focused {
   outline: 2px solid var(--sx-status-information);
   outline-offset: 2px;
 }
@@ -32,16 +33,20 @@
   background: var(--sx-primary);
   color: var(--sx-text-primary);
 }
-.sx-btn--primary:hover { background: var(--sx-btn-primary-hovered); }
-.sx-btn--primary:active { background: var(--sx-btn-primary-pressed); color: var(--sx-text-inverse); }
+.sx-btn--primary:hover,
+.sx-btn--primary.is-hovered { background: var(--sx-btn-primary-hovered); }
+.sx-btn--primary:active,
+.sx-btn--primary.is-pressed { background: var(--sx-btn-primary-pressed); color: var(--sx-text-inverse); }
 
 .sx-btn--secondary {
   background: transparent;
   color: var(--sx-btn-secondary-text);
   border: 1.5px solid var(--sx-interactive-active);
 }
-.sx-btn--secondary:hover { background: var(--sx-btn-secondary-hovered); }
-.sx-btn--secondary:active { background: var(--sx-btn-secondary-pressed); }
+.sx-btn--secondary:hover,
+.sx-btn--secondary.is-hovered { background: var(--sx-btn-secondary-hovered); }
+.sx-btn--secondary:active,
+.sx-btn--secondary.is-pressed { background: var(--sx-btn-secondary-pressed); }
 
 .sx-btn--tertiary {
   background: transparent;
@@ -50,8 +55,10 @@
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-.sx-btn--tertiary:hover { background: var(--sx-btn-tertiary-hovered); color: var(--sx-interactive-active); }
-.sx-btn--tertiary:active { background: var(--sx-btn-tertiary-pressed); }
+.sx-btn--tertiary:hover,
+.sx-btn--tertiary.is-hovered { background: var(--sx-btn-tertiary-hovered); color: var(--sx-interactive-active); }
+.sx-btn--tertiary:active,
+.sx-btn--tertiary.is-pressed { background: var(--sx-btn-tertiary-pressed); }
 
 .sx-btn[disabled],
 .sx-btn[aria-disabled="true"] {

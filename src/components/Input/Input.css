@@ -16,7 +16,20 @@
   color: var(--sx-text-primary);
   transition: border-color var(--sx-dur-1) var(--sx-ease), box-shadow var(--sx-dur-1) var(--sx-ease);
 }
-.sx-input:focus-within {
+/* Size axis — large (48px, default) | small (40px) */
+.sx-input--large { height: 48px; padding: 0 14px; font: var(--sx-body-large); }
+.sx-input--small {
+  height: 40px;
+  padding: 0 var(--sx-space-3);
+  font: var(--sx-body-medium);
+  border-radius: var(--sx-radius-md);
+}
+.sx-input:hover,
+.sx-input.is-hovered {
+  border-color: var(--sx-text-secondary);
+}
+.sx-input:focus-within,
+.sx-input.is-focused {
   border-color: var(--sx-interactive-active);
   box-shadow: 0 0 0 3px rgba(0, 211, 126, 0.16);
 }
@@ -55,6 +68,12 @@
 .sx-input__lead {
   color: var(--sx-text-secondary);
   font-size: 20px;
+}
+
+/* Date-range separator (DateInput range mode) */
+.sx-input--range .sx-input__range-sep {
+  color: var(--sx-text-secondary);
+  flex: 0 0 auto;
 }
 
 .sx-input__icon-btn {

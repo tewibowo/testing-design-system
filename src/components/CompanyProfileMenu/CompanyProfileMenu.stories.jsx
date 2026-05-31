@@ -1,0 +1,24 @@
+import React from "react";
+import { CompanyProfileMenu } from "./CompanyProfileMenu.jsx";
+
+export default {
+  title: "Components/CompanyProfileMenu",
+  component: CompanyProfileMenu,
+  parameters: { layout: "padded" },
+  decorators: [(S) => <div style={{ minHeight: 320 }}><S /></div>],
+};
+
+const companies = [
+  { id: "abc", name: "ABC Pte. Ltd", type: "Business Account", selected: true },
+  { id: "xyz", name: "XYZ Pte. Ltd", type: "Business Account" },
+];
+
+export const Default = { args: {} };
+
+export const WithSwitchCompany = {
+  args: { switchCompany: true, companies },
+};
+
+export const SwitchOnly = {
+  args: { switchCompany: true, companies, actions: [] },
+};

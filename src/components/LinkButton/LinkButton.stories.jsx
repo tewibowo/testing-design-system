@@ -16,6 +16,7 @@ export default {
 };
 
 export const Default = {};
+export const NoIcon = { args: { leadingIcon: undefined, trailingIcon: undefined, children: "Learn more" } };
 export const WithLeadingIcon = { args: { leadingIcon: "download", trailingIcon: undefined, children: "Download statement" } };
 export const OnDarkSurface = {
   args: { onDark: true, children: "Request Quote" },

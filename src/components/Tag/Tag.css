@@ -1,42 +1,105 @@
-/* Tag — migrated to STX semantic tokens (Figma: Status/* + Base Color/*). */
+/* Tag — migrated to STX semantic tokens (Figma: Status/* + Base Color/*).
+ * Axes: tone × size (large|small) × appearance (outlined|filled),
+ * plus removable + clickable affordances. */
 .sx-tag {
   display: inline-flex;
   align-items: center;
   gap: var(--sx-space-1);
-  padding: var(--sx-space-1) var(--sx-space-3);
   font: var(--sx-body-bold-small);
   border: 1px solid transparent;
   border-radius: var(--sx-radius-md);
+  /* button reset (clickable variant) */
+  background: none;
+  font-family: inherit;
+  text-align: left;
+  white-space: nowrap;
 }
+.sx-tag__label { display: inline-flex; align-items: center; gap: var(--sx-space-1); }
+
+/* ── Leading icon ── */
+.sx-tag__icon { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+.sx-tag__icon .material-symbols-rounded,
+.sx-tag__icon.material-symbols-rounded { font-size: 16px; line-height: 1; }
+.sx-tag--small .sx-tag__icon .material-symbols-rounded,
+.sx-tag--small .sx-tag__icon.material-symbols-rounded { font-size: 14px; }
+.sx-tag__icon svg { width: 1em; height: 1em; display: block; }
+
 .sx-tag--pill { border-radius: var(--sx-radius-full); }
 
-.sx-tag--positive {
+/* ── Size ── */
+.sx-tag--large { padding: var(--sx-space-1) var(--sx-space-3); font: var(--sx-body-bold-small); }
+.sx-tag--small { padding: 2px var(--sx-space-2); font: var(--sx-label-small); }
+
+/* ════════ Outlined (default) — surface bg + colored border/text ════════ */
+.sx-tag--outlined.sx-tag--positive {
   background: var(--sx-status-surface-positive);
   border-color: var(--sx-status-positive);
   color: var(--sx-status-positive);
 }
-.sx-tag--critical {
+.sx-tag--outlined.sx-tag--critical {
   background: var(--sx-status-surface-critical);
   border-color: var(--sx-status-critical);
   color: var(--sx-status-critical);
 }
-.sx-tag--warning {
+.sx-tag--outlined.sx-tag--warning {
   background: var(--sx-status-surface-warning);
   border-color: var(--sx-status-warning);
   color: var(--sx-status-warning);
 }
-.sx-tag--info {
+.sx-tag--outlined.sx-tag--info {
   background: var(--sx-status-surface-information);
   border-color: var(--sx-status-information);
   color: var(--sx-status-information);
 }
-.sx-tag--neutral {
+.sx-tag--outlined.sx-tag--neutral {
   background: var(--sx-surface-secondary);
   border-color: var(--sx-border);
   color: var(--sx-text-primary);
 }
-.sx-tag--brand {
-  background: var(--sx-primary);
+.sx-tag--outlined.sx-tag--brand {
+  background: var(--sx-surface);
+  border-color: var(--sx-primary);
   color: var(--sx-text-primary);
-  border-color: transparent;
 }
+
+/* ════════ Filled — solid status bg + on-container text ════════ */
+.sx-tag--filled { border-color: transparent; color: var(--sx-text-inverse); }
+.sx-tag--filled.sx-tag--positive { background: var(--sx-status-positive); }
+.sx-tag--filled.sx-tag--critical { background: var(--sx-status-critical); }
+.sx-tag--filled.sx-tag--warning  { background: var(--sx-status-warning); }
+.sx-tag--filled.sx-tag--info     { background: var(--sx-status-information); }
+.sx-tag--filled.sx-tag--neutral  { background: var(--sx-text-secondary); }
+.sx-tag--filled.sx-tag--brand    { background: var(--sx-primary); color: var(--sx-text-primary); }
+
+/* ── Removable close affordance ── */
+.sx-tag__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin-left: 2px;
+  border: 0;
+  background: none;
+  color: currentColor;
+  cursor: pointer;
+  border-radius: var(--sx-radius-full);
+  opacity: 0.75;
+  transition: opacity var(--sx-dur-1) var(--sx-ease), background var(--sx-dur-1) var(--sx-ease);
+}
+.sx-tag__remove:hover { opacity: 1; background: var(--sx-surface-hovered); }
+.sx-tag__remove:disabled { cursor: not-allowed; opacity: 0.4; }
+
+/* ── Clickable ── */
+.sx-tag--clickable { cursor: pointer; transition: background var(--sx-dur-1) var(--sx-ease), border-color var(--sx-dur-1) var(--sx-ease); }
+.sx-tag--clickable:hover { background: var(--sx-surface-hovered); }
+.sx-tag--clickable.is-selected { font: var(--sx-body-bold-small); }
+.sx-tag--clickable:focus-visible { outline: 2px solid var(--sx-status-information); outline-offset: 2px; }
+
+/* ── Disabled ── */
+.sx-tag.is-disabled {
+  background: var(--sx-surface-disabled);
+  border-color: var(--sx-border);
+  color: var(--sx-disabled-on-surface);
+  cursor: not-allowed;
+}
+.sx-tag.is-disabled .sx-tag__remove { opacity: 0.4; cursor: not-allowed; }

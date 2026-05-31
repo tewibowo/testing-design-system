@@ -23,3 +23,27 @@ export const Prefilled = {
     multiple: true,
   },
 };
+
+// Inline SVG data URI so the thumbnail renders without a network/object URL.
+const sampleImage =
+  "data:image/svg+xml;utf8," +
+  encodeURIComponent(
+    "<svg xmlns='http://www.w3.org/2000/svg' width='96' height='96'>" +
+      "<rect width='96' height='96' fill='%2300d37e'/>" +
+      "<rect x='18' y='30' width='60' height='40' rx='4' fill='%23002b2a'/>" +
+      "<circle cx='34' cy='44' r='6' fill='%2379ffca'/>" +
+      "</svg>"
+  );
+
+export const Uploaded = {
+  args: {
+    label: "Proof of identity",
+    multiple: true,
+    files: [
+      // Image file → renders a thumbnail preview.
+      { name: "selfie.png", size: 842_000, type: "image/png", preview: sampleImage },
+      // Non-image file → renders a document placeholder icon.
+      { name: "address-proof.pdf", size: 1_180_000, type: "application/pdf" },
+    ],
+  },
+};

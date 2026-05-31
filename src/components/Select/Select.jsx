@@ -6,6 +6,8 @@ import "./Select.css";
  * For combobox-style typeahead, build on top of a popover (future work).
  *
  *   <Select label="Currency" options={[{value, label}]} />
+ *
+ * size: "large" (48px, default) | "small" (40px) — matches Input.
  */
 export function Select({
   label,
@@ -13,6 +15,7 @@ export function Select({
   error,
   options = [],
   placeholder = "Select…",
+  size = "large",
   disabled = false,
   id: idProp,
   className = "",
@@ -22,6 +25,7 @@ export function Select({
   const isError = !!error;
   const wrapCls = [
     "sx-select",
+    `sx-select--${size === "small" ? "small" : "large"}`,
     isError && "is-error",
     disabled && "is-disabled",
   ].filter(Boolean).join(" ");

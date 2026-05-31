@@ -41,3 +41,32 @@ export const AllSizes = {
     </div>
   ),
 };
+
+/* Interaction states forced via state-class hooks so Chromatic can snapshot
+ * hover / pressed without driving real pointer events. */
+export const States = {
+  parameters: { layout: "padded" },
+  render: () => {
+    const variants = ["primary", "secondary", "tertiary"];
+    const cell = { display: "flex", flexDirection: "column", gap: 8 };
+    const colHead = { font: "var(--sx-label-small)", color: "var(--sx-text-secondary)" };
+    return (
+      <div style={{ display: "grid", gridTemplateColumns: "auto repeat(4, max-content)", gap: 16, alignItems: "center" }}>
+        <span />
+        <span style={colHead}>Enabled</span>
+        <span style={colHead}>Hovered</span>
+        <span style={colHead}>Pressed</span>
+        <span style={colHead}>Disabled</span>
+        {variants.map((v) => (
+          <React.Fragment key={v}>
+            <span style={{ ...colHead, textTransform: "capitalize" }}>{v}</span>
+            <Button variant={v}>Button</Button>
+            <Button variant={v} className="is-hovered">Button</Button>
+            <Button variant={v} className="is-pressed">Button</Button>
+            <Button variant={v} disabled>Button</Button>
+          </React.Fragment>
+        ))}
+      </div>
+    );
+  },
+};

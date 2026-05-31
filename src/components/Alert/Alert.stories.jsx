@@ -33,6 +33,31 @@ export const WithActions = {
   },
 };
 
+export const CTABottom = {
+  args: {
+    tone: "warning",
+    title: "Assessment expiring",
+    children: "Your customer knowledge assessment expires on 31 Dec 2026.",
+    actionPlacement: "bottom",
+    actions: (
+      <>
+        <Button size="sm" variant="primary">Take Assessment</Button>
+        <Button size="sm" variant="tertiary">Remind me later</Button>
+      </>
+    ),
+  },
+};
+
+export const CTARight = {
+  args: {
+    tone: "info",
+    title: "Verification pending",
+    children: "Complete your identity verification to raise your limits.",
+    actionPlacement: "right",
+    actions: <Button size="sm" variant="primary">Verify</Button>,
+  },
+};
+
 export const Dismissible = {
   args: { onDismiss: () => {} },
 };

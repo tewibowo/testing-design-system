@@ -40,9 +40,51 @@
 .sx-menu__item:hover,
 .sx-menu__item:focus-visible { background: var(--sx-surface-secondary); outline: none; }
 .sx-menu__item[disabled] { color: var(--sx-disabled-on-surface); cursor: not-allowed; }
-.sx-menu__item .material-symbols-rounded { font-size: 20px; color: var(--sx-text-secondary); }
+.sx-menu__item[disabled] .sx-menu__item-secondary,
+.sx-menu__item[disabled] .sx-menu__item-trailing { color: var(--sx-disabled-on-surface); }
+.sx-menu__icon { font-size: 20px; color: var(--sx-text-secondary); flex: 0 0 auto; }
 .sx-menu__item--critical { color: var(--sx-status-critical); }
-.sx-menu__item--critical .material-symbols-rounded { color: var(--sx-status-critical); }
+.sx-menu__item--critical .sx-menu__icon { color: var(--sx-status-critical); }
+
+/* text column (label + supporting secondary text) */
+.sx-menu__item-text { display: flex; flex-direction: column; gap: 2px; flex: 1 1 auto; min-width: 0; }
+.sx-menu__item-label { display: block; }
+.sx-menu__item-secondary {
+  font: var(--sx-body-small);
+  color: var(--sx-text-secondary);
+}
+.sx-menu__item-trailing {
+  flex: 0 0 auto;
+  margin-left: auto;
+  font: var(--sx-body-small);
+  color: var(--sx-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* selection affordances */
+.sx-menu__check {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  color: var(--sx-primary);
+}
+.sx-menu__check .material-symbols-rounded { font-size: 18px; color: inherit; }
+/* single-select: trailing tick, only visible when selected */
+.sx-menu__check--tick { margin-left: auto; }
+/* multi-select: leading checkbox box */
+.sx-menu__check--box {
+  border: 1.5px solid var(--sx-border);
+  border-radius: var(--sx-radius-sm);
+  color: var(--sx-text-inverse);
+}
+.sx-menu__item.is-selected .sx-menu__check--box {
+  background: var(--sx-primary);
+  border-color: var(--sx-primary);
+}
+.sx-menu__check--box .material-symbols-rounded { font-size: 14px; }
 .sx-menu__divider { height: 1px; background: var(--sx-border); margin: 4px 0; }
 .sx-menu__label {
   font: var(--sx-body-small);

@@ -11,8 +11,8 @@ import "./Menu.css";
  *     <Menu.Item icon="delete" tone="critical">Delete</Menu.Item>
  *   </Menu>
  */
-export function Menu({ trigger, align = "left", placement = "bottom", children, className = "" }) {
-  const [open, setOpen] = useState(false);
+export function Menu({ trigger, align = "left", placement = "bottom", defaultOpen = false, children, className = "" }) {
+  const [open, setOpen] = useState(defaultOpen);
   const ref = useRef(null);
 
   useEffect(() => {
@@ -59,25 +59,62 @@ export function Menu({ trigger, align = "left", placement = "bottom", children, 
   );
 }
 
-function MenuItem({ icon, tone = "default", disabled = false, onSelect, children, __close }) {
+function MenuItem({
+  icon,
+  tone = "default",
+  disabled = false,
+  onSelect,
+  children,
+  secondary,
+  trailing,
+  selectable,
+  selected = false,
+  __close,
+}) {
+  const isSingle = selectable === "single";
+  const isMultiple = selectable === "multiple";
   const cls = [
     "sx-menu__item",
     tone === "critical" && "sx-menu__item--critical",
+    selectable && "sx-menu__item--selectable",
+    selected && "is-selected",
   ].filter(Boolean).join(" ");
+  // role + aria reflect the selection affordance
+  const role = isSingle
+    ? "menuitemradio"
+    : isMultiple
+    ? "menuitemcheckbox"
+    : "menuitem";
   return (
     <button
       type="button"
-      role="menuitem"
+      role={role}
       className={cls}
       disabled={disabled}
+      aria-checked={selectable ? selected : undefined}
       onClick={() => {
         if (disabled) return;
         onSelect && onSelect();
-        __close && __close();
+        // multi-select keeps the menu open for further toggling
+        if (!isMultiple) __close && __close();
       }}
     >
-      {icon && <span className="material-symbols-rounded">{icon}</span>}
-      {children}
+      {isMultiple && (
+        <span className="sx-menu__check sx-menu__check--box" aria-hidden="true">
+          {selected && <span className="material-symbols-rounded">check</span>}
+        </span>
+      )}
+      {icon && <span className="sx-menu__icon material-symbols-rounded">{icon}</span>}
+      <span className="sx-menu__item-text">
+        <span className="sx-menu__item-label">{children}</span>
+        {secondary && <span className="sx-menu__item-secondary">{secondary}</span>}
+      </span>
+      {trailing && <span className="sx-menu__item-trailing">{trailing}</span>}
+      {isSingle && (
+        <span className="sx-menu__check sx-menu__check--tick" aria-hidden="true">
+          {selected && <span className="material-symbols-rounded">check</span>}
+        </span>
+      )}
     </button>
   );
 }

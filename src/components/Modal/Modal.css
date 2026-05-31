@@ -1,7 +1,7 @@
 .sx-modal-scrim {
   position: fixed;
   inset: 0;
-  background: rgba(0, 43, 42, 0.4);
+  background: var(--sx-overlay);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,6 +31,9 @@
 .sx-modal--sm { max-width: 360px; }
 .sx-modal--lg { max-width: 640px; }
 .sx-modal--xl { max-width: 880px; }
+/* Figma width mapping: small 400 / medium 600 */
+.sx-modal--400 { max-width: 400px; }
+.sx-modal--600 { max-width: 600px; }
 
 .sx-modal__head {
   display: flex;
@@ -67,3 +70,61 @@
   padding: 12px 24px 20px;
   border-top: 1px solid var(--sx-border);
 }
+
+/* ── Floating close (illustration / new-feature variants) ── */
+.sx-modal__close--float {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
+  margin: 0;
+  background: var(--sx-surface);
+}
+.sx-modal { position: relative; }
+
+/* ── Illustration & New-feature: centered content ── */
+.sx-modal__centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 32px 24px 24px;
+  gap: 12px;
+  overflow-y: auto;
+}
+.sx-modal__centered .sx-modal__title {
+  flex: 0 0 auto;
+  font: 700 20px/1.3 var(--sx-font-display);
+  color: var(--sx-text-primary);
+}
+.sx-modal__centered .sx-modal__body {
+  padding: 0;
+  text-align: center;
+  color: var(--sx-text-secondary);
+}
+.sx-modal__centered .sx-modal__foot {
+  border-top: 0;
+  justify-content: center;
+  padding: 8px 0 0;
+  width: 100%;
+}
+.sx-modal__illustration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sx-primary);
+  margin-bottom: 4px;
+}
+
+/* ── New-feature: top media/screenshot block ── */
+.sx-modal--v-new-feature { overflow: hidden; }
+.sx-modal__media {
+  width: 100%;
+  background: var(--sx-surface-secondary);
+  border-bottom: 1px solid var(--sx-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.sx-modal__media > * { display: block; max-width: 100%; }

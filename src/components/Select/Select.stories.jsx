@@ -15,6 +15,7 @@ const currencies = [
 ];
 
 export const Default = { args: { label: "Currency", options: currencies } };
+export const Small = { args: { label: "Currency", size: "small", options: currencies, defaultValue: "xsgd" } };
 export const WithValue = { args: { label: "Currency", options: currencies, defaultValue: "xsgd" } };
 export const WithHelper = { args: { label: "Currency", helper: "Pick the stablecoin you want to mint.", options: currencies } };
 export const Error = { args: { label: "Currency", error: "Please select a currency.", options: currencies } };

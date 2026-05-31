@@ -2,6 +2,7 @@ import React from "react";
 import { Tooltip } from "./Tooltip.jsx";
 import { IconButton } from "../IconButton/IconButton.jsx";
 import { Button } from "../Button/Button.jsx";
+import { AssetMark } from "../AssetMark/AssetMark.jsx";
 
 export default {
   title: "Components/Tooltip",
@@ -34,6 +35,72 @@ export const AlwaysOpen = {
   render: (args) => (
     <Tooltip {...args}>
       <IconButton icon="help" variant="outline" label="Help" />
+    </Tooltip>
+  ),
+};
+
+export const WithTitle = {
+  render: () => (
+    <Tooltip
+      defaultOpen
+      side="top"
+      title="Transfer limit"
+      content="Maximum transfer amount is S$10,000/day until full verification is complete."
+    >
+      <IconButton icon="info" variant="outline" label="Info" />
+    </Tooltip>
+  ),
+};
+
+export const WithTag = {
+  render: () => (
+    <Tooltip
+      defaultOpen
+      side="top"
+      title="Multi-chain support"
+      tag={{ label: "Beta", tone: "info" }}
+      content="This token is available across multiple networks."
+    >
+      <IconButton icon="info" variant="outline" label="Info" />
+    </Tooltip>
+  ),
+};
+
+export const SupportedChain = {
+  render: () => (
+    <Tooltip
+      defaultOpen
+      side="top"
+      title="Supported tokens"
+      content={
+        <span style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          {["XSGD", "USDT", "USDC", "XUSD"].map((a) => (
+            <span key={a} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <AssetMark asset={a} size={20} />
+              <span>{a}</span>
+            </span>
+          ))}
+        </span>
+      }
+    >
+      <IconButton icon="info" variant="outline" label="Info" />
+    </Tooltip>
+  ),
+};
+
+export const WithActions = {
+  render: () => (
+    <Tooltip
+      defaultOpen
+      side="bottom"
+      title="Verification required"
+      content="Verify your identity to raise your daily transfer limit."
+      links={[
+        { label: "Verify now", onClick: () => {} },
+        { label: "Learn more", onClick: () => {} },
+      ]}
+    >
+      <IconButton icon="info" variant="outline" label="Info" />
     </Tooltip>
   ),
 };

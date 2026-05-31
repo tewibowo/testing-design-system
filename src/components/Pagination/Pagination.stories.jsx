@@ -34,3 +34,17 @@ export const Edge = {
     return <Pagination page={p} totalPages={24} onChange={setP} />;
   },
 };
+
+export const WithGoTo = {
+  render: () => {
+    const [p, setP] = useState(6);
+    return <Pagination page={p} totalPages={24} onChange={setP} showGoTo />;
+  },
+};
+
+export const DisabledItems = {
+  render: () => {
+    const [p, setP] = useState(6);
+    return <Pagination page={p} totalPages={24} onChange={setP} disabledPages={[4, 8]} />;
+  },
+};

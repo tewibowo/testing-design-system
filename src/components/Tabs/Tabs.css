@@ -36,4 +36,33 @@
 .sx-tabs--pill .sx-tabs__tab.is-active { background: var(--sx-surface); color: var(--sx-text-primary); box-shadow: var(--sx-shadow-1); }
 .sx-tabs--pill .sx-tabs__tab.is-active::after { display: none; }
 
+/* Small size */
+.sx-tabs--small .sx-tabs__tab { height: 36px; padding: 0 12px; font: 700 12px/1 var(--sx-font-display); }
+.sx-tabs--small.sx-tabs--pill .sx-tabs__tab { height: 28px; padding: 0 12px; }
+
+/* Secondary tab (Figma Secondary Tab) — surface-secondary pill group with active filled chip */
+.sx-tabs--secondary .sx-tabs__strip {
+  border-bottom: 0;
+  gap: 4px;
+  padding: 4px;
+  background: var(--sx-surface-secondary);
+  border-radius: var(--sx-radius-md);
+  display: inline-flex;
+}
+.sx-tabs--secondary .sx-tabs__tab {
+  height: 36px;
+  padding: 0 16px;
+  border-radius: var(--sx-radius-sm);
+  color: var(--sx-text-secondary);
+}
+.sx-tabs--secondary.sx-tabs--small .sx-tabs__tab { height: 28px; padding: 0 12px; }
+.sx-tabs--secondary .sx-tabs__tab:hover:not(.is-active) { background: var(--sx-surface-hovered); color: var(--sx-text-primary); }
+.sx-tabs--secondary .sx-tabs__tab.is-active {
+  background: var(--sx-surface);
+  color: var(--sx-text-primary);
+  box-shadow: var(--sx-shadow-1);
+}
+.sx-tabs--secondary .sx-tabs__tab.is-active::after { display: none; }
+.sx-tabs--secondary.sx-tabs--fill .sx-tabs__strip { display: flex; }
+
 .sx-tabs__panel { padding: 24px 0; }

@@ -28,3 +28,54 @@ function Demo({ title = "Send to" }) {
 }
 
 export const Default = { render: () => <Demo /> };
+
+export const WithFooter = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Open with footer</Button>
+        <BottomSheet
+          open={open}
+          onClose={() => setOpen(false)}
+          title="Confirm transfer"
+          footer={
+            <>
+              <Button variant="secondary" onClick={() => setOpen(false)}>Cancel</Button>
+              <Button variant="primary" onClick={() => setOpen(false)}>Confirm</Button>
+            </>
+          }
+        >
+          <p style={{ font: "var(--sx-body-medium)", color: "var(--sx-text-secondary)", margin: 0 }}>
+            You are about to send 1,250 XSGD to John Doe. This action cannot be undone.
+          </p>
+        </BottomSheet>
+      </>
+    );
+  },
+};
+
+export const HideClose = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Open without close</Button>
+        <BottomSheet
+          open={open}
+          onClose={() => setOpen(false)}
+          title="Select an option"
+          hideClose
+          footer={
+            <Button variant="primary" onClick={() => setOpen(false)}>Done</Button>
+          }
+        >
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            <Button variant="secondary">Bank transfer</Button>
+            <Button variant="secondary">Stablecoin wallet</Button>
+          </div>
+        </BottomSheet>
+      </>
+    );
+  },
+};
