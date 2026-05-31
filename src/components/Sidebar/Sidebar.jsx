@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Logomark } from "../Logomark/Logomark.jsx";
+import { CompanyProfileMenu } from "../CompanyProfileMenu/CompanyProfileMenu.jsx";
 import "./Sidebar.css";
 
 export const DEFAULT_NAV_ITEMS = [
@@ -44,6 +45,11 @@ export function Sidebar({
   account = "personal",
   company,
   onCompanyClick,
+  companies,
+  companyActions,
+  onSwitchCompany,
+  onCompanyAction,
+  defaultMenuOpen = false,
   items = DEFAULT_NAV_ITEMS,
   active,
   activeSubItem,
@@ -51,6 +57,8 @@ export function Sidebar({
   brandName = "StraitsX",
   masBadge = true,
 }) {
+  const hasMenu = !!(companies || companyActions);
+  const [menuOpen, setMenuOpen] = useState(defaultMenuOpen);
   const [expanded, setExpanded] = useState(() => {
     const init = {};
     items.forEach((i) => {
@@ -72,20 +80,34 @@ export function Sidebar({
         </div>
 
         {company && (
-          <button
-            type="button"
-            className="sx-sidebar__company"
-            onClick={onCompanyClick}
-            aria-haspopup={onCompanyClick ? "menu" : undefined}
-          >
-            <span className="sx-sidebar__company-text">
-              <span className="sx-sidebar__company-name">{company.name}</span>
-              <span className="sx-sidebar__company-type">{company.type}</span>
-            </span>
-            {onCompanyClick && (
-              <span className="material-symbols-rounded sx-sidebar__company-chevron" aria-hidden="true">expand_more</span>
+          <div className="sx-sidebar__company-wrap">
+            <button
+              type="button"
+              className={"sx-sidebar__company" + (menuOpen ? " is-open" : "")}
+              onClick={() => { if (hasMenu) setMenuOpen((o) => !o); else if (onCompanyClick) onCompanyClick(); }}
+              aria-haspopup={hasMenu || onCompanyClick ? "menu" : undefined}
+              aria-expanded={hasMenu ? menuOpen : undefined}
+            >
+              <span className="sx-sidebar__company-text">
+                <span className="sx-sidebar__company-name">{company.name}</span>
+                <span className="sx-sidebar__company-type">{company.type}</span>
+              </span>
+              {(hasMenu || onCompanyClick) && (
+                <span className={"material-symbols-rounded sx-sidebar__company-chevron" + (menuOpen ? " is-open" : "")} aria-hidden="true">expand_more</span>
+              )}
+            </button>
+            {hasMenu && menuOpen && (
+              <div className="sx-sidebar__company-menu">
+                <CompanyProfileMenu
+                  switchCompany={!!companies}
+                  companies={companies || []}
+                  actions={companyActions || undefined}
+                  onSwitch={(id) => { setMenuOpen(false); onSwitchCompany && onSwitchCompany(id); }}
+                  onAction={(id) => { setMenuOpen(false); onCompanyAction && onCompanyAction(id); }}
+                />
+              </div>
             )}
-          </button>
+          </div>
         )}
 
         <nav className="sx-sidebar__nav" aria-label="Main">

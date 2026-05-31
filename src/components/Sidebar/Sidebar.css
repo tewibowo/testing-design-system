@@ -22,7 +22,15 @@
 }
 .sx-sidebar__brand-sub { font: var(--sx-body-small); color: var(--sx-interactive-active); margin-top: 2px; }
 
-/* Company profile dropdown trigger */
+/* Company profile dropdown trigger + popover */
+.sx-sidebar__company-wrap { position: relative; width: 100%; }
+.sx-sidebar__company-menu {
+  position: absolute;
+  top: calc(100% + var(--sx-space-1));
+  left: 0;
+  right: 0;
+  z-index: 30;
+}
 .sx-sidebar__company {
   display: flex;
   align-items: center;

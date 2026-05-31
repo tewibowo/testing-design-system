@@ -34,6 +34,11 @@ export const Personal = {
   },
 };
 
+const COMPANIES = [
+  { id: "abc", name: "ABC Pte. Ltd", type: "Business Account", selected: true },
+  { id: "xyz", name: "XYZ Pte. Ltd", type: "Business Account" },
+];
+
 export const BusinessWithCompanyDropdown = {
   render: () => {
     const [active, setActive] = useState("mint");
@@ -43,18 +48,38 @@ export const BusinessWithCompanyDropdown = {
         <Sidebar
           account="business"
           company={{ name: "ABC Pte. Ltd", type: "Company" }}
-          onCompanyClick={() => alert("Open company switcher")}
+          companies={COMPANIES}
+          onSwitchCompany={(id) => console.log("switch", id)}
+          onCompanyAction={(id) => console.log("action", id)}
           items={DEFAULT_NAV_ITEMS}
           active={active}
           activeSubItem={sub}
           onSelect={(id) => (id.startsWith("mint-") ? setSub(id) : setActive(id))}
         />
         <div style={{ padding: 32, color: "var(--sx-text-secondary)" }}>
-          Business — company profile dropdown + expanded sub-items
+          Business — click the company profile to open the dropdown
         </div>
       </Frame>
     );
   },
+};
+
+// Dropdown forced open so it's visible in static Chromatic snapshots.
+export const CompanyDropdownOpen = {
+  render: () => (
+    <Frame>
+      <Sidebar
+        account="business"
+        company={{ name: "ABC Pte. Ltd", type: "Company" }}
+        companies={COMPANIES}
+        defaultMenuOpen
+        active="home"
+      />
+      <div style={{ padding: 32, color: "var(--sx-text-secondary)" }}>
+        Company-profile dropdown (open)
+      </div>
+    </Frame>
+  ),
 };
 
 export const Sandbox = {
