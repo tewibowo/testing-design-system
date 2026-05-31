@@ -1,0 +1,184 @@
+/* FieldBank — Figma "Field / Bank" (5324:4923). STX semantic tokens. */
+.sx-fieldbank { position: relative; }
+
+.sx-fieldbank__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sx-space-2);
+  margin-bottom: var(--sx-space-1);
+}
+.sx-fieldbank__header .sx-field__label { margin: 0; }
+
+.sx-fieldbank__link {
+  flex: 0 0 auto;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  font: var(--sx-label-medium);
+  color: var(--sx-link);
+  cursor: pointer;
+}
+.sx-fieldbank__link:hover { text-decoration: underline; }
+
+/* Card-style control */
+.sx-fieldbank__control {
+  display: flex;
+  align-items: center;
+  gap: var(--sx-space-2);
+  width: 100%;
+  padding: var(--sx-space-4);
+  border-radius: var(--sx-radius-lg);
+  border: 1px solid var(--sx-border);
+  background: var(--sx-surface);
+  color: var(--sx-text-primary);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color var(--sx-dur-1) var(--sx-ease), box-shadow var(--sx-dur-1) var(--sx-ease);
+}
+.sx-fieldbank.is-open .sx-fieldbank__control,
+.sx-fieldbank__control:focus-visible {
+  outline: 0;
+  border-color: var(--sx-interactive-active);
+  box-shadow: 0 0 0 3px rgba(0, 211, 126, 0.16);
+}
+.sx-fieldbank.is-error .sx-fieldbank__control { border-color: var(--sx-status-critical); }
+.sx-fieldbank.is-error.is-open .sx-fieldbank__control,
+.sx-fieldbank.is-error .sx-fieldbank__control:focus-visible {
+  box-shadow: 0 0 0 3px rgba(223, 19, 18, 0.16);
+}
+.sx-fieldbank.is-disabled .sx-fieldbank__control {
+  background: var(--sx-surface-disabled);
+  color: var(--sx-disabled-on-surface);
+  cursor: not-allowed;
+}
+
+.sx-fieldbank__placeholder {
+  flex: 1 1 auto;
+  min-width: 0;
+  font: var(--sx-body-large);
+  color: var(--sx-text-secondary);
+}
+.sx-fieldbank.is-disabled .sx-fieldbank__placeholder { color: var(--sx-disabled-on-surface); }
+
+.sx-fieldbank__mark {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 24px;
+}
+.sx-fieldbank__mark > * { max-width: 48px; max-height: 24px; }
+.sx-fieldbank__initials {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--sx-radius-full);
+  background: var(--sx-surface-secondary);
+  color: var(--sx-text-secondary);
+  font: var(--sx-label-small);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sx-fieldbank__text {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sx-space-1);
+}
+.sx-fieldbank__name { font: var(--sx-body-bold-medium); color: inherit; }
+.sx-fieldbank__secondary {
+  font: var(--sx-body-medium);
+  color: var(--sx-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sx-fieldbank.is-disabled .sx-fieldbank__name,
+.sx-fieldbank.is-disabled .sx-fieldbank__secondary { color: var(--sx-disabled-on-surface); }
+
+.sx-fieldbank__chevron {
+  flex: 0 0 auto;
+  align-self: center;
+  color: var(--sx-text-secondary);
+  font-size: 22px;
+  transition: transform var(--sx-dur-1) var(--sx-ease);
+}
+.sx-fieldbank.is-open .sx-fieldbank__chevron { transform: rotate(180deg); }
+
+/* Popover menu */
+.sx-fieldbank__menu {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + var(--sx-space-2));
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: 360px;
+  overflow-y: auto;
+  background: var(--sx-surface);
+  border-radius: var(--sx-radius-lg);
+  box-shadow: var(--sx-shadow-1);
+}
+.sx-fieldbank__option {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sx-space-2);
+  padding: var(--sx-space-3);
+  color: var(--sx-text-primary);
+  cursor: pointer;
+  transition: background var(--sx-dur-1) var(--sx-ease);
+}
+.sx-fieldbank__option:hover { background: var(--sx-surface-hovered); }
+.sx-fieldbank__option.is-selected { background: var(--sx-surface-secondary); }
+.sx-fieldbank__option.is-disabled {
+  background: var(--sx-surface-disabled);
+  color: var(--sx-disabled-on-surface);
+  cursor: not-allowed;
+}
+.sx-fieldbank__option.is-disabled .sx-fieldbank__name,
+.sx-fieldbank__option.is-disabled .sx-fieldbank__secondary {
+  color: var(--sx-disabled-on-surface);
+}
+.sx-fieldbank__option .sx-fieldbank__link { align-self: center; }
+
+.sx-fieldbank__tags {
+  display: flex;
+  gap: var(--sx-space-2);
+  margin-top: var(--sx-space-1);
+}
+.sx-fieldbank__tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  height: 24px;
+  padding: 0 var(--sx-space-2);
+  border-radius: var(--sx-radius-sm);
+  font: var(--sx-body-small);
+  border: 1px solid transparent;
+}
+.sx-fieldbank__tag.is-critical {
+  color: var(--sx-status-critical);
+  border-color: var(--sx-status-critical);
+  background: var(--sx-status-surface-critical);
+}
+.sx-fieldbank__tag.is-warning {
+  color: var(--sx-status-warning);
+  border-color: var(--sx-status-warning);
+  background: var(--sx-status-surface-warning);
+}
+.sx-fieldbank__tag.is-positive {
+  color: var(--sx-status-positive);
+  border-color: var(--sx-status-positive);
+  background: var(--sx-status-surface-positive);
+}
+.sx-fieldbank__tag.is-information {
+  color: var(--sx-status-information);
+  border-color: var(--sx-status-information);
+  background: var(--sx-status-surface-information);
+}

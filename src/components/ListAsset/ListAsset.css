@@ -1,0 +1,105 @@
+/* ListAsset — Figma: List / Asset (5554:8405) */
+.sx-list-asset {
+  display: flex;
+  align-items: center;
+  gap: var(--sx-space-4);
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--sx-surface);
+}
+
+.sx-list-asset__lead {
+  display: flex;
+  align-items: center;
+  gap: var(--sx-space-3);
+  flex: 1 0 0;
+  min-width: 0;
+}
+.sx-list-asset__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: var(--sx-radius-full);
+  overflow: hidden;
+  background: var(--sx-surface-secondary);
+  font: var(--sx-label-medium);
+  color: var(--sx-text-secondary);
+}
+.sx-list-asset__icon > * { width: 100%; height: 100%; }
+
+.sx-list-asset__currency {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+.sx-list-asset__symbol {
+  font: var(--sx-title-small);
+  color: var(--sx-text-primary);
+  word-break: break-word;
+}
+.sx-list-asset__subtitle {
+  font: var(--sx-body-bold-medium);
+  color: var(--sx-text-secondary);
+  word-break: break-word;
+}
+
+.sx-list-asset__balance {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 0;
+  min-width: 0;
+}
+.sx-list-asset__balance-value {
+  font: var(--sx-title-small);
+  color: var(--sx-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sx-list-asset__balance-sub {
+  font: var(--sx-body-bold-medium);
+  color: var(--sx-text-secondary);
+}
+
+.sx-list-asset__networks { flex-shrink: 0; }
+
+.sx-list-asset__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sx-space-4);
+  flex-shrink: 0;
+}
+.sx-list-asset__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--sx-border);
+  border-radius: var(--sx-radius-full);
+  background: transparent;
+  color: var(--sx-text-primary);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background var(--sx-dur-1) var(--sx-ease);
+}
+.sx-list-asset__icon-btn:hover { background: var(--sx-surface-hovered); }
+.sx-list-asset__icon-btn:focus-visible {
+  outline: 2px solid var(--sx-link);
+  outline-offset: 2px;
+}
+.sx-list-asset__icon-btn .material-symbols-rounded { font-size: 20px; }
+
+.sx-list-asset__chevron {
+  font-size: 16px;
+  color: var(--sx-text-secondary);
+  flex-shrink: 0;
+}
+
+/* ── Mobile ── */
+.sx-list-asset--mobile .sx-list-asset__symbol { font: var(--sx-title-mobile-small); }
+.sx-list-asset--mobile .sx-list-asset__balance { align-items: flex-end; }
+.sx-list-asset--mobile .sx-list-asset__balance-value { font: var(--sx-title-mobile-small); }

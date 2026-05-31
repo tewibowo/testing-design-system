@@ -1,0 +1,159 @@
+import React, { useId, useRef, useState, useEffect } from "react";
+import "./FieldNetwork.css";
+
+/**
+ * Field / Network (Figma 5072:46588) — a labelled select-style field. The
+ * control opens a popover listing networks (leading mark + name + optional
+ * status tag). Single-select. Controlled (value) or uncontrolled (defaultValue).
+ *
+ *   <FieldNetwork
+ *     label="Network"
+ *     placeholder="Select Network"
+ *     options={[
+ *       { value: "eth", name: "Ethereum", logo: <EthIcon /> },
+ *       { value: "sol", name: "Solana", tag: { label: "New" } },
+ *     ]}
+ *     onChange={(value) => ...}
+ *   />
+ *
+ * States: enabled, opened, filled/unfilled, error, disabled.
+ */
+export function FieldNetwork({
+  label = "Network",
+  placeholder = "Select Network",
+  helper,
+  error,
+  options = [],
+  value,
+  defaultValue,
+  onChange,
+  disabled = false,
+  id: idProp,
+  className = "",
+}) {
+  const autoId = useId();
+  const id = idProp || autoId;
+  const isError = !!error;
+  const isControlled = value !== undefined;
+  const [internal, setInternal] = useState(defaultValue);
+  const selected = isControlled ? value : internal;
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onDoc = (e) => {
+      if (rootRef.current && !rootRef.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, [open]);
+
+  const selectedOption = options.find((o) => o.value === selected);
+
+  const commit = (val, opt) => {
+    if (opt && opt.disabled) return;
+    if (!isControlled) setInternal(val);
+    onChange && onChange(val, opt);
+    setOpen(false);
+  };
+
+  const wrapCls = [
+    "sx-fieldnetwork",
+    open && "is-open",
+    isError && "is-error",
+    disabled && "is-disabled",
+  ].filter(Boolean).join(" ");
+
+  return (
+    <div className={"sx-field " + className} ref={rootRef}>
+      {label && (
+        <span className="sx-field__label" id={`${id}-label`}>{label}</span>
+      )}
+      <div className={wrapCls}>
+        <button
+          type="button"
+          className="sx-fieldnetwork__control"
+          disabled={disabled}
+          aria-haspopup="listbox"
+          aria-expanded={open}
+          aria-labelledby={label ? `${id}-label` : undefined}
+          onClick={() => setOpen((o) => !o)}
+        >
+          {selectedOption && (
+            <span className="sx-fieldnetwork__mark" aria-hidden="true">
+              {selectedOption.logo || (
+                <span className="sx-fieldnetwork__initials">
+                  {(selectedOption.name || selectedOption.value).slice(0, 2).toUpperCase()}
+                </span>
+              )}
+            </span>
+          )}
+          <span
+            className={
+              "sx-fieldnetwork__value" + (selectedOption ? "" : " is-placeholder")
+            }
+          >
+            {selectedOption ? selectedOption.name ?? selectedOption.value : placeholder}
+          </span>
+          <span
+            className="material-symbols-rounded sx-fieldnetwork__chevron"
+            aria-hidden="true"
+          >
+            expand_more
+          </span>
+        </button>
+
+        {open && !disabled && (
+          <ul className="sx-fieldnetwork__menu" role="listbox">
+            {options.map((o) => {
+              const on = o.value === selected;
+              return (
+                <li
+                  key={o.value}
+                  role="option"
+                  aria-selected={on}
+                  aria-disabled={o.disabled || undefined}
+                  className={
+                    "sx-fieldnetwork__option" +
+                    (on ? " is-selected" : "") +
+                    (o.disabled ? " is-disabled" : "")
+                  }
+                  onClick={() => commit(o.value, o)}
+                >
+                  <span className="sx-fieldnetwork__mark" aria-hidden="true">
+                    {o.logo || (
+                      <span className="sx-fieldnetwork__initials">
+                        {(o.name || o.value).slice(0, 2).toUpperCase()}
+                      </span>
+                    )}
+                  </span>
+                  <span className="sx-fieldnetwork__opt-text">
+                    <span className="sx-fieldnetwork__opt-name">{o.name ?? o.value}</span>
+                    {o.secondary && (
+                      <span className="sx-fieldnetwork__opt-secondary">{o.secondary}</span>
+                    )}
+                  </span>
+                  {o.tag && (
+                    <span
+                      className={
+                        "sx-fieldnetwork__tag is-" + (o.tag.variant || "positive")
+                      }
+                    >
+                      {o.tag.label}
+                    </span>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </div>
+      {(helper || error) && (
+        <span className={"sx-field__helper" + (isError ? " is-error" : "")}>
+          {error || helper}
+        </span>
+      )}
+    </div>
+  );
+}
