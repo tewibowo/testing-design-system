@@ -33,7 +33,7 @@
 
 .sx-tabs--pill .sx-tabs__strip { border-bottom: 0; gap: 4px; padding: 4px; background: var(--sx-surface-secondary); border-radius: var(--sx-radius-full); display: inline-flex; }
 .sx-tabs--pill .sx-tabs__tab { height: 36px; border-radius: var(--sx-radius-full); padding: 0 16px; }
-.sx-tabs--pill .sx-tabs__tab.is-active { background: #fff; color: var(--sx-text-primary); box-shadow: var(--sx-shadow-1); }
+.sx-tabs--pill .sx-tabs__tab.is-active { background: var(--sx-surface); color: var(--sx-text-primary); box-shadow: var(--sx-shadow-1); }
 .sx-tabs--pill .sx-tabs__tab.is-active::after { display: none; }
 
 .sx-tabs__panel { padding: 24px 0; }

@@ -24,7 +24,7 @@
 }
 .sx-pagination__btn.is-active {
   background: var(--sx-text-primary);
-  color: #fff;
+  color: var(--sx-text-inverse);
 }
 .sx-pagination__btn[disabled] { color: var(--sx-disabled-on-surface); cursor: not-allowed; }
 .sx-pagination__btn .material-symbols-rounded { font-size: 20px; }

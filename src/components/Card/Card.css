@@ -1,5 +1,5 @@
 .sx-card {
-  background: #fff;
+  background: var(--sx-surface);
   border-radius: var(--sx-radius-md);
   border: 1px solid var(--sx-border);
   padding: 24px;
@@ -11,12 +11,12 @@
 }
 .sx-card--ivy {
   background: var(--sx-text-primary);
-  color: #fff;
+  color: var(--sx-text-inverse);
   border-color: transparent;
 }
 .sx-card--teal {
   background: var(--sx-interactive-active);
-  color: #fff;
+  color: var(--sx-text-inverse);
   border-color: transparent;
 }
 .sx-card__title { font: 700 20px/1.25 var(--sx-font-display); margin: 0 0 8px; }

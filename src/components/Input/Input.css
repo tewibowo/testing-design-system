@@ -11,7 +11,7 @@
   padding: 0 14px;
   border-radius: var(--sx-radius-lg);
   border: 1px solid var(--sx-border);
-  background: #fff;
+  background: var(--sx-surface);
   font: var(--sx-body-large);
   color: var(--sx-text-primary);
   transition: border-color var(--sx-dur-1) var(--sx-ease), box-shadow var(--sx-dur-1) var(--sx-ease);
@@ -79,7 +79,7 @@
   padding: 0 16px;
   border-radius: var(--sx-radius-full);
   background: var(--sx-text-primary);
-  color: #fff;
+  color: var(--sx-text-inverse);
   border: 0;
   cursor: pointer;
   font: 700 14px/1 var(--sx-font-display);

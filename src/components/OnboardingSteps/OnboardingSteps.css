@@ -9,7 +9,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
+  background: var(--sx-surface);
   border: 1.5px solid var(--sx-border);
   color: var(--sx-text-primary);
   font: 700 14px/1 var(--sx-font-display);
@@ -17,7 +17,7 @@
 }
 .sx-step-dot.is-done {
   background: var(--sx-interactive-active);
-  color: #fff;
+  color: var(--sx-text-inverse);
   border-color: var(--sx-interactive-active);
 }
 .sx-step-dot.is-done .material-symbols-rounded { font-size: 18px; }

@@ -31,14 +31,14 @@
 .sx-icon-btn--ghost:active { background: var(--sx-surface-disabled); }
 
 .sx-icon-btn--outline {
-  background: #fff;
+  background: var(--sx-surface);
   border: 1px solid var(--sx-border);
 }
 .sx-icon-btn--outline:hover { background: var(--sx-surface-secondary); }
 
 .sx-icon-btn--filled {
   background: var(--sx-text-primary);
-  color: #fff;
+  color: var(--sx-text-inverse);
 }
 .sx-icon-btn--filled:hover { background: var(--sx-interactive-active); }
 

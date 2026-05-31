@@ -13,7 +13,7 @@
   min-width: 280px;
   max-width: 420px;
   background: var(--sx-text-primary);
-  color: #fff;
+  color: var(--sx-text-inverse);
   border-radius: var(--sx-radius-md);
   padding: 12px 14px;
   box-shadow: var(--sx-shadow-2);

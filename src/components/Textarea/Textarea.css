@@ -5,7 +5,7 @@
   padding: 10px 14px;
   border-radius: var(--sx-radius-lg);
   border: 1px solid var(--sx-border);
-  background: #fff;
+  background: var(--sx-surface);
   transition: border-color var(--sx-dur-1) var(--sx-ease), box-shadow var(--sx-dur-1) var(--sx-ease);
 }
 .sx-textarea-wrap:focus-within {

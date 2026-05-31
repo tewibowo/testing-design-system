@@ -1,0 +1,107 @@
+.sx-card-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sx-space-4);
+  background: var(--sx-surface);
+  border-radius: var(--sx-radius-md);
+  border: 1px solid var(--sx-border);
+  padding: var(--sx-space-5);
+  color: var(--sx-text-primary);
+  width: 100%;
+}
+
+.sx-card-checklist__title { font: var(--sx-title-small); color: var(--sx-text-primary); margin: 0; }
+
+/* ── Tabs ── */
+.sx-card-checklist__tabs {
+  display: flex;
+  gap: var(--sx-space-2);
+  padding: var(--sx-space-1);
+  background: var(--sx-surface-secondary);
+  border-radius: var(--sx-radius-sm);
+}
+.sx-card-checklist__tab {
+  flex: 1 0 0;
+  padding: var(--sx-space-2);
+  border: 1px solid transparent;
+  border-radius: var(--sx-radius-sm);
+  background: transparent;
+  cursor: pointer;
+  font: var(--sx-body-medium);
+  color: var(--sx-interactive-active);
+  text-align: center;
+}
+.sx-card-checklist__tab.is-active {
+  background: var(--sx-surface);
+  border-color: var(--sx-border);
+  font: var(--sx-body-bold-medium);
+  color: var(--sx-interactive-active);
+}
+
+/* ── Progress ── */
+.sx-card-checklist__progress {
+  display: flex;
+  align-items: center;
+  gap: var(--sx-space-3);
+}
+.sx-card-checklist__progress-track {
+  flex: 1 0 0;
+  height: 8px;
+  border-radius: var(--sx-radius-full);
+  background: var(--sx-surface-secondary);
+  overflow: hidden;
+}
+.sx-card-checklist__progress-fill {
+  height: 100%;
+  border-radius: var(--sx-radius-full);
+  background: var(--sx-status-positive);
+  transition: width var(--sx-dur-2) var(--sx-ease);
+}
+.sx-card-checklist__progress-pct {
+  font: var(--sx-label-medium);
+  color: var(--sx-text-primary);
+  flex-shrink: 0;
+}
+
+/* ── List ── */
+.sx-card-checklist__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sx-space-1);
+}
+.sx-card-checklist__item {
+  display: flex;
+  align-items: center;
+  gap: var(--sx-space-3);
+  padding: var(--sx-space-3);
+  border-radius: var(--sx-radius-lg);
+}
+.sx-card-checklist__item.is-active {
+  background: var(--sx-surface-secondary);
+  box-shadow: var(--sx-shadow-1);
+}
+
+.sx-card-checklist__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.sx-card-checklist__mark .material-symbols-rounded { font-size: 24px; }
+.sx-card-checklist__mark--done { color: var(--sx-status-positive); }
+.sx-card-checklist__mark--active { color: var(--sx-primary); }
+.sx-card-checklist__mark--locked { color: var(--sx-disabled-on-surface); }
+
+.sx-card-checklist__item-body {
+  flex: 1 0 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sx-space-1);
+}
+.sx-card-checklist__item-title { font: var(--sx-body-medium); color: var(--sx-text-primary); margin: 0; }
+.sx-card-checklist__item-desc { font: var(--sx-body-small); color: var(--sx-text-secondary); margin: 0; }
+.sx-card-checklist__item-trailing { color: var(--sx-text-secondary); flex-shrink: 0; }

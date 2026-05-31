@@ -11,7 +11,7 @@
 .sx-bsheet {
   width: 100%;
   max-width: 560px;
-  background: #fff;
+  background: var(--sx-surface);
   border-radius: var(--sx-radius-lg) var(--sx-radius-lg) 0 0;
   box-shadow: var(--sx-shadow-3);
   max-height: calc(100vh - 24px);

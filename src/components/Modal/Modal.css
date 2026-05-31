@@ -14,7 +14,7 @@
   to { opacity: 1; }
 }
 .sx-modal {
-  background: #fff;
+  background: var(--sx-surface);
   border-radius: var(--sx-radius-lg);
   box-shadow: var(--sx-shadow-3);
   width: 100%;

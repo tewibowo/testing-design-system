@@ -1,5 +1,5 @@
 .sx-sidebar {
-  background: #fff;
+  background: var(--sx-surface);
   padding: 32px 16px 24px;
   display: flex;
   flex-direction: column;
@@ -33,7 +33,7 @@
 }
 .sx-nav-item:hover { background: var(--sx-surface-secondary); }
 .sx-nav-item.is-active {
-  background: #E2F7EC;
+  background: var(--sx-status-surface-positive);
   color: var(--sx-interactive-active);
   font-weight: 700;
 }

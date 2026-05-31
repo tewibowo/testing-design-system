@@ -5,7 +5,7 @@
   width: 40px;
   height: 40px;
   border-radius: var(--sx-radius-full);
-  background: #fff;
+  background: var(--sx-surface);
   border: 1px solid var(--sx-border);
   display: inline-flex;
   align-items: center;
@@ -27,7 +27,7 @@
   color: var(--sx-text-primary);
   font: 700 11px/18px var(--sx-font-display);
   text-align: center;
-  border: 2px solid #fff;
+  border: 2px solid var(--sx-surface);
 }
 
 .sx-topbar__user { display: flex; align-items: center; gap: 10px; }

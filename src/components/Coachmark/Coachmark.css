@@ -15,7 +15,7 @@
 .sx-coachmark {
   position: absolute;
   z-index: 1201;
-  background: #fff;
+  background: var(--sx-surface);
   border-radius: var(--sx-radius-lg);
   box-shadow: var(--sx-shadow-3);
   padding: 16px;

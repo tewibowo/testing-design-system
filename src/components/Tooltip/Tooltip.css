@@ -6,7 +6,7 @@
   position: absolute;
   z-index: 50;
   background: var(--sx-text-primary);
-  color: #fff;
+  color: var(--sx-text-inverse);
   font: var(--sx-body-small);
   padding: 8px 10px;
   border-radius: var(--sx-radius-sm);

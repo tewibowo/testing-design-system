@@ -4,7 +4,7 @@
   align-items: center;
   gap: 12px;
   padding: 16px;
-  background: #fff;
+  background: var(--sx-surface);
   border: 1px solid var(--sx-border);
   border-radius: var(--sx-radius-lg);
 }
