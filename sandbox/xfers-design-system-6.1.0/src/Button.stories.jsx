@@ -3,24 +3,15 @@ import { Button } from "@xfers/design-system";
 import { withDesignSystem } from "./decorator.jsx";
 
 export default {
-  title: "@xfers Design System 6.1.0/Button",
-  component: Button,
+  title: "@xfers Design System 6.1.0/Components/Button",
   decorators: [withDesignSystem],
   parameters: { layout: "centered" },
-  argTypes: {
-    type: { control: "inline-radio", options: ["primary", "secondary", "tertiary"] },
-    isDisabled: { control: "boolean" },
-    isFullWidth: { control: "boolean" },
-    children: { control: "text" },
-  },
-  args: { children: "Continue", type: "primary", isDisabled: false, isFullWidth: false },
 };
 
-export const Primary = { args: { type: "primary" } };
-export const Secondary = { args: { type: "secondary", children: "Cancel" } };
-export const Tertiary = { args: { type: "tertiary", children: "Learn more" } };
-export const Disabled = { args: { type: "primary", isDisabled: true } };
-
+export const Primary = { render: () => <Button type="primary">Continue</Button> };
+export const Secondary = { render: () => <Button type="secondary">Cancel</Button> };
+export const Tertiary = { render: () => <Button type="tertiary">Learn more</Button> };
+export const Disabled = { render: () => <Button type="primary" isDisabled>Submit</Button> };
 export const AllTypes = {
   parameters: { layout: "padded" },
   render: () => (
