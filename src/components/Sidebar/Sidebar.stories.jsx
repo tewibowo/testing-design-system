@@ -26,7 +26,7 @@ export const Personal = {
           items={DEFAULT_NAV_ITEMS}
           active={active}
           activeSubItem={sub}
-          onSelect={(id) => (id.startsWith("mint-") ? setSub(id) : setActive(id))}
+          onSelect={(id) => { if (id.startsWith("mint-")) { setSub(id); setActive(null); } else { setActive(id); setSub(null); } }}
         />
         <div style={{ padding: 32, color: "var(--text-secondary)" }}>Personal account</div>
       </Frame>
@@ -54,7 +54,7 @@ export const BusinessWithCompanyDropdown = {
           items={DEFAULT_NAV_ITEMS}
           active={active}
           activeSubItem={sub}
-          onSelect={(id) => (id.startsWith("mint-") ? setSub(id) : setActive(id))}
+          onSelect={(id) => { if (id.startsWith("mint-")) { setSub(id); setActive(null); } else { setActive(id); setSub(null); } }}
         />
         <div style={{ padding: 32, color: "var(--text-secondary)" }}>
           Business — click the company profile to open the dropdown

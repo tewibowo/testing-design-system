@@ -115,7 +115,7 @@ export function Sidebar({
           {items.map((item) => {
             const hasSub = item.subItems && item.subItems.length > 0;
             const isOpen = !!expanded[item.id];
-            const isActive = active === item.id;
+            const isActive = active === item.id && !(hasSub && item.subItems.some((s) => s.id === activeSubItem));
             return (
               <div key={item.id} className="sidebar__group">
                 <button

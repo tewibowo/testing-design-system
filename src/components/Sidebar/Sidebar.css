@@ -26,10 +26,10 @@
 .sidebar__company-wrap { position: relative; width: 100%; }
 .sidebar__company-menu {
   position: absolute;
-  top: calc(100% + var(--space-1));
-  left: 0;
-  right: 0;
+  top: 0;
+  left: calc(100% + var(--space-1));
   z-index: 30;
+  min-width: 208px;
 }
 .sidebar__company {
   display: flex;

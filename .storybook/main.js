@@ -3,6 +3,7 @@ const config = {
   stories: [
     "../src/stories/**/*.stories.@(js|jsx|mjs|ts|tsx)",
     "../src/components/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    "../src/components/**/*.mdx",
   ],
   // Storybook 10: docs, controls, actions, viewport, backgrounds, toolbars,
   // measure, outline, highlight and test/interactions are built into core.
@@ -10,7 +11,8 @@ const config = {
     "@storybook/addon-a11y",
     "@chromatic-com/storybook",
     "@storybook/addon-mcp",
-    "@storybook/addon-vitest"
+    "@storybook/addon-vitest",
+    "@storybook/addon-docs"
   ],
   framework: {
     name: "@storybook/react-vite",
