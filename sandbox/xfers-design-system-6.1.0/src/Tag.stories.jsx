@@ -3,7 +3,7 @@ import { Tag } from "@xfers/design-system";
 import { withDesignSystem } from "./decorator.jsx";
 
 export default {
-  title: "Design System 6.1.0/Tag",
+  title: "@xfers Design System 6.1.0/Tag",
   component: Tag,
   decorators: [withDesignSystem],
   parameters: { layout: "centered" },

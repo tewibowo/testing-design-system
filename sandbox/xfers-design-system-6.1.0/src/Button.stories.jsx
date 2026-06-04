@@ -3,7 +3,7 @@ import { Button } from "@xfers/design-system";
 import { withDesignSystem } from "./decorator.jsx";
 
 export default {
-  title: "Design System 6.1.0/Button",
+  title: "@xfers Design System 6.1.0/Button",
   component: Button,
   decorators: [withDesignSystem],
   parameters: { layout: "centered" },

@@ -1,0 +1,23 @@
+{
+  "name": "xfers-design-system-6.1.0-sandbox",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Isolated Storybook sandbox for exploring the published @xfers/design-system@6.1.0 package. Self-contained — independent of the parent testing-design-system project.",
+  "type": "module",
+  "scripts": {
+    "storybook": "storybook dev -p 6007",
+    "build-storybook": "storybook build -o storybook-static"
+  },
+  "dependencies": {
+    "@xfers/design-system": "6.1.0",
+    "antd": "5.21.6",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@storybook/react-vite": "^8.6.14",
+    "@vitejs/plugin-react": "^4.3.4",
+    "storybook": "^8.6.14",
+    "vite": "^5.4.11"
+  }
+}

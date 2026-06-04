@@ -3,7 +3,7 @@ import { H1, H2, H3, H4, P1, P1Bold, SmallP } from "@xfers/design-system";
 import { withDesignSystem } from "./decorator.jsx";
 
 export default {
-  title: "Design System 6.1.0/Typography",
+  title: "@xfers Design System 6.1.0/Typography",
   decorators: [withDesignSystem],
   parameters: { layout: "padded" },
 };

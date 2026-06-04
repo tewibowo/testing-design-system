@@ -3,7 +3,7 @@ import { Alert } from "@xfers/design-system";
 import { withDesignSystem } from "./decorator.jsx";
 
 export default {
-  title: "Design System 6.1.0/Alert",
+  title: "@xfers Design System 6.1.0/Alert",
   component: Alert,
   decorators: [withDesignSystem],
   parameters: { layout: "padded" },

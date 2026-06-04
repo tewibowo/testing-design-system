@@ -3,7 +3,7 @@ import { Input } from "@xfers/design-system";
 import { withDesignSystem } from "./decorator.jsx";
 
 export default {
-  title: "Design System 6.1.0/Input",
+  title: "@xfers Design System 6.1.0/Input",
   component: Input,
   decorators: [withDesignSystem],
   parameters: { layout: "padded" },
