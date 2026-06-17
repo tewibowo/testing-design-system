@@ -3,12 +3,12 @@ import "./Card.css";
 
 /**
  * Basic surface primitive.
- * surface: "default" | "raised" | "ivy" | "teal"
+ * shadow: false | 1 | 2 | 3
  */
-export function Card({ surface = "default", className = "", title, body, children, ...rest }) {
+export function Card({ shadow = false, className = "", title, body, children, ...rest }) {
   const cls = [
     "card",
-    surface !== "default" && `card--${surface}`,
+    shadow && `card--shadow-${shadow}`,
     className,
   ].filter(Boolean).join(" ");
   return (

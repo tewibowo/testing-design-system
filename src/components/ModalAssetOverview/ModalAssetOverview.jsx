@@ -43,7 +43,7 @@ export function ModalAssetOverview({
   );
 
   return (
-    <Modal open={open} onClose={onClose} size="sm" title={header} className={"asset-ov " + className}>
+    <Modal open={open} onClose={onClose} size="small" title={header} className={"asset-ov " + className}>
       <p className="asset-ov__section-label">Available Method:</p>
       <ul className="asset-ov__methods">
         {methods.map((m) => (

@@ -37,7 +37,7 @@ function MintInner() {
         />
       </div>
 
-      <Card surface="raised" className="ex-pa__col" style={{ maxWidth: 520 }}>
+      <Card shadow={1} className="ex-pa__col" style={{ maxWidth: 520 }}>
         {step === 0 && (
           <>
             <Select
@@ -88,12 +88,12 @@ function MintInner() {
         open={confirm}
         onClose={() => setConfirm(false)}
         title="Confirm mint"
-        size="sm"
+        size="small"
         footer={
           <>
-            <Button variant="secondary" size="md" onClick={() => setConfirm(false)}>Cancel</Button>
+            <Button variant="secondary" size="lg" onClick={() => setConfirm(false)}>Cancel</Button>
             <Button
-              size="md"
+              size="lg"
               onClick={() => {
                 setConfirm(false);
                 setStep(2);

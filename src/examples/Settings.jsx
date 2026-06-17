@@ -31,7 +31,7 @@ export function Settings() {
 
   const tabContent = {
     profile: (
-      <Card surface="raised">
+      <Card shadow={1}>
         <h2 style={{ font: "var(--title-small)", color: "var(--text-primary)", margin: "0 0 8px" }}>Profile</h2>
         <p style={{ font: "var(--body-medium)", color: "var(--text-secondary)", margin: 0 }}>How you appear across StraitsX.</p>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 20 }}>
@@ -47,7 +47,7 @@ export function Settings() {
       </Card>
     ),
     security: (
-      <Card surface="raised">
+      <Card shadow={1}>
         <h2 style={{ font: "var(--title-small)", color: "var(--text-primary)", margin: "0 0 8px" }}>Security</h2>
         <Alert tone="warning" title="Two-factor authentication is recommended">
           Add an extra layer of protection to your account.
@@ -71,11 +71,11 @@ export function Settings() {
           open={showDelete}
           onClose={() => setShowDelete(false)}
           title="Delete your StraitsX account?"
-          size="sm"
+          size="small"
           footer={
             <>
-              <Button variant="secondary" size="md" onClick={() => setShowDelete(false)}>Cancel</Button>
-              <Button variant="primary" size="md" onClick={() => setShowDelete(false)} style={{ background: "var(--status-critical)", color: "#fff" }}>I understand, delete</Button>
+              <Button variant="secondary" size="lg" onClick={() => setShowDelete(false)}>Cancel</Button>
+              <Button variant="primary" size="lg" onClick={() => setShowDelete(false)} style={{ background: "var(--status-critical)", color: "#fff" }}>I understand, delete</Button>
             </>
           }
         >
@@ -84,7 +84,7 @@ export function Settings() {
       </Card>
     ),
     notifications: (
-      <Card surface="raised">
+      <Card shadow={1}>
         <h2 style={{ font: "var(--title-small)", color: "var(--text-primary)", margin: "0 0 8px" }}>Notifications</h2>
         <Row title="Transaction confirmations" sub="Inbound and outbound transfers."><Switch defaultChecked /></Row>
         <Row title="Pending approvals" sub="Transfers awaiting your review."><Switch defaultChecked /></Row>
@@ -93,7 +93,7 @@ export function Settings() {
       </Card>
     ),
     developers: (
-      <Card surface="raised">
+      <Card shadow={1}>
         <h2 style={{ font: "var(--title-small)", color: "var(--text-primary)", margin: "0 0 8px" }}>Developers</h2>
         <p style={{ font: "var(--body-medium)", color: "var(--text-secondary)", margin: "0 0 16px" }}>API access for programmatic transfers and reporting.</p>
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
@@ -118,7 +118,7 @@ export function Settings() {
         </div>
         <PageTitle title="Settings" subtitle="Manage your account, security, and integrations." />
         <Tabs
-          variant="pill"
+          variant="secondary"
           activeTab={tab}
           onTabChange={setTab}
           items={[

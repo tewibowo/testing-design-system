@@ -12,7 +12,7 @@ import "./Modal.css";
  *   "default"      — standard header + body + footer.
  *   "illustration" — centered illustration slot (`illustration`) + centered title/body.
  *   "new-feature"  — top media/screenshot block (`media`) + centered title/body.
- * `size`: "sm" | "md" | "lg" | "xl" | 400 (Figma small) | 600 (Figma medium).
+ * `size`: "small" (400) | "large" (600) — matches the two Figma widths.
  *
  * Closes on Escape or scrim click (`dismissable` to disable).
  */
@@ -22,7 +22,7 @@ export function Modal({
   title,
   children,
   footer,
-  size = "md",
+  size = "small",
   variant = "default",
   illustration,
   media,
@@ -75,27 +75,34 @@ export function Modal({
 
         {centered ? (
           <>
-            {/* close affordance floats over centered/media layouts */}
-            {!hideClose && (
-              <button
-                type="button"
-                className="modal__close modal__close--float"
-                onClick={onClose}
-                aria-label="Close"
-              >
-                <span className="material-symbols-rounded">close</span>
-              </button>
+            {/* illustration variant: bare close icon, top-right, no title row */}
+            {isIllustration && !hideClose && (
+              <div className="modal__head--icon-only">
+                <button
+                  type="button"
+                  className="modal__close"
+                  onClick={onClose}
+                  aria-label="Close"
+                >
+                  <span className="material-symbols-rounded">close</span>
+                </button>
+              </div>
             )}
-            <div className="modal__centered">
-              {isIllustration && illustration && (
-                <div className="modal__illustration">{illustration}</div>
-              )}
-              {title && <div id="modal-title" className="modal__title">{title}</div>}
-              {children !== undefined && children !== null && (
-                <div className="modal__body">{children}</div>
-              )}
-              {footer && <div className="modal__foot">{footer}</div>}
-            </div>
+            {isIllustration && (illustration || title) && (
+              <div className="modal__illustration-wrap">
+                {illustration && <div className="modal__illustration">{illustration}</div>}
+                {title && <div id="modal-title" className="modal__title">{title}</div>}
+              </div>
+            )}
+            {isNewFeature && title && (
+              <div className="modal__title-row">
+                <div id="modal-title" className="modal__title">{title}</div>
+              </div>
+            )}
+            {children !== undefined && children !== null && (
+              <div className="modal__body modal__body--centered">{children}</div>
+            )}
+            {footer && <div className="modal__foot">{footer}</div>}
           </>
         ) : (
           <>

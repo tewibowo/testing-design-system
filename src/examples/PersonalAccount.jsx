@@ -34,7 +34,7 @@ export function PersonalAccount() {
             <TransferPanel />
             <div className="ex-pa__col">
               <OtcBanner />
-              <Card surface="raised" title="Notification">
+              <Card shadow={1} title="Notification">
                 <EmptyState
                   compact
                   title="No Transaction Found"

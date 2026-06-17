@@ -2,19 +2,18 @@ import React, { useState } from "react";
 import "./Tabs.css";
 
 /**
- * Tabs — variant: "underline" (default), "pill", or "secondary" (Figma Secondary Tab).
- * `fill` stretches tabs to fill width. `size`: "large" (default) | "small".
+ * Tabs — variant: "default" (underline) or "secondary" (Figma Secondary Tab).
+ * `fill` stretches tabs to fill width.
  *
  *   <Tabs items={[{id, label, content}]} defaultTab="in" />
- *   <Tabs items={…} variant="secondary" size="small" />
+ *   <Tabs items={…} variant="secondary" />
  */
 export function Tabs({
   items = [],
   defaultTab,
   activeTab,
   onTabChange,
-  variant = "underline",
-  size = "large",
+  variant = "default",
   fill = false,
   className = "",
 }) {
@@ -27,9 +26,7 @@ export function Tabs({
   const activeItem = items.find((i) => i.id === current);
   const cls = [
     "tabs",
-    variant === "pill" && "tabs--pill",
     variant === "secondary" && "tabs--secondary",
-    size === "small" && "tabs--small",
     fill && "tabs--fill",
     className,
   ].filter(Boolean).join(" ");

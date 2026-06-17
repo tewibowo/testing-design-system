@@ -55,6 +55,7 @@ export { OtcBanner } from "./components/OtcBanner/OtcBanner.jsx";
 
 // Brand
 export { Logomark } from "./components/Logomark/Logomark.jsx";
+export { Logo } from "./components/Logo/Logo.jsx";
 export { Icon } from "./components/Icon/Icon.jsx";
 export { PartnerLogo } from "./components/PartnerLogo/PartnerLogo.jsx";
 

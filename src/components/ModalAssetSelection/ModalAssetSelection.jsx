@@ -34,7 +34,7 @@ export function ModalAssetSelection({
   );
 
   return (
-    <Modal open={open} onClose={onClose} size="sm" title={header} className={"asset-sel " + className}>
+    <Modal open={open} onClose={onClose} size="small" title={header} className={"asset-sel " + className}>
       {label && <p className="asset-sel__label">{label}</p>}
       <ul className="asset-sel__list">
         {assets.map((a) => (

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ModalAssetOverview } from "./ModalAssetOverview.jsx";
 import { Button } from "../Button/Button.jsx";
+import { PartnerLogo } from "../PartnerLogo/PartnerLogo.jsx";
 
 export default {
   title: "Components/Modal/Asset Overview",
@@ -24,12 +25,12 @@ const methods = [
 ];
 
 const networks = [
-  { label: "Ethereum" },
-  { label: "Polygon" },
-  { label: "Avalanche C-Chain" },
-  { label: "Arbitrum" },
-  { label: "Hedera" },
-  { label: "Ripple" },
+  { label: "Ethereum", mark: <PartnerLogo name="ethereum" size={16} monochrome={false} /> },
+  { label: "Polygon", mark: <PartnerLogo name="polygon" size={16} monochrome={false} /> },
+  { label: "Avalanche C-Chain", mark: <PartnerLogo name="avalanche" size={16} monochrome={false} /> },
+  { label: "Arbitrum", mark: <PartnerLogo name="arbitrum" size={16} monochrome={false} /> },
+  { label: "Hedera", mark: <PartnerLogo name="hedera" size={16} monochrome={false} /> },
+  { label: "Ripple", mark: <PartnerLogo name="ripple" size={16} monochrome={false} /> },
 ];
 
 function Demo(props) {
@@ -45,6 +46,7 @@ function Demo(props) {
 export const Stablecoin = {
   render: () => (
     <Demo
+      mark={<PartnerLogo name="xsgd" size={36} />}
       symbol="XSGD"
       subtitle="1:1 to SGD"
       methods={methods}
@@ -70,6 +72,7 @@ export const Open = {
     <ModalAssetOverview
       open
       onClose={() => {}}
+      mark={<PartnerLogo name="xsgd" size={36} />}
       symbol="XSGD"
       subtitle="1:1 to SGD"
       methods={methods}

@@ -27,7 +27,7 @@ export function TransferPanel({
     onTabChange && onTabChange(id);
   };
   return (
-    <Card surface="raised" className="transfer">
+    <Card shadow={1} className="transfer">
       <div className="tabs" role="tablist">
         {tabs.map((t) => (
           <button

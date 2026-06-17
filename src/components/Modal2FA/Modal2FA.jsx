@@ -93,7 +93,7 @@ export function Modal2FA({
     <Modal
       open={open}
       onClose={onClose}
-      size="sm"
+      size="small"
       hideClose={false}
       footer={footer}
       className={"2fa " + className}

@@ -8,7 +8,7 @@ export default {
   parameters: { layout: "centered" },
 };
 
-function Demo({ size = "md", title = "Confirm transfer" }) {
+function Demo({ size = "small", title = "Confirm transfer" }) {
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -20,8 +20,8 @@ function Demo({ size = "md", title = "Confirm transfer" }) {
         title={title}
         footer={
           <>
-            <Button variant="secondary" size="md" onClick={() => setOpen(false)}>Cancel</Button>
-            <Button variant="primary" size="md" onClick={() => setOpen(false)}>Confirm</Button>
+            <Button variant="secondary" size="lg" onClick={() => setOpen(false)}>Cancel</Button>
+            <Button variant="primary" size="lg" onClick={() => setOpen(false)}>Confirm</Button>
           </>
         }
       >
@@ -31,11 +31,8 @@ function Demo({ size = "md", title = "Confirm transfer" }) {
   );
 }
 
-export const Default = { render: () => <Demo /> };
-export const Small = { render: () => <Demo size="sm" title="Discard draft?" /> };
-export const Large = { render: () => <Demo size="lg" title="Customer Knowledge Assessment" /> };
-export const Small400 = { render: () => <Demo size={400} title="Discard draft?" /> };
-export const Medium600 = { render: () => <Demo size={600} title="Customer Knowledge Assessment" /> };
+export const Small = { render: () => <Demo size="small" title="Discard draft?" /> };
+export const Large = { render: () => <Demo size="large" title="Customer Knowledge Assessment" /> };
 
 export const HideClose = {
   render: () => {
@@ -45,14 +42,14 @@ export const HideClose = {
         <Button onClick={() => setOpen(true)}>Open modal (no close)</Button>
         <Modal
           open={open}
-          size="md"
+          size="small"
           hideClose
           onClose={() => setOpen(false)}
           title="Confirm transfer"
           footer={
             <>
-              <Button variant="secondary" size="md" onClick={() => setOpen(false)}>Cancel</Button>
-              <Button variant="primary" size="md" onClick={() => setOpen(false)}>Confirm</Button>
+              <Button variant="secondary" size="lg" onClick={() => setOpen(false)}>Cancel</Button>
+              <Button variant="primary" size="lg" onClick={() => setOpen(false)}>Confirm</Button>
             </>
           }
         >
@@ -71,12 +68,12 @@ export const NonDismissable = {
         <Button onClick={() => setOpen(true)}>Open modal (non-dismissable)</Button>
         <Modal
           open={open}
-          size="md"
+          size="small"
           dismissable={false}
           onClose={() => setOpen(false)}
           title="Action required"
           footer={
-            <Button variant="primary" size="md" onClick={() => setOpen(false)}>Acknowledge</Button>
+            <Button variant="primary" size="lg" onClick={() => setOpen(false)}>Acknowledge</Button>
           }
         >
           Scrim clicks and the Escape key are disabled — you must use an explicit action to continue.
@@ -94,7 +91,7 @@ export const Illustration = {
         <Button onClick={() => setOpen(true)}>Open illustration modal</Button>
         <Modal
           open={open}
-          size={400}
+          size="small"
           variant="illustration"
           onClose={() => setOpen(false)}
           title="You're all set!"
@@ -103,7 +100,7 @@ export const Illustration = {
               verified
             </span>
           }
-          footer={<Button variant="primary" size="md" onClick={() => setOpen(false)}>Got it</Button>}
+          footer={<Button variant="primary" size="lg" onClick={() => setOpen(false)}>Got it</Button>}
         >
           Your account has been verified. You can now transact across all supported stablecoins.
         </Modal>
@@ -120,7 +117,7 @@ export const NewFeature = {
         <Button onClick={() => setOpen(true)}>Open new-feature modal</Button>
         <Modal
           open={open}
-          size={600}
+          size="large"
           variant="new-feature"
           onClose={() => setOpen(false)}
           title="Introducing instant swaps"
@@ -140,10 +137,7 @@ export const NewFeature = {
             </div>
           }
           footer={
-            <>
-              <Button variant="secondary" size="md" onClick={() => setOpen(false)}>Maybe later</Button>
-              <Button variant="primary" size="md" onClick={() => setOpen(false)}>Try it now</Button>
-            </>
+            <Button variant="primary" size="lg" onClick={() => setOpen(false)}>Get Started</Button>
           }
         >
           Swap between stablecoins instantly with zero spread for the first 30 days.

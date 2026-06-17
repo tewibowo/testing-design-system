@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ModalAssetSelection } from "./ModalAssetSelection.jsx";
 import { Button } from "../Button/Button.jsx";
+import { PartnerLogo } from "../PartnerLogo/PartnerLogo.jsx";
 
 export default {
   title: "Components/Modal/Asset Selection",
@@ -9,10 +10,10 @@ export default {
 };
 
 const stablecoins = [
-  { id: "xsgd", symbol: "XSGD", subtitle: "1:1 to SGD" },
-  { id: "xusd", symbol: "XUSD", subtitle: "1:1 to USD" },
-  { id: "usdc", symbol: "USDC" },
-  { id: "usdt", symbol: "USDT" },
+  { id: "xsgd", symbol: "XSGD", subtitle: "1:1 to SGD", mark: <PartnerLogo name="xsgd" size={32} /> },
+  { id: "xusd", symbol: "XUSD", subtitle: "1:1 to USD", mark: <PartnerLogo name="xusd" size={32} /> },
+  { id: "usdc", symbol: "USDC", mark: <PartnerLogo name="usdc" size={32} /> },
+  { id: "usdt", symbol: "USDT", mark: <PartnerLogo name="usdt" size={32} /> },
 ];
 
 const fiat = [

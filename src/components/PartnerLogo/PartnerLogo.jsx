@@ -1,29 +1,105 @@
 import React from "react";
 
 /**
- * Partner logo registry. Add a partner by extending `LOGOS` with an SVG
- * component (paint with `currentColor` so the `color` prop tints it).
+ * Partner logo registry, sourced from the StraitsX design system Figma file
+ * (Logo section). Bank marks use a 64x40 viewBox; chain/exchange marks use a
+ * square 24x24 viewBox — `bankLogo`/`squareLogo` size them accordingly.
  *
  *   <PartnerLogo name="standard-chartered" />
  *   <PartnerLogo name="ethereum" size={48} />
  *
- * For unknown names, falls back to a monochrome wordmark pill so layouts
- * don't break while you wait for licensed assets.
+ * These are licensed brand assets exported in full color, so the
+ * `monochrome` prop has no effect on real logos — it only affects the
+ * fallback wordmark pill shown for unknown names.
  *
- * To add a real logo:
- *   1. Drop the SVG file in `src/assets/partners/<slug>.svg`
- *   2. Add an entry to LOGOS:
- *      "standard-chartered": ({ size }) => (
- *        <img src={new URL("../../assets/partners/standard-chartered.svg", import.meta.url)} height={size} alt="" />
- *      )
+ * To add a new logo: drop the SVG in `src/assets/partners/<slug>.svg` and
+ * add an entry to LOGOS using `bankLogo` (wide marks) or `squareLogo` (icon
+ * marks).
  */
+function bankLogo(slug) {
+  const src = new URL(`../../assets/partners/${slug}.svg`, import.meta.url);
+  return ({ size }) => <img src={src} height={size} width={size * 1.6} alt="" />;
+}
+
+function squareLogo(slug) {
+  const src = new URL(`../../assets/partners/${slug}.svg`, import.meta.url);
+  return ({ size }) => <img src={src} height={size} width={size} alt="" />;
+}
+
 const LOGOS = {
-  // Placeholder — replace each with the actual licensed SVG.
+  // Coins
+  xsgd: squareLogo("xsgd"),
+  xusd: squareLogo("xusd"),
+  xidr: squareLogo("xidr"),
+  usdc: squareLogo("usdc"),
+  usdt: squareLogo("usdt"),
+
+  // Banks
+  uob: bankLogo("uob"),
+  anz: bankLogo("anz"),
+  dbs: bankLogo("dbs"),
+  "standard-chartered": bankLogo("standard-chartered"),
+  smbc: bankLogo("smbc"),
+  mandiri: bankLogo("mandiri"),
+  rhb: bankLogo("rhb"),
+  cimb: bankLogo("cimb"),
+  bss: bankLogo("bss"),
+  "cimb-niaga": bankLogo("cimb-niaga"),
+  bni: bankLogo("bni"),
+  "hana-bank": bankLogo("hana-bank"),
+  bri: bankLogo("bri"),
+  permata: bankLogo("permata"),
+  bca: bankLogo("bca"),
+  danamon: bankLogo("danamon"),
+  bsi: bankLogo("bsi"),
+
+  // Blockchains
+  ethereum: squareLogo("ethereum"),
+  arbitrum: squareLogo("arbitrum"),
+  polygon: squareLogo("polygon"),
+  metamask: squareLogo("metamask"),
+  bsc: squareLogo("bsc"),
+  avalanche: squareLogo("avalanche"),
+  tron: squareLogo("tron"),
+  ripple: squareLogo("ripple"),
+  zilliqa: squareLogo("zilliqa"),
+  solana: squareLogo("solana"),
+  base: squareLogo("base"),
+  walletconnect: squareLogo("walletconnect"),
+  hedera: squareLogo("hedera"),
+
+  // Exchanges / custodians / platforms
+  binance: squareLogo("binance"),
+  "crypto-com": squareLogo("crypto-com"),
+  zillet: squareLogo("zillet"),
+  "qcp-capital": squareLogo("qcp-capital"),
+  fireblocks: squareLogo("fireblocks"),
+  "onchain-custodian": squareLogo("onchain-custodian"),
+  uniswap: squareLogo("uniswap"),
+  dextf: squareLogo("dextf"),
+  coinhako: squareLogo("coinhako"),
+  liquid: squareLogo("liquid"),
+  "tokenize-xchange": squareLogo("tokenize-xchange"),
+  bitgo: squareLogo("bitgo"),
+  "ledger-vault": squareLogo("ledger-vault"),
+  unagii: squareLogo("unagii"),
+  coinstore: squareLogo("coinstore"),
 };
 
-const KNOWN_BANKS = ["cimb", "standard-chartered", "hana-bank", "permata", "bca", "bsi", "bss", "cimb-niaga"];
-const KNOWN_CHAINS = ["ethereum", "arbitrum", "polygon", "metamask"];
-const KNOWN_PARTNERS = ["coinstore", "qcp-capital", "dextf", "bsi"];
+const KNOWN_COINS = ["xsgd", "xusd", "xidr", "usdc", "usdt"];
+const KNOWN_BANKS = [
+  "uob", "anz", "dbs", "standard-chartered", "smbc", "mandiri", "rhb", "cimb",
+  "bss", "cimb-niaga", "bni", "hana-bank", "bri", "permata", "bca", "danamon", "bsi",
+];
+const KNOWN_CHAINS = [
+  "ethereum", "arbitrum", "polygon", "metamask", "bsc", "avalanche", "tron",
+  "ripple", "zilliqa", "solana", "base", "walletconnect", "hedera",
+];
+const KNOWN_PARTNERS = [
+  "binance", "crypto-com", "zillet", "qcp-capital", "fireblocks",
+  "onchain-custodian", "uniswap", "dextf", "coinhako", "liquid",
+  "tokenize-xchange", "bitgo", "ledger-vault", "unagii", "coinstore",
+];
 
 function prettify(slug) {
   return slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
@@ -61,6 +137,7 @@ export function PartnerLogo({ name, size = 32, monochrome = true, className = ""
   );
 }
 
+PartnerLogo.coins = KNOWN_COINS;
 PartnerLogo.banks = KNOWN_BANKS;
 PartnerLogo.chains = KNOWN_CHAINS;
 PartnerLogo.partners = KNOWN_PARTNERS;

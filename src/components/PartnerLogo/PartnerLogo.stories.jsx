@@ -14,31 +14,38 @@ export default {
 };
 
 export const Fallback = {
-  parameters: { docs: { description: { story: "Until licensed SVG files are added to the registry, every partner renders as a monochrome wordmark pill so layouts stay intact." } } },
+  args: { name: "some-unlisted-partner" },
+  parameters: { docs: { description: { story: "For names not in the registry, PartnerLogo renders a monochrome wordmark pill so layouts stay intact while licensed assets are pending." } } },
+};
+
+export const Coins = {
+  render: () => (
+    <div style={{ display: "flex", gap: 16, flexWrap: "wrap", alignItems: "center" }}>
+      {PartnerLogo.coins.map((slug) => <PartnerLogo key={slug} name={slug} size={32} />)}
+    </div>
+  ),
 };
 
 export const Banks = {
   render: () => (
-    <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
-      {PartnerLogo.banks.map((slug) => <PartnerLogo key={slug} name={slug} />)}
+    <div style={{ display: "flex", gap: 16, flexWrap: "wrap", alignItems: "center" }}>
+      {PartnerLogo.banks.map((slug) => <PartnerLogo key={slug} name={slug} size={40} />)}
     </div>
   ),
 };
 
 export const Blockchains = {
   render: () => (
-    <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
-      {PartnerLogo.chains.map((slug) => <PartnerLogo key={slug} name={slug} />)}
+    <div style={{ display: "flex", gap: 16, flexWrap: "wrap", alignItems: "center" }}>
+      {PartnerLogo.chains.map((slug) => <PartnerLogo key={slug} name={slug} size={32} />)}
     </div>
   ),
 };
 
-export const FilledChips = {
+export const Partners = {
   render: () => (
-    <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
-      {[...PartnerLogo.banks.slice(0, 4), ...PartnerLogo.chains.slice(0, 2)].map((slug) => (
-        <PartnerLogo key={slug} name={slug} monochrome={false} size={36} />
-      ))}
+    <div style={{ display: "flex", gap: 16, flexWrap: "wrap", alignItems: "center" }}>
+      {PartnerLogo.partners.map((slug) => <PartnerLogo key={slug} name={slug} size={32} />)}
     </div>
   ),
 };

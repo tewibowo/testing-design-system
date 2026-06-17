@@ -98,7 +98,6 @@ export function TransactionHistory() {
           </div>
 
           <Tabs
-            variant="underline"
             activeTab={tab}
             onTabChange={(t) => { setTab(t); setPage(1); }}
             items={[

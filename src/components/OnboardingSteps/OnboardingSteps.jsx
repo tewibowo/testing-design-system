@@ -61,7 +61,7 @@ export function OnboardingSteps({
   ];
 
   return (
-    <Card surface="raised" className="onboard">
+    <Card shadow={1} className="onboard">
       <h1 className="onboard__heading" style={{ font: "700 24px/1.2 var(--font-display)" }}>
         {heading}
       </h1>
