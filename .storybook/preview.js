@@ -2,6 +2,7 @@ import "../src/styles/global.css";
 
 /** @type { import('@storybook/react').Preview } */
 const preview = {
+  tags: ["autodocs"],
   parameters: {
     controls: {
       matchers: {
