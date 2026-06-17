@@ -31,7 +31,7 @@ function statusTag(status) {
     (typeof status === "object" && status.tone) ||
     STATUS_TONE[String(label).toLowerCase()] ||
     "neutral";
-  return <Tag tone={tone} shape="pill">{label}</Tag>;
+  return <Tag tone={tone}>{label}</Tag>;
 }
 
 const mono = (key) => (row) => <span className="txn__mono">{row[key]}</span>;
