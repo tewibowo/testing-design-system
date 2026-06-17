@@ -1,6 +1,6 @@
 {
   "name": "prohellox-designsystem",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "StraitsX design system — tokens + React components, with Storybook and Chromatic visual regression.",
   "license": "MIT",
   "type": "module",
@@ -13,6 +13,7 @@
   "files": [
     "src/components",
     "!src/components/**/*.stories.jsx",
+    "src/assets",
     "src/fonts",
     "src/styles",
     "src/index.js",
