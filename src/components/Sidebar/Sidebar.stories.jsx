@@ -64,6 +64,34 @@ export const BusinessWithCompanyDropdown = {
   },
 };
 
+// Opt-in per-item: opening "Mint" immediately selects its first sub-item
+// ("Buy") instead of just expanding. Other groups without the flag keep the
+// plain expand-only behavior shown in the Personal story.
+const AUTO_SELECT_NAV_ITEMS = DEFAULT_NAV_ITEMS.map((item) =>
+  item.id === "mint" ? { ...item, autoSelectFirstSubItem: true } : item
+);
+
+export const AutoSelectFirstSubItem = {
+  render: () => {
+    const [active, setActive] = useState("home");
+    const [sub, setSub] = useState(null);
+    return (
+      <Frame>
+        <Sidebar
+          account="personal"
+          items={AUTO_SELECT_NAV_ITEMS}
+          active={active}
+          activeSubItem={sub}
+          onSelect={(id) => { if (id.startsWith("mint-")) { setSub(id); setActive(null); } else { setActive(id); setSub(null); } }}
+        />
+        <div style={{ padding: 32, color: "var(--text-secondary)" }}>
+          Click "Mint" — it expands and auto-selects "Buy"
+        </div>
+      </Frame>
+    );
+  },
+};
+
 // Dropdown forced open so it's visible in static Chromatic snapshots.
 export const CompanyDropdownOpen = {
   render: () => (
@@ -92,20 +120,10 @@ export const NavHover = {
   ),
 };
 
-// MAS regulatory badge hidden.
-export const NoMasBadge = {
-  render: () => (
-    <Frame>
-      <Sidebar account="personal" items={DEFAULT_NAV_ITEMS} active="home" masBadge={false} />
-      <div style={{ padding: 32, color: "var(--text-secondary)" }}>No MAS badge</div>
-    </Frame>
-  ),
-};
-
 export const Sandbox = {
   render: () => (
     <Frame>
-      <Sidebar account="sandbox" company={{ name: "ABC Pte. Ltd", type: "Sandbox" }} onCompanyClick={() => {}} active="home" />
+      <Sidebar account="sandbox" company={{ name: "ABC Pte. Ltd", type: "Company" }} onCompanyClick={() => {}} active="home" />
       <div style={{ padding: 32, color: "var(--text-secondary)" }}>Sandbox environment</div>
     </Frame>
   ),

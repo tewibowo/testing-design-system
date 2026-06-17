@@ -13,11 +13,9 @@ const items = [
   { id: "swap", label: "Swap", content: <p style={{ font: "var(--body-medium)" }}>Swap between stablecoins.</p> },
 ];
 
-export const Underline = { args: { items, defaultTab: "in" } };
-export const Pill = { args: { items, defaultTab: "in", variant: "pill" } };
+export const Default = { args: { items, defaultTab: "in" } };
 export const Fill = { args: { items, defaultTab: "in", fill: true } };
 export const Secondary = { args: { items, defaultTab: "in", variant: "secondary" } };
-export const Small = { args: { items, defaultTab: "in", size: "small" } };
 export const Disabled = {
   args: {
     items: [

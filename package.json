@@ -1,8 +1,8 @@
 {
-  "name": "testing-design-system",
-  "version": "0.1.0",
-  "private": true,
+  "name": "prohellox-designsystem",
+  "version": "0.1.1",
   "description": "StraitsX design system — tokens + React components, with Storybook and Chromatic visual regression.",
+  "license": "MIT",
   "type": "module",
   "main": "src/index.js",
   "exports": {
@@ -11,10 +11,19 @@
     "./global.css": "./src/styles/global.css"
   },
   "files": [
-    "src",
+    "src/components",
+    "!src/components/**/*.stories.jsx",
+    "src/fonts",
+    "src/styles",
+    "src/index.js",
     "README.md",
-    "SKILL.md"
+    "SKILL.md",
+    "LICENSE"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bukanEngineer/testing-design-system.git"
+  },
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o storybook-static",

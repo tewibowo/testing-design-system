@@ -14,13 +14,8 @@
 }
 .sidebar__top { display: flex; flex-direction: column; gap: var(--space-6); }
 
-.sidebar__brand { display: flex; align-items: center; gap: var(--space-2); }
-.sidebar__brand-name {
-  font: var(--title-small);
-  color: var(--text-primary);
-  letter-spacing: -0.01em;
-}
-.sidebar__brand-sub { font: var(--body-small); color: var(--interactive-active); margin-top: 2px; }
+.sidebar__brand { display: flex; flex-direction: column; align-items: center; gap: var(--space-1); }
+.sidebar__brand-sub { font: var(--body-small); color: var(--interactive-active); text-align: center; }
 
 /* Company profile dropdown trigger + popover */
 .sidebar__company-wrap { position: relative; width: 100%; }
@@ -81,7 +76,13 @@
   font: var(--body-bold-medium);
 }
 .nav-item.is-active .material-symbols-rounded { color: var(--sidebar-menuitem-text); }
-.nav-item__label { flex: 1; min-width: 0; }
+.nav-item__label {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .nav-item__tag {
   font: var(--label-small);
   padding: 2px var(--space-2);
@@ -131,3 +132,27 @@
 }
 .sidebar__mas .material-symbols-rounded { font-size: 22px; color: var(--text-secondary); flex: 0 0 auto; }
 .sidebar__mas-text { font: var(--body-small); color: var(--text-secondary); }
+
+/* Sandbox theme — dark surface, white text/icons. Company profile card and
+ * the MAS badge keep their light styling per Figma (only nav + brand invert). */
+.sidebar.is-sandbox { background: var(--sidebar-sandbox-bg); border-right: 0; }
+.sidebar.is-sandbox .sidebar__brand-sub { color: var(--sidebar-sandbox-text); }
+.sidebar.is-sandbox .nav-item,
+.sidebar.is-sandbox .nav-item .material-symbols-rounded,
+.sidebar.is-sandbox .nav-item__chevron,
+.sidebar.is-sandbox .subitem {
+  color: var(--sidebar-sandbox-text);
+}
+.sidebar.is-sandbox .nav-item:hover,
+.sidebar.is-sandbox .nav-item.is-hovered,
+.sidebar.is-sandbox .subitem:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+.sidebar.is-sandbox .nav-item.is-active,
+.sidebar.is-sandbox .subitem.is-active {
+  background: var(--sidebar-sandbox-active);
+  color: var(--sidebar-sandbox-text);
+}
+.sidebar.is-sandbox .nav-item.is-active .material-symbols-rounded {
+  color: var(--sidebar-sandbox-text);
+}

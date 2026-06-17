@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Logomark } from "../Logomark/Logomark.jsx";
+import { Logo } from "../Logo/Logo.jsx";
 import { CompanyProfileMenu } from "../CompanyProfileMenu/CompanyProfileMenu.jsx";
 import "./Sidebar.css";
 
@@ -31,6 +31,13 @@ const ACCOUNT_LABEL = {
  * company-profile dropdown, expandable nav items with sub-items, "New" tags,
  * and the MAS regulatory badge.
  *
+ * Items with `subItems` toggle open/closed on click. Set
+ * `autoSelectFirstSubItem: true` on an item to also call `onSelect` with its
+ * first sub-item's id the moment it's opened — useful when a group has no
+ * route of its own and should land on its first child. Omit it (default
+ * false) to keep plain expand/collapse with no selection. Both behaviors can
+ * be mixed across items in the same `items` array.
+ *
  *   <Sidebar
  *     account="business"
  *     company={{ name: "ABC Pte. Ltd", type: "Company" }}
@@ -55,9 +62,8 @@ export function Sidebar({
   activeSubItem,
   hoveredItem, // id of a nav item to render in its hovered state (stories/Chromatic)
   onSelect,
-  brandName = "StraitsX",
-  masBadge = true,
 }) {
+  const isSandbox = account === "sandbox";
   const hasMenu = !!(companies || companyActions);
   const [menuOpen, setMenuOpen] = useState(defaultMenuOpen);
   const [expanded, setExpanded] = useState(() => {
@@ -70,14 +76,11 @@ export function Sidebar({
   const toggle = (id) => setExpanded((e) => ({ ...e, [id]: !e[id] }));
 
   return (
-    <aside className="sidebar">
+    <aside className={"sidebar" + (isSandbox ? " is-sandbox" : "")}>
       <div className="sidebar__top">
         <div className="sidebar__brand">
-          <Logomark size={36} />
-          <div>
-            <div className="sidebar__brand-name">{brandName}</div>
-            <div className="sidebar__brand-sub">{ACCOUNT_LABEL[account] || ACCOUNT_LABEL.personal}</div>
-          </div>
+          <Logo size={172} tone={isSandbox ? "white" : "default"} />
+          <div className="sidebar__brand-sub">{ACCOUNT_LABEL[account] || ACCOUNT_LABEL.personal}</div>
         </div>
 
         {company && (
@@ -122,7 +125,13 @@ export function Sidebar({
                   type="button"
                   className={"nav-item" + (isActive ? " is-active" : "") + (hoveredItem === item.id ? " is-hovered" : "")}
                   aria-expanded={hasSub ? isOpen : undefined}
-                  onClick={() => { if (hasSub) toggle(item.id); else if (onSelect) onSelect(item.id); }}
+                  onClick={() => {
+                    if (hasSub) {
+                      const willOpen = !isOpen;
+                      toggle(item.id);
+                      if (willOpen && item.autoSelectFirstSubItem && onSelect) onSelect(item.subItems[0].id);
+                    } else if (onSelect) onSelect(item.id);
+                  }}
                 >
                   <span className="material-symbols-rounded" aria-hidden="true">{item.icon}</span>
                   <span className="nav-item__label">{item.label}</span>
@@ -153,12 +162,10 @@ export function Sidebar({
         </nav>
       </div>
 
-      {masBadge && (
-        <div className="sidebar__mas">
-          <span className="material-symbols-rounded" aria-hidden="true">verified_user</span>
-          <span className="sidebar__mas-text">Licensed &amp; Regulated by Monetary Authority of Singapore</span>
-        </div>
-      )}
+      <div className="sidebar__mas">
+        <span className="material-symbols-rounded" aria-hidden="true">verified_user</span>
+        <span className="sidebar__mas-text">Licensed &amp; Regulated by Monetary Authority of Singapore</span>
+      </div>
     </aside>
   );
 }

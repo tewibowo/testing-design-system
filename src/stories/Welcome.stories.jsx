@@ -69,7 +69,7 @@ import { Button, Tag, Card } from "testing-design-system";
 
 export default function Example() {
   return (
-    <Card surface="raised" title="Welcome">
+    <Card shadow={1} title="Welcome">
       <Tag tone="positive">Verified</Tag>
       <Button variant="primary">Continue</Button>
     </Card>

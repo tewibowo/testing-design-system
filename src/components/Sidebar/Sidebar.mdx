@@ -54,6 +54,7 @@ Nav items at the parent level have two distinct behaviours, determined per item 
 
 - Clicking an expand-only or navigable parent toggles the sub-item list open and closed.
 - Only one group is expanded at a time. Opening a new group collapses any previously open group (accordion behaviour).
+- Per-group opt-in: a group can set `autoSelectFirstSubItem` so that opening it (not closing) also selects its first sub-item, landing the user directly on it. Groups without the flag just expand/collapse with no selection change. Both behaviours can coexist across groups in the same Sidebar.
 
 ### Text truncation
 
@@ -123,6 +124,12 @@ Business account with a company profile section. Click the company name to open 
 Static snapshot of the company switcher dropdown in its open state. Shows the switch-company list with the active company checked, followed by account-level actions.
 
 <Canvas of={SidebarStories.CompanyDropdownOpen} />
+
+### Auto-select First Sub-item
+
+Opening a group with `autoSelectFirstSubItem` set also selects its first sub-item rather than only expanding. Other groups in the same Sidebar can omit the flag and keep plain expand/collapse.
+
+<Canvas of={SidebarStories.AutoSelectFirstSubItem} />
 
 ### Nav Hover State
 
