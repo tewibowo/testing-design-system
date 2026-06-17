@@ -2,7 +2,8 @@
 .ex-bd {
   display: grid;
   grid-template-columns: 240px 1fr;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   background: var(--background);
 }
 
@@ -12,6 +13,8 @@
   gap: 24px;
   padding: 0 32px 64px;
   min-width: 0;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .ex-bd__head {

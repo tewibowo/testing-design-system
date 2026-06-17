@@ -24,8 +24,6 @@
 .tag--small .tag__icon.material-symbols-rounded { font-size: 14px; }
 .tag__icon svg { width: 1em; height: 1em; display: block; }
 
-.tag--pill { border-radius: var(--radius-full); }
-
 /* ── Size ── */
 .tag--large { padding: var(--space-1) var(--space-3); font: var(--body-bold-small); }
 .tag--small { padding: 2px var(--space-2); font: var(--label-small); }

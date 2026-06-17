@@ -7,7 +7,6 @@ export default {
   parameters: { layout: "centered" },
   argTypes: {
     tone: { control: "inline-radio", options: ["positive", "critical", "warning", "info", "neutral", "brand"] },
-    shape: { control: "inline-radio", options: ["default", "pill"] },
     size: { control: "inline-radio", options: ["large", "small"] },
     appearance: { control: "inline-radio", options: ["outlined", "filled"] },
     icon: { control: "text" },
@@ -17,7 +16,7 @@ export default {
     disabled: { control: "boolean" },
     children: { control: "text" },
   },
-  args: { tone: "positive", shape: "default", size: "large", appearance: "outlined", children: "Verified" },
+  args: { tone: "positive", size: "large", appearance: "outlined", children: "Verified" },
 };
 
 export const Positive = { args: { tone: "positive", children: "Verified" } };
@@ -25,7 +24,7 @@ export const Critical = { args: { tone: "critical", children: "Failed" } };
 export const Warning = { args: { tone: "warning", children: "Pending" } };
 export const Info = { args: { tone: "info", children: "Information" } };
 export const Neutral = { args: { tone: "neutral", children: "Not Verified" } };
-export const Brand = { args: { tone: "brand", children: "New", shape: "pill" } };
+export const Brand = { args: { tone: "brand", children: "New" } };
 
 export const AllTones = {
   parameters: { layout: "padded" },
@@ -36,18 +35,7 @@ export const AllTones = {
       <Tag tone="warning">Pending</Tag>
       <Tag tone="info">Information</Tag>
       <Tag tone="neutral">Not Verified</Tag>
-      <Tag tone="brand" shape="pill">New</Tag>
-    </div>
-  ),
-};
-
-export const PillFilters = {
-  parameters: { layout: "padded" },
-  render: () => (
-    <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-      <Tag tone="positive" shape="pill">● Active</Tag>
-      <Tag tone="warning" shape="pill">● Pending review</Tag>
-      <Tag tone="neutral" shape="pill">● Draft</Tag>
+      <Tag tone="brand">New</Tag>
     </div>
   ),
 };
@@ -90,7 +78,7 @@ export const WithIcon = {
       <Tag tone="critical" icon="error">Failed</Tag>
       <Tag tone="warning" icon="schedule">Pending</Tag>
       <Tag tone="info" appearance="filled" icon="info">Information</Tag>
-      <Tag tone="brand" shape="pill" size="small" icon="star">New</Tag>
+      <Tag tone="brand" size="small" icon="star">New</Tag>
     </div>
   ),
 };
@@ -114,11 +102,11 @@ export const Removable = {
     return (
       <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
         {tags.map((t) => (
-          <Tag key={t} tone="neutral" shape="pill" removable onRemove={() => setTags((prev) => prev.filter((x) => x !== t))}>
+          <Tag key={t} tone="neutral" removable onRemove={() => setTags((prev) => prev.filter((x) => x !== t))}>
             {t}
           </Tag>
         ))}
-        <Tag tone="neutral" shape="pill" removable disabled>Locked</Tag>
+        <Tag tone="neutral" removable disabled>Locked</Tag>
         {tags.length === 0 && <span style={{ color: "var(--text-secondary)" }}>All removed</span>}
       </div>
     );
@@ -136,7 +124,6 @@ export const Clickable = {
           <Tag
             key={o}
             tone="brand"
-            shape="pill"
             clickable
             selected={active === o}
             onClick={() => setActive(o)}
@@ -144,7 +131,7 @@ export const Clickable = {
             {o}
           </Tag>
         ))}
-        <Tag tone="brand" shape="pill" clickable disabled>Disabled</Tag>
+        <Tag tone="brand" clickable disabled>Disabled</Tag>
       </div>
     );
   },
@@ -154,9 +141,9 @@ export const ClickableSelectedStates = {
   parameters: { layout: "padded" },
   render: () => (
     <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
-      <Tag tone="info" shape="pill" clickable>Enabled</Tag>
-      <Tag tone="info" shape="pill" clickable selected>Selected</Tag>
-      <Tag tone="info" shape="pill" clickable disabled>Disabled</Tag>
+      <Tag tone="info" clickable>Enabled</Tag>
+      <Tag tone="info" clickable selected>Selected</Tag>
+      <Tag tone="info" clickable disabled>Disabled</Tag>
     </div>
   ),
 };

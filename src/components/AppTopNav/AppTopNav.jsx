@@ -104,7 +104,7 @@ export function AppTopNav({
       <div className="app-topnav__left">
         <span className="app-topnav__logo">{brand}</span>
         {isSandbox && (
-          <Tag tone="warning" shape="pill" size="small" className="app-topnav__sandbox">
+          <Tag tone="warning" size="small" className="app-topnav__sandbox">
             Sandbox
           </Tag>
         )}

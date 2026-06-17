@@ -5,7 +5,6 @@ import "./Tag.css";
  * Status / category tag.
  *
  * tone:       positive | critical | warning | info | neutral | brand
- * shape:      "default" (8-px radius) | "pill" (fully rounded)
  * size:       "large" (default) | "small"            — Figma large/small
  * appearance: "outlined" (default) | "filled"        — Figma Filled/Outlined
  *               outlined = surface bg + colored border/text (current look)
@@ -17,11 +16,10 @@ import "./Tag.css";
  *               (selected = filled highlight)
  * disabled:   bool — applies to removable / clickable affordances
  *
- * Backwards compatible: a plain <Tag tone shape> still renders a static span.
+ * Backwards compatible: a plain <Tag tone> still renders a static span.
  */
 export function Tag({
   tone = "neutral",
-  shape = "default",
   size = "large",
   appearance = "outlined",
   icon,
@@ -43,7 +41,6 @@ export function Tag({
     `tag--${tone}`,
     `tag--${size}`,
     `tag--${effectiveAppearance}`,
-    shape === "pill" && "tag--pill",
     clickable && "tag--clickable",
     selected && "is-selected",
     disabled && "is-disabled",

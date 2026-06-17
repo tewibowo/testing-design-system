@@ -30,7 +30,7 @@ export function MarketingHero() {
 
       <section className="ex-marketing__hero">
         <div className="ex-marketing__hero-text">
-          <Tag tone="brand" shape="pill" className="ex-marketing__eyebrow">Regulated by MAS</Tag>
+          <Tag tone="brand" className="ex-marketing__eyebrow">Regulated by MAS</Tag>
           <h1 className="ex-marketing__h1">
             Payments<br />
             Infrastructure<br />
@@ -75,7 +75,7 @@ export function MarketingHero() {
               <span>Available</span><span>S$ 113,080.50</span>
             </div>
             <div className="ex-marketing__card-foot">
-              <Tag tone="positive" shape="pill">● Verified</Tag>
+              <Tag tone="positive">● Verified</Tag>
               <span>1 XSGD = 1 SGD</span>
             </div>
           </div>
