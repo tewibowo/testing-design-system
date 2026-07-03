@@ -48,6 +48,24 @@
   margin: 0;
 }
 .auth-sub strong { font-weight: 700; }
+.auth-sub--secondary { color: var(--text-secondary); }
+
+/* Vertically centered variants (email-link landing, success screens). */
+.auth-body--center {
+  justify-content: center;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+.auth-status { display: flex; justify-content: center; }
+
+/* Full-height wrapper for screens swapped via AnimatePresence. */
+.auth-fill {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
 
 .auth-form {
   display: flex;
@@ -110,7 +128,17 @@
 .auth-success-host {
   display: flex;
   flex-direction: column;
+  flex: 1;
+  min-height: 100%;
+  box-sizing: border-box;
 }
+
+/* Inline links sit on the text baseline inside body copy. */
+.auth-tnc .link-btn,
+.auth-switch .link-btn,
+.auth-resend .link-btn,
+.auth-help-line .link-btn,
+.auth-sub .link-btn { vertical-align: baseline; }
 
 .auth-email-chip {
   display: inline-block;
@@ -256,6 +284,13 @@
   transition: fill var(--dur-2) var(--ease);
 }
 .auth-rule[data-ok="true"] .auth-rule__icon circle { fill: var(--status-positive); }
+.auth-rule__icon path {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 
 /* ---- Captcha sheet (GeeTest-style dark panel) ----------------------------- */
 
@@ -362,7 +397,10 @@
   color: #9aa0a6;
 }
 
-/* ---- Google account chooser (deliberately Google-styled, not DS) --------- */
+/* ---- Google account chooser (deliberately Google-styled, not DS) ---------
+ * Sheet-only step: rendered inside the app bottom sheet. Bleeds to the
+ * panel edges (negative margins offset .sheet-panel padding) so the dark
+ * Google surface reads as an external page under the white grabber strip. */
 
 .auth-google {
   background: #202124;
@@ -370,28 +408,19 @@
   font-family: Roboto, "Helvetica Neue", Arial, system-ui, sans-serif;
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  margin: 0 -20px calc(-20px - var(--safe-bottom));
+  border-radius: 16px 16px 0 0;
 }
 .auth-google__bar {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: calc(var(--safe-top) + 10px) 16px 12px;
+  padding: 14px 20px 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
-.auth-google__back {
-  background: none;
-  border: 0;
-  padding: 6px;
-  margin-left: -6px;
-  color: #9aa0a6;
-  display: flex;
-  cursor: pointer;
-}
-.auth-google__back .material-symbols-rounded { font-size: 22px; }
 .auth-google__bar-label { font-size: 14px; color: #e8eaed; }
 .auth-google__main {
-  padding: 28px 24px 8px;
+  padding: 24px 20px 8px;
   display: flex;
   flex-direction: column;
 }
@@ -485,13 +514,14 @@
   line-height: 1.5;
   margin: 20px 0 0;
 }
+.auth-google__note-slot { min-height: 20px; margin-top: 8px; }
+.auth-google__note { color: #9aa0a6; font-size: 12px; }
 .auth-google__footer {
-  margin-top: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 20px 24px calc(var(--safe-bottom) + 16px);
+  padding: 12px 20px calc(var(--safe-bottom) + 16px);
 }
 .auth-google__foot-btn {
   background: none;

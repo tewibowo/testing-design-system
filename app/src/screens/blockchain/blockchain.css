@@ -254,7 +254,7 @@
   margin: 0 0 16px;
   padding: 0;
 }
-.blockchain-confirm-rows li {
+.blockchain-confirm-rows > div {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -262,7 +262,7 @@
   padding: 11px 0;
   border-bottom: 1px solid var(--sx-color-grey-100, #f0f0f0);
 }
-.blockchain-confirm-rows li:last-child { border-bottom: 0; }
+.blockchain-confirm-rows > div:last-child { border-bottom: 0; }
 .blockchain-confirm-rows dt {
   font-family: "Hanken Grotesk", sans-serif;
   font-size: 13px;
@@ -324,6 +324,117 @@
   font-size: 13px;
   font-weight: 500;
 }
+
+/* ---- Confirm sheet (delete / unlink) ------------------------------------- */
+
+.blockchain-confirm-body { margin: 0 0 18px; }
+.blockchain-confirm-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 4px;
+}
+.blockchain-btn--critical.btn--primary {
+  background: var(--status-critical, #df1312);
+  color: var(--text-inverse, #fff);
+}
+.blockchain-btn--critical.btn--primary:hover,
+.blockchain-btn--critical.btn--primary:active {
+  background: color-mix(in srgb, var(--status-critical, #df1312) 85%, #000);
+  color: var(--text-inverse, #fff);
+}
+
+/* ---- Addresses list ("My Addresses", spec A1) ----------------------------- */
+
+.blockchain-list { padding-bottom: 28px; }
+.blockchain-list__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 16px 0 10px;
+}
+.blockchain-h2 {
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  margin: 0;
+}
+.blockchain-info-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--sx-color-grey-500, #505454);
+  margin: 0 0 16px;
+}
+.blockchain-info-ic {
+  font-size: 18px;
+  color: var(--sx-color-vibrant-green, #00d37e);
+  margin-top: 1px;
+}
+
+.blockchain-card {
+  background: #fff;
+  border: 1px solid var(--sx-color-grey-200, #e0e0e0);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.blockchain-card__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.blockchain-card__id.list-blockchain {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  background: transparent;
+}
+.blockchain-card__id .list-blockchain__icon {
+  width: 40px;
+  height: 40px;
+}
+.blockchain-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.blockchain-card__label {
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--sx-color-grey-500, #505454);
+  margin-top: 2px;
+}
+.blockchain-card__netrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.blockchain-card__netnames {
+  flex: 1;
+  min-width: 0;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--sx-color-deep-ivy, #002b2a);
+}
+.blockchain-empty {
+  text-align: center;
+  margin: 24px 0;
+}
+
+/* Success-state secondary link (blockchain flows only) */
+.blockchain-stage .success-state__actions .link-btn { justify-content: center; }
 
 /* ---- Wallet link (MetaMask stub) ----------------------------------------- */
 
@@ -609,6 +720,9 @@
   justify-content: center;
   overflow: hidden;
 }
+.blockchain-wc__tile--dark { background: #1a1a1a; }
+.blockchain-wc__tile--safepal { background: #4a88f8; }
+.blockchain-wc__tile--safepal .blockchain-wc__tile-letter { color: #fff; }
 .blockchain-wc__tile--grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

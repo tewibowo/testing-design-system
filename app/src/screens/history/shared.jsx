@@ -18,10 +18,45 @@ export const STATUS_TONES = {
 /** Spec §9 — status options in the Filter & Sort sheet. */
 export const FILTER_STATUSES = ["Completed", "Pending", "Processing", "Cancelled", "Failed"];
 
-export const EMPTY_FILTERS = { start: "", end: "", statuses: [] };
+/** Spec §9 — funding transaction-type options. Matched by prefix so the
+ * captured "Admin Transfer to" row answers to "Admin Transfer". */
+export const FILTER_TYPES = [
+  "Blockchain Transfer In",
+  "Blockchain Transfer Out",
+  "Bank Transfer In",
+  "Bank Transfer Out",
+  "Admin Transfer"
+];
+
+/** Spec §9 — asset options. */
+export const FILTER_ASSETS = ["XSGD", "XUSD", "USDT", "USDC", "XIDR"];
+
+/** Spec §9 — sort options ("Newest first" is the default). */
+export const SORT_OPTIONS = [
+  { id: "newest", label: "Newest first" },
+  { id: "oldest", label: "Oldest first" },
+  { id: "amount-desc", label: "Amount high→low" },
+  { id: "amount-asc", label: "Amount low→high" }
+];
+
+export const EMPTY_FILTERS = {
+  start: "",
+  end: "",
+  types: [],
+  assets: [],
+  statuses: [],
+  sort: "newest"
+};
 
 export function isFiltering(f) {
-  return Boolean(f.start || f.end || f.statuses.length);
+  return Boolean(
+    f.start ||
+      f.end ||
+      f.types.length ||
+      f.assets.length ||
+      f.statuses.length ||
+      f.sort !== "newest"
+  );
 }
 
 const MONTHS = {
@@ -36,15 +71,28 @@ export function parseTxDate(str) {
   return new Date(Number(m[3]), MONTHS[m[2]], Number(m[1]), Number(m[4]), Number(m[5]));
 }
 
-/** Apply the Filter & Sort sheet's filters (date range + status set). */
+/** Apply the Filter & Sort sheet's filters (type/asset/status/date + sort). */
 export function applyFilters(rows, f) {
-  return rows.filter((tx) => {
+  const filtered = rows.filter((tx) => {
+    if (f.types.length && !f.types.some((t) => tx.type.startsWith(t))) return false;
+    if (f.assets.length && (!tx.asset || !f.assets.includes(tx.asset))) return false;
     if (f.statuses.length && !f.statuses.includes(tx.status)) return false;
     const d = parseTxDate(tx.date);
     if (f.start && d && d < new Date(`${f.start}T00:00:00`)) return false;
     if (f.end && d && d > new Date(`${f.end}T23:59:59`)) return false;
     return true;
   });
+  const time = (tx) => parseTxDate(tx.date)?.getTime() ?? 0;
+  switch (f.sort) {
+    case "oldest":
+      return filtered.slice().sort((a, b) => time(a) - time(b));
+    case "amount-desc":
+      return filtered.slice().sort((a, b) => (b.amount ?? -Infinity) - (a.amount ?? -Infinity));
+    case "amount-asc":
+      return filtered.slice().sort((a, b) => (a.amount ?? Infinity) - (b.amount ?? Infinity));
+    default:
+      return filtered.slice().sort((a, b) => time(b) - time(a)); // newest first
+  }
 }
 
 /** Copy to clipboard — prototype-tolerant (never throws). */

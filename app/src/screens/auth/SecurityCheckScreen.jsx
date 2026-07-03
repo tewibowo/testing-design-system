@@ -38,16 +38,16 @@ export function SecurityCheckScreen() {
             {body}
           </motion.p>
 
-          <motion.div variants={listItem} className="auth-check-list">
+          <div className="auth-check-list">
             {channels.map((channel) => (
-              <div key={channel} className="auth-check-row">
+              <motion.div key={channel} variants={listItem} className="auth-check-row">
                 <span className="material-symbols-rounded" aria-hidden="true">
                   check
                 </span>
                 {channel}
-              </div>
+              </motion.div>
             ))}
-          </motion.div>
+          </div>
         </motion.div>
       </div>
 

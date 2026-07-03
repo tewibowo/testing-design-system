@@ -68,7 +68,12 @@ function TroubleOtp({ target, resendToast, onVerified, renderHelpLine }) {
           </motion.p>
 
           <motion.div variants={listItem}>
-            <OtpInput value={code} onChange={setCode} status={status} />
+            <OtpInput
+              value={code}
+              onChange={setCode}
+              status={status}
+              disabled={status === "success"}
+            />
           </motion.div>
 
           <motion.p variants={listItem} className="auth-resend">

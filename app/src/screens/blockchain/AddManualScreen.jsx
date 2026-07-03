@@ -17,6 +17,7 @@ import { Input } from "@ds/components/Input/Input.jsx";
 import { Textarea } from "@ds/components/Textarea/Textarea.jsx";
 import { LinkButton } from "@ds/components/LinkButton/LinkButton.jsx";
 import { AssetMark } from "@ds/components/AssetMark/AssetMark.jsx";
+import { addManualAddress } from "./addressStore.js";
 import {
   useFlowToast,
   SheetHeader,
@@ -72,7 +73,7 @@ function ConfirmSheet({ close, data, onConfirmed }) {
       <SheetHeader title="Confirm address details" onClose={close} />
       <dl className="blockchain-confirm-rows">
         {rows.map(([k, v]) => (
-          <li key={k}>
+          <div key={k}>
             <dt>{k}</dt>
             <dd>
               {k === "Network" && (
@@ -80,14 +81,14 @@ function ConfirmSheet({ close, data, onConfirmed }) {
               )}
               {v}
             </dd>
-          </li>
+          </div>
         ))}
-        <li>
+        <div>
           <dt>Blockchain Address</dt>
           <dd>
             <span className="blockchain-mono">{truncAddr(data.address)}</span>
           </dd>
-        </li>
+        </div>
       </dl>
       <AddrChip
         address={data.address}
@@ -160,12 +161,17 @@ export function AddManualScreen() {
       />
     ));
 
+  // Confirm → the store gains a "Not Verified" card mirroring the Solana
+  // card pattern (spec A4 flow logic), then swap to the success stage.
   const submit = () =>
     openSheet(({ close }) => (
       <ConfirmSheet
         close={close}
         data={{ owner, addrType, platform, label, network, address: address.trim() }}
-        onConfirmed={() => setStage("success")}
+        onConfirmed={() => {
+          addManualAddress({ label, network, address: address.trim(), addrType, platform });
+          setStage("success");
+        }}
       />
     ));
 
@@ -334,12 +340,20 @@ export function AddManualScreen() {
                 variant="primary"
                 size="lg"
                 onClick={() => {
+                  nav.popToRoot();
+                  nav.push("blockchain/list");
+                }}
+              >
+                View my addresses
+              </Button>
+              <LinkButton
+                onClick={() => {
                   nav.pop();
                   nav.pop();
                 }}
               >
                 Done
-              </Button>
+              </LinkButton>
             </SuccessState>
           </motion.div>
         )}

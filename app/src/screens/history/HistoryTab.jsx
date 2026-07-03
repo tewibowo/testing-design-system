@@ -20,6 +20,7 @@ import { Tabs } from "@ds/components/Tabs/Tabs.jsx";
 import { Tag } from "@ds/components/Tag/Tag.jsx";
 import { Button } from "@ds/components/Button/Button.jsx";
 import { IconButton } from "@ds/components/IconButton/IconButton.jsx";
+import { Input } from "@ds/components/Input/Input.jsx";
 import { EmptyState } from "@ds/components/EmptyState/EmptyState.jsx";
 import { AssetMark } from "@ds/components/AssetMark/AssetMark.jsx";
 import { HistoryFilterSheet } from "./FilterSheet.jsx";
@@ -32,8 +33,6 @@ import {
   useHistoryToast
 } from "./shared.jsx";
 import "./history.css";
-
-const EASE_EXIT = [0.4, 0, 1, 1];
 
 // Panel = tab content unit: crossfade via popLayout + stagger children.
 const panelVariants = {
@@ -48,10 +47,11 @@ const panelVariants = {
   exit: tabContent.exit
 };
 
-// Rows: shared list entrance + a faster ease-in exit for filter removals.
+// Rows: shared list entrance + a faster exit for filter removals
+// (exits run ~2/3 of enters, same brand ease — no invented curves).
 const rowVariants = {
   ...listItem,
-  exit: { opacity: 0, y: -8, transition: { duration: 0.16, ease: EASE_EXIT } }
+  exit: { opacity: 0, y: -8, transition: { duration: 0.16, ease: EASE_BRAND } }
 };
 
 // Spec §1.2 tab bar, names verbatim.
@@ -69,6 +69,7 @@ export function HistoryTab() {
   const [tab, setTab] = useState("funding");
   const [subFilter, setSubFilter] = useState("all"); // funding sub-filter (§1.2)
   const [filters, setFilters] = useState(EMPTY_FILTERS);
+  const [query, setQuery] = useState(""); // "Search by Transaction ID" (§1.4)
   const filtersRef = useRef(filters);
   filtersRef.current = filters;
 
@@ -78,10 +79,14 @@ export function HistoryTab() {
   const actionRows = useMemo(() => fundingRows.filter((t) => t.status !== "Completed"), [fundingRows]);
 
   const rows = useMemo(() => {
-    if (tab === "funding") return applyFilters(subFilter === "all" ? fundingRows : actionRows, filters);
-    if (tab === "swap") return applyFilters(swapRows, filters);
-    return []; // OTC Request tab is empty until a request is submitted (§3)
-  }, [tab, subFilter, filters, fundingRows, actionRows, swapRows]);
+    let base;
+    if (tab === "funding") base = subFilter === "all" ? fundingRows : actionRows;
+    else if (tab === "swap") base = swapRows;
+    else base = []; // OTC Request tab is empty until a request is submitted (§3)
+    const q = query.trim().toLowerCase();
+    if (q) base = base.filter((t) => t.id.toLowerCase().includes(q));
+    return applyFilters(base, filters);
+  }, [tab, subFilter, filters, query, fundingRows, actionRows, swapRows]);
 
   const filterActive = isFiltering(filters);
 
@@ -137,6 +142,23 @@ export function HistoryTab() {
 
       <div className="history-chrome">
         <Tabs items={MAIN_TABS} fill activeTab={tab} onTabChange={setTab} />
+        <div className="history-toolbar">
+          <Input
+            type="search"
+            size="small"
+            placeholder="Search by Transaction ID"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="history-toolbar__search"
+          />
+          <IconButton
+            icon="download"
+            size="sm"
+            label="Export CSV"
+            disabled={rows.length === 0}
+            onClick={() => showToast("CSV export is not available in this prototype", "info")}
+          />
+        </div>
         {tab === "funding" && (
           <div className="history-subrow">
             <Tabs
@@ -152,7 +174,9 @@ export function HistoryTab() {
       <div className="screen-scroll">
         <div className="screen-pad">
           <div className="history-panelhost">
-            <AnimatePresence mode="popLayout" initial={false}>
+            {/* initial NOT disabled: RootTabs remounts the tab per switch, so
+                the mount pass IS the entrance — panel fades, rows stagger. */}
+            <AnimatePresence mode="popLayout">
               <motion.div
                 key={panelKey}
                 className="history-panel"
@@ -165,7 +189,7 @@ export function HistoryTab() {
                   <OtcEmptyState onRequest={() => nav.push("home/otc")} />
                 ) : (
                   <div className="history-list">
-                    <AnimatePresence mode="popLayout" initial={false}>
+                    <AnimatePresence mode="popLayout">
                       {rows.map((tx) => (
                         <HistoryRow
                           key={tx.id}
