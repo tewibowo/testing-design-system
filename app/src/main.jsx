@@ -1,6 +1,6 @@
 import { createRoot } from "react-dom/client";
 // Self-hosted fonts so the installed PWA needs no CDN (offline-first).
-import "material-symbols/rounded.css";
+import "@app/styles/icons.css";
 import "@fontsource/red-hat-mono/400.css";
 import "@fontsource/red-hat-mono/500.css";
 import "@fontsource/red-hat-mono/700.css";

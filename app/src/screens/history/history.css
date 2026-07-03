@@ -47,6 +47,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  white-space: nowrap;
 }
 .history-subtab__count {
   min-width: 18px;

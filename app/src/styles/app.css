@@ -289,6 +289,16 @@ body {
   max-width: 300px;
 }
 
+/* ---- Focus ring (brand: 2px information-blue, offset 2px) --------------- */
+
+.input:focus-within,
+.input.is-focused {
+  border-color: var(--sx-color-information, #0d69d4);
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 4px var(--sx-color-information, #0d69d4);
+}
+
 /* ---- Money -------------------------------------------------------------- */
 
 .money {

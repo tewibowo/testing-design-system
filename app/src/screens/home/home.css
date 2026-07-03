@@ -88,6 +88,11 @@
   padding: 8px 0 28px;
 }
 
+.home-balance {
+  /* .home-sections zeroes the horizontal .screen-pad gutter; every other
+     section carries its own inset, the balance block needs it restored */
+  padding: 0 20px;
+}
 .home-balance .estimated-balance__value {
   font-size: 40px;
 }
