@@ -1,10 +1,13 @@
 // Shared bits for the blockchain address flows: local toast, clipboard
-// helper, mono address chip (truncAddr + copy), sheet chrome and pickers.
+// helper, mono address chip (truncAddr + copy), sheet chrome, pickers,
+// status tag and a small confirm sheet.
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useTime, useTransform } from "motion/react";
 import { listContainer, listItem, pressable, toast } from "@app/motion/presets.js";
 import { truncAddr } from "@app/data/db.js";
 import { AssetMark } from "@ds/components/AssetMark/AssetMark.jsx";
+import { Button } from "@ds/components/Button/Button.jsx";
+import { Tag } from "@ds/components/Tag/Tag.jsx";
 import "./blockchain.css";
 
 /* ---- Clipboard --------------------------------------------------------- */
@@ -161,6 +164,48 @@ export function PickerSheet({ title, options, selectedKey, onSelect, close }) {
           );
         })}
       </motion.ul>
+    </div>
+  );
+}
+
+/* ---- Status tag (spec A1 visual notes) -----------------------------------
+ * "Verified" = green outlined; "Not Verified" = grey FILLED block;
+ * "Pending" = warning outlined (post-verify state, mirrors the bank flow). */
+
+export function AddressStatusTag({ status }) {
+  if (status === "Verified") {
+    return <Tag tone="positive" appearance="outlined" size="small">Verified</Tag>;
+  }
+  if (status === "Pending") {
+    return <Tag tone="warning" appearance="outlined" size="small" icon="schedule">Pending</Tag>;
+  }
+  return <Tag tone="neutral" appearance="filled" size="small">Not Verified</Tag>;
+}
+
+/* ---- Small confirm sheet (delete / unlink — dialogs not captured in the
+ * screenshots; spec A1 recommends a confirm step) -------------------------- */
+
+export function ConfirmSheet({ title, body, confirmLabel, critical = false, onConfirm, close }) {
+  return (
+    <div className="blockchain-sheet">
+      <SheetHeader title={title} onClose={close} />
+      {body && <p className="blockchain-body blockchain-confirm-body">{body}</p>}
+      <div className="blockchain-confirm-actions">
+        <Button
+          variant="primary"
+          size="lg"
+          className={critical ? "blockchain-btn--critical" : ""}
+          onClick={() => {
+            close();
+            onConfirm && onConfirm();
+          }}
+        >
+          {confirmLabel}
+        </Button>
+        <Button variant="secondary" size="lg" onClick={close}>
+          Cancel
+        </Button>
+      </div>
     </div>
   );
 }
