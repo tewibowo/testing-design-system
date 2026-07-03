@@ -21,7 +21,7 @@ const TAB_SCREENS = {
 
 export function RootTabs() {
   const [active, setActive] = useState("home");
-  const unread = notifications.filter((n) => !n.read).length;
+  const unread = notifications.items.filter((n) => !n.read).length;
   const tabs = TABS.map((t) => (t.key === "home" ? { ...t, badge: 0 } : t));
   const Active = TAB_SCREENS[active];
 
