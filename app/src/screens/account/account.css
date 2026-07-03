@@ -83,7 +83,7 @@
   margin-top: 1px;
 }
 
-/* ── Tabs (DS secondary variant, squeezed for 3 mobile labels) ─ */
+/* ── Tabs (DS default/underline variant, squeezed for 3 mobile labels) ─ */
 
 .account-tabs {
   margin-bottom: var(--space-4);
@@ -98,9 +98,13 @@
 }
 .account-tabs .tabs__tab {
   padding: 0 var(--space-1);
-  height: 34px;
+  height: 40px;
   font-size: 12px;
   white-space: nowrap;
+}
+.account-tabs .tabs__tab.is-active::after {
+  left: var(--space-1);
+  right: var(--space-1);
 }
 
 /* ── Section header + lists ────────────────────────────────── */
@@ -304,6 +308,20 @@
 }
 .account-logout .material-symbols-rounded {
   font-size: 20px;
+}
+
+/* ── Currency-selection sheet (spec §5 step 2) ─────────────── */
+
+.account-sheet {
+  padding: var(--space-2) 0 var(--space-1);
+}
+.account-sheet__title {
+  font: var(--title-mobile-small);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-4);
+}
+.account-sheet__actions {
+  margin-top: var(--space-5);
 }
 
 /* ── Confirm sheet ─────────────────────────────────────────── */

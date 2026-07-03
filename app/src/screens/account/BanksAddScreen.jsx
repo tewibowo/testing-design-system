@@ -1,6 +1,10 @@
 /* ────────────────────────────────────────────────
  * ANIMATION STORYBOARD — Add Bank Account (account/banks-add)
- *     0ms   screen slides in (shell); currency options stagger up 50ms apart
+ *  sheet    "Add New" opens the currency sheet (shell spring); options
+ *           stagger up 50ms apart; Next closes it and pushes this screen
+ *     0ms   screen slides in (shell) at the form step (currency chosen);
+ *           pushed WITHOUT a currency param it starts at an inline
+ *           currency step instead (canonical cross-area entry)
  *   Next    currency step fades out fast (130ms), form crossfades in (200ms)
  *  submit(empty)  fields container shakes ±8px (320ms), error text fades up
  *  submit(valid)  600ms fake processing → success: check draws, copy rises
@@ -56,10 +60,57 @@ function LabelWithInfo({ text, info }) {
   );
 }
 
-export function BanksAddScreen() {
-  const nav = useNav();
-  const [step, setStep] = useState("currency"); // currency | form | success
+/**
+ * Currency-selection bottom sheet (spec §5 step 2 — "Add Bank Account"
+ * modal). Opened from the Bank Accounts tab's "Add New" button; Next
+ * closes the sheet and hands the chosen currency to the add-bank screen.
+ * SGD is pre-selected, so Next is enabled from the start (per spec).
+ */
+export function AddBankCurrencySheet({ close, onNext }) {
   const [currency, setCurrency] = useState(CURRENCIES[0]);
+  return (
+    <div className="account-sheet">
+      <h3 className="account-sheet__title">Add Bank Account</h3>
+      <motion.div
+        className="account-list"
+        variants={listContainer}
+        initial="initial"
+        animate="enter"
+      >
+        {CURRENCIES.map((c) => (
+          <motion.div key={c} variants={listItem}>
+            <SelectionBox
+              type="radio"
+              name="account-sheet-currency"
+              label={c}
+              selected={currency === c}
+              onChange={() => setCurrency(c)}
+            />
+          </motion.div>
+        ))}
+      </motion.div>
+      <div className="account-cta-row account-sheet__actions">
+        <Button variant="secondary" onClick={close}>Close</Button>
+        <Button
+          variant="primary"
+          onClick={() => {
+            close();
+            onNext(currency);
+          }}
+        >
+          Next
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+export function BanksAddScreen({ params = {} }) {
+  const nav = useNav();
+  // Pushed with a currency (from the tab's currency sheet) → straight to the
+  // form; pushed bare (canonical cross-area route) → inline currency step.
+  const [step, setStep] = useState(params.currency ? "form" : "currency"); // currency | form | success
+  const [currency, setCurrency] = useState(params.currency || CURRENCIES[0]);
   const [alertDismissed, setAlertDismissed] = useState(false);
   const [values, setValues] = useState({
     bankName: "",

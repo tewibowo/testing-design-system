@@ -30,6 +30,7 @@ import { LinkButton } from "@ds/components/LinkButton/LinkButton.jsx";
 import { Logo } from "@ds/components/Logo/Logo.jsx";
 import { Pagination } from "@ds/components/Pagination/Pagination.jsx";
 import { useBanks, removeBank } from "./bankStore.js";
+import { AddBankCurrencySheet } from "./BanksAddScreen.jsx";
 import { ConfirmSheet, StatusTag, ToastStack, useToasts } from "./parts.jsx";
 import "./account.css";
 
@@ -49,6 +50,16 @@ export function AccountTab() {
   const [tab, setTab] = useState("banks");
 
   /* ── sheet + toast actions ─────────────────────────────── */
+
+  // Spec §5 step 2: "Add New" opens the currency-selection sheet; Next
+  // pushes the full add-bank form with the chosen currency.
+  const addBank = () =>
+    openSheet(({ close }) => (
+      <AddBankCurrencySheet
+        close={close}
+        onNext={(currency) => nav.push("account/banks-add", { currency })}
+      />
+    ));
 
   const contactSupport = () =>
     toasts.show({
@@ -174,7 +185,7 @@ export function AccountTab() {
 
           <Tabs
             className="account-tabs"
-            variant="secondary"
+            variant="default"
             fill
             items={TAB_ITEMS}
             activeTab={tab}
@@ -192,7 +203,7 @@ export function AccountTab() {
               {tab === "banks" && (
                 <BanksPanel
                   banks={banks}
-                  onAdd={() => nav.push("account/banks-add")}
+                  onAdd={addBank}
                   onVerify={(bank) => nav.push("account/banks-verify", { bank: bank.name })}
                   onEdit={editBank}
                   onDelete={deleteBank}

@@ -68,11 +68,15 @@ export function OtcScreen() {
   const [toastNode, showToast] = useHomeToast();
 
   const [step, setStep] = useState("intro"); // intro | form | confirm | done
-  // Form state seeded with the captured example: Sell 100,000 USDC → USDT.
-  const [direction, setDirection] = useState(otc.request.direction);
-  const [amount, setAmount] = useState(otc.request.amount);
-  const [amountAsset, setAmountAsset] = useState(otc.request.sellAsset);
-  const [counterAsset, setCounterAsset] = useState(otc.request.buyAsset);
+  // Form starts in the captured Step-3 state (history-otc.md §7.3): direction
+  // "Buy", amount empty, amount asset USDC, counter asset XSGD, Next disabled.
+  // (The spec's Step-4 example — Sell 100,000 USDC → USDT — is what the user
+  // types to reach the captured confirmation; db.otc.request keeps its
+  // fee/processing constants.)
+  const [direction, setDirection] = useState("Buy");
+  const [amount, setAmount] = useState("");
+  const [amountAsset, setAmountAsset] = useState("USDC");
+  const [counterAsset, setCounterAsset] = useState("XSGD");
   const [submitting, setSubmitting] = useState(false);
   const timer = useRef(null);
 
@@ -135,7 +139,7 @@ export function OtcScreen() {
     return (
       <div className="home-wrap">
         <SuccessState
-          title="Request submitted"
+          title="OTC request submitted"
           body="Our OTC Trading Desk will respond within 1 business day via Email / WhatsApp / Telegram. You can track this request in Transaction History under the OTC Request tab."
         >
           <Button variant="primary" size="lg" onClick={() => nav.popToRoot()}>
@@ -176,7 +180,6 @@ export function OtcScreen() {
             </div>
           ))}
         </div>
-        <p className="home-otc__min">{otc.minimums.helper}</p>
         <div className="home-otc__contact">
           <div className="home-otc__contact-row">
             <span className="home-otc__contact-icon" aria-hidden="true">

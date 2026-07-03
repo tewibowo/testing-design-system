@@ -3,6 +3,10 @@
 import { useCallback, useEffect, useId, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Toast } from "@ds/components/Toast/Toast.jsx";
+// `.field` / `.field__label` / `.field__helper` (used by SelectField below and
+// by the DS Copybox markup) live in the DS Input stylesheet — load it here so
+// the transfers area doesn't depend on another area importing <Input>.
+import "@ds/components/Input/Input.css";
 import {
   listContainer,
   listItem,

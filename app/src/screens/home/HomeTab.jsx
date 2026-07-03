@@ -11,7 +11,7 @@ import { motion } from "motion/react";
 import { useNav } from "@app/nav/Navigator.jsx";
 import { Money } from "@app/ui/Money.jsx";
 import { listContainer, listItem, pressable, EASE_BRAND } from "@app/motion/presets.js";
-import { balances, otc } from "@app/data/db.js";
+import { balances, notifications, otc } from "@app/data/db.js";
 import { Logo } from "@ds/components/Logo/Logo.jsx";
 import { AssetMark } from "@ds/components/AssetMark/AssetMark.jsx";
 import { EstimatedBalance } from "@ds/components/EstimatedBalance/EstimatedBalance.jsx";
@@ -50,7 +50,13 @@ function bannerBody() {
   );
 }
 
-export function HomeTab({ unreadNotifications = 0 }) {
+// Default unread badge count derives from db (RootTabs passes the same
+// db-derived value as a prop). The captured panel shows every item read
+// (spec: "screenshot shows no badge, so default 0/none is also acceptable"),
+// so the badge stays hidden until db marks items unread.
+const unreadFromDb = notifications.items.filter((n) => !n.read).length;
+
+export function HomeTab({ unreadNotifications = unreadFromDb }) {
   const nav = useNav();
   const [spin, setSpin] = useState(0);
   const [toastNode, showToast] = useHomeToast();

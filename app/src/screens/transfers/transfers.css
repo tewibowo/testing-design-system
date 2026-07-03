@@ -243,6 +243,17 @@
   text-decoration: none;
 }
 
+/* ── Round Singapore flag mark (conversion box) ──
+ * The flag's lower half is white — keep a hairline ring so it reads as a
+ * circular mark on white surfaces. */
+
+.transfers-sgflag {
+  flex: 0 0 auto;
+  display: block;
+  border-radius: var(--radius-full, 999px);
+  box-shadow: 0 0 0 1px rgba(0, 43, 42, 0.08);
+}
+
 /* ── Legal footer (§0) ── */
 
 .transfers-legal {

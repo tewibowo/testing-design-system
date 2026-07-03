@@ -533,14 +533,6 @@
   line-height: 1.5;
   color: var(--sx-color-deep-ivy, #002b2a);
 }
-.home-otc__min {
-  font-family: "Hanken Grotesk", sans-serif;
-  font-size: 12px;
-  line-height: 1.5;
-  color: var(--sx-color-grey-500, #505454);
-  text-align: center;
-  margin: 12px 0 0;
-}
 .home-otc__contact {
   background: #fff;
   border: 1px solid rgba(216, 216, 216, 0.55);
