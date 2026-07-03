@@ -11,12 +11,15 @@
     "generate-icons": "node scripts/generate-icons.mjs"
   },
   "dependencies": {
+    "@fontsource/red-hat-mono": "^5.2.8",
+    "material-symbols": "^0.45.5",
     "motion": "^12.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^5.0.0",
+    "playwright": "^1.61.1",
     "sharp": "^0.34.0",
     "vite": "^7.0.0",
     "vite-plugin-pwa": "^1.0.0"

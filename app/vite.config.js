@@ -33,14 +33,37 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,svg,png,ttf,woff2}"],
-        maximumFileSizeToCacheInBytes: 6 * 1024 * 1024
+        maximumFileSizeToCacheInBytes: 6 * 1024 * 1024,
+        // Icon + mono fonts come from Google Fonts; cache them on first
+        // online load so the installed PWA keeps working offline.
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+            handler: "StaleWhileRevalidate",
+            options: { cacheName: "google-fonts-css", expiration: { maxEntries: 8 } }
+          },
+          {
+            urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "google-fonts-files",
+              expiration: { maxEntries: 16, maxAgeSeconds: 60 * 60 * 24 * 365 },
+              cacheableResponse: { statuses: [0, 200] }
+            }
+          }
+        ]
       }
     })
   ],
   resolve: {
     alias: {
       "@ds": path.resolve(here, "../src"),
-      "@app": path.resolve(here, "src")
-    }
+      "@app": path.resolve(here, "src"),
+      // DS sources live outside app/, so point their react imports at
+      // the app's copy (repo root has no node_modules).
+      react: path.resolve(here, "node_modules/react"),
+      "react-dom": path.resolve(here, "node_modules/react-dom")
+    },
+    dedupe: ["react", "react-dom"]
   }
 });

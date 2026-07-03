@@ -1,0 +1,772 @@
+/* Mintswap area — Swap / Mint Setup / Mint.
+ * Prefix: mintswap-. Colors/radii/shadows/type via design-system tokens
+ * (src/styles/tokens.css semantic layer), matching the shell's fallbacks. */
+
+/* ── Page scaffolding ── */
+
+.mintswap-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 4px;
+  padding-bottom: 24px;
+}
+
+/* Full-height phase wrapper (gate crossfade / edit→success swap). */
+.mintswap-phase {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.mintswap-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--surface, #fff);
+  border: 1px solid var(--border, #d8d8d8);
+  border-radius: var(--radius-lg, 12px);
+  padding: 16px 20px 20px;
+}
+.mintswap-card__title {
+  font: var(--title-mobile-small, 700 18px/1.33 "Red Hat Display", sans-serif);
+  color: var(--text-primary, #002b2a);
+  margin: 0;
+}
+.mintswap-card__sub {
+  font: var(--body-medium, 400 14px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-secondary, #505454);
+  margin: 0;
+}
+
+.mintswap-divider {
+  height: 1px;
+  background: var(--border, #d8d8d8);
+}
+
+.mintswap-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mintswap-lead {
+  font: var(--body-bold-medium, 700 14px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-primary, #002b2a);
+  margin: 0;
+}
+
+.mintswap-sublabel {
+  font: var(--body-small, 400 12px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-secondary, #505454);
+}
+
+/* ── Inline links (spec: blue underlined) ── */
+
+.mintswap-link {
+  display: inline;
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-weight: 600;
+  color: var(--link, #187d97);
+  text-decoration: underline;
+  cursor: pointer;
+  text-align: left;
+}
+.mintswap-link--block {
+  display: block;
+  margin-top: 6px;
+}
+
+/* ── Select-style trigger (opens a bottom sheet) ── */
+
+.mintswap-select {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 48px;
+  padding: 8px 14px;
+  border: 1px solid var(--border, #d8d8d8);
+  border-radius: var(--radius-lg, 12px);
+  background: var(--surface, #fff);
+  font: var(--body-large, 400 16px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-primary, #002b2a);
+  text-align: left;
+  cursor: pointer;
+}
+.mintswap-select__lead {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+}
+.mintswap-select__value {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mintswap-select__chevron {
+  flex: 0 0 auto;
+  font-size: 20px;
+  color: var(--text-secondary, #505454);
+}
+
+/* ── Bottom-sheet content ── */
+
+.mintswap-sheet {
+  padding-bottom: 4px;
+}
+.mintswap-sheet__title {
+  font: var(--title-mobile-small, 700 18px/1.33 "Red Hat Display", sans-serif);
+  color: var(--text-primary, #002b2a);
+  margin: 2px 0 14px;
+}
+.mintswap-sheet__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mintswap-assetrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border, #d8d8d8);
+  border-radius: var(--radius-lg, 12px);
+  background: var(--surface, #fff);
+  text-align: left;
+  cursor: pointer;
+}
+.mintswap-assetrow.is-selected {
+  border-color: var(--primary, #00d37e);
+  box-shadow: 0 0 0 1px var(--primary, #00d37e);
+}
+.mintswap-assetrow__sym {
+  flex: 1;
+  min-width: 0;
+  font: var(--body-bold-medium, 700 14px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-primary, #002b2a);
+}
+.mintswap-assetrow__bal {
+  font-family: var(--font-mono, "Red Hat Mono", monospace);
+  font-size: 13px;
+  color: var(--text-secondary, #505454);
+  white-space: nowrap;
+}
+.mintswap-assetrow__check {
+  font-size: 20px;
+  color: var(--status-positive, #257c58);
+}
+
+/* ── Swap card (§5) ── */
+
+.mintswap-swap-card {
+  gap: 18px;
+}
+
+.mintswap-leg {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.mintswap-leg__labels {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.mintswap-leg__label {
+  font: var(--body-medium, 400 14px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-primary, #002b2a);
+}
+.mintswap-leg__balance {
+  font: var(--body-medium, 400 14px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-secondary, #505454);
+}
+
+.mintswap-leg__field {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  min-height: 52px;
+}
+.mintswap-leg__main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 8px 8px 14px;
+  border: 1px solid var(--border, #d8d8d8);
+  border-right: 0;
+  border-radius: var(--radius-lg, 12px) 0 0 var(--radius-lg, 12px);
+  background: var(--surface, #fff);
+  transition: border-color var(--dur-1, 120ms) var(--ease, cubic-bezier(0.2, 0.7, 0.2, 1)),
+    box-shadow var(--dur-1, 120ms) var(--ease, cubic-bezier(0.2, 0.7, 0.2, 1));
+}
+.mintswap-leg__main:focus-within {
+  border-color: var(--interactive-active, #054948);
+  box-shadow: inset 0 0 0 1px var(--interactive-active, #054948);
+}
+.mintswap-leg__input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  padding: 0;
+  font-family: var(--font-mono, "Red Hat Mono", monospace);
+  font-variant-numeric: tabular-nums;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary, #002b2a);
+}
+.mintswap-leg__input::placeholder {
+  color: var(--input-placeholder, #b6b6b6);
+  font-weight: 400;
+}
+.mintswap-leg__max {
+  flex: 0 0 auto;
+  border: 0;
+  background: none;
+  padding: 6px 10px;
+  font: var(--label-medium, 700 14px/1.35 "Red Hat Display", sans-serif);
+  color: var(--link, #187d97);
+  cursor: pointer;
+}
+.mintswap-leg__num {
+  font-family: var(--font-mono, "Red Hat Mono", monospace);
+  font-variant-numeric: tabular-nums;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary, #002b2a);
+}
+.mintswap-leg__num.is-zero {
+  color: var(--input-placeholder, #b6b6b6);
+  font-weight: 400;
+}
+
+.mintswap-leg__asset {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px 0 10px;
+  border: 1px solid var(--border, #d8d8d8);
+  border-radius: 0 var(--radius-lg, 12px) var(--radius-lg, 12px) 0;
+  background: var(--surface, #fff);
+  cursor: pointer;
+}
+.mintswap-leg__coin {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.mintswap-leg__sym {
+  font: var(--body-bold-medium, 700 14px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-primary, #002b2a);
+}
+.mintswap-leg__chevron {
+  font-size: 20px;
+  color: var(--text-secondary, #505454);
+}
+
+.mintswap-rate-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.mintswap-rate-chip {
+  padding: 4px 10px;
+  border-radius: var(--radius-sm, 4px);
+  background: var(--surface-secondary, #f6f7f9);
+  font: var(--body-medium, 400 14px/1.5 "Hanken Grotesk", sans-serif);
+  font-variant-numeric: tabular-nums;
+  color: var(--interactive-active, #054948);
+}
+.mintswap-flip {
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+.mintswap-swapbtn {
+  width: 100%;
+}
+.mintswap-footnote {
+  font: var(--body-small, 400 12px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-secondary, #505454);
+  text-align: center;
+  margin: 0;
+}
+
+/* ── Swap success (invented terminus; spec §6 flow note) ── */
+
+.mintswap-success-scroll {
+  display: flex;
+  flex-direction: column;
+}
+.mintswap-success-scroll .success-state {
+  flex: 1;
+}
+
+.mintswap-balances {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface, #fff);
+  border: 1px solid var(--border, #d8d8d8);
+  border-radius: var(--radius-lg, 12px);
+  padding: 12px 16px 4px;
+  text-align: left;
+}
+.mintswap-balances__title {
+  font: var(--label-small, 700 12px/1.35 "Red Hat Display", sans-serif);
+  color: var(--text-secondary, #505454);
+  padding-bottom: 4px;
+}
+.mintswap-balances__row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+}
+.mintswap-balances__row + .mintswap-balances__row {
+  border-top: 1px solid var(--surface-secondary, #f6f7f9);
+}
+.mintswap-balances__sym {
+  flex: 1;
+  min-width: 0;
+  font: var(--body-bold-medium, 700 14px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-primary, #002b2a);
+}
+.mintswap-balances__value {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary, #002b2a);
+}
+
+/* ── In-frame centered modal (confirmation / 2FA) ── */
+
+.mintswap-modal-host {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.mintswap-modal-scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--overlay, rgba(5, 21, 19, 0.7));
+}
+.mintswap-modal-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 340px;
+  max-height: 100%;
+  background: var(--surface, #fff);
+  border-radius: var(--radius-lg, 12px);
+  box-shadow: var(--shadow-3, 0 20px 24px -4px rgba(10, 13, 18, 0.08));
+  overflow: hidden;
+}
+
+.mintswap-modal__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 16px 14px 20px;
+}
+.mintswap-modal__head.has-divider {
+  border-bottom: 1px solid var(--border, #d8d8d8);
+}
+.mintswap-modal__title {
+  flex: 1;
+  min-width: 0;
+  font: var(--title-mobile-small, 700 18px/1.33 "Red Hat Display", sans-serif);
+  color: var(--text-primary, #002b2a);
+  margin: 0;
+}
+.mintswap-modal__close {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: none;
+  padding: 6px;
+  margin: -6px -6px -6px 0;
+  color: var(--text-secondary, #505454);
+  cursor: pointer;
+}
+.mintswap-modal__close .material-symbols-rounded {
+  font-size: 22px;
+}
+
+.mintswap-modal__body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 20px 20px;
+  overflow-y: auto;
+}
+.mintswap-modal__copy {
+  font: var(--body-medium, 400 14px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-secondary, #505454);
+  margin: 0;
+}
+
+.mintswap-modal__foot {
+  display: flex;
+  gap: 12px;
+  padding: 16px 20px;
+  background: var(--surface-secondary, #f6f7f9);
+  border-top: 1px solid var(--border, #d8d8d8);
+}
+.mintswap-modal__foot .btn {
+  flex: 1;
+}
+
+/* ── Confirmation rows (§6) ── */
+
+.mintswap-confirm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.mintswap-confirm__row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.mintswap-confirm__label {
+  font: var(--body-medium, 400 14px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-secondary, #505454);
+}
+.mintswap-confirm__value {
+  font: var(--body-bold-medium, 700 14px/1.5 "Hanken Grotesk", sans-serif);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary, #002b2a);
+  text-align: right;
+}
+.mintswap-confirm__value .money {
+  font-size: 14px;
+  font-weight: 700;
+}
+.mintswap-confirm__subrow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -6px;
+}
+.mintswap-refresh {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm, 4px);
+  background: var(--surface-secondary, #f6f7f9);
+  font: var(--body-small, 400 12px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-secondary, #505454);
+}
+.mintswap-refresh__time {
+  font-family: var(--font-mono, "Red Hat Mono", monospace);
+  font-variant-numeric: tabular-nums;
+  color: var(--interactive-active, #054948);
+  font-weight: 600;
+}
+
+/* ── 2FA modal (§2) ── */
+
+.mintswap-2fa__lock {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  border-radius: var(--radius-full, 999px);
+  background: var(--sidebar-active, #d7efe2);
+  color: var(--status-positive, #257c58);
+}
+.mintswap-2fa__lock .material-symbols-rounded {
+  font-size: 20px;
+}
+
+.mintswap-2fa__code {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+.mintswap-2fa__digit {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 48px;
+  text-align: center;
+  font-family: var(--font-mono, "Red Hat Mono", monospace);
+  font-size: 18px;
+  color: var(--text-primary, #002b2a);
+  background: var(--surface, #fff);
+  border: 1px solid var(--border, #d8d8d8);
+  border-radius: var(--radius-md, 8px);
+  outline: none;
+  transition: border-color var(--dur-1, 120ms) var(--ease, cubic-bezier(0.2, 0.7, 0.2, 1)),
+    box-shadow var(--dur-1, 120ms) var(--ease, cubic-bezier(0.2, 0.7, 0.2, 1));
+}
+.mintswap-2fa__digit:focus {
+  border-color: var(--primary, #00d37e);
+  box-shadow: 0 0 0 1px var(--primary, #00d37e);
+}
+
+.mintswap-2fa__autofill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  align-self: center;
+  padding: 5px 12px;
+  border: 1px dashed var(--border, #d8d8d8);
+  border-radius: var(--radius-full, 999px);
+  background: transparent;
+  font: var(--label-small, 700 12px/1.35 "Red Hat Display", sans-serif);
+  color: var(--text-secondary, #505454);
+  cursor: pointer;
+}
+.mintswap-2fa__autofill .material-symbols-rounded {
+  font-size: 14px;
+  color: var(--primary, #00d37e);
+}
+
+.mintswap-2fa__trouble {
+  font: var(--body-small, 400 12px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-secondary, #505454);
+  text-align: center;
+  margin: 0;
+}
+.mintswap-2fa__trouble .mintswap-link {
+  font-size: 12px;
+}
+
+/* ── Mint setup (§1) ── */
+
+.mintswap-walletbox .selbox__content {
+  flex: 1;
+  min-width: 0;
+}
+.mintswap-walletrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.mintswap-walletdesc {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding-top: 2px;
+}
+.mintswap-walletdesc__addr {
+  font-family: var(--font-mono, "Red Hat Mono", monospace);
+  font-size: 12px;
+  color: var(--text-secondary, #505454);
+  word-break: break-all;
+}
+
+.mintswap-linkbtn {
+  width: 100%;
+}
+.mintswap-linkbtn .material-symbols-rounded {
+  font-size: 20px;
+}
+
+.mintswap-how__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.mintswap-how__head .mintswap-card__title {
+  padding-top: 4px;
+}
+.mintswap-how__panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 14px;
+  border-radius: var(--radius-md, 8px);
+  background: var(--status-surface-positive, #f0f9f4);
+}
+.mintswap-how__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.mintswap-how__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  border-radius: var(--radius-full, 999px);
+  background: var(--sidebar-active, #d7efe2);
+  color: var(--status-positive, #257c58);
+}
+.mintswap-how__icon .material-symbols-rounded {
+  font-size: 18px;
+}
+.mintswap-how__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.mintswap-how__title {
+  font: var(--body-bold-medium, 700 14px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-primary, #002b2a);
+}
+.mintswap-how__body {
+  font: var(--body-medium, 400 14px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-secondary, #505454);
+}
+.mintswap-how__text .mintswap-link {
+  font-size: 13px;
+}
+
+/* ── Mint page (§3–§4) ── */
+
+.mintswap-mint-headrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.mintswap-mint-title {
+  flex: 1;
+  min-width: 0;
+}
+
+.mintswap-addressbox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px;
+  border: 1px solid var(--border, #d8d8d8);
+  border-radius: var(--radius-lg, 12px);
+  background: var(--surface, #fff);
+}
+.mintswap-addressbox__wallet {
+  font: var(--body-small, 400 12px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-secondary, #505454);
+}
+.mintswap-addressbox__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mintswap-addressbox__addr {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-mono, "Red Hat Mono", monospace);
+  font-size: 13px;
+  color: var(--text-primary, #002b2a);
+}
+.mintswap-walletbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: var(--radius-full, 999px);
+  background: var(--sidebar-active, #d7efe2);
+  color: var(--status-positive, #257c58);
+  cursor: pointer;
+}
+.mintswap-walletbtn .material-symbols-rounded {
+  font-size: 18px;
+}
+
+/* "Step N" pill badge (spec: dark pill, white text) on the DS CardSteps. */
+.mintswap-step .card-steps__counter {
+  width: auto;
+  height: 24px;
+  padding: 0 10px;
+  white-space: nowrap;
+  font: var(--label-small, 700 12px/1.35 "Red Hat Display", sans-serif);
+}
+/* Step cards 1-2 are head-only; tighten the bottom padding. */
+.mintswap-step {
+  padding-bottom: var(--space-4, 16px);
+}
+
+/* Important Notes: mint tint + thick green left rule (spec §4). */
+.mintswap-notes.alert {
+  background: var(--status-surface-positive, #f0f9f4);
+  border-color: var(--status-positive, #257c58);
+  border-left-width: 4px;
+}
+.mintswap-notes .alert__title {
+  font: var(--body-bold-medium, 700 14px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-primary, #002b2a);
+}
+.mintswap-notes__list {
+  margin: 4px 0 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.mintswap-notes__list li {
+  font: var(--body-medium, 400 14px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-primary, #002b2a);
+}
+
+/* ── Legal footer ── */
+
+.mintswap-legal {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 4px 0 8px;
+}
+.mintswap-legal p {
+  font: var(--body-small, 400 12px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-secondary, #505454);
+  margin: 0;
+}
+
+/* ── Toast layer (screen-scoped) ── */
+
+.mintswap-toasts {
+  position: absolute;
+  top: calc(var(--safe-top) + 10px);
+  left: 16px;
+  right: 16px;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+.mintswap-toasts > * {
+  pointer-events: auto;
+  width: 100%;
+}
+.mintswap-toasts .toast {
+  width: 100%;
+  box-shadow: var(--shadow-3, 0 20px 24px -4px rgba(10, 13, 18, 0.08));
+}

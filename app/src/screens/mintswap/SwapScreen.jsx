@@ -117,7 +117,11 @@ export function SwapScreen() {
     setTimeout(() => {
       setProcessing(false);
       setConfirmOpen(false);
-      setResult({ from: fromId, to: toId, spend: amount, receive });
+      // Credit the quoted (displayed) figure — §6 suggests USDT 23.77 → 13.77
+      // and XSGD 0.00 → 12.90 after the captured 10.0 USDT → 12.9 XSGD swap.
+      const quoted =
+        Math.round(receive * 10 ** RECEIVE_DECIMALS) / 10 ** RECEIVE_DECIMALS;
+      setResult({ from: fromId, to: toId, spend: amount, receive: quoted });
     }, 600);
   };
 
