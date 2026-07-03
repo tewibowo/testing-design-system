@@ -3,7 +3,7 @@
  *     0ms   active tab panel crossfades in (AnimatePresence
  *           popLayout swap, 200ms, brand ease)
  *    40ms   rows stagger in 50ms apart (fade + 12px rise, 240ms)
- *  filter   removed rows fade up + out (160ms ease-in), survivors
+ *  filter   removed rows fade up + out (160ms, brand ease), survivors
  *  apply    reflow via layout (240ms), returning rows fade + rise
  * Timing values live in @app/motion/presets.js (DUR / EASE_BRAND) —
  * the single source of truth for durations used here.
