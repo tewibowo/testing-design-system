@@ -1,0 +1,450 @@
+/* Transfers area — Transfer In / Transfer Out.
+ * Prefix: transfers-. Colors/radii/shadows/type via design-system tokens
+ * (src/styles/tokens.css semantic layer), matching the shell's fallbacks. */
+
+/* ── Page scaffolding ── */
+
+.transfers-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 4px;
+  padding-bottom: 24px;
+}
+
+.transfers-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0 0;
+  font: var(--title-mobile-large, 700 24px/1.25 "Red Hat Display", sans-serif);
+  color: var(--text-primary, #002b2a);
+}
+.transfers-title__mark { flex: 0 0 auto; }
+
+.transfers-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.transfers-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.transfers-branch { width: 100%; }
+
+.transfers-summary { width: 100%; }
+
+/* ── Inline instruction line (marks + info glyph inside body copy) ── */
+
+.transfers-instruction {
+  font: var(--body-medium, 400 14px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-primary, #002b2a);
+  margin: 0;
+}
+.transfers-inline-mark {
+  vertical-align: -4px;
+  margin: 0 1px;
+}
+.transfers-inline-info {
+  font-size: 16px;
+  color: var(--text-secondary, #505454);
+  vertical-align: -3px;
+  cursor: help;
+}
+
+/* ── QR ── */
+
+.transfers-qr-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+/* ── Field header (label + right-aligned link, e.g. "Add Wallet") ── */
+
+.transfers-field-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* ── Select-style trigger (opens a bottom sheet) ── */
+
+.transfers-select {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 48px;
+  padding: 8px 14px;
+  border: 1px solid var(--border, #d8d8d8);
+  border-radius: var(--radius-lg, 12px);
+  background: var(--surface, #fff);
+  font: var(--body-large, 400 16px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-primary, #002b2a);
+  text-align: left;
+  cursor: pointer;
+}
+.transfers-select.is-disabled {
+  background: var(--surface-disabled, #f2f4f5);
+  color: var(--disabled-on-surface, #9d9e9f);
+  cursor: default;
+}
+.transfers-select__lead {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+}
+.transfers-select__value {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.transfers-select__value.is-placeholder { color: var(--input-placeholder, #b6b6b6); }
+.transfers-select__chevron {
+  flex: 0 0 auto;
+  font-size: 20px;
+  color: var(--text-secondary, #505454);
+}
+.transfers-select.is-disabled .transfers-select__chevron { color: var(--disabled-on-surface, #9d9e9f); }
+.transfers-select__two {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.transfers-select__name {
+  font: var(--body-bold-medium, 700 14px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-primary, #002b2a);
+}
+.transfers-select__addr {
+  font-family: var(--font-mono, "Red Hat Mono", monospace);
+  font-size: 12px;
+  color: var(--text-secondary, #505454);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.transfers-bank-lead {
+  font-size: 22px;
+  color: var(--text-secondary, #505454);
+}
+
+/* ── Amount input (leading mark, Max link, fixed asset suffix) ── */
+
+.transfers-amount {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.transfers-amount__box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding-left: 14px;
+  border: 1px solid var(--border, #d8d8d8);
+  border-radius: var(--radius-lg, 12px);
+  background: var(--surface, #fff);
+  overflow: hidden;
+  transition: border-color var(--dur-1, 120ms) var(--ease, cubic-bezier(0.2, 0.7, 0.2, 1)),
+    box-shadow var(--dur-1, 120ms) var(--ease, cubic-bezier(0.2, 0.7, 0.2, 1));
+}
+.transfers-amount__box:focus-within {
+  border-color: var(--status-information, #0c45e1);
+  box-shadow: 0 0 0 1px var(--status-information, #0c45e1);
+}
+.transfers-amount__box.is-error,
+.transfers-amount__box.is-error:focus-within {
+  border-color: var(--status-critical, #df1312);
+  box-shadow: 0 0 0 1px var(--status-critical, #df1312);
+}
+.transfers-amount__input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-mono, "Red Hat Mono", monospace);
+  font-variant-numeric: tabular-nums;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary, #002b2a);
+  padding: 0;
+}
+.transfers-amount__input::placeholder { color: var(--input-placeholder, #b6b6b6); }
+.transfers-amount__max {
+  flex: 0 0 auto;
+  border: 0;
+  background: none;
+  padding: 6px 10px;
+  font: var(--label-medium, 700 14px/1.35 "Red Hat Display", sans-serif);
+  color: var(--link, #187d97);
+  cursor: pointer;
+}
+.transfers-amount__suffix {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: stretch;
+  padding: 0 14px;
+  border-left: 1px solid var(--border, #d8d8d8);
+  background: var(--surface, #fff);
+  font: var(--body-bold-medium, 700 14px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-primary, #002b2a);
+}
+.transfers-amount__helper {
+  font: var(--body-small, 400 12px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-secondary, #505454);
+}
+.transfers-amount__helper.is-error { color: var(--status-critical, #df1312); }
+.transfers-amount__helper .money { font-size: 12px; }
+
+/* ── Summary value fragments ── */
+
+.transfers-netvalue {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.transfers-feevalue {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.transfers-feevalue__note {
+  font: var(--body-small, 400 12px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-secondary, #505454);
+  text-align: right;
+  max-width: 200px;
+}
+
+/* ── Inline links (spec: blue text links) ── */
+
+.transfers-link {
+  display: inline;
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-weight: 600;
+  color: var(--link, #187d97);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.transfers-link--block {
+  display: block;
+  margin-top: 6px;
+  text-decoration: none;
+}
+
+/* ── Legal footer (§0) ── */
+
+.transfers-legal {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 4px 0 8px;
+}
+.transfers-legal p {
+  font: var(--body-small, 400 12px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-secondary, #505454);
+  margin: 0;
+}
+
+/* ── Bottom-sheet content ── */
+
+.transfers-sheet { padding-bottom: 4px; }
+.transfers-sheet__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 2px 0 14px;
+}
+.transfers-sheet__title {
+  font: var(--title-mobile-small, 700 18px/1.33 "Red Hat Display", sans-serif);
+  color: var(--text-primary, #002b2a);
+  margin: 0;
+}
+.transfers-sheet__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.transfers-netrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border, #d8d8d8);
+  border-radius: var(--radius-lg, 12px);
+  background: var(--surface, #fff);
+  font: var(--body-large, 400 16px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-primary, #002b2a);
+  text-align: left;
+  cursor: pointer;
+}
+.transfers-netrow.is-selected {
+  border-color: var(--primary, #00d37e);
+  box-shadow: 0 0 0 1px var(--primary, #00d37e);
+}
+.transfers-netrow__name { flex: 1; min-width: 0; }
+.transfers-netrow__check {
+  font-size: 20px;
+  color: var(--status-positive, #257c58);
+}
+
+.transfers-pickrow {
+  border: 1px solid var(--border, #d8d8d8);
+  border-radius: var(--radius-lg, 12px);
+  background: var(--surface, #fff);
+  padding: 6px 14px;
+  cursor: pointer;
+}
+.transfers-pickrow.is-selected {
+  border-color: var(--primary, #00d37e);
+  box-shadow: 0 0 0 1px var(--primary, #00d37e);
+}
+.transfers-pickrow .material-symbols-rounded { color: var(--text-secondary, #505454); }
+
+/* ── Confirm sheet rows ── */
+
+.transfers-confirm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 4px 0 8px;
+}
+.transfers-confirm__row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.transfers-confirm__label {
+  font: var(--body-medium, 400 14px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-secondary, #505454);
+}
+.transfers-confirm__value {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font: var(--body-medium, 400 14px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-primary, #002b2a);
+  text-align: right;
+}
+.transfers-confirm__sub {
+  font-family: var(--font-mono, "Red Hat Mono", monospace);
+  font-size: 12px;
+  color: var(--text-secondary, #505454);
+}
+.transfers-confirm__divider {
+  height: 1px;
+  background: var(--border, #d8d8d8);
+}
+.transfers-confirm__row--net .transfers-confirm__value {
+  font: var(--label-large, 700 16px/1.35 "Red Hat Display", sans-serif);
+}
+.transfers-confirm__btn { width: 100%; }
+
+/* ── Toast layer (screen-scoped) ── */
+
+.transfers-toast-region {
+  position: absolute;
+  top: calc(var(--safe-top) + 10px);
+  left: 16px;
+  right: 16px;
+  z-index: 60;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+.transfers-toast { pointer-events: auto; }
+
+/* ── Awaiting-funds modal (in-screen overlay, §5) ── */
+
+.transfers-modal-host {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.transfers-modal-scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--overlay, rgba(5, 21, 19, 0.7));
+}
+.transfers-modal {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  background: var(--surface, #fff);
+  border-radius: var(--radius-lg, 12px);
+  box-shadow: var(--shadow-3, 0 20px 24px -4px rgba(10, 13, 18, 0.08));
+  overflow: hidden;
+}
+.transfers-modal__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 28px 24px 20px;
+  text-align: center;
+}
+.transfers-modal__title {
+  font: var(--title-mobile-medium, 700 20px/1.3 "Red Hat Display", sans-serif);
+  color: var(--text-primary, #002b2a);
+  margin: 0;
+}
+.transfers-modal__text,
+.transfers-modal__help {
+  font: var(--body-medium, 400 14px/1.5 "Hanken Grotesk", sans-serif);
+  color: var(--text-secondary, #505454);
+  margin: 0;
+}
+.transfers-modal__foot {
+  padding: 16px 20px;
+  background: var(--surface-secondary, #f6f7f9);
+  border-top: 1px solid var(--border, #d8d8d8);
+}
+.transfers-modal__foot .btn { width: 100%; }
+
+/* Rocket illustration substitute: Material icon in a styled circle over a
+ * grey "smoke cloud" ellipse. */
+.transfers-rocket {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  border-radius: var(--radius-full, 999px);
+  background: var(--status-surface-positive, #f0f9f4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+.transfers-rocket__cloud {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 52px;
+  height: 18px;
+  border-radius: var(--radius-full, 999px);
+  background: var(--surface-disabled, #f2f4f5);
+}
+.transfers-rocket__icon {
+  position: relative;
+  font-size: 44px;
+  color: var(--primary, #00d37e);
+}
