@@ -40,3 +40,7 @@ chromatic-build-*.xml
 # Generated / scratch
 *.tsbuildinfo
 .cache/
+
+# app build
+app/dist/
+app/dev-dist/

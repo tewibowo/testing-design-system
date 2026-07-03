@@ -1,0 +1,117 @@
+/* ---- App shell: phone-first, framed on desktop ---------------------- */
+
+:root {
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --tabbar-height: 64px;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--sx-color-deep-ivy, #002b2a);
+  overscroll-behavior: none;
+}
+
+.device {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  background: #fff;
+  overflow: hidden;
+}
+
+/* Desktop / tablet: present the app inside a phone frame so colleagues
+   reviewing on a laptop see it as intended. */
+@media (min-width: 768px) {
+  #root {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .device {
+    width: 390px;
+    height: min(844px, 94vh);
+    border-radius: 44px;
+    border: 10px solid #0a0d12;
+    box-shadow:
+      0 24px 48px rgba(0, 0, 0, 0.45),
+      0 4px 12px rgba(0, 0, 0, 0.35);
+    --safe-top: 14px;
+    --safe-bottom: 10px;
+  }
+}
+
+/* ---- Stack navigator -------------------------------------------------- */
+
+.stack-root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.stack-frame {
+  position: absolute;
+  inset: 0;
+  background: var(--sx-color-grey-50, #fafafa);
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+}
+
+.stack-dim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 43, 42, 0.18);
+  pointer-events: none;
+}
+
+/* ---- Bottom sheet ------------------------------------------------------ */
+
+.sheet-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 43, 42, 0.4);
+  z-index: 40;
+}
+
+.sheet-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 41;
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -8px 32px rgba(10, 13, 18, 0.16);
+  padding: 8px 20px calc(20px + var(--safe-bottom));
+  max-height: 88%;
+  overflow-y: auto;
+  will-change: transform;
+}
+
+.sheet-grabber {
+  width: 40px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--sx-color-grey-300, #c6c6c6);
+  margin: 6px auto 14px;
+}
+
+/* ---- Shared screen scaffolding ---------------------------------------- */
+
+.screen-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.screen-pad {
+  padding: 0 20px;
+}
