@@ -12,6 +12,7 @@ import { useNav } from "@app/nav/Navigator.jsx";
 import { useSheet } from "@app/nav/Sheet.jsx";
 import { listContainer, listItem, DUR, EASE_BRAND } from "@app/motion/presets.js";
 import { CaptchaSheet } from "./CaptchaSheet.jsx";
+import { GoogleChooserSheet } from "./GoogleChooserSheet.jsx";
 import { AuthDecor, GoogleG, OrDivider, useAuthToast } from "./AuthKit.jsx";
 import "./auth.css";
 
@@ -37,6 +38,19 @@ export function LoginScreen({ params = {} }) {
         onSuccess={() => {
           close();
           nav.push("auth/password", { email });
+        }}
+      />
+    ));
+  };
+
+  // Google path: account chooser is a sheet-only step (not a route);
+  // any account continues to 2FA, per auth-login.md §4 flow logic.
+  const continueWithGoogle = () => {
+    openSheet(({ close }) => (
+      <GoogleChooserSheet
+        onPick={() => {
+          close();
+          nav.push("auth/2fa", { via: "google" });
         }}
       />
     ));
@@ -142,7 +156,7 @@ export function LoginScreen({ params = {} }) {
               variant="secondary"
               size="lg"
               className="auth-wide auth-google-cta"
-              onClick={() => nav.push("auth/google")}
+              onClick={continueWithGoogle}
             >
               <GoogleG size={20} />
               Continue with Google
