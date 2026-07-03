@@ -149,7 +149,6 @@ export function HistoryTab() {
             placeholder="Search by Transaction ID"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="history-toolbar__search"
           />
           <IconButton
             icon="download"
