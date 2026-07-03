@@ -24,6 +24,33 @@ export const authRoutes = {
 Screen names are `"<area>/<name>"`. Screen components receive
 `{ params, isTop }`. The integrator wires routes into the registry.
 
+### Canonical cross-area routes
+
+These names are fixed — push them from anywhere; if you own one, you MUST
+export it under exactly this name:
+
+| Route | Owner | Purpose |
+| --- | --- | --- |
+| `auth/login` | auth | app entry (initial screen) |
+| `root/tabs` | integrator | main tab UI; `nav.reset("root/tabs")` after login |
+| `home/notifications` | home | notification center |
+| `home/otc` | home | OTC request flow entry |
+| `transfers/in` | transfers | transfer-in method selection |
+| `transfers/out` | transfers | transfer-out destination selection |
+| `mintswap/swap` | mintswap | swap screen |
+| `mintswap/mint` | mintswap | mint entry (routes to setup internally if unconfigured) |
+| `account/banks-add` | account | add bank account flow |
+| `account/banks-verify` | account | verify bank account flow |
+| `blockchain/add` | blockchain | add blockchain address flow |
+| `blockchain/verify` | blockchain | verify blockchain address flow |
+| `history/detail` | history | transaction detail (params: `{ txId }`) |
+
+Tab-root components (exported as named components, not routes):
+`HomeTab` from `screens/home/HomeTab.jsx`, `HistoryTab` from
+`screens/history/HistoryTab.jsx`, `AccountTab` from
+`screens/account/AccountTab.jsx`. Tab roots render their own `AppHeader`
+(usually `large`), no `back`.
+
 ## Navigation
 
 ```js
