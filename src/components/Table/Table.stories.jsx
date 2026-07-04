@@ -58,7 +58,7 @@ export const CellVariants = {
         render: (r) => (
           <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
             <code style={{ fontFamily: "var(--font-mono)" }}>{r.ref}</code>
-            <IconButton icon="content_copy" variant="ghost" size="sm" label="Copy reference" />
+            <IconButton icon="content_copy" variant="tertiary" size="sm" label="Copy reference" />
           </span>
         ),
       },
@@ -83,6 +83,41 @@ export const CellVariants = {
       },
     ];
     return <Table columns={cellColumns} rows={cellRows} />;
+  },
+};
+
+/* ── Fixed header: pins the header row while the body scrolls vertically ── */
+export const FixedHeader = {
+  render: () => {
+    const manyRows = Array.from({ length: 30 }, (_, i) => ({
+      id: i + 1,
+      date: `2026-05-${String(22 - (i % 22)).padStart(2, "0")}`,
+      ref: `TX-10293${84 - i}`,
+      to: ["John Doe", "Acme Pte. Ltd.", "Mei Lin", "0xa1B…f2"][i % 4],
+      asset: ["XSGD", "XIDR", "XUSD"][i % 3],
+      amount: 1250 + i * 37.5,
+      status: ["Completed", "Pending", "Failed"][i % 3],
+    }));
+    return <Table columns={columns} rows={manyRows} scrollY={320} />;
+  },
+};
+
+/* ── Fixed columns: pins leading/trailing columns while the body scrolls horizontally ── */
+export const FixedColumns = {
+  render: () => {
+    const wideColumns = [
+      { key: "date", header: "Date", width: 160, fixed: "left" },
+      { key: "ref", header: "Reference", width: 180, render: (r) => <code style={{ fontFamily: "var(--font-mono)" }}>{r.ref}</code> },
+      { key: "to", header: "To / From", width: 220 },
+      { key: "asset", header: "Asset", width: 160 },
+      { key: "network", header: "Network", width: 180 },
+      { key: "chain", header: "Chain", width: 160 },
+      { key: "memo", header: "Memo", width: 240 },
+      { key: "amount", header: "Amount", numeric: true, width: 160, render: (r) => r.amount.toLocaleString(undefined, { minimumFractionDigits: 2 }) },
+      { key: "status", header: "Status", width: 160, fixed: "right", render: (r) => <Tag tone={tone[r.status] || "neutral"}>{r.status}</Tag> },
+    ];
+    const wideRows = rows.map((r) => ({ ...r, network: "Ethereum", chain: "Mainnet", memo: "Invoice #4471" }));
+    return <Table columns={wideColumns} rows={wideRows} scrollX={1400} />;
   },
 };
 

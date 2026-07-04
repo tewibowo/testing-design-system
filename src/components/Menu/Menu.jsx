@@ -61,6 +61,7 @@ export function Menu({ trigger, align = "left", placement = "bottom", defaultOpe
 
 function MenuItem({
   icon,
+  leading,
   tone = "default",
   disabled = false,
   onSelect,
@@ -104,7 +105,8 @@ function MenuItem({
           {selected && <span className="material-symbols-rounded">check</span>}
         </span>
       )}
-      {icon && <span className="menu__icon material-symbols-rounded">{icon}</span>}
+      {leading && <span className="menu__leading" aria-hidden="true">{leading}</span>}
+      {!leading && icon && <span className="menu__icon material-symbols-rounded">{icon}</span>}
       <span className="menu__item-text">
         <span className="menu__item-label">{children}</span>
         {secondary && <span className="menu__item-secondary">{secondary}</span>}

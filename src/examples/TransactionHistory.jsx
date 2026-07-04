@@ -11,7 +11,7 @@ import { Button } from "../components/Button/Button.jsx";
 import { Input } from "../components/Input/Input.jsx";
 import { Menu } from "../components/Menu/Menu.jsx";
 import { IconButton } from "../components/IconButton/IconButton.jsx";
-import "./PersonalAccount.css";
+import "./TransactionHistory.css";
 
 const ALL_ROWS = Array.from({ length: 48 }).map((_, i) => {
   const statuses = ["Completed", "Completed", "Completed", "Pending", "Failed"];

@@ -3,14 +3,14 @@ import "./IconButton.css";
 
 /**
  * Icon-only button.
- *   variant: "ghost" | "outline" | "filled"
+ *   variant: "primary" | "secondary" | "tertiary"
  *   shape:   "circle" | "square"
  *   size:    "lg" | "sm"
  *   icon: Material Symbol name (e.g. "close", "arrow_forward")
  */
 export function IconButton({
   icon,
-  variant = "ghost",
+  variant = "tertiary",
   shape = "circle",
   size = "lg",
   label,
