@@ -43,6 +43,15 @@
 .menu__item[disabled] .menu__item-secondary,
 .menu__item[disabled] .menu__item-trailing { color: var(--disabled-on-surface); }
 .menu__icon { font-size: 20px; color: var(--text-secondary); flex: 0 0 auto; }
+.menu__leading {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+.menu__leading > * { width: 24px; height: 24px; }
 .menu__item--critical { color: var(--status-critical); }
 .menu__item--critical .menu__icon { color: var(--status-critical); }
 

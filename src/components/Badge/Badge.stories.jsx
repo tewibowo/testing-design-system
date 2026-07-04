@@ -24,13 +24,13 @@ export const OnIconButton = {
   render: () => (
     <div style={{ display: "flex", gap: 18, alignItems: "center" }}>
       <Badge.Wrap badge={<Badge>2</Badge>}>
-        <IconButton icon="notifications" variant="outline" label="Notifications" />
+        <IconButton icon="notifications" variant="secondary" label="Notifications" />
       </Badge.Wrap>
       <Badge.Wrap badge={<Badge tone="critical">12</Badge>}>
-        <IconButton icon="mail" variant="outline" label="Mail" />
+        <IconButton icon="mail" variant="secondary" label="Mail" />
       </Badge.Wrap>
       <Badge.Wrap badge={<Badge dot tone="critical" />}>
-        <IconButton icon="chat" variant="outline" label="Chat" />
+        <IconButton icon="chat" variant="secondary" label="Chat" />
       </Badge.Wrap>
     </div>
   ),

@@ -11,7 +11,7 @@ export default {
 
 export const FromIconButton = {
   render: () => (
-    <Menu trigger={({ onClick }) => <IconButton icon="more_vert" variant="outline" onClick={onClick} label="More" />}>
+    <Menu trigger={({ onClick }) => <IconButton icon="more_vert" variant="secondary" onClick={onClick} label="More" />}>
       <Menu.Item icon="download" onSelect={() => {}}>Download statement</Menu.Item>
       <Menu.Item icon="share" onSelect={() => {}}>Share</Menu.Item>
       <Menu.Divider />
@@ -88,7 +88,7 @@ export const WithDisabledItem = {
   parameters: { layout: "padded" },
   render: () => (
     <div style={{ minHeight: 220 }}>
-      <Menu defaultOpen trigger={({ onClick }) => <IconButton icon="more_vert" variant="outline" onClick={onClick} label="More" />}>
+      <Menu defaultOpen trigger={({ onClick }) => <IconButton icon="more_vert" variant="secondary" onClick={onClick} label="More" />}>
         <Menu.Item icon="download" onSelect={() => {}}>Download statement</Menu.Item>
         <Menu.Item icon="share" disabled onSelect={() => {}}>Share (disabled)</Menu.Item>
         <Menu.Divider />
@@ -100,7 +100,7 @@ export const WithDisabledItem = {
 
 export const WithSecondaryText = {
   render: () => (
-    <Menu trigger={({ onClick }) => <IconButton icon="more_vert" variant="outline" onClick={onClick} label="More" />}>
+    <Menu trigger={({ onClick }) => <IconButton icon="more_vert" variant="secondary" onClick={onClick} label="More" />}>
       <Menu.Item icon="account_balance" secondary="DBS •••• 8829" trailing="Default">Primary account</Menu.Item>
       <Menu.Item icon="credit_card" secondary="Visa •••• 4012" trailing="2m ago">Card</Menu.Item>
       <Menu.Divider />

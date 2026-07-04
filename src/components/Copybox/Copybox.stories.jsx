@@ -1,5 +1,6 @@
 import React from "react";
 import { Copybox } from "./Copybox.jsx";
+import { ToastProvider } from "../Toast/Toast.jsx";
 
 export default {
   title: "Components/Copybox",
@@ -17,7 +18,7 @@ export default {
     size: { control: "inline-radio", options: ["large", "sm"] },
     buttonVariant: { control: "inline-radio", options: ["text", "icon"] },
   },
-  decorators: [(S) => <div style={{ maxWidth: 480 }}><S /></div>],
+  decorators: [(S) => <ToastProvider><div style={{ maxWidth: 480 }}><S /></div></ToastProvider>],
 };
 
 export const WalletAddress = {

@@ -17,6 +17,7 @@ export { Select } from "./components/Select/Select.jsx";
 export { MultiSelect } from "./components/MultiSelect/MultiSelect.jsx";
 export { DateInput } from "./components/DateInput/DateInput.jsx";
 export { Copybox } from "./components/Copybox/Copybox.jsx";
+export { InputCurrency } from "./components/InputCurrency/InputCurrency.jsx";
 export { Checkbox } from "./components/Checkbox/Checkbox.jsx";
 export { Radio, RadioGroup } from "./components/Radio/Radio.jsx";
 export { Switch } from "./components/Switch/Switch.jsx";

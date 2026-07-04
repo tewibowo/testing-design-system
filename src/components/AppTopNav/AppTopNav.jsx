@@ -80,7 +80,7 @@ export function AppTopNav({
       <header className="app-topnav app-topnav--mobile" data-account={account}>
         <IconButton
           icon="menu"
-          variant="ghost"
+          variant="tertiary"
           label="Open menu"
           onClick={onMenuClick}
           className="app-topnav__menu"
@@ -142,7 +142,7 @@ export function AppTopNav({
         >
           <IconButton
             icon="notifications"
-            variant="ghost"
+            variant="tertiary"
             label="Notifications"
           />
         </Badge.Wrap>

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { ToastContext } from "../Toast/Toast.jsx";
 import "./Copybox.css";
 
 /**
@@ -33,6 +34,7 @@ export function Copybox({
   ...rest
 }) {
   const [copied, setCopied] = useState(false);
+  const toast = useContext(ToastContext);
   const isError = !!error;
   const lead = logo || icon;
   const iconOnly = buttonVariant === "icon";
@@ -41,6 +43,7 @@ export function Copybox({
     try {
       await navigator.clipboard.writeText(value);
       setCopied(true);
+      toast?.show({ tone: "positive", message: "Copied" });
       setTimeout(() => setCopied(false), 1500);
     } catch {
       /* clipboard unavailable */

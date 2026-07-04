@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { CardSwap } from "./CardSwap.jsx";
+import { AssetMark } from "../AssetMark/AssetMark.jsx";
 
 export default {
   title: "Components/Card/Swap",
@@ -14,6 +15,48 @@ export const Default = {
     rate: "1 XSGD ≈ 0.7233 USDT",
     onSwap: () => {},
     onReverse: () => {},
+  },
+};
+
+const CURRENCY_OPTIONS = [
+  { value: "XSGD", symbol: "XSGD", logo: <AssetMark asset="XSGD" size={24} /> },
+  { value: "XUSD", symbol: "XUSD", logo: <AssetMark asset="XUSD" size={24} /> },
+  { value: "USDC", symbol: "USDC", logo: <AssetMark asset="USDC" size={24} /> },
+  { value: "USDT", symbol: "USDT", logo: <AssetMark asset="USDT" size={24} /> },
+];
+
+export const Interactive = {
+  render: () => {
+    function InteractiveSwap() {
+      const [fromAmount, setFromAmount] = useState("20");
+      const [fromCurrency, setFromCurrency] = useState("XUSD");
+      const [toCurrency, setToCurrency] = useState("XSGD");
+
+      return (
+        <CardSwap
+          from={{
+            amount: fromAmount,
+            currency: fromCurrency,
+            balance: "1,300 " + fromCurrency,
+            onMax: () => setFromAmount("1300"),
+            onAmountChange: setFromAmount,
+            options: CURRENCY_OPTIONS,
+            onCurrencyChange: setFromCurrency,
+          }}
+          to={{
+            amount: (Number(fromAmount || 0) * 1.273).toFixed(2),
+            currency: toCurrency,
+            balance: "1,000 " + toCurrency,
+            options: CURRENCY_OPTIONS,
+            onCurrencyChange: setToCurrency,
+          }}
+          rate={`1 ${toCurrency} ≈ 0.7233 ${fromCurrency}`}
+          onSwap={() => {}}
+          onReverse={() => {}}
+        />
+      );
+    }
+    return <InteractiveSwap />;
   },
 };
 

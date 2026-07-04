@@ -61,3 +61,30 @@
   color: var(--text-secondary);
   font: var(--body-medium);
 }
+
+/* ── Fixed columns (Ant Design-style left/right sticky cells) ── */
+.table__cell--fixed-left,
+.table__cell--fixed-right {
+  position: sticky;
+  z-index: 1;
+  background: var(--surface);
+}
+.table thead th.table__cell--fixed-left,
+.table thead th.table__cell--fixed-right {
+  z-index: 3;
+  background: var(--surface-secondary);
+}
+.table--zebra tbody tr:nth-child(odd) td.table__cell--fixed-left,
+.table--zebra tbody tr:nth-child(odd) td.table__cell--fixed-right {
+  background: var(--surface-secondary);
+}
+.table tbody tr:hover td.table__cell--fixed-left,
+.table tbody tr:hover td.table__cell--fixed-right {
+  background: var(--surface-hovered);
+}
+.table__cell--fixed-shadow.table__cell--fixed-left {
+  box-shadow: 6px 0 8px -6px rgba(0, 0, 0, 0.18);
+}
+.table__cell--fixed-shadow.table__cell--fixed-right {
+  box-shadow: -6px 0 8px -6px rgba(0, 0, 0, 0.18);
+}
