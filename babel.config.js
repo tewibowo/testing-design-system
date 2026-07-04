@@ -6,6 +6,7 @@ export default {
         targets: "> 0.5%, last 2 versions, not dead",
         useBuiltIns: "usage",
         corejs: 3,
+        modules: false,
       },
     ],
     ["@babel/preset-react", { runtime: "automatic" }],

@@ -4,6 +4,9 @@
   "description": "StraitsX design system — tokens + React components, with Storybook and Chromatic visual regression.",
   "license": "MIT",
   "type": "module",
+  "engines": {
+    "node": ">=24.18.0"
+  },
   "main": "src/index.js",
   "exports": {
     ".": "./src/index.js",
