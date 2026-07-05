@@ -85,7 +85,7 @@ export const AutoSelectFirstSubItem = {
           onSelect={(id) => { if (id.startsWith("mint-")) { setSub(id); setActive(null); } else { setActive(id); setSub(null); } }}
         />
         <div style={{ padding: 32, color: "var(--text-secondary)" }}>
-          Click "Mint" — it expands and auto-selects "Buy"
+          Click &quot;Mint&quot; — it expands and auto-selects &quot;Buy&quot;
         </div>
       </Frame>
     );

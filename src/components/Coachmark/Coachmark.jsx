@@ -85,7 +85,7 @@ export function Coachmark({
 
   return createPortal(
     <>
-      <div className="coachmark-scrim" onClick={onDismiss} />
+      <button type="button" className="coachmark-scrim" aria-label="Dismiss" onClick={onDismiss} />
       <div className="coachmark-spot" style={spotStyle} aria-hidden="true" />
       <div
         className={"coachmark " + className}

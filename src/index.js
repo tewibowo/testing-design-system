@@ -1,7 +1,7 @@
 // Package entry — re-exports every component.
 // CSS is NOT auto-imported here; consumers import what they want:
-//   import "testing-design-system/global.css";
-//   import "testing-design-system/tokens.css";
+//   import "prohellox-designsystem/global.css";
+//   import "prohellox-designsystem/tokens.css";
 
 // Primitives
 export { Button } from "./components/Button/Button.jsx";
