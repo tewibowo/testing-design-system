@@ -16,7 +16,7 @@ function Demo({ title = "Send to" }) {
       <BottomSheet open={open} onClose={() => setOpen(false)} title={title}>
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           <p style={{ font: "var(--body-medium)", color: "var(--text-secondary)", margin: 0 }}>
-            Choose how you'd like to send funds.
+            Choose how you&apos;d like to send funds.
           </p>
           <Button>Bank transfer</Button>
           <Button variant="secondary">Stablecoin wallet</Button>

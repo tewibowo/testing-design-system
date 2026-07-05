@@ -34,7 +34,12 @@ function statusTag(status) {
   return <Tag tone={tone}>{label}</Tag>;
 }
 
-const mono = (key) => (row) => <span className="txn__mono">{row[key]}</span>;
+const mono = (key) => {
+  function Mono(row) {
+    return <span className="txn__mono">{row[key]}</span>;
+  }
+  return Mono;
+};
 
 const COLUMNS = {
   funding: [

@@ -29,7 +29,7 @@ export const PlainContent = {
     <div style={{ maxWidth: 600 }}>
       <CardSteps step={2} title="Enter Recipient Details">
         <p style={{ font: "var(--body-medium)", color: "var(--text-secondary)", margin: 0 }}>
-          Provide the recipient's bank account information to continue.
+          Provide the recipient&apos;s bank account information to continue.
         </p>
       </CardSteps>
     </div>

@@ -172,7 +172,14 @@ export function BusinessDashboard() {
           onClick={() => setNavOpen(false)}
         />
       </div>
-      {navOpen && <div className="ex-bd__backdrop" onClick={() => setNavOpen(false)} />}
+      {navOpen && (
+        <button
+          type="button"
+          className="ex-bd__backdrop"
+          aria-label="Close navigation"
+          onClick={() => setNavOpen(false)}
+        />
+      )}
 
       <main className="ex-bd__main">
         <header className="ex-bd__mobile-topbar">
@@ -305,11 +312,13 @@ export function BusinessDashboard() {
         </div>
 
         <p className="ex-bd__footnote">
-          XSGD, XUSD and XIDR are issued by StraitsX. "STRAITSX", "XSGD", "XIDR" and all other
+          XSGD, XUSD and XIDR are issued by StraitsX. &quot;STRAITSX&quot;, &quot;XSGD&quot;, &quot;XIDR&quot; and all other
           URLs, logos, and trademarks related to the StraitsX Services are either trademarks or
           registered trademarks of StraitsX or its licensors. StraitsX is the trading name of the
           StraitsX Group of Companies and its affiliated entities.{" "}
-          <a href="#">Important Risk Warnings Regarding Digital Payment Tokens: Learn More</a>
+          <LinkButton as="a" href="https://www.straitsx.com" size="md">
+            Important Risk Warnings Regarding Digital Payment Tokens: Learn More
+          </LinkButton>
         </p>
       </main>
     </div>

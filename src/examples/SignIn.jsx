@@ -19,7 +19,7 @@ export function SignIn() {
         <h1 style={{ font: "700 36px/1.1 var(--font-display)", margin: 0, color: "#fff", letterSpacing: "-0.02em" }}>
           Payments Infrastructure<br />for Digital Assets
         </h1>
-        <p style={{ font: "var(--body-large)", color: "#79FFCA", maxWidth: 32, marginTop: 16, maxWidth: "32ch" }}>
+        <p style={{ font: "var(--body-large)", color: "#79FFCA", marginTop: 16, maxWidth: "32ch" }}>
           Mint, send and earn on regulated stablecoins. Backed 1:1 by reserves held with Standard Chartered Bank.
         </p>
       </aside>
@@ -56,7 +56,7 @@ export function SignIn() {
           </form>
 
           <p style={{ font: "var(--body-medium)", color: "var(--text-secondary)", textAlign: "center", marginTop: 24 }}>
-            Don't have an account? <LinkButton as="a" href="#signup" size="md">Open an account</LinkButton>
+            Don&apos;t have an account? <LinkButton as="a" href="#signup" size="md">Open an account</LinkButton>
           </p>
         </div>
       </main>

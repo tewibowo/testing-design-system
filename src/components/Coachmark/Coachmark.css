@@ -1,6 +1,9 @@
 .coachmark-scrim {
   position: fixed;
   inset: 0;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
   background: var(--overlay);
   z-index: 1200;
   pointer-events: auto;

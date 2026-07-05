@@ -49,7 +49,7 @@ export function TransactionHistory() {
     {
       key: "actions",
       header: "",
-      render: (r) => (
+      render: (_r) => (
         <Menu trigger={({ onClick }) => <IconButton icon="more_vert" size="sm" onClick={onClick} label="Row actions" />} align="right">
           <Menu.Item icon="visibility">View details</Menu.Item>
           <Menu.Item icon="download">Download receipt</Menu.Item>
