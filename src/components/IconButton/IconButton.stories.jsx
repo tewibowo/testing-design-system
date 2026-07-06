@@ -7,7 +7,7 @@ export default {
   parameters: { layout: "centered" },
   argTypes: {
     icon: { control: "text" },
-    variant: { control: "inline-radio", options: ["ghost", "outline", "filled"] },
+    variant: { control: "inline-radio", options: ["primary", "secondary", "tertiary"] },
     shape: { control: "inline-radio", options: ["circle", "square"] },
     size: { control: "inline-radio", options: ["lg", "sm"] },
     disabled: { control: "boolean" },
@@ -15,28 +15,28 @@ export default {
   args: { icon: "notifications", label: "Notifications" },
 };
 
-export const Ghost = { args: { variant: "ghost" } };
-export const Outline = { args: { variant: "outline" } };
-export const Filled = { args: { variant: "filled" } };
+export const Primary = { args: { variant: "primary" } };
+export const Secondary = { args: { variant: "secondary" } };
+export const Tertiary = { args: { variant: "tertiary" } };
 
 export const AllSizes = {
   parameters: { layout: "padded" },
   render: () => (
     <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-      <IconButton icon="search" variant="outline" size="lg" label="Search lg" />
-      <IconButton icon="search" variant="outline" size="sm" label="Search sm" />
+      <IconButton icon="search" variant="secondary" size="lg" label="Search lg" />
+      <IconButton icon="search" variant="secondary" size="sm" label="Search sm" />
     </div>
   ),
 };
 
-export const Disabled = { args: { variant: "filled", disabled: true, icon: "notifications", label: "Notifications" } };
+export const Disabled = { args: { variant: "primary", disabled: true, icon: "notifications", label: "Notifications" } };
 
 /* Interaction states forced via state-class hooks so Chromatic can snapshot
  * hover / pressed without driving real pointer events. */
 export const States = {
   parameters: { layout: "padded" },
   render: () => {
-    const variants = ["filled", "outline", "ghost"];
+    const variants = ["primary", "secondary", "tertiary"];
     const colHead = { font: "var(--label-small)", color: "var(--text-secondary)" };
     return (
       <div style={{ display: "grid", gridTemplateColumns: "auto repeat(4, max-content)", gap: 16, alignItems: "center" }}>
@@ -63,12 +63,12 @@ export const Showcase = {
   parameters: { layout: "padded" },
   render: () => (
     <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-      <IconButton icon="close" variant="ghost" label="Close" />
-      <IconButton icon="more_vert" variant="ghost" label="More" />
-      <IconButton icon="notifications" variant="outline" label="Notifications" />
-      <IconButton icon="settings" variant="outline" shape="square" label="Settings" />
-      <IconButton icon="arrow_forward" variant="filled" label="Next" />
-      <IconButton icon="check" variant="filled" shape="square" label="Confirm" />
+      <IconButton icon="close" variant="tertiary" label="Close" />
+      <IconButton icon="more_vert" variant="tertiary" label="More" />
+      <IconButton icon="notifications" variant="secondary" label="Notifications" />
+      <IconButton icon="settings" variant="secondary" shape="square" label="Settings" />
+      <IconButton icon="arrow_forward" variant="primary" label="Next" />
+      <IconButton icon="check" variant="primary" shape="square" label="Confirm" />
     </div>
   ),
 };

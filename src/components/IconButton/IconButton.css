@@ -24,30 +24,34 @@
 .icon-btn--circle { border-radius: var(--radius-full); }
 .icon-btn--square { border-radius: var(--radius-md); }
 
-/* variants */
-.icon-btn--ghost { background: transparent; }
-.icon-btn--ghost:hover,
-.icon-btn--ghost.is-hovered { background: var(--surface-secondary); }
-.icon-btn--ghost:active,
-.icon-btn--ghost.is-pressed { background: var(--surface-disabled); }
-
-.icon-btn--outline {
-  background: var(--surface);
-  border: 1px solid var(--border);
+/* variants — mirrors Button's Primary/Secondary/Tertiary styling */
+.icon-btn--primary {
+  background: var(--primary);
+  color: var(--text-primary);
 }
-.icon-btn--outline:hover,
-.icon-btn--outline.is-hovered { background: var(--surface-secondary); }
-.icon-btn--outline:active,
-.icon-btn--outline.is-pressed { background: var(--surface-disabled); }
+.icon-btn--primary:hover,
+.icon-btn--primary.is-hovered { background: var(--btn-primary-hovered); }
+.icon-btn--primary:active,
+.icon-btn--primary.is-pressed { background: var(--btn-primary-pressed); color: var(--text-inverse); }
 
-.icon-btn--filled {
-  background: var(--text-primary);
-  color: var(--text-inverse);
+.icon-btn--secondary {
+  background: transparent;
+  color: var(--btn-secondary-text);
+  border: 1.5px solid var(--border);
 }
-.icon-btn--filled:hover,
-.icon-btn--filled.is-hovered { background: var(--interactive-active); }
-.icon-btn--filled:active,
-.icon-btn--filled.is-pressed { background: var(--interactive-active); }
+.icon-btn--secondary:hover,
+.icon-btn--secondary.is-hovered { background: var(--btn-secondary-hovered); }
+.icon-btn--secondary:active,
+.icon-btn--secondary.is-pressed { background: var(--btn-secondary-pressed); }
+
+.icon-btn--tertiary {
+  background: transparent;
+  color: var(--btn-secondary-text);
+}
+.icon-btn--tertiary:hover,
+.icon-btn--tertiary.is-hovered { background: var(--btn-tertiary-hovered); }
+.icon-btn--tertiary:active,
+.icon-btn--tertiary.is-pressed { background: var(--btn-tertiary-pressed); }
 
 .icon-btn[disabled] {
   background: var(--surface-disabled);

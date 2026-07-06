@@ -2,17 +2,29 @@ import React from "react";
 import { Icon } from "../Icon/Icon.jsx";
 import { Button } from "../Button/Button.jsx";
 import { IconButton } from "../IconButton/IconButton.jsx";
+import { InputCurrency } from "../InputCurrency/InputCurrency.jsx";
 import "./CardSwap.css";
 
 /**
  * Card / Swap — a from/to currency swap panel.
  * Figma: Card / Swap (5431:6671).
  *
- * Each leg (`from` / `to`) is `{ amount, currency, balance, logo? }`.
- * `logo` is an optional ReactNode coin mark; otherwise initials are shown.
+ * Each leg (`from` / `to`) is
+ * `{ amount, currency, balance, logo?, onMax?, onAmountChange?, options?, onCurrencyChange? }`.
+ * `logo` is an optional ReactNode coin mark, used when `currency` has no
+ * matching entry in `options`. `onAmountChange(value)` makes the amount field
+ * an editable input. `options` (same shape as InputCurrency's `asset.options`)
+ * + `onCurrencyChange(value, option)` makes the currency suffix an opening
+ * picker; without `options` it stays static text. Renders each leg with
+ * `InputCurrency`.
  *
  *   <CardSwap
- *     from={{ amount: "20", currency: "XUSD", balance: "1,300 XUSD" }}
+ *     from={{
+ *       amount, currency: "XUSD", balance: "1,300 XUSD",
+ *       onAmountChange: setAmount,
+ *       options: [{ value: "XUSD", symbol: "XUSD" }, { value: "XSGD", symbol: "XSGD" }],
+ *       onCurrencyChange: setCurrency,
+ *     }}
  *     to={{ amount: "25.46", currency: "XSGD", balance: "1,000 XSGD" }}
  *     rate="1 XSGD ≈ 0.7233 USDT"
  *   />
@@ -47,7 +59,7 @@ export function CardSwap({
             </span>
           )}
         </div>
-        <IconButton variant="outline" size="sm" icon="swap_vert" label="Reverse" onClick={onReverse} />
+        <IconButton variant="secondary" size="sm" icon="swap_vert" label="Reverse" onClick={onReverse} />
       </div>
 
       <Leg label="To" leg={to} />
@@ -68,21 +80,21 @@ function Leg({ label, leg }) {
         <span className="card-swap__leg-label">{label}</span>
         {leg.balance && <span className="card-swap__leg-balance">Balance: {leg.balance}</span>}
       </div>
-      <div className="card-swap__field">
-        <div className="card-swap__field-main">
-          <span className="card-swap__amount num">{leg.amount}</span>
-          {leg.onMax && (
-            <button type="button" className="card-swap__max" onClick={leg.onMax}>Max</button>
-          )}
-        </div>
-        <div className="card-swap__suffix">
-          <span className="card-swap__coin" aria-hidden="true">
-            {leg.logo || <span className="card-swap__coin-initial">{(leg.currency || "?").charAt(0)}</span>}
-          </span>
-          <span className="card-swap__currency">{leg.currency}</span>
-          <Icon name="expand_more" size={24} className="card-swap__chevron" />
-        </div>
-      </div>
+      <InputCurrency
+        position="suffix"
+        placeholder="0"
+        value={leg.amount}
+        onChange={leg.onAmountChange ? (e) => leg.onAmountChange(e.target.value) : undefined}
+        readOnly={!leg.onAmountChange}
+        linkButton={leg.onMax ? { label: "Max", onClick: leg.onMax } : undefined}
+        asset={{
+          value: leg.currency,
+          symbol: leg.currency,
+          logo: leg.logo,
+          options: leg.options,
+          onChange: leg.onCurrencyChange,
+        }}
+      />
     </div>
   );
 }

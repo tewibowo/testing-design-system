@@ -64,8 +64,8 @@ export const Welcome = {
       </Section>
 
       <Section title="Using the package">
-        <Pre>{`import "testing-design-system/global.css";
-import { Button, Tag, Card } from "testing-design-system";
+        <Pre>{`import "prohellox-designsystem/global.css";
+import { Button, Tag, Card } from "prohellox-designsystem";
 
 export default function Example() {
   return (

@@ -18,12 +18,18 @@ import React from "react";
  */
 function bankLogo(slug) {
   const src = new URL(`../../assets/partners/${slug}.svg`, import.meta.url);
-  return ({ size }) => <img src={src} height={size} width={size * 1.6} alt="" />;
+  function BankLogo({ size }) {
+    return <img src={src} height={size} width={size * 1.6} alt="" />;
+  }
+  return BankLogo;
 }
 
 function squareLogo(slug) {
   const src = new URL(`../../assets/partners/${slug}.svg`, import.meta.url);
-  return ({ size }) => <img src={src} height={size} width={size} alt="" />;
+  function SquareLogo({ size }) {
+    return <img src={src} height={size} width={size} alt="" />;
+  }
+  return SquareLogo;
 }
 
 const LOGOS = {

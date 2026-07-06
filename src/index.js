@@ -1,7 +1,7 @@
 // Package entry — re-exports every component.
 // CSS is NOT auto-imported here; consumers import what they want:
-//   import "testing-design-system/global.css";
-//   import "testing-design-system/tokens.css";
+//   import "prohellox-designsystem/global.css";
+//   import "prohellox-designsystem/tokens.css";
 
 // Primitives
 export { Button } from "./components/Button/Button.jsx";
@@ -17,6 +17,7 @@ export { Select } from "./components/Select/Select.jsx";
 export { MultiSelect } from "./components/MultiSelect/MultiSelect.jsx";
 export { DateInput } from "./components/DateInput/DateInput.jsx";
 export { Copybox } from "./components/Copybox/Copybox.jsx";
+export { InputCurrency } from "./components/InputCurrency/InputCurrency.jsx";
 export { Checkbox } from "./components/Checkbox/Checkbox.jsx";
 export { Radio, RadioGroup } from "./components/Radio/Radio.jsx";
 export { Switch } from "./components/Switch/Switch.jsx";

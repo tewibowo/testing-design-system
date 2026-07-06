@@ -5,7 +5,6 @@
   gap: var(--space-5);
   background: var(--surface);
   border-radius: var(--radius-md);
-  border: 1px solid var(--border);
   padding: var(--space-4) var(--space-5);
   color: var(--text-primary);
   width: 343px;
@@ -38,68 +37,6 @@
   color: var(--text-primary);
 }
 .card-swap__leg-balance { color: var(--text-secondary); }
-
-.card-swap__field {
-  display: flex;
-  align-items: stretch;
-  width: 100%;
-  min-height: 48px;
-}
-.card-swap__field-main {
-  display: flex;
-  flex: 1 0 0;
-  min-width: 0;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-3);
-  border: 1px solid var(--border);
-  border-right: 0;
-  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
-}
-.card-swap__amount {
-  flex: 1 0 0;
-  min-width: 0;
-  font: var(--body-large);
-  color: var(--text-primary);
-}
-.card-swap__max {
-  background: none;
-  border: 0;
-  padding: 0;
-  cursor: pointer;
-  font: var(--label-medium);
-  color: var(--link);
-}
-
-.card-swap__suffix {
-  display: flex;
-  align-items: center;
-  gap: var(--space-1);
-  padding: 0 var(--space-3) 0 var(--space-2);
-  border: 1px solid var(--border);
-  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
-}
-.card-swap__coin {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  flex-shrink: 0;
-}
-.card-swap__coin-initial {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  border-radius: var(--radius-full);
-  background: var(--surface-secondary);
-  color: var(--text-secondary);
-  font: var(--label-small);
-}
-.card-swap__currency { font: var(--body-large); color: var(--text-primary); }
-.card-swap__chevron { color: var(--text-secondary); }
 
 /* ── Rate row ── */
 .card-swap__rate-row {

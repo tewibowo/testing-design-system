@@ -8,14 +8,14 @@ export default {
   parameters: { layout: "centered" },
 };
 
-export const Static = {
+export const Default = {
   parameters: { layout: "padded" },
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: 12, maxWidth: 420 }}>
-      <Toast tone="positive" title="Transfer confirmed" onDismiss={() => {}}>1,250 XSGD sent to John Doe.</Toast>
-      <Toast tone="critical" title="Transfer failed" onDismiss={() => {}}>Insufficient balance.</Toast>
-      <Toast tone="warning" title="Network slow" onDismiss={() => {}}>Confirmations may take longer than usual.</Toast>
-      <Toast tone="info" title="New feature" onDismiss={() => {}}>Earn is now available on your account.</Toast>
+    <div style={{ display: "flex", flexDirection: "column", gap: 12, alignItems: "flex-start" }}>
+      <Toast tone="positive">This is a message</Toast>
+      <Toast tone="warning">This is a message</Toast>
+      <Toast tone="critical">This is a message</Toast>
+      <Toast tone="info">This is a message</Toast>
     </div>
   ),
 };

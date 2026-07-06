@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Sidebar, DEFAULT_NAV_ITEMS } from "../components/Sidebar/Sidebar.jsx";
+import { Sidebar } from "../components/Sidebar/Sidebar.jsx";
 import { TopBar } from "../components/TopBar/TopBar.jsx";
 import { EstimatedBalance } from "../components/EstimatedBalance/EstimatedBalance.jsx";
 import { IconButton } from "../components/IconButton/IconButton.jsx";
@@ -8,7 +8,19 @@ import { CardSwap } from "../components/CardSwap/CardSwap.jsx";
 import { OtcBanner } from "../components/OtcBanner/OtcBanner.jsx";
 import { Alert } from "../components/Alert/Alert.jsx";
 import { LinkButton } from "../components/LinkButton/LinkButton.jsx";
+import { Logomark } from "../components/Logomark/Logomark.jsx";
+import { Badge } from "../components/Badge/Badge.jsx";
 import "./BusinessDashboard.css";
+
+const NAV_ITEMS = [
+  { id: "home", icon: "home", label: "Home" },
+  { id: "earn", icon: "savings", label: "Earn" },
+  { id: "history", icon: "receipt_long", label: "Transaction History" },
+  { id: "statement", icon: "description", label: "Account Statement" },
+  { id: "team", icon: "badge", label: "Team" },
+  { id: "help", icon: "help", label: "Help" },
+  { id: "support", icon: "support_agent", label: "Support" },
+];
 
 const STABLECOIN_ASSETS = [
   {
@@ -42,17 +54,17 @@ const STABLECOIN_ASSETS = [
 
 const CASH_ASSETS = [
   {
+    symbol: "IDR",
+    subtitle: "Indonesian Rupiah",
+    balance: "1,123,456,789.00",
+    fiat: "~95,400 SGD",
+    networks: [],
+  },
+  {
     symbol: "SGD",
     subtitle: "Singapore Dollar",
     balance: "84,500.00",
     fiat: "~84,500 SGD",
-    networks: [],
-  },
-  {
-    symbol: "USD",
-    subtitle: "US Dollar",
-    balance: "12,300.00",
-    fiat: "~16,612 SGD",
     networks: [],
   },
 ];
@@ -84,7 +96,7 @@ const TRANSACTIONS = [
   },
 ];
 
-function ActionBtn({ icon, label, variant = "filled" }) {
+function ActionBtn({ icon, label, variant = "primary" }) {
   return (
     <div className="ex-bd__action">
       <IconButton icon={icon} variant={variant} label={label} />
@@ -117,31 +129,70 @@ function AssetRow({ asset }) {
       </div>
 
       <div className="ex-bd__asset-actions">
-        <IconButton variant="outline" size="sm" icon="add" label={`Add ${asset.symbol}`} />
-        <IconButton variant="outline" size="sm" icon="arrow_outward" label={`Send ${asset.symbol}`} />
+        <IconButton variant="secondary" size="sm" icon="add" label={`Add ${asset.symbol}`} />
+        <IconButton variant="secondary" size="sm" icon="arrow_outward" label={`Send ${asset.symbol}`} />
       </div>
     </li>
   );
 }
 
+const SWAP_CURRENCY_OPTIONS = [
+  { value: "XSGD", symbol: "XSGD", logo: <AssetMark asset="XSGD" size={24} /> },
+  { value: "XUSD", symbol: "XUSD", logo: <AssetMark asset="XUSD" size={24} /> },
+  { value: "USDC", symbol: "USDC", logo: <AssetMark asset="USDC" size={24} /> },
+  { value: "USDT", symbol: "USDT", logo: <AssetMark asset="USDT" size={24} /> },
+];
+
 export function BusinessDashboard() {
   const [active, setActive] = useState("home");
   const [assetTab, setAssetTab] = useState("stable");
   const [showBanner, setShowBanner] = useState(true);
+  const [swapFromAmount, setSwapFromAmount] = useState("20");
+  const [swapFromCurrency, setSwapFromCurrency] = useState("XUSD");
+  const [swapToCurrency, setSwapToCurrency] = useState("XSGD");
+  const [navOpen, setNavOpen] = useState(false);
 
   const assets = assetTab === "stable" ? STABLECOIN_ASSETS : CASH_ASSETS;
 
   return (
     <div className="ex-bd">
-      <Sidebar
-        account="business"
-        company={{ name: "Acme Pte. Ltd.", type: "Company" }}
-        items={DEFAULT_NAV_ITEMS}
-        active={active}
-        onSelect={setActive}
-      />
+      <div className={"ex-bd__sidebar-wrap" + (navOpen ? " is-open" : "")}>
+        <Sidebar
+          account="business"
+          company={{ name: "Acme Pte. Ltd.", type: "Company" }}
+          items={NAV_ITEMS}
+          active={active}
+          onSelect={(id) => { setActive(id); setNavOpen(false); }}
+        />
+        <IconButton
+          icon="close"
+          variant="tertiary"
+          label="Close menu"
+          className="ex-bd__sidebar-close"
+          onClick={() => setNavOpen(false)}
+        />
+      </div>
+      {navOpen && (
+        <button
+          type="button"
+          className="ex-bd__backdrop"
+          aria-label="Close navigation"
+          onClick={() => setNavOpen(false)}
+        />
+      )}
 
       <main className="ex-bd__main">
+        <header className="ex-bd__mobile-topbar">
+          <IconButton icon="menu" variant="tertiary" label="Open menu" onClick={() => setNavOpen(true)} />
+          <Logomark size={32} />
+          <div className="ex-bd__mobile-topbar-actions">
+            <Badge.Wrap badge={<Badge tone="critical" size="sm">3</Badge>}>
+              <IconButton icon="notifications" variant="secondary" size="sm" label="Notifications" />
+            </Badge.Wrap>
+            <IconButton icon="person" variant="secondary" size="sm" label="Account" />
+          </div>
+        </header>
+
         <div className="ex-bd__head">
           <TopBar unread={3} name="Sarah Chen" company="Acme Pte. Ltd." />
         </div>
@@ -149,9 +200,9 @@ export function BusinessDashboard() {
         <div className="ex-bd__hero">
           <EstimatedBalance label="My Estimated Balance" amount="2,081.23" currency="SGD" />
           <div className="ex-bd__actions">
-            <ActionBtn icon="add" label="Transfer In" variant="filled" />
-            <ActionBtn icon="arrow_outward" label="Transfer Out" variant="filled" />
-            <ActionBtn icon="receipt_long" label="Transaction History" variant="outline" />
+            <ActionBtn icon="add" label="Transfer In" variant="primary" />
+            <ActionBtn icon="arrow_outward" label="Transfer Out" variant="primary" />
+            <ActionBtn icon="receipt_long" label="Transaction History" variant="secondary" />
           </div>
         </div>
 
@@ -238,20 +289,36 @@ export function BusinessDashboard() {
           {/* Right column */}
           <div className="ex-bd__col">
             <CardSwap
-              from={{ amount: "20", currency: "XUSD", balance: "1,300 XUSD" }}
-              to={{ amount: "25.46", currency: "XSGD", balance: "1,000 XSGD" }}
-              rate="1 XSGD ≈ 0.7233 USDT"
+              from={{
+                amount: swapFromAmount,
+                currency: swapFromCurrency,
+                balance: "1,300 " + swapFromCurrency,
+                onMax: () => setSwapFromAmount("1300"),
+                onAmountChange: setSwapFromAmount,
+                options: SWAP_CURRENCY_OPTIONS,
+                onCurrencyChange: setSwapFromCurrency,
+              }}
+              to={{
+                amount: (Number(swapFromAmount || 0) * 1.273).toFixed(2),
+                currency: swapToCurrency,
+                balance: "1,000 " + swapToCurrency,
+                options: SWAP_CURRENCY_OPTIONS,
+                onCurrencyChange: setSwapToCurrency,
+              }}
+              rate={`1 ${swapToCurrency} ≈ 0.7233 ${swapFromCurrency}`}
             />
             <OtcBanner />
           </div>
         </div>
 
         <p className="ex-bd__footnote">
-          XSGD, XUSD and XIDR are issued by StraitsX. "STRAITSX", "XSGD", "XIDR" and all other
+          XSGD, XUSD and XIDR are issued by StraitsX. &quot;STRAITSX&quot;, &quot;XSGD&quot;, &quot;XIDR&quot; and all other
           URLs, logos, and trademarks related to the StraitsX Services are either trademarks or
           registered trademarks of StraitsX or its licensors. StraitsX is the trading name of the
           StraitsX Group of Companies and its affiliated entities.{" "}
-          <a href="#">Important Risk Warnings Regarding Digital Payment Tokens: Learn More</a>
+          <LinkButton as="a" href="https://www.straitsx.com" size="md">
+            Important Risk Warnings Regarding Digital Payment Tokens: Learn More
+          </LinkButton>
         </p>
       </main>
     </div>

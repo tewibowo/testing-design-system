@@ -1,6 +1,6 @@
 /* Modal2FA — illustration + instruction + segmented code input. Composes Modal. */
 
-.2fa .modal__body {
+.tfa .modal__body {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,37 +8,37 @@
   padding-top: var(--space-2);
 }
 /* Footer matches the Figma surface-secondary button bar. */
-.2fa .modal__foot {
+.tfa .modal__foot {
   background: var(--surface-secondary);
   padding: var(--space-5);
   gap: var(--space-4);
 }
-.2fa__action { flex: 1 1 0; }
+.tfa__action { flex: 1 1 0; }
 
-.2fa__hero { display: flex; flex-direction: column; align-items: center; gap: var(--space-4); }
-.2fa__illustration {
+.tfa__hero { display: flex; flex-direction: column; align-items: center; gap: var(--space-4); }
+.tfa__illustration {
   width: 160px;
   height: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.2fa__illustration > * { max-width: 100%; max-height: 100%; }
-.2fa__title {
+.tfa__illustration > * { max-width: 100%; max-height: 100%; }
+.tfa__title {
   font: var(--title-small);
   color: var(--text-primary);
   text-align: center;
 }
 
-.2fa__instruction {
+.tfa__instruction {
   font: var(--body-medium);
   color: var(--text-primary);
   text-align: center;
   margin: 0;
 }
 
-.2fa__code { display: flex; gap: var(--space-3); width: 100%; }
-.2fa__digit {
+.tfa__code { display: flex; gap: var(--space-3); width: 100%; }
+.tfa__digit {
   flex: 1 1 0;
   min-width: 0;
   height: 48px;
@@ -52,12 +52,12 @@
   transition: border-color var(--dur-1) var(--ease),
     box-shadow var(--dur-1) var(--ease);
 }
-.2fa__digit:focus {
+.tfa__digit:focus {
   border-color: var(--interactive-active);
   box-shadow: 0 0 0 3px var(--btn-secondary-hovered);
 }
 
-.2fa__trouble {
+.tfa__trouble {
   background: transparent;
   border: 0;
   cursor: pointer;
@@ -65,4 +65,4 @@
   color: var(--link);
   text-align: center;
 }
-.2fa__trouble:hover { text-decoration: underline; }
+.tfa__trouble:hover { text-decoration: underline; }

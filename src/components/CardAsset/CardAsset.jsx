@@ -81,8 +81,8 @@ export function CardAsset({
             )}
 
             <div className="card-asset__actions">
-              <IconButton variant="outline" size="sm" icon="add" label="Add" onClick={onAdd ? () => onAdd(a) : undefined} />
-              <IconButton variant="outline" size="sm" icon="arrow_outward" label="Send" onClick={onSend ? () => onSend(a) : undefined} />
+              <IconButton variant="secondary" size="sm" icon="add" label="Add" onClick={onAdd ? () => onAdd(a) : undefined} />
+              <IconButton variant="secondary" size="sm" icon="arrow_outward" label="Send" onClick={onSend ? () => onSend(a) : undefined} />
             </div>
           </li>
         ))}

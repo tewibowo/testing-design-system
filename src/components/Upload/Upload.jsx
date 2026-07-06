@@ -20,17 +20,21 @@ function isImageFile(file) {
 /** Resolve a preview image URL for an image file. Accepts a pre-supplied
  *  `preview`/`url` (e.g. for prefilled stories) or creates an object URL. */
 function FilePreview({ file }) {
-  const [url, setUrl] = useState(file.preview || file.url || null);
+  const providedUrl = file.preview || file.url || null;
+  const [objectUrl, setObjectUrl] = useState(null);
   useEffect(() => {
-    if (file.preview || file.url) { setUrl(file.preview || file.url); return; }
+    if (providedUrl) return;
     if (typeof File !== "undefined" && file instanceof Blob && typeof URL !== "undefined" && URL.createObjectURL) {
       const objUrl = URL.createObjectURL(file);
-      setUrl(objUrl);
+      // Object URLs are an external-system resource (revoked on cleanup below);
+      // creating and tracking one is exactly what an effect is for.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setObjectUrl(objUrl);
       return () => URL.revokeObjectURL(objUrl);
     }
-    setUrl(null);
-  }, [file]);
+  }, [file, providedUrl]);
 
+  const url = providedUrl || objectUrl;
   if (url) {
     return <img className="upload__thumb" src={url} alt="" aria-hidden="true" />;
   }

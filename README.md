@@ -18,6 +18,36 @@ npm run build-storybook
 npx chromatic --project-token=<your-token>
 ```
 
+## Using this package in an app
+
+Install it as a dependency, then import components and stylesheets from the built `dist/` output:
+
+```bash
+npm install prohellox-designsystem
+```
+
+```jsx
+import "prohellox-designsystem/global.css"; // resets + tokens + @font-face (once, at your app's entry)
+import { Button, Tag, Card } from "prohellox-designsystem";
+
+export default function Example() {
+  return (
+    <Card shadow={1} title="Welcome">
+      <Tag tone="positive">Verified</Tag>
+      <Button variant="primary">Continue</Button>
+    </Card>
+  );
+}
+```
+
+Each component imports its own CSS (`import "./Button.css"` etc.) as part of the package — this requires a bundler that handles CSS-from-JS imports (Vite, webpack, Next.js, Remix, CRA all do this out of the box, including for `node_modules` dependencies). Running the package's compiled output directly under plain Node (no bundler) is not a supported consumption path.
+
+`prohellox-designsystem/tokens.css` is also available on its own if you only want the CSS variables and `@font-face` rules without the body reset from `global.css`.
+
+### Building the package
+
+`npm run build` compiles `src/` with Babel into `dist/` (ESM, `.jsx` extensions preserved, cross-file imports rewritten to match), generates type declarations with `tsc`, and copies fonts/assets/CSS alongside — mirroring the `src/` layout so relative asset paths keep resolving. `npm run prepublishOnly` runs lint + test + build automatically before `npm publish`.
+
 ## Repository setup
 
 This project ships ready to push to GitHub. From the project root:

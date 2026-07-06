@@ -22,11 +22,15 @@ export function Toast({ tone = "positive", title, children, onDismiss, className
 }
 
 /* ─────────── ToastProvider + useToast hook ─────────── */
-const ToastContext = React.createContext(null);
+export const ToastContext = React.createContext(null);
 
 let __id = 0;
 
-export function ToastProvider({ children, duration = 4000 }) {
+const MIN_DURATION = 3000;
+const MAX_DURATION = 7000;
+const clampDuration = (ms) => Math.min(MAX_DURATION, Math.max(MIN_DURATION, ms));
+
+export function ToastProvider({ children, duration = 5000 }) {
   const [items, setItems] = useState([]);
   const timers = useRef({});
 
@@ -42,7 +46,7 @@ export function ToastProvider({ children, duration = 4000 }) {
     const id = ++__id;
     const t = { id, ...toast };
     setItems((prev) => [...prev, t]);
-    timers.current[id] = setTimeout(() => dismiss(id), toast.duration ?? duration);
+    timers.current[id] = setTimeout(() => dismiss(id), clampDuration(toast.duration ?? duration));
     return id;
   }, [dismiss, duration]);
 
@@ -55,7 +59,7 @@ export function ToastProvider({ children, duration = 4000 }) {
       {children}
       <div className="toast-region" role="region" aria-label="Notifications">
         {items.map((t) => (
-          <Toast key={t.id} tone={t.tone} title={t.title} onDismiss={() => dismiss(t.id)}>
+          <Toast key={t.id} tone={t.tone} title={t.title}>
             {t.message}
           </Toast>
         ))}

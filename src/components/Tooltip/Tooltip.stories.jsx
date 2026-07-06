@@ -13,7 +13,7 @@ export default {
 export const Default = {
   render: () => (
     <Tooltip label="Maximum transfer amount is S$10,000/day until full verification.">
-      <IconButton icon="info" variant="outline" label="Info" />
+      <IconButton icon="info" variant="secondary" label="Info" />
     </Tooltip>
   ),
 };
@@ -34,7 +34,7 @@ export const AlwaysOpen = {
   args: { label: "This is always shown", defaultOpen: true },
   render: (args) => (
     <Tooltip {...args}>
-      <IconButton icon="help" variant="outline" label="Help" />
+      <IconButton icon="help" variant="secondary" label="Help" />
     </Tooltip>
   ),
 };
@@ -47,7 +47,7 @@ export const WithTitle = {
       title="Transfer limit"
       content="Maximum transfer amount is S$10,000/day until full verification is complete."
     >
-      <IconButton icon="info" variant="outline" label="Info" />
+      <IconButton icon="info" variant="secondary" label="Info" />
     </Tooltip>
   ),
 };
@@ -61,7 +61,7 @@ export const WithTag = {
       tag={{ label: "Beta", tone: "info" }}
       content="This token is available across multiple networks."
     >
-      <IconButton icon="info" variant="outline" label="Info" />
+      <IconButton icon="info" variant="secondary" label="Info" />
     </Tooltip>
   ),
 };
@@ -83,7 +83,7 @@ export const SupportedChain = {
         </span>
       }
     >
-      <IconButton icon="info" variant="outline" label="Info" />
+      <IconButton icon="info" variant="secondary" label="Info" />
     </Tooltip>
   ),
 };
@@ -100,7 +100,7 @@ export const WithActions = {
         { label: "Learn more", onClick: () => {} },
       ]}
     >
-      <IconButton icon="info" variant="outline" label="Info" />
+      <IconButton icon="info" variant="secondary" label="Info" />
     </Tooltip>
   ),
 };
