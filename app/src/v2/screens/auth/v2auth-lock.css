@@ -1,0 +1,210 @@
+/* v2 auth — lock screen (brief §2.6, motion §4.9/§4.10).
+   Full-ivy passcode unlock: pattern backdrop, logomark top third, dots that
+   tick-fill green and tint mint on success, shared keypad + biometric key. */
+
+.v2auth-lock {
+  position: relative; /* hosts the absolute PatternBg */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-top: calc(var(--safe-top) + 12px);
+}
+
+/* ---- Hero: logomark, greeting, title, dots, demo hint ------------------ */
+
+.v2auth-lock__hero {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  text-align: center;
+}
+
+/* Logomark 48px in vibrant green (§2.6.1) — masked so the currentColor SVG
+   takes the accent. Ratio from logomark-full.svg's viewBox. */
+.v2auth-lock__mark {
+  width: 48px;
+  aspect-ratio: 219.184 / 89.975;
+  background: var(--v2-accent);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  margin-bottom: 40px;
+}
+
+.v2auth-lock__hello {
+  margin: 0 0 6px;
+  font: 400 14px/1.4 "Hanken Grotesk", sans-serif;
+  color: var(--v2-text-dim);
+}
+
+.v2auth-lock__title {
+  margin: 0 0 28px;
+  font: 700 22px/1.2 "Red Hat Display", sans-serif;
+  color: var(--v2-text);
+}
+
+/* ---- Passcode dots (§2.6.2) --------------------------------------------- */
+
+.v2auth-lock__dots {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.v2auth-lock__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.24); /* hollow ring */
+  background: transparent;
+  transition:
+    background-color 0.12s cubic-bezier(0.2, 0.7, 0.2, 1),
+    border-color 0.12s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.v2auth-lock__dot.is-filled {
+  background: var(--v2-accent);
+  border-color: var(--v2-accent);
+}
+/* §4.10 success: sequential mint tint, 50ms stagger per dot index. */
+.v2auth-lock__dot.is-success {
+  background: var(--v2-mint);
+  border-color: var(--v2-mint);
+  transition-delay: calc(var(--i) * 50ms);
+}
+
+/* ---- Demo hint ----------------------------------------------------------- */
+
+.v2auth-lock__demo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.v2auth-lock__hint {
+  margin: 0;
+  font: 400 13px/1.4 "Hanken Grotesk", sans-serif;
+  color: var(--v2-text-faint);
+}
+
+.v2auth-lock__code {
+  font: 500 13px/1 "Red Hat Mono", monospace;
+  font-variant-numeric: tabular-nums;
+  color: var(--v2-text-dim);
+}
+
+.v2auth-lock__demo-link {
+  border: 0;
+  background: none;
+  padding: 6px 10px;
+  font: 700 14px/1 "Red Hat Display", sans-serif;
+  color: var(--v2-mint);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---- Footer: email fallback + keypad ------------------------------------ */
+
+.v2auth-lock__foot {
+  flex-shrink: 0;
+}
+
+/* Quiet fallback link — white 64%, no underline until press (§2.6.4). */
+.v2auth-lock__email {
+  display: block;
+  margin: 0 auto 4px;
+  border: 0;
+  background: none;
+  padding: 8px 12px;
+  font: 400 14px/1 "Hanken Grotesk", sans-serif;
+  color: var(--v2-text-dim);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.v2auth-lock__email:active {
+  text-decoration: underline;
+}
+
+.v2auth-lock__pad {
+  position: relative;
+}
+
+/* Biometric key in the keypad's empty bottom-left cell. Geometry mirrors
+   v2-theme.css .v2-keypad: padding 4px 8px, 2px gaps, 56px rows —
+   row 4 starts at 4px + 3 × (56px + 2px). */
+.v2auth-lock__bio {
+  position: absolute;
+  left: 8px;
+  top: calc(4px + 3 * 58px);
+  width: calc((100% - 20px) / 3);
+  height: 56px;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  color: var(--v2-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.v2auth-lock__bio:active {
+  background: var(--v2-pressed);
+}
+
+.v2auth-lock__bio-ring {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1.5px solid var(--v2-line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.12s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.v2auth-lock__bio-ring.is-scanning {
+  border-color: var(--v2-accent);
+}
+.v2auth-lock__bio-ring .material-symbols-rounded {
+  font-size: 22px;
+}
+
+/* ---- Email fallback sheet ------------------------------------------------ */
+
+.v2auth-sheet {
+  padding: 4px 0 8px;
+}
+
+.v2auth-sheet__title {
+  margin: 4px 0 10px;
+  font: 700 18px/1.2 "Red Hat Display", sans-serif;
+  color: var(--v2-text);
+}
+
+.v2auth-sheet__body {
+  margin: 0 0 20px;
+  font: 400 14px/1.5 "Hanken Grotesk", sans-serif;
+  color: var(--v2-text-dim);
+}
+
+/* Primary CTA pill — green bg, ivy text (v2 style rules; not the DS
+   Button's light-theme styling). */
+.v2auth-sheet__cta {
+  width: 100%;
+  height: 48px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--v2-accent);
+  color: var(--v2-bg);
+  font: 700 16px/1 "Red Hat Display", sans-serif;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
