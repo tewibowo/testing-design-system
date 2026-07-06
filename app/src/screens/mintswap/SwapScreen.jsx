@@ -168,6 +168,7 @@ export function SwapScreen() {
                         className="mintswap-leg__input"
                         type="text"
                         inputMode="decimal"
+                        autoFocus
                         placeholder="0.00"
                         aria-label={`Amount in ${fromId}`}
                         value={amountStr}

@@ -11,6 +11,7 @@ import { AppHeader } from "@app/ui/AppHeader.jsx";
 import { useNav } from "@app/nav/Navigator.jsx";
 import { user } from "@app/data/db.js";
 import { listContainer, listItem } from "@app/motion/presets.js";
+import { armKeyboard } from "@app/ui/keyboardRelay.js";
 import "./auth.css";
 
 export function PasswordScreen({ params = {} }) {
@@ -20,6 +21,8 @@ export function PasswordScreen({ params = {} }) {
 
   const login = () => {
     if (!password) return;
+    // Arm inside the tap so iOS keeps the keyboard up for the OTP cells.
+    armKeyboard("numeric");
     nav.push("auth/2fa", { via: "password" });
   };
 

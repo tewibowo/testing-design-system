@@ -15,6 +15,7 @@ import { listContainer, listItem, pressable, EASE_BRAND } from "@app/motion/pres
 import { balances, notifications, otc } from "@app/data/db.js";
 import { openTransferIn } from "@app/screens/transfers/TransferInSheet.jsx";
 import { openTransferOut } from "@app/screens/transfers/TransferOutSheet.jsx";
+import { armKeyboard } from "@app/ui/keyboardRelay.js";
 import { Logo } from "@ds/components/Logo/Logo.jsx";
 import { AssetMark } from "@ds/components/AssetMark/AssetMark.jsx";
 import { EstimatedBalance } from "@ds/components/EstimatedBalance/EstimatedBalance.jsx";
@@ -116,7 +117,13 @@ export function HomeTab({ unreadNotifications = unreadFromDb }) {
                 key={a.id}
                 {...pressable}
                 className="home-action"
-                onClick={() => (a.sheet ? a.sheet(openSheet) : nav.push(a.route))}
+                onClick={() => {
+                  // Arm inside the tap so iOS raises the keyboard for the
+                  // amount field on the incoming swap screen.
+                  if (a.id === "swap") armKeyboard("decimal");
+                  if (a.sheet) a.sheet(openSheet);
+                  else nav.push(a.route);
+                }}
               >
                 <span className="home-action__circle">
                   <span className="material-symbols-rounded">{a.icon}</span>

@@ -33,6 +33,7 @@ import { listContainer, listItem, pressable, DUR, EASE_BRAND } from "@app/motion
 import { balances, banks, blockchainAddresses, fees, fmtMoney, networks, truncAddr } from "@app/data/db.js";
 import { AssetMark } from "@ds/components/AssetMark/AssetMark.jsx";
 import { CommitButton, FlowRow, SHEET_TIMING, SheetSuccess, useCommit } from "./sheetParts.jsx";
+import { armKeyboard } from "@app/ui/keyboardRelay.js";
 import "./transfers.css";
 
 const TIMING = {
@@ -88,6 +89,7 @@ export function TransferOutSheet({ close, asset: initialAsset = "XSGD" }) {
           <DestStep
             onBank={(b) => {
               setDest({ kind: "bank", name: b.name, sub: b.account });
+              armKeyboard("decimal");
               go("amount");
             }}
             onWallet={(w) => {
@@ -97,6 +99,7 @@ export function TransferOutSheet({ close, asset: initialAsset = "XSGD" }) {
                 sub: truncAddr(w.address),
                 network: networks.find((n) => n.name === w.networks[0]) ?? networks[0]
               });
+              armKeyboard("decimal");
               go("amount");
             }}
             onVerifyBank={() => verifyVia("account/banks-verify")}
@@ -287,6 +290,7 @@ function AmountStep({ asset, onAsset, amountStr, onAmount, busy, onReview }) {
           <input
             className={"transfers-bigamount__input" + (amountStr.length > 9 ? " is-long" : "")}
             inputMode="decimal"
+            autoFocus
             placeholder="0.00"
             value={amountStr}
             disabled={busy}
