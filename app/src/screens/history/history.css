@@ -306,6 +306,23 @@
   flex-wrap: wrap;
   gap: 8px;
 }
+/* Design feedback: chips read as binary — selected (solid ivy) or not
+   (white + grey outline). Hover only nudges the border, never fills. */
+.history-sheet__chips .tag--clickable {
+  background: #fff;
+  border-color: var(--sx-color-grey-300, #c6c6c6);
+  color: var(--sx-color-deep-ivy, #002b2a);
+}
+.history-sheet__chips .tag--clickable:hover {
+  background: #fff;
+  border-color: var(--sx-color-deep-ivy, #002b2a);
+}
+.history-sheet__chips .tag--clickable.is-selected,
+.history-sheet__chips .tag--clickable.is-selected:hover {
+  background: var(--sx-color-deep-ivy, #002b2a);
+  border-color: var(--sx-color-deep-ivy, #002b2a);
+  color: #fff;
+}
 .history-sheet__footer {
   display: grid;
   grid-template-columns: 1fr 1fr;

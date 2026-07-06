@@ -124,21 +124,7 @@ export function HistoryTab() {
 
   return (
     <>
-      <AppHeader
-        title="Transaction History"
-        large
-        right={
-          <span className="history-filter-wrap">
-            <IconButton
-              icon="tune"
-              size="sm"
-              label="Filter & Sort"
-              onClick={openFilterSheet}
-            />
-            {filterActive && <span className="history-filter-dot" aria-hidden="true" />}
-          </span>
-        }
-      />
+      <AppHeader title="Transaction History" large />
 
       <div className="history-chrome">
         <Tabs items={MAIN_TABS} fill activeTab={tab} onTabChange={setTab} />
@@ -150,6 +136,15 @@ export function HistoryTab() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
+          <span className="history-filter-wrap">
+            <IconButton
+              icon="tune"
+              size="sm"
+              label="Filter & Sort"
+              onClick={openFilterSheet}
+            />
+            {filterActive && <span className="history-filter-dot" aria-hidden="true" />}
+          </span>
           <IconButton
             icon="download"
             size="sm"
