@@ -218,7 +218,7 @@ export function LockScreen() {
                 "v2auth-lock__bio-ring" + (scanning ? " is-scanning" : "")
               }
             >
-              <span className="material-symbols-rounded">person</span>
+              <span className="material-symbols-rounded">fingerprint</span>
             </span>
           </motion.button>
         </div>
