@@ -3,7 +3,7 @@
 // callout (VAN helper), two compliance trust notes.
 import { motion } from "motion/react";
 import { AppHeader } from "@app/ui/AppHeader.jsx";
-import { banks, fees, limits, mint } from "@app/data/db.js";
+import { banks, limits, mint } from "@app/data/db.js";
 import { listContainer, listItem, pressable } from "@app/motion/presets.js";
 import { MoveToastLayer, copyText, useMoveToast } from "./shared.jsx";
 import "./v2moveflows-deposit.css";
@@ -52,8 +52,7 @@ export function V2DepositBankScreen() {
         >
           <motion.p variants={listItem} className="v2mf-lead">
             Make a <strong>{banks.transferIn.method}</strong> transfer using the
-            details below. {fees.bankTransferIn.fee} ·{" "}
-            {fees.bankTransferIn.processingTime}.
+            details below:
           </motion.p>
 
           <motion.div variants={listItem} className="v2-card v2mf-copyrows">
