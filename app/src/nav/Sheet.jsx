@@ -21,7 +21,14 @@ export function SheetProvider({ children }) {
     setCurrent({ render, opts });
   }, []);
 
-  const closeSheet = useCallback(() => setCurrent(null), []);
+  // opts.onDismiss fires on ANY close path (scrim tap, drag, closeSheet) so
+  // callers can sync toggle state (e.g. the v2 Move disc).
+  const closeSheet = useCallback(() => {
+    setCurrent((cur) => {
+      if (cur?.opts?.onDismiss) queueMicrotask(cur.opts.onDismiss);
+      return null;
+    });
+  }, []);
 
   return (
     <SheetContext.Provider value={{ openSheet, closeSheet }}>
