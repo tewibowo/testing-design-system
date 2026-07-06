@@ -82,9 +82,14 @@ export function SheetHost() {
             key="sheet-panel"
             className="sheet-panel"
             style={{
-              bottom: kbInset,
-              maxHeight: kbInset ? `calc(94% - ${kbInset}px)` : undefined,
-              transition: "bottom 200ms cubic-bezier(0.2, 0.7, 0.2, 1), max-height 200ms cubic-bezier(0.2, 0.7, 0.2, 1)"
+              // Keyboard handling: keep the panel anchored to the screen
+              // bottom (white surface runs behind the keyboard) and raise
+              // only the CONTENT via bottom padding — lifting the panel
+              // itself exposed the scrim beneath it.
+              paddingBottom: kbInset ? `calc(16px + ${kbInset}px)` : undefined,
+              maxHeight: kbInset ? "96%" : undefined,
+              transition:
+                "padding-bottom 200ms cubic-bezier(0.2, 0.7, 0.2, 1), max-height 200ms cubic-bezier(0.2, 0.7, 0.2, 1)"
             }}
             initial={sheet.initial}
             animate={sheet.enter}
