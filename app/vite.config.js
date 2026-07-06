@@ -10,6 +10,14 @@ export default defineConfig({
   // Relative base so the same build works at any hosting path
   // (GitHub Pages subpath, Vercel root, PR previews…).
   base: "./",
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(here, "index.html"),
+        v2: path.resolve(here, "v2/index.html")
+      }
+    }
+  },
   plugins: [
     react(),
     VitePWA({
