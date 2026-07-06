@@ -299,6 +299,147 @@ body {
     0 0 0 4px var(--sx-color-information, #0d69d4);
 }
 
+/* ---- Install gate (mobile browser → add to home screen) ----------------- */
+
+.installgate {
+  position: absolute;
+  inset: 0;
+  z-index: 80;
+  background: var(--sx-color-deep-ivy, #002b2a);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px 28px calc(28px + var(--safe-bottom));
+}
+.installgate__logo {
+  display: block;
+  width: 64px;
+  margin-bottom: 20px;
+  color: var(--sx-color-vibrant-green, #00d37e);
+}
+.installgate__logo svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.installgate__title {
+  font: 700 26px/1.15 "Red Hat Display", sans-serif;
+  color: #fff;
+  margin: 0 0 10px;
+  text-wrap: balance;
+}
+.installgate__lead {
+  font: 400 15px/1.5 "Hanken Grotesk", sans-serif;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0 0 28px;
+  max-width: 300px;
+  text-wrap: pretty;
+}
+.installgate__steps {
+  list-style: none;
+  margin: 0 0 32px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 330px;
+  text-align: left;
+}
+.installgate__step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 13px 14px;
+}
+.installgate__step-num {
+  font: 700 12px/1 "Red Hat Mono", monospace;
+  color: var(--sx-color-vibrant-green, #00d37e);
+  width: 12px;
+  flex-shrink: 0;
+}
+.installgate__step-icon {
+  font-size: 22px;
+  color: var(--sx-color-vibrant-green, #00d37e);
+  flex-shrink: 0;
+}
+.installgate__step-text {
+  font: 400 14px/1.4 "Hanken Grotesk", sans-serif;
+  color: #fff;
+}
+.installgate__continue {
+  border: 0;
+  background: none;
+  color: rgba(255, 255, 255, 0.56);
+  font: 600 14px/1 "Red Hat Display", sans-serif;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+/* ---- Sheet steps (multi-step bottom-sheet flows) ------------------------ */
+
+.sheetsteps__header {
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  align-items: center;
+  min-height: 36px;
+  margin-bottom: 6px;
+}
+.sheetsteps__side {
+  display: flex;
+  align-items: center;
+}
+.sheetsteps__side--right {
+  justify-content: flex-end;
+}
+.sheetsteps__back {
+  border: 0;
+  background: none;
+  padding: 6px;
+  margin-left: -8px;
+  cursor: pointer;
+  color: inherit;
+  display: flex;
+}
+.sheetsteps__back .material-symbols-rounded {
+  font-size: 24px;
+}
+.sheetsteps__title {
+  text-align: center;
+  font: 700 17px/1.2 "Red Hat Display", sans-serif;
+}
+.sheetsteps__dots {
+  display: flex;
+  gap: 4px;
+}
+.sheetsteps__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.18;
+  transition: opacity 200ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    background 200ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.sheetsteps__dot.is-done {
+  opacity: 0.45;
+}
+.sheetsteps__dot.is-current {
+  background: var(--sx-color-vibrant-green, #00d37e);
+  opacity: 1;
+}
+.sheetsteps__viewport {
+  overflow: hidden;
+}
+
 /* ---- Money -------------------------------------------------------------- */
 
 .money {
