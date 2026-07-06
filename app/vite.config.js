@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 import path from "node:path";
+import fs from "node:fs";
 import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -20,6 +21,29 @@ export default defineConfig({
   },
   plugins: [
     react(),
+    {
+      // The PWA plugin injects root-relative links (./registerSW.js,
+      // ./manifest.webmanifest) into every emitted page; from the nested
+      // /v2/ page those resolve to /v2/* paths that don't exist. It writes
+      // them during bundle emission, so patch the file after the build.
+      name: "v2-nested-page-fixups",
+      apply: "build",
+      enforce: "post",
+      closeBundle() {
+        const file = path.resolve(here, "dist/v2/index.html");
+        if (!fs.existsSync(file)) return;
+        // Inline the SW registration: register() resolves relative to the
+        // PAGE url, so the shared root sw.js must be addressed as ../sw.js
+        // from /v2/ (scope ../ is legal — the worker file lives there).
+        const inlineReg =
+          "<script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('../sw.js',{scope:'../'})})}</script>";
+        const html = fs
+          .readFileSync(file, "utf8")
+          .replace(/<script id="vite-plugin-pwa:register-sw"[^>]*><\/script>/, inlineReg)
+          .replace(/<link rel="manifest" href="\.\/manifest\.webmanifest"\s*\/?>/, "");
+        fs.writeFileSync(file, html);
+      }
+    },
     VitePWA({
       registerType: "autoUpdate",
       includeAssets: ["icons/apple-touch-icon.png"],
