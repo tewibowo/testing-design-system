@@ -245,3 +245,15 @@
   gap: 8px;
   padding: 8px 0;
 }
+
+/* ---- Phone canvas ------------------------------------------------------- */
+
+/* Matches the tab bar (the app's bottom edge): if iOS standalone mis-sizes
+   the viewport on cold launch, the strip it paints below the app blends in
+   instead of reading as a band. Overrides the v1 white from app.css. */
+@media (max-width: 767.98px) {
+  html,
+  body {
+    background: #022220;
+  }
+}

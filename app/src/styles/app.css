@@ -18,6 +18,17 @@ body {
   overscroll-behavior: none;
 }
 
+/* Phone: the page canvas must match the app, not the desktop-frame ivy
+   backdrop. iOS standalone can mis-size the viewport on cold launch and
+   paint the canvas in the strip below the app — with the ivy default that
+   read as a green band. v2 re-overrides this in v2-theme.css. */
+@media (max-width: 767.98px) {
+  html,
+  body {
+    background: #fff;
+  }
+}
+
 .device {
   /* Fill the initial containing block with pure layout (fixed + inset: 0)
      instead of a measured height: 100dvh and window.innerHeight are both
@@ -80,11 +91,28 @@ body {
 
 /* ---- Bottom sheet ------------------------------------------------------ */
 
+/* Entrances run as CSS animations so the compositor drives them: the sheet
+   mounts its whole content tree on the same frame the slide starts, and a
+   JS-driven tween (framer) drops frames under that load — the appear jitter.
+   Framer still owns drag-to-dismiss and the exit tween (inline transforms,
+   which these animations no longer override once finished). */
+@keyframes sheet-scrim-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes sheet-panel-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+
 .sheet-scrim {
   position: absolute;
   inset: 0;
   background: rgba(0, 43, 42, 0.4);
   z-index: 40;
+  animation: sheet-scrim-in 320ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
 }
 
 .sheet-panel {
@@ -101,6 +129,7 @@ body {
   flex-direction: column;
   overflow: hidden;
   will-change: transform;
+  animation: sheet-panel-in 320ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
 }
 
 /* Drag-to-dismiss target: the strip around the grabber. The body below it

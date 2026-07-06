@@ -76,10 +76,13 @@ export function SheetHost() {
     <AnimatePresence>
       {current && (
         <>
+          {/* Entrances are CSS animations (see app.css) — compositor-driven,
+              so content mounting can't stutter them. initial={false} stops
+              framer running a competing JS entrance; it still owns exits. */}
           <motion.div
             key="sheet-scrim"
             className="sheet-scrim"
-            initial={scrim.initial}
+            initial={false}
             animate={scrim.enter}
             exit={scrim.exit}
             onClick={closeSheet}
@@ -88,7 +91,7 @@ export function SheetHost() {
             key="sheet-panel"
             className="sheet-panel"
             style={{ maxHeight: kbInset ? "96%" : undefined }}
-            initial={sheet.initial}
+            initial={false}
             animate={sheet.enter}
             exit={sheet.exit}
             drag="y"
