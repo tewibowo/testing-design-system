@@ -28,7 +28,7 @@ let keySeq = 0;
  * `screens` maps name -> component. The root entry stays mounted so
  * tab state survives pushes.
  */
-export function StackNavigator({ screens, initial, initialParams = {} }) {
+export function StackNavigator({ screens, initial, initialParams = {}, children }) {
   const [stack, setStack] = useState(() => [
     { key: `s${keySeq++}`, name: initial, params: initialParams }
   ]);
@@ -79,6 +79,8 @@ export function StackNavigator({ screens, initial, initialParams = {} }) {
           })}
         </AnimatePresence>
       </div>
+      {/* Overlays (e.g. SheetHost) render here so they can useNav(). */}
+      {children}
     </NavContext.Provider>
   );
 }

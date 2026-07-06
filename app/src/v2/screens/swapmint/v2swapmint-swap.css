@@ -76,10 +76,17 @@
   margin-top: 8px;
   font: 400 13px/1.35 "Hanken Grotesk", sans-serif;
   color: var(--v2-text-dim);
-  text-align: right;
 }
 .v2swapmint-card__sub.is-critical {
   color: var(--v2-critical);
+}
+/* Leg modifiers — Revolut treatment: balance subline sits under the chip
+   (left), the fiat approximation under the amount (right). */
+.v2swapmint-card--pay .v2swapmint-card__sub {
+  text-align: left;
+}
+.v2swapmint-card--receive .v2swapmint-card__sub {
+  text-align: right;
 }
 
 /* Asset chip: coin cluster carries the shared layoutId (§4.5) */
