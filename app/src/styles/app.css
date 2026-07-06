@@ -45,6 +45,19 @@ body {
   overflow: hidden;
 }
 
+/* iOS standalone short-viewport correction (see ui/viewportFix.js): the
+   layout viewport ends above the physical screen bottom, so inset sizing
+   can't reach it — but the window still paints there. Size the shell to
+   the real screen height and restore the home-indicator inset iOS
+   under-reports in that state. */
+.vp-short .device {
+  bottom: auto;
+  height: var(--screen-h, 100dvh);
+}
+.vp-short {
+  --safe-bottom: 34px;
+}
+
 /* Desktop / tablet: present the app inside a phone frame so colleagues
    reviewing on a laptop see it as intended. */
 @media (min-width: 768px) {
