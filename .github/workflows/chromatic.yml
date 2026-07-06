@@ -3,13 +3,27 @@ name: "Chromatic"
 # Runs visual regression on every push and PR. Requires CHROMATIC_PROJECT_TOKEN
 # to be set in repository Settings → Secrets and variables → Actions.
 
+# Scoped to design-system sources — pushes that only touch the mobile
+# prototype (app/) or reference material don't consume Chromatic builds.
 on:
   push:
     branches:
       - main
+    paths:
+      - "src/**"
+      - ".storybook/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/chromatic.yml"
   pull_request:
     branches:
       - main
+    paths:
+      - "src/**"
+      - ".storybook/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/chromatic.yml"
 
 jobs:
   chromatic:
