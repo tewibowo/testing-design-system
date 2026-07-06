@@ -217,7 +217,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2px;
-  padding: 4px 8px calc(4px + env(safe-area-inset-bottom, 0px));
+  padding: 4px 8px calc(4px + var(--safe-bottom, 0px));
 }
 .v2-keypad__key {
   position: relative;

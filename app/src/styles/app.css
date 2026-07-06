@@ -2,7 +2,11 @@
 
 :root {
   --safe-top: env(safe-area-inset-top, 0px);
-  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  /* Clamped: the home indicator needs at most 34px, but iOS reports inflated
+     values in some modes (Safari's collapsed bottom toolbar, some iOS 26
+     standalone launches) — unclamped, the tab bar and CTA bars grow a huge
+     dead strip at the bottom. */
+  --safe-bottom: min(env(safe-area-inset-bottom, 0px), 34px);
   --tabbar-height: 64px;
 }
 
