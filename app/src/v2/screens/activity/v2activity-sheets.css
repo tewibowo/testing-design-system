@@ -1,0 +1,229 @@
+/* v2 Activity sheets — transaction detail (§2.5.5) + date filter (§2.5.4).
+   Sheet chrome (teal panel, grabber, drag settle) is host-owned. */
+
+/* Sticky pill toast inside the scrolling sheet panel (§2.3 recipe:
+   ivy text on mint; §4.8: slide down, auto-dismiss 2s) */
+.v2activity-toastwrap {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  height: 0;
+  display: flex;
+  justify-content: center;
+}
+.v2activity-toast {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 2px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--v2-mint);
+  color: var(--v2-bg);
+  font: 700 13px/1 "Red Hat Display", sans-serif;
+  pointer-events: none;
+}
+
+/* ---- Transaction detail --------------------------------------------------- */
+
+.v2activity-detail {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0 8px;
+}
+.v2activity-detail__head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+}
+.v2activity-detail__type {
+  font: 700 12px/1.2 "Red Hat Display", sans-serif;
+  letter-spacing: 0.04em;
+  color: var(--v2-text-dim);
+}
+.v2activity-detail__desc {
+  font: 400 13px/1.35 "Hanken Grotesk", sans-serif;
+  color: var(--v2-text-dim);
+}
+
+/* Amount hero — Red Hat Mono 32, centred; tone tracks direction/status */
+.v2activity-detail__hero {
+  margin: 14px 0 2px;
+  text-align: center;
+  font: 500 32px/1.15 "Red Hat Mono", monospace;
+  font-variant-numeric: tabular-nums;
+  color: var(--v2-text);
+}
+.v2activity-detail__hero.is-credit {
+  color: var(--v2-mint);
+}
+.v2activity-detail__hero.is-failed {
+  color: var(--v2-critical);
+}
+
+.v2activity-detail__statusrow {
+  display: flex;
+  justify-content: center;
+  margin: 12px 0 4px;
+}
+.v2activity-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font: 700 12px/1 "Red Hat Display", sans-serif;
+}
+.v2activity-status .material-symbols-rounded {
+  font-size: 16px;
+}
+.v2activity-status.is-positive {
+  background: rgba(121, 255, 202, 0.12);
+  color: var(--v2-mint);
+}
+.v2activity-status.is-pending {
+  background: rgba(252, 154, 7, 0.14);
+  color: var(--v2-warning);
+}
+.v2activity-status.is-failed {
+  background: rgba(223, 19, 18, 0.16);
+  color: var(--v2-critical);
+}
+
+.v2activity-detail__rows {
+  margin-top: 16px;
+  border-top: 1px solid var(--v2-line-soft);
+}
+.v2activity-drow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 44px;
+  padding: 6px 0;
+}
+.v2activity-detail__rows .v2activity-drow + .v2activity-drow {
+  border-top: 1px solid var(--v2-line-soft);
+}
+.v2activity-drow__label {
+  flex-shrink: 0;
+  font: 400 14px/1.3 "Hanken Grotesk", sans-serif;
+  color: var(--v2-text-dim);
+}
+.v2activity-drow__value {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  text-align: right;
+  font: 500 14px/1.3 "Red Hat Mono", monospace;
+  font-variant-numeric: tabular-nums;
+  color: var(--v2-text);
+  overflow-wrap: anywhere;
+}
+.v2activity-copy {
+  display: inline-flex;
+  border: 0;
+  background: none;
+  padding: 2px;
+  color: var(--v2-text-dim);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.v2activity-copy:active {
+  color: var(--v2-mint);
+}
+.v2activity-copy .material-symbols-rounded {
+  font-size: 18px;
+}
+
+/* Amount breakdown (total / fee / net) — raised block, net hairlined */
+.v2activity-detail__breakdown {
+  margin-top: 16px;
+  padding: 4px 16px;
+  background: var(--v2-raised);
+  border-radius: 12px;
+}
+.v2activity-detail__breakdown .v2activity-drow {
+  min-height: 40px;
+}
+.v2activity-drow--net {
+  border-top: 1px solid var(--v2-line);
+}
+.v2activity-drow--net .v2activity-drow__label {
+  color: var(--v2-text);
+  font-weight: 600;
+}
+.v2activity-drow--net .v2activity-drow__value {
+  font-weight: 700;
+}
+
+/* Secondary pill — transparent, white 24% border (§2.3 secondary recipe) */
+.v2activity-detail__explorer {
+  margin-top: 16px;
+  height: 48px;
+  border: 1.5px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  background: none;
+  color: var(--v2-text);
+  font: 700 15px/1 "Red Hat Display", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.v2activity-detail__explorer .material-symbols-rounded {
+  font-size: 18px;
+}
+
+/* ---- Date filter sheet ------------------------------------------------------ */
+
+.v2activity-filter {
+  padding: 4px 0 8px;
+}
+.v2activity-filter__title {
+  margin: 4px 0 14px;
+  font: 700 18px/1.2 "Red Hat Display", sans-serif;
+  color: var(--v2-text);
+}
+.v2activity-filter__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 52px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  color: var(--v2-text);
+  text-align: left;
+  font: 400 15px/1.2 "Hanken Grotesk", sans-serif;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.v2activity-filter__row + .v2activity-filter__row {
+  margin-top: 2px;
+}
+.v2activity-filter__row.is-selected {
+  box-shadow: inset 0 0 0 1px var(--v2-mint);
+}
+.v2activity-filter__row .material-symbols-rounded {
+  font-size: 20px;
+  color: var(--v2-mint);
+}
+.v2activity-apply {
+  margin-top: 16px;
+  width: 100%;
+  height: 52px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--v2-accent);
+  color: var(--v2-bg);
+  font: 700 16px/1 "Red Hat Display", sans-serif;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}

@@ -1,0 +1,244 @@
+/* Moveflows withdraw — §2.4 recipient / amount / review. Prefix: v2mf-. */
+
+/* Recipient search row (teal card) */
+.v2mf-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  margin-top: 8px;
+}
+.v2mf-search .material-symbols-rounded {
+  font-size: 20px;
+  color: var(--v2-text-dim);
+  flex-shrink: 0;
+}
+.v2mf-search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: none;
+  outline: none;
+  color: var(--v2-text);
+  font: 400 15px/1.3 "Hanken Grotesk", sans-serif;
+}
+.v2mf-search input::placeholder {
+  color: var(--v2-text-faint);
+}
+
+/* Recipient rows on teal cards */
+.v2mf-recips {
+  padding: 2px 4px;
+  margin-top: 12px;
+}
+.v2mf-eyebrow + .v2mf-recips {
+  margin-top: 0;
+}
+.v2mf-recip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px;
+  border: 0;
+  background: none;
+  text-align: left;
+  color: var(--v2-text);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.v2mf-recip + .v2mf-recip {
+  border-top: 1px solid var(--v2-line-soft);
+}
+.v2mf-recip__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: var(--v2-chip);
+  color: var(--v2-mint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.v2mf-recip__icon .material-symbols-rounded {
+  font-size: 20px;
+}
+.v2mf-recip__name {
+  font: 700 15px/1.2 "Red Hat Display", sans-serif;
+}
+.v2mf-recip__sub {
+  font: 400 13px/1.3 "Hanken Grotesk", sans-serif;
+  color: var(--v2-text-dim);
+  margin-top: 2px;
+}
+.v2mf-recip__sub .money {
+  font-size: 12px;
+}
+.v2mf-recip__chev {
+  margin-left: auto;
+  color: var(--v2-text-faint);
+}
+.v2mf-empty {
+  padding: 16px 12px;
+  font: 400 13px/1.4 "Hanken Grotesk", sans-serif;
+  color: var(--v2-text-faint);
+}
+
+/* Amount step — hero fills, presets + CTA + keypad pinned below */
+.v2mf-amtwrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.v2mf-hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 0 20px;
+  min-height: 0;
+}
+.v2mf-amt {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  max-width: 100%;
+  color: var(--v2-text);
+}
+.v2mf-amt.is-over {
+  color: var(--v2-critical);
+}
+.v2mf-amt__ccy {
+  font: 300 32px/1 "Red Hat Mono", monospace;
+  color: var(--v2-text-dim);
+}
+.v2mf-amt.is-over .v2mf-amt__ccy {
+  color: inherit;
+}
+.v2mf-amt__digits {
+  font-size: 64px;
+  font-weight: 300;
+  line-height: 1;
+  overflow: hidden;
+}
+.v2mf-caret {
+  width: 2px;
+  height: 48px;
+  border-radius: 1px;
+  background: var(--v2-mint);
+  align-self: center;
+  animation: v2mf-blink 1.1s steps(2, jump-none) infinite;
+}
+@keyframes v2mf-blink {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Balance chip under the amount */
+.v2mf-balchip {
+  font-weight: 500;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 13px;
+  color: var(--v2-text-dim);
+}
+.v2mf-balchip .money {
+  font-size: 13px;
+  color: var(--v2-text);
+}
+.v2mf-balchip__sep {
+  color: var(--v2-text-faint);
+}
+.v2mf-balchip__max {
+  font: 700 13px/1 "Red Hat Display", sans-serif;
+  color: var(--v2-mint);
+}
+
+.v2mf-ctapad {
+  padding: 8px 20px 4px;
+}
+
+/* Amount-step header chip (recipient pinned, Satispay treatment) */
+.v2mf-hdrchip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 700 14px/1 "Red Hat Display", sans-serif;
+  color: var(--v2-text);
+}
+.v2mf-hdrchip__icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--v2-chip);
+  color: var(--v2-mint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.v2mf-hdrchip__icon .material-symbols-rounded {
+  font-size: 14px;
+}
+
+/* Review push — summary rows, mono values right-aligned */
+.v2mf-reviewwrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.v2mf-sum {
+  padding: 6px 16px;
+  margin-top: 12px;
+}
+.v2mf-sumrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+}
+.v2mf-sumrow + .v2mf-sumrow {
+  border-top: 1px solid var(--v2-line-soft);
+}
+.v2mf-sumrow__label {
+  font: 400 14px/1.3 "Hanken Grotesk", sans-serif;
+  color: var(--v2-text-dim);
+}
+.v2mf-sumrow__value {
+  font: 500 15px/1.3 "Red Hat Mono", monospace;
+  font-variant-numeric: tabular-nums;
+  color: var(--v2-text);
+  text-align: right;
+}
+.v2mf-sumrow.v2mf-sumrow--total {
+  border-top: 1px solid var(--v2-line);
+}
+.v2mf-compliance {
+  margin: 2px 4px 0;
+  font: 400 12px/1.5 "Hanken Grotesk", sans-serif;
+  color: var(--v2-text-faint);
+  text-align: center;
+}
+
+/* Success — dark-ground overrides for SuccessState copy (local scope only;
+   BUILDERS-V2: verify contrast, don't restyle globally) */
+.v2mf-success {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.v2mf-success .success-state__title {
+  color: var(--v2-text);
+}
+.v2mf-success .success-state__body {
+  color: var(--v2-text-dim);
+}
