@@ -9,9 +9,12 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { useNav } from "@app/nav/Navigator.jsx";
+import { useSheet } from "@app/nav/Sheet.jsx";
 import { Money } from "@app/ui/Money.jsx";
 import { listContainer, listItem, pressable, EASE_BRAND } from "@app/motion/presets.js";
 import { balances, notifications, otc } from "@app/data/db.js";
+import { openTransferIn } from "@app/screens/transfers/TransferInSheet.jsx";
+import { openTransferOut } from "@app/screens/transfers/TransferOutSheet.jsx";
 import { Logo } from "@ds/components/Logo/Logo.jsx";
 import { AssetMark } from "@ds/components/AssetMark/AssetMark.jsx";
 import { EstimatedBalance } from "@ds/components/EstimatedBalance/EstimatedBalance.jsx";
@@ -20,11 +23,13 @@ import { IconButton } from "@ds/components/IconButton/IconButton.jsx";
 import { useHomeToast } from "./useHomeToast.jsx";
 import "./home.css";
 
+// Transfer In/Out open as step-by-step bottom sheets (design feedback);
+// Swap and Mint remain pushed screens.
 const QUICK_ACTIONS = [
-  { label: "Transfer In", icon: "add", route: "transfers/in" },
-  { label: "Transfer Out", icon: "arrow_outward", route: "transfers/out" },
-  { label: "Swap", icon: "swap_vert", route: "mintswap/swap" },
-  { label: "Mint", icon: "toll", route: "mintswap/mint" }
+  { id: "transfer-in", label: "Transfer In", icon: "add", sheet: openTransferIn },
+  { id: "transfer-out", label: "Transfer Out", icon: "arrow_outward", sheet: openTransferOut },
+  { id: "swap", label: "Swap", icon: "swap_vert", route: "mintswap/swap" },
+  { id: "mint", label: "Mint", icon: "toll", route: "mintswap/mint" }
 ];
 
 // Mini network-mark order for the asset rows. db only records how many
@@ -58,6 +63,7 @@ const unreadFromDb = notifications.items.filter((n) => !n.read).length;
 
 export function HomeTab({ unreadNotifications = unreadFromDb }) {
   const nav = useNav();
+  const { openSheet } = useSheet();
   const [spin, setSpin] = useState(0);
   const [toastNode, showToast] = useHomeToast();
 
@@ -107,10 +113,10 @@ export function HomeTab({ unreadNotifications = unreadFromDb }) {
           <motion.section variants={listItem} className="home-actions">
             {QUICK_ACTIONS.map((a) => (
               <motion.button
-                key={a.route}
+                key={a.id}
                 {...pressable}
                 className="home-action"
-                onClick={() => nav.push(a.route)}
+                onClick={() => (a.sheet ? a.sheet(openSheet) : nav.push(a.route))}
               >
                 <span className="home-action__circle">
                   <span className="material-symbols-rounded">{a.icon}</span>
@@ -166,14 +172,14 @@ export function HomeTab({ unreadNotifications = unreadFromDb }) {
                       size="sm"
                       icon="add"
                       label={`Transfer in ${row.asset}`}
-                      onClick={() => nav.push("transfers/in", { asset: row.asset })}
+                      onClick={() => openTransferIn(openSheet, { asset: row.asset })}
                     />
                     <IconButton
                       variant="outline"
                       size="sm"
                       icon="arrow_outward"
                       label={`Transfer out ${row.asset}`}
-                      onClick={() => nav.push("transfers/out", { asset: row.asset })}
+                      onClick={() => openTransferOut(openSheet, { asset: row.asset })}
                     />
                   </div>
                 </motion.li>

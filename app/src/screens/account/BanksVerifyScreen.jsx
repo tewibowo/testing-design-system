@@ -12,6 +12,8 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useNav } from "@app/nav/Navigator.jsx";
+import { useSheet } from "@app/nav/Sheet.jsx";
+import { openTransferIn } from "@app/screens/transfers/TransferInSheet.jsx";
 import { AppHeader } from "@app/ui/AppHeader.jsx";
 import { SuccessState } from "@app/ui/SuccessState.jsx";
 import { listContainer, listItem, tabContent } from "@app/motion/presets.js";
@@ -38,6 +40,7 @@ const MOCK_FILE = {
 
 export function BanksVerifyScreen({ params = {} }) {
   const nav = useNav();
+  const { openSheet } = useSheet();
   const toasts = useToasts();
   const [step, setStep] = useState("method"); // method | upload | success
   const [method, setMethod] = useState(null);
@@ -54,8 +57,8 @@ export function BanksVerifyScreen({ params = {} }) {
   const next = () => {
     if (!method) return;
     if (method === "transfer") {
-      // Verify-by-transfer-in continues in the canonical transfer-in flow.
-      nav.push("transfers/in");
+      // Verify-by-transfer-in continues in the transfer-in bottom sheet.
+      openTransferIn(openSheet);
       return;
     }
     setStep("upload");
