@@ -181,6 +181,9 @@
 
 /* ── Confirm sheet (kill switch / log out) ────────────────────── */
 
+.v2account-confirm {
+  padding-bottom: 4px;
+}
 .v2account-confirm__title {
   margin: 4px 0 8px;
   font: 700 18px/1.2 "Red Hat Display", sans-serif;
