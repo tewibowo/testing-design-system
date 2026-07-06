@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useDragControls } from "motion/react";
 import { sheet, scrim } from "@app/motion/presets.js";
 
 const SheetContext = createContext(null);
@@ -66,6 +66,12 @@ function useKeyboardInset() {
 export function SheetHost() {
   const { current, closeSheet } = useSheet();
   const kbInset = useKeyboardInset();
+  // Dismissal drag starts from the handle strip only. Putting drag="y" on
+  // the panel itself made the panel the gesture target for every touch, and
+  // the touch-action framer applies for that kills native scrolling — tall
+  // sheet content then scrolled through JS-blocked jitter instead of the
+  // compositor.
+  const dragControls = useDragControls();
   return (
     <AnimatePresence>
       {current && (
@@ -81,28 +87,39 @@ export function SheetHost() {
           <motion.div
             key="sheet-panel"
             className="sheet-panel"
-            style={{
-              // Keyboard handling: keep the panel anchored to the screen
-              // bottom (white surface runs behind the keyboard) and raise
-              // only the CONTENT via bottom padding — lifting the panel
-              // itself exposed the scrim beneath it.
-              paddingBottom: kbInset ? `calc(16px + ${kbInset}px)` : undefined,
-              maxHeight: kbInset ? "96%" : undefined,
-              transition:
-                "padding-bottom 200ms cubic-bezier(0.2, 0.7, 0.2, 1), max-height 200ms cubic-bezier(0.2, 0.7, 0.2, 1)"
-            }}
+            style={{ maxHeight: kbInset ? "96%" : undefined }}
             initial={sheet.initial}
             animate={sheet.enter}
             exit={sheet.exit}
             drag="y"
+            dragListener={false}
+            dragControls={dragControls}
             dragConstraints={{ top: 0 }}
             dragElastic={{ top: 0, bottom: 0.6 }}
             onDragEnd={(_e, info) => {
               if (info.offset.y > 120 || info.velocity.y > 600) closeSheet();
             }}
           >
-            <div className="sheet-grabber" />
-            {current.render({ close: closeSheet })}
+            <div
+              className="sheet-handle"
+              onPointerDown={(e) => dragControls.start(e)}
+            >
+              <div className="sheet-grabber" />
+            </div>
+            <div
+              className="sheet-body"
+              style={{
+                // Keyboard handling: keep the panel anchored to the screen
+                // bottom (surface runs behind the keyboard) and raise only
+                // the CONTENT via bottom padding — lifting the panel itself
+                // exposed the scrim beneath it.
+                paddingBottom: kbInset ? `calc(16px + ${kbInset}px)` : undefined,
+                transition:
+                  "padding-bottom 200ms cubic-bezier(0.2, 0.7, 0.2, 1)"
+              }}
+            >
+              {current.render({ close: closeSheet })}
+            </div>
           </motion.div>
         </>
       )}

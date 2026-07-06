@@ -6,7 +6,7 @@ import {
   useRef,
   useState
 } from "react";
-import { AnimatePresence, motion, useAnimationControls } from "motion/react";
+import { AnimatePresence, animate, motion, useMotionValue } from "motion/react";
 import { stackScreen, scrim, DUR, EASE_STACK } from "@app/motion/presets.js";
 
 const NavContext = createContext(null);
@@ -86,7 +86,10 @@ export function StackNavigator({ screens, initial, initialParams = {}, children 
 }
 
 function StackFrame({ children, isTop, isRoot, onSwipeBack }) {
-  const controls = useAnimationControls();
+  // Externally-owned x so the edge swipe can move the frame directly; the
+  // enter/covered/exit variants write to this same value, so gesture and
+  // animation stay in sync and interrupt each other cleanly.
+  const x = useMotionValue(0);
   const dragStartX = useRef(null);
 
   // Edge-swipe back: only armed when the touch starts near the left edge.
@@ -97,23 +100,25 @@ function StackFrame({ children, isTop, isRoot, onSwipeBack }) {
   };
 
   const onPan = (_e, info) => {
-    if (dragStartX.current == null || isRoot) return;
-    controls.set({ x: Math.max(0, info.offset.x) });
+    if (dragStartX.current == null) return;
+    x.set(Math.max(0, info.offset.x));
   };
 
   const onPanEnd = (_e, info) => {
-    if (dragStartX.current == null || isRoot) return;
+    if (dragStartX.current == null) return;
     const shouldPop = info.offset.x > 110 || info.velocity.x > 500;
     if (shouldPop) {
       onSwipeBack();
     } else {
-      controls.start({
-        x: 0,
-        transition: { duration: DUR.base, ease: EASE_STACK }
-      });
+      animate(x, 0, { duration: DUR.base, ease: EASE_STACK });
     }
     dragStartX.current = null;
   };
+
+  // Pan tracking is only wired on frames that can actually pop — the root
+  // frame hosts the most scrolling, and pointer-tracking JS during native
+  // scrolls is wasted work there.
+  const panHandlers = isRoot ? {} : { onPanStart, onPan, onPanEnd };
 
   return (
     <motion.div
@@ -121,10 +126,8 @@ function StackFrame({ children, isTop, isRoot, onSwipeBack }) {
       initial={isRoot ? false : stackScreen.initial}
       animate={isTop ? stackScreen.enter : stackScreen.covered}
       exit={stackScreen.exit}
-      onPanStart={onPanStart}
-      onPan={onPan}
-      onPanEnd={onPanEnd}
-      style={{ touchAction: "pan-y" }}
+      {...panHandlers}
+      style={{ x, touchAction: "pan-y" }}
     >
       {children}
       <AnimatePresence>

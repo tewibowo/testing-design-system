@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
 import { TabBar } from "@app/ui/TabBar.jsx";
-import { tabContent } from "@app/motion/presets.js";
+import { TabPanes } from "@app/ui/TabPanes.jsx";
 import { notifications } from "@app/data/db.js";
 import { HomeTab } from "@app/screens/home/HomeTab.jsx";
 import { HistoryTab } from "@app/screens/history/HistoryTab.jsx";
@@ -13,33 +12,21 @@ const TABS = [
   { key: "account", label: "Account", icon: "account_circle" }
 ];
 
-const TAB_SCREENS = {
-  home: HomeTab,
-  history: HistoryTab,
-  account: AccountTab
-};
-
 export function RootTabs() {
   const [active, setActive] = useState("home");
   const unread = notifications.items.filter((n) => !n.read).length;
   const tabs = TABS.map((t) => (t.key === "home" ? { ...t, badge: 0 } : t));
-  const Active = TAB_SCREENS[active];
 
   return (
     <>
-      <div className="tab-host">
-        <AnimatePresence mode="popLayout" initial={false}>
-          <motion.div
-            key={active}
-            className="tab-pane"
-            initial={tabContent.initial}
-            animate={tabContent.enter}
-            exit={tabContent.exit}
-          >
-            <Active unreadNotifications={unread} />
-          </motion.div>
-        </AnimatePresence>
-      </div>
+      <TabPanes
+        active={active}
+        panes={{
+          home: <HomeTab unreadNotifications={unread} />,
+          history: <HistoryTab unreadNotifications={unread} />,
+          account: <AccountTab unreadNotifications={unread} />
+        }}
+      />
       <TabBar tabs={tabs} active={active} onChange={setActive} />
     </>
   );

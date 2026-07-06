@@ -19,11 +19,13 @@ body {
 }
 
 .device {
-  position: relative;
-  width: 100%;
-  /* --app-h mirrors window.innerHeight (see ui/appHeight.js) — 100dvh can
-     be stale on iOS standalone cold launch, leaving a bottom gap. */
-  height: var(--app-h, 100dvh);
+  /* Fill the initial containing block with pure layout (fixed + inset: 0)
+     instead of a measured height: 100dvh and window.innerHeight are both
+     reported stale on iOS standalone cold launch (leaving a bottom band),
+     and JS-mirrored values only correct if iOS fires a resize event. Inset
+     sizing tracks the viewport automatically, no measurement involved. */
+  position: fixed;
+  inset: 0;
   background: #fff;
   overflow: hidden;
 }
@@ -37,6 +39,8 @@ body {
     justify-content: center;
   }
   .device {
+    position: relative;
+    inset: auto;
     width: 390px;
     height: min(844px, 94vh);
     border-radius: 44px;
@@ -92,10 +96,21 @@ body {
   background: #fff;
   border-radius: 20px 20px 0 0;
   box-shadow: 0 -8px 32px rgba(10, 13, 18, 0.16);
-  padding: 8px 20px calc(20px + var(--safe-bottom));
   max-height: 88%;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   will-change: transform;
+}
+
+/* Drag-to-dismiss target: the strip around the grabber. The body below it
+   keeps native scrolling (the panel is NOT the scroller — framer drag on a
+   scroll container blocks compositor scrolling). */
+.sheet-handle {
+  flex-shrink: 0;
+  padding-top: 8px;
+  touch-action: none;
+  cursor: grab;
 }
 
 .sheet-grabber {
@@ -104,6 +119,13 @@ body {
   border-radius: 999px;
   background: var(--sx-color-grey-300, #c6c6c6);
   margin: 6px auto 14px;
+}
+
+.sheet-body {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  padding: 0 20px calc(20px + var(--safe-bottom));
 }
 
 /* ---- Shared screen scaffolding ---------------------------------------- */
@@ -132,14 +154,14 @@ body {
   flex: 1;
   position: relative;
   overflow: hidden;
-  display: flex;
 }
+/* Panes stack (all tabs stay mounted — see ui/TabPanes.jsx); the active
+   one is faded in on top. */
 .tab-pane {
-  flex: 1;
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  min-height: 0;
 }
 
 /* ---- App header -------------------------------------------------------- */

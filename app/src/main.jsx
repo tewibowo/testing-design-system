@@ -1,5 +1,4 @@
 import { createRoot } from "react-dom/client";
-import { initAppHeight } from "@app/ui/appHeight.js";
 // Self-hosted fonts so the installed PWA needs no CDN (offline-first).
 import "@app/styles/icons.css";
 import "@fontsource/red-hat-mono/400.css";
@@ -9,7 +8,5 @@ import "@ds/styles/tokens.css";
 import "@ds/styles/global.css";
 import "@app/styles/app.css";
 import App from "@app/App.jsx";
-
-initAppHeight();
 
 createRoot(document.getElementById("root")).render(<App />);
