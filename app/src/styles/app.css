@@ -84,6 +84,8 @@ body {
   display: flex;
   flex-direction: column;
   will-change: transform;
+  /* Isolate each screen's layout/paint so deep stacks composite cheaply. */
+  contain: layout paint;
 }
 
 .stack-dim {

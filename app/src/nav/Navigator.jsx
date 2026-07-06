@@ -66,11 +66,17 @@ export function StackNavigator({ screens, initial, initialParams = {}, children 
             const Screen = screens[entry.name];
             if (!Screen) throw new Error(`Unknown screen: ${entry.name}`);
             const isTop = i === stack.length - 1;
+            // Screens buried 2+ deep are fully covered: keep them mounted
+            // (state survives) but hidden and un-animated, so each push
+            // composites at most two full-screen layers instead of the
+            // whole stack — the main source of on-device jank.
+            const buried = stack.length - 1 - i >= 2;
             return (
               <StackFrame
                 key={entry.key}
                 isTop={isTop}
                 isRoot={i === 0}
+                buried={buried}
                 onSwipeBack={pop}
               >
                 <Screen params={entry.params} isTop={isTop} />
@@ -85,7 +91,7 @@ export function StackNavigator({ screens, initial, initialParams = {}, children 
   );
 }
 
-function StackFrame({ children, isTop, isRoot, onSwipeBack }) {
+function StackFrame({ children, isTop, isRoot, buried, onSwipeBack }) {
   // Externally-owned x so the edge swipe can move the frame directly; the
   // enter/covered/exit variants write to this same value, so gesture and
   // animation stay in sync and interrupt each other cleanly.
@@ -124,10 +130,16 @@ function StackFrame({ children, isTop, isRoot, onSwipeBack }) {
     <motion.div
       className="stack-frame"
       initial={isRoot ? false : stackScreen.initial}
-      animate={isTop ? stackScreen.enter : stackScreen.covered}
+      animate={
+        buried
+          ? { ...stackScreen.covered, transition: { duration: 0 } }
+          : isTop
+            ? stackScreen.enter
+            : stackScreen.covered
+      }
       exit={stackScreen.exit}
       {...panHandlers}
-      style={{ x, touchAction: "pan-y" }}
+      style={{ x, touchAction: "pan-y", visibility: buried ? "hidden" : "visible" }}
     >
       {children}
       <AnimatePresence>
