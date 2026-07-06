@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { sheet, scrim } from "@app/motion/presets.js";
 
@@ -39,9 +39,33 @@ export function SheetProvider({ children }) {
   );
 }
 
+/**
+ * Tracks the on-screen keyboard: iOS overlays it on the layout viewport,
+ * so a bottom-anchored sheet would hide behind it. Returns the overlap in
+ * px so the sheet can lift above the keyboard.
+ */
+function useKeyboardInset() {
+  const [inset, setInset] = useState(0);
+  useEffect(() => {
+    const vv = window.visualViewport;
+    if (!vv) return undefined;
+    const update = () =>
+      setInset(Math.max(0, window.innerHeight - vv.height - vv.offsetTop));
+    vv.addEventListener("resize", update);
+    vv.addEventListener("scroll", update);
+    update();
+    return () => {
+      vv.removeEventListener("resize", update);
+      vv.removeEventListener("scroll", update);
+    };
+  }, []);
+  return inset;
+}
+
 /** Overlay renderer — mount once, inside the navigator. */
 export function SheetHost() {
   const { current, closeSheet } = useSheet();
+  const kbInset = useKeyboardInset();
   return (
     <AnimatePresence>
       {current && (
@@ -57,6 +81,11 @@ export function SheetHost() {
           <motion.div
             key="sheet-panel"
             className="sheet-panel"
+            style={{
+              bottom: kbInset,
+              maxHeight: kbInset ? `calc(94% - ${kbInset}px)` : undefined,
+              transition: "bottom 200ms cubic-bezier(0.2, 0.7, 0.2, 1), max-height 200ms cubic-bezier(0.2, 0.7, 0.2, 1)"
+            }}
             initial={sheet.initial}
             animate={sheet.enter}
             exit={sheet.exit}

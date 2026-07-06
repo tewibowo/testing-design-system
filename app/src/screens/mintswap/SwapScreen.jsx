@@ -49,6 +49,16 @@ const phaseSwap = {
 
 export function SwapScreen() {
   const nav = useNav();
+  const payInputRef = useRef(null);
+  // Focus after mount with preventScroll — the raw autoFocus attribute made
+  // the browser scroll the stack container mid push-transition (the "whole
+  // page slides left" clunk). The keyboard relay keeps the keyboard up.
+  useEffect(() => {
+    const id = requestAnimationFrame(() =>
+      payInputRef.current?.focus({ preventScroll: true })
+    );
+    return () => cancelAnimationFrame(id);
+  }, []);
   const { openSheet } = useSheet();
   const wallet = useBalances();
 
@@ -165,10 +175,10 @@ export function SwapScreen() {
                       onPick={() => pickAsset("from")}
                     >
                       <input
+                        ref={payInputRef}
                         className="mintswap-leg__input"
                         type="text"
                         inputMode="decimal"
-                        autoFocus
                         placeholder="0.00"
                         aria-label={`Amount in ${fromId}`}
                         value={amountStr}

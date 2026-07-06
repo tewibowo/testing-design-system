@@ -24,7 +24,7 @@
  *         circle pops, check draws (360ms @ 180ms), copy rises
  *  done   "Done" closes the sheet
  * ──────────────────────────────────────────────────────────────── */
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { AnimatePresence, motion, useAnimationControls } from "motion/react";
 import { useNav } from "@app/nav/Navigator.jsx";
 import { Money } from "@app/ui/Money.jsx";
@@ -188,6 +188,16 @@ function DestStep({ onBank, onWallet, onVerifyBank, onVerifyWallet }) {
 /* ── Step 2 — pick the stablecoin + amount ── */
 
 function AmountStep({ asset, onAsset, amountStr, onAmount, busy, onReview }) {
+  const amountInputRef = useRef(null);
+  // preventScroll: focusing during the step slide must not scroll the
+  // sheet/stack containers (visible as a sideways jump).
+  useEffect(() => {
+    const id = requestAnimationFrame(() =>
+      amountInputRef.current?.focus({ preventScroll: true })
+    );
+    return () => cancelAnimationFrame(id);
+  }, []);
+
   const [open, setOpen] = useState(false);
   const shake = useAnimationControls();
 
@@ -288,9 +298,9 @@ function AmountStep({ asset, onAsset, amountStr, onAmount, busy, onReview }) {
       <motion.div variants={listItem}>
         <motion.div className="transfers-bigamount" animate={shake}>
           <input
+            ref={amountInputRef}
             className={"transfers-bigamount__input" + (amountStr.length > 9 ? " is-long" : "")}
             inputMode="decimal"
-            autoFocus
             placeholder="0.00"
             value={amountStr}
             disabled={busy}

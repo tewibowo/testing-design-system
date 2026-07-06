@@ -27,7 +27,7 @@ export function OtpInput({
   // Focus the first empty cell on mount; refocus cell 0 when cleared.
   useEffect(() => {
     if (!autoFocus || disabled) return;
-    inputs.current[Math.min(value.length, length - 1)]?.focus();
+    inputs.current[Math.min(value.length, length - 1)]?.focus({ preventScroll: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoFocus, value === ""]);
 
@@ -47,16 +47,16 @@ export function OtpInput({
     if (raw.length > 1) {
       const joined = (value.slice(0, idx) + raw).slice(0, length);
       onChange?.(joined);
-      inputs.current[Math.min(idx + raw.length, length - 1)]?.focus();
+      inputs.current[Math.min(idx + raw.length, length - 1)]?.focus({ preventScroll: true });
       return;
     }
     setDigit(idx, raw);
-    if (idx < length - 1) inputs.current[idx + 1]?.focus();
+    if (idx < length - 1) inputs.current[idx + 1]?.focus({ preventScroll: true });
   };
 
   const handleKeyDown = (idx) => (e) => {
     if (e.key === "Backspace" && !value[idx] && idx > 0) {
-      inputs.current[idx - 1]?.focus();
+      inputs.current[idx - 1]?.focus({ preventScroll: true });
     }
   };
 
