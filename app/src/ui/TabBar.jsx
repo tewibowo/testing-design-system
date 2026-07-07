@@ -16,14 +16,16 @@ export function TabBar({ tabs, active, onChange }) {
             onClick={() => onChange(t.key)}
             aria-current={isActive ? "page" : undefined}
           >
+            {/* Glass lens covers the WHOLE tab (icon + label) and slides
+                between items via the shared layoutId. */}
+            {isActive && (
+              <motion.span
+                layoutId="tab-pill"
+                className="tabbar__pill"
+                transition={{ duration: DUR.slow, ease: EASE_BRAND }}
+              />
+            )}
             <span className="tabbar__icon-wrap">
-              {isActive && (
-                <motion.span
-                  layoutId="tab-pill"
-                  className="tabbar__pill"
-                  transition={{ duration: DUR.slow, ease: EASE_BRAND }}
-                />
-              )}
               <span
                 className="material-symbols-rounded tabbar__icon"
                 style={{ fontVariationSettings: `'FILL' ${isActive ? 1 : 0}, 'wght' ${isActive ? 500 : 400}` }}
