@@ -1,13 +1,15 @@
-import React, { useId } from "react";
+import React, { useId, useState } from "react";
+import { Menu } from "../Menu/Menu.jsx";
 import "./Select.css";
 
 /**
- * Native `<select>` styled to match StraitsX inputs.
- * For combobox-style typeahead, build on top of a popover (future work).
+ * Select field built on the `Menu` popover — matches menu styling rather
+ * than relying on the browser's native `<select>` chrome.
  *
  *   <Select label="Currency" options={[{value, label}]} />
  *
- * size: "large" (48px, default) | "small" (40px) — matches Input.
+ * size: "large" (48px, default) | "small" (36px) — matches Input.
+ * Controlled via `value`/`onChange(value, option)`, or uncontrolled via `defaultValue`.
  */
 export function Select({
   label,
@@ -17,30 +19,73 @@ export function Select({
   placeholder = "Select…",
   size = "large",
   disabled = false,
+  value,
+  defaultValue,
+  onChange,
   id: idProp,
   className = "",
-  ...selectProps
+  ...rest
 }) {
-  const id = useId();
+  const autoId = useId();
+  const id = idProp || autoId;
   const isError = !!error;
-  const wrapCls = [
-    "select",
-    `select--${size === "small" ? "small" : "large"}`,
-    isError && "is-error",
-    disabled && "is-disabled",
-  ].filter(Boolean).join(" ");
+  const isControlled = value !== undefined;
+  const [internal, setInternal] = useState(defaultValue ?? "");
+  const selectedValue = isControlled ? value : internal;
+  const selectedOption = options.find((o) => o.value === selectedValue);
+
+  const select = (option) => {
+    if (!isControlled) setInternal(option.value);
+    onChange && onChange(option.value, option);
+  };
+
   return (
     <div className={"field " + className}>
-      {label && <label htmlFor={idProp || id} className="field__label">{label}</label>}
-      <div className={wrapCls}>
-        <select id={idProp || id} disabled={disabled} {...selectProps}>
-          {placeholder !== false && <option value="" disabled hidden>{placeholder}</option>}
-          {options.map((o) => (
-            <option key={o.value} value={o.value} disabled={o.disabled}>{o.label}</option>
-          ))}
-        </select>
-        <span className="material-symbols-rounded select__chevron" aria-hidden="true">expand_more</span>
-      </div>
+      {label && (
+        <span className="field__label" id={`${id}-label`}>{label}</span>
+      )}
+      <Menu
+        className="select-menu"
+        trigger={({ onClick, open }) => (
+          <button
+            type="button"
+            id={id}
+            disabled={disabled}
+            aria-haspopup="listbox"
+            aria-expanded={open}
+            aria-labelledby={label ? `${id}-label` : undefined}
+            onClick={onClick}
+            className={[
+              "select",
+              `select--${size === "small" ? "small" : "large"}`,
+              isError && "is-error",
+              disabled && "is-disabled",
+            ].filter(Boolean).join(" ")}
+            {...rest}
+          >
+            <span className="select__value">
+              {selectedOption ? (
+                selectedOption.label
+              ) : (
+                <span className="select__placeholder">{placeholder}</span>
+              )}
+            </span>
+            <span className="material-symbols-rounded select__chevron" aria-hidden="true">expand_more</span>
+          </button>
+        )}
+      >
+        {options.map((o) => (
+          <Menu.Item
+            key={o.value}
+            selectable="single"
+            selected={o.value === selectedValue}
+            disabled={o.disabled}
+            onSelect={() => select(o)}
+          >
+            {o.label}
+          </Menu.Item>
+        ))}
+      </Menu>
       {(helper || error) && (
         <span className={"field__helper" + (isError ? " is-error" : "")}>{error || helper}</span>
       )}

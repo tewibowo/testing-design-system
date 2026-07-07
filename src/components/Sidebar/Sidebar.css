@@ -125,6 +125,32 @@
   font: var(--body-bold-medium);
 }
 
+/* Loading state — skeleton nav items */
+.nav-item-skeleton {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+}
+.nav-item-skeleton__icon,
+.nav-item-skeleton__label {
+  border-radius: var(--radius-sm);
+  background: var(--skeleton-gradient);
+  animation: skeleton-pulse 1.4s ease-in-out infinite;
+}
+.nav-item-skeleton__icon { width: 22px; height: 22px; flex: 0 0 auto; }
+.nav-item-skeleton__label { height: 12px; width: var(--skeleton-width, 70%); }
+
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.75; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-item-skeleton__icon,
+  .nav-item-skeleton__label { animation: none; opacity: 0.7; }
+}
+
 /* MAS regulatory badge */
 .sidebar__mas {
   display: flex;

@@ -120,6 +120,17 @@ export const NavHover = {
   ),
 };
 
+// Nav items replaced with animated skeleton placeholders (e.g. while nav
+// config is being fetched).
+export const Loading = {
+  render: () => (
+    <Frame>
+      <Sidebar account="personal" loading />
+      <div style={{ padding: 32, color: "var(--text-secondary)" }}>Nav items loading</div>
+    </Frame>
+  ),
+};
+
 export const Sandbox = {
   render: () => (
     <Frame>
