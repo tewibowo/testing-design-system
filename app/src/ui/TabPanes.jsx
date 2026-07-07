@@ -1,18 +1,21 @@
 import { motion } from "motion/react";
 import { DUR, EASE_BRAND } from "@app/motion/presets.js";
 
-/* Same feel as motion/presets tabContent (fade + whisper of rise), but
-   driven by variant switches on panes that STAY MOUNTED. */
+/* Plain fast crossfade — native iOS doesn't animate tab switches at all,
+   and translating the pane (a scroll container's ancestor) made iOS drop
+   the first swipe after a switch. Inactive panes end visibility:hidden so
+   they can't interfere with hit-testing; unlike display:none this keeps
+   their scroll positions. */
 const paneVariants = {
   active: {
     opacity: 1,
-    y: 0,
-    transition: { duration: DUR.base, ease: EASE_BRAND }
+    visibility: "visible",
+    transition: { duration: DUR.fast, ease: EASE_BRAND }
   },
   inactive: {
     opacity: 0,
-    y: 6,
-    transition: { duration: 0.13, ease: EASE_BRAND }
+    transition: { duration: 0.1, ease: EASE_BRAND },
+    transitionEnd: { visibility: "hidden" }
   }
 };
 
@@ -21,7 +24,7 @@ const paneVariants = {
  * (the old AnimatePresence approach) re-rendered the whole tab tree in the
  * middle of the crossfade — a main-thread hit that stuttered the very
  * animation it triggered — and threw away scroll position and screen state.
- * Panes stack absolutely; the active one rises in over the outgoing one.
+ * Panes stack absolutely; the active one crossfades in over the outgoing.
  *
  * `panes` maps key -> rendered element, e.g. { home: <HomeTab /> }.
  */
