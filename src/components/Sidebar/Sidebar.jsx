@@ -38,6 +38,10 @@ const ACCOUNT_LABEL = {
  * false) to keep plain expand/collapse with no selection. Both behaviors can
  * be mixed across items in the same `items` array.
  *
+ * Pass `loading` to replace the nav items with animated skeleton
+ * placeholders (e.g. while nav config is being fetched). `loadingCount`
+ * controls how many placeholder rows render (default 8).
+ *
  *   <Sidebar
  *     account="business"
  *     company={{ name: "ABC Pte. Ltd", type: "Company" }}
@@ -62,6 +66,8 @@ export function Sidebar({
   activeSubItem,
   hoveredItem, // id of a nav item to render in its hovered state (stories/Chromatic)
   onSelect,
+  loading = false,
+  loadingCount = 8,
 }) {
   const isSandbox = account === "sandbox";
   const hasMenu = !!(companies || companyActions);
@@ -116,50 +122,62 @@ export function Sidebar({
           )}
 
           <nav className="sidebar__nav" aria-label="Main">
-            {items.map((item) => {
-              const hasSub = item.subItems && item.subItems.length > 0;
-              const isOpen = !!expanded[item.id];
-              const isActive = active === item.id && !(hasSub && item.subItems.some((s) => s.id === activeSubItem));
-              return (
-                <div key={item.id} className="sidebar__group">
-                  <button
-                    type="button"
-                    className={"nav-item" + (isActive ? " is-active" : "") + (hoveredItem === item.id ? " is-hovered" : "")}
-                    aria-expanded={hasSub ? isOpen : undefined}
-                    onClick={() => {
-                      if (hasSub) {
-                        const willOpen = !isOpen;
-                        toggle(item.id);
-                        if (willOpen && item.autoSelectFirstSubItem && onSelect) onSelect(item.subItems[0].id);
-                      } else if (onSelect) onSelect(item.id);
-                    }}
+            {loading
+              ? Array.from({ length: loadingCount }, (_, i) => (
+                  <div
+                    key={i}
+                    className="nav-item-skeleton"
+                    style={{ "--skeleton-width": `${55 + ((i * 17) % 35)}%` }}
+                    aria-hidden="true"
                   >
-                    <span className="material-symbols-rounded" aria-hidden="true">{item.icon}</span>
-                    <span className="nav-item__label">{item.label}</span>
-                    {item.tag && <span className="nav-item__tag">{item.tag}</span>}
-                    {hasSub && (
-                      <span className={"material-symbols-rounded nav-item__chevron" + (isOpen ? " is-open" : "")} aria-hidden="true">
-                        keyboard_arrow_down
-                      </span>
-                    )}
-                  </button>
-                  {hasSub && isOpen && (
-                    <div className="sidebar__subnav">
-                      {item.subItems.map((sub) => (
-                        <button
-                          key={sub.id}
-                          type="button"
-                          className={"subitem" + (activeSubItem === sub.id ? " is-active" : "")}
-                          onClick={() => onSelect && onSelect(sub.id)}
-                        >
-                          {sub.label}
-                        </button>
-                      ))}
+                    <span className="nav-item-skeleton__icon" />
+                    <span className="nav-item-skeleton__label" />
+                  </div>
+                ))
+              : items.map((item) => {
+                  const hasSub = item.subItems && item.subItems.length > 0;
+                  const isOpen = !!expanded[item.id];
+                  const isActive = active === item.id && !(hasSub && item.subItems.some((s) => s.id === activeSubItem));
+                  return (
+                    <div key={item.id} className="sidebar__group">
+                      <button
+                        type="button"
+                        className={"nav-item" + (isActive ? " is-active" : "") + (hoveredItem === item.id ? " is-hovered" : "")}
+                        aria-expanded={hasSub ? isOpen : undefined}
+                        onClick={() => {
+                          if (hasSub) {
+                            const willOpen = !isOpen;
+                            toggle(item.id);
+                            if (willOpen && item.autoSelectFirstSubItem && onSelect) onSelect(item.subItems[0].id);
+                          } else if (onSelect) onSelect(item.id);
+                        }}
+                      >
+                        <span className="material-symbols-rounded" aria-hidden="true">{item.icon}</span>
+                        <span className="nav-item__label">{item.label}</span>
+                        {item.tag && <span className="nav-item__tag">{item.tag}</span>}
+                        {hasSub && (
+                          <span className={"material-symbols-rounded nav-item__chevron" + (isOpen ? " is-open" : "")} aria-hidden="true">
+                            keyboard_arrow_down
+                          </span>
+                        )}
+                      </button>
+                      {hasSub && isOpen && (
+                        <div className="sidebar__subnav">
+                          {item.subItems.map((sub) => (
+                            <button
+                              key={sub.id}
+                              type="button"
+                              className={"subitem" + (activeSubItem === sub.id ? " is-active" : "")}
+                              onClick={() => onSelect && onSelect(sub.id)}
+                            >
+                              {sub.label}
+                            </button>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-              );
-            })}
+                  );
+                })}
           </nav>
         </div>
 

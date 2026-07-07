@@ -106,6 +106,7 @@
   --disabled-on-surface: #9d9e9f;  /* disabled content/icon on surface */
   --surface-hovered:     #ececec;
   --surface-pressed:     #e3e3e3;
+  --skeleton-gradient:   linear-gradient(90deg, #e0e0e0 0%, #f2f4f5 88.71%); /* loading placeholders */
 
   /* ── Status/* ── */
   --status-positive:            #257c58;

@@ -22,8 +22,8 @@ export const Light = {
     activeHref: "#xsgd",
     actions: (
       <>
-        <Button variant="tertiary" size="md">Sign in</Button>
-        <Button variant="primary" size="md">Open account</Button>
+        <Button variant="tertiary" size="sm">Sign in</Button>
+        <Button variant="primary" size="sm">Open account</Button>
       </>
     ),
   },
