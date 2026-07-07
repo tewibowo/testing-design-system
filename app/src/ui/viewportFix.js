@@ -23,7 +23,13 @@ export function initViewportFix() {
     // portrait (iPad split view and landscape never qualify).
     const portraitFull = window.innerWidth === window.screen.width;
     const short = portraitFull && window.innerHeight < window.screen.height - 1;
+    const gap = short ? window.screen.height - window.innerHeight : 0;
     root.style.setProperty("--screen-h", `${window.screen.height}px`);
+    // How far the reported viewport falls short of the screen. Bottom chrome
+    // anchors to the viewport edge via this gap: iOS sometimes CLIPS the
+    // window at that edge (painting system white below), so anything
+    // positioned beyond it is simply cut off.
+    root.style.setProperty("--vp-gap", `${gap}px`);
     root.classList.toggle("vp-short", short);
   };
   apply();

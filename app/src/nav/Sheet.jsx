@@ -50,16 +50,10 @@ function useKeyboardInset() {
     const vv = window.visualViewport;
     if (!vv) return undefined;
     const update = () => {
-      // Overlap of the keyboard with the LAYOUT viewport.
-      const overlap = Math.max(0, window.innerHeight - vv.height - vv.offsetTop);
-      // Under the iOS short-viewport bug (see ui/viewportFix.js) the shell
-      // is 47pt taller than the layout viewport, so the keyboard covers
-      // that much extra sheet content that innerHeight can't see — without
-      // this the CTA hides behind the keyboard's accessory bar.
-      const shellExtra = document.documentElement.classList.contains("vp-short")
-        ? Math.max(0, window.screen.height - window.innerHeight)
-        : 0;
-      setInset(overlap > 0 ? overlap + shellExtra : 0);
+      // Overlap of the keyboard with the layout viewport. The panel itself
+      // anchors to the viewport edge (see .vp-short .sheet-panel), so this
+      // is the right measure under the iOS short-viewport bug too.
+      setInset(Math.max(0, window.innerHeight - vv.height - vv.offsetTop));
     };
     vv.addEventListener("resize", update);
     vv.addEventListener("scroll", update);
