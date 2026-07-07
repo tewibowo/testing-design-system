@@ -254,16 +254,43 @@ body {
   margin: 6px 8px 4px;
 }
 
-/* ---- Tab bar ------------------------------------------------------------ */
+/* ---- Tab bar — floating liquid-glass capsule ----------------------------
+   iOS 26 language: the bar floats inset from the screen edges, content
+   scrolls behind it through a frosted blur, and the selection is a glass
+   "lens" that slides between tabs (layoutId pill in ui/TabBar.jsx). */
 
 .tabbar {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: calc(var(--safe-bottom, 0px) + 10px);
+  z-index: 30;
   display: flex;
   justify-content: space-around;
   align-items: stretch;
-  background: #fff;
-  border-top: 1px solid var(--sx-color-grey-200, #e0e0e0);
-  padding: 6px 8px calc(6px + var(--safe-bottom));
-  flex-shrink: 0;
+  padding: 5px 6px;
+  border-radius: 999px;
+  border: 0.5px solid rgba(255, 255, 255, 0.6);
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.34)
+  );
+  -webkit-backdrop-filter: blur(22px) saturate(1.9);
+  backdrop-filter: blur(22px) saturate(1.9);
+  box-shadow:
+    0 12px 32px rgba(10, 13, 18, 0.18),
+    0 2px 8px rgba(10, 13, 18, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+/* No backdrop-filter support → near-opaque surface so the bar stays legible */
+@supports not (backdrop-filter: blur(1px)) {
+  .tabbar {
+    background: rgba(255, 255, 255, 0.94);
+  }
+}
+/* Root screens scroll under the floating bar — clear its footprint */
+.tab-pane .screen-scroll {
+  padding-bottom: calc(78px + var(--safe-bottom, 0px));
 }
 .tabbar__item {
   flex: 1;
@@ -273,7 +300,7 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 2px;
-  padding: 4px 0;
+  padding: 4px 0 5px;
   cursor: pointer;
   color: var(--sx-color-grey-500, #505454);
   -webkit-tap-highlight-color: transparent;
@@ -287,11 +314,16 @@ body {
   width: 56px;
   height: 30px;
 }
+/* Selection lens — a glassy mint capsule with a specular top edge */
 .tabbar__pill {
   position: absolute;
-  inset: 0;
+  inset: -2px -4px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--sx-color-vibrant-green, #00d37e) 22%, transparent);
+  background: color-mix(in srgb, var(--sx-color-vibrant-green, #00d37e) 26%, rgba(255, 255, 255, 0.35));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.75),
+    inset 0 -1px 2px rgba(10, 13, 18, 0.06),
+    0 2px 6px color-mix(in srgb, var(--sx-color-vibrant-green, #00d37e) 25%, transparent);
 }
 .tabbar__icon { font-size: 22px; position: relative; z-index: 1; }
 .tabbar__badge {
