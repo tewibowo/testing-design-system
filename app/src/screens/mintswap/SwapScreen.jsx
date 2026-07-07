@@ -28,7 +28,7 @@ import {
   EASE_BRAND
 } from "@app/motion/presets.js";
 import { assets, balances, swapRates, fees, fmtMoney, assetDecimals } from "@app/data/db.js";
-import { AssetMark } from "@ds/components/AssetMark/AssetMark.jsx";
+import { HoldingMark } from "@app/ui/FiatFlag.jsx";
 import { Button } from "@ds/components/Button/Button.jsx";
 import { IconButton } from "@ds/components/IconButton/IconButton.jsx";
 import { baseRate, jitterRate } from "./rates.js";
@@ -275,7 +275,7 @@ export function SwapScreen() {
                   <span className="mintswap-balances__title">Updated balances</span>
                   {[result.from, result.to].map((id) => (
                     <div key={id} className="mintswap-balances__row">
-                      <AssetMark asset={id} size={28} />
+                      <HoldingMark asset={id} size={28} />
                       <span className="mintswap-balances__sym">{id}</span>
                       <Money
                         className="mintswap-balances__value"
@@ -341,7 +341,7 @@ function SwapLeg({ label, currency, balance, children, onPick }) {
             className="mintswap-leg__coin"
             transition={{ duration: DUR.slow, ease: EASE_BRAND }}
           >
-            <AssetMark asset={currency} size={24} />
+            <HoldingMark asset={currency} size={24} />
             <span className="mintswap-leg__sym">{currency}</span>
           </motion.span>
           <span className="material-symbols-rounded mintswap-leg__chevron" aria-hidden="true">
@@ -373,7 +373,7 @@ function AssetSheet({ activeId, onSelect }) {
               className={"mintswap-assetrow" + (id === activeId ? " is-selected" : "")}
               onClick={() => onSelect(id)}
             >
-              <AssetMark asset={id} size={32} />
+              <HoldingMark asset={id} size={32} />
               <span className="mintswap-assetrow__sym">{id}</span>
               <span className="mintswap-assetrow__bal num">
                 {fmtMoney(wallet[id] ?? 0, assetDecimals(id))} {id}

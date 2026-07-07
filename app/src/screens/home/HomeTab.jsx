@@ -21,6 +21,7 @@ import { valueInSgd } from "@app/screens/mintswap/rates.js";
 import { openTransferIn } from "@app/screens/transfers/TransferInSheet.jsx";
 import { openTransferOut } from "@app/screens/transfers/TransferOutSheet.jsx";
 import { armKeyboard } from "@app/ui/keyboardRelay.js";
+import { FiatFlag } from "@app/ui/FiatFlag.jsx";
 import { Logo } from "@ds/components/Logo/Logo.jsx";
 import { AssetMark } from "@ds/components/AssetMark/AssetMark.jsx";
 import { EstimatedBalance } from "@ds/components/EstimatedBalance/EstimatedBalance.jsx";
@@ -95,7 +96,7 @@ function CurrencySheet({ activeCode, onSelect }) {
           className={"home-currow" + (c.code === activeCode ? " is-selected" : "")}
           onClick={() => onSelect(c.code)}
         >
-          <AssetMark asset={c.code} size={32} label={c.code === "EUR" ? "€" : c.code === "JPY" ? "¥" : undefined} />
+          <FiatFlag code={c.code} size={32} />
           <span className="home-currow__id">
             <span className="home-currow__code">{c.code}</span>
             <span className="home-currow__name">{c.name}</span>
@@ -302,7 +303,7 @@ export function HomeTab({ unreadNotifications = unreadFromDb }) {
               >
                 {balances.fiat.map((row) => (
                   <motion.li key={row.asset} variants={listItem} className="home-asset">
-                    <AssetMark asset={row.asset} size={40} />
+                    <FiatFlag code={row.asset} size={40} />
                     <div className="home-asset__id">
                       <span className="home-asset__symbol">{row.asset}</span>
                       <span className="home-asset__name">{row.name}</span>

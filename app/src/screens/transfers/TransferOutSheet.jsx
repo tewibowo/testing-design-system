@@ -33,6 +33,7 @@ import { listContainer, listItem, pressable, DUR, EASE_BRAND } from "@app/motion
 import { assetDecimals, balances, banks, blockchainAddresses, fees, fmtMoney, networks, truncAddr } from "@app/data/db.js";
 import { useBalances, debit } from "@app/data/walletStore.js";
 import { AssetMark } from "@ds/components/AssetMark/AssetMark.jsx";
+import { HoldingMark } from "@app/ui/FiatFlag.jsx";
 import { CommitButton, FlowRow, SHEET_TIMING, SheetSuccess, useCommit } from "./sheetParts.jsx";
 import { armKeyboard } from "@app/ui/keyboardRelay.js";
 import "./transfers.css";
@@ -261,7 +262,7 @@ function AmountStep({ asset, onAsset, allowFiat, amountStr, onAmount, busy, onRe
           disabled={busy}
           onClick={() => setOpen((o) => !o)}
         >
-          <AssetMark asset={asset} size={20} />
+          <HoldingMark asset={asset} size={20} />
           <span className="transfers-assetchip__sym">{asset}</span>
           <motion.span
             className="material-symbols-rounded transfers-assetchip__chev"
@@ -306,7 +307,7 @@ function AmountStep({ asset, onAsset, allowFiat, amountStr, onAmount, busy, onRe
                           setOpen(false);
                         }}
                       >
-                        <AssetMark asset={id} size={28} />
+                        <HoldingMark asset={id} size={28} />
                         <span className="transfers-assetrow__sym">{id}</span>
                         <span className="transfers-assetrow__bal">
                           {fmtMoney(wallet[id] ?? 0, assetDecimals(id))} {id}
@@ -421,7 +422,7 @@ function ReviewStep({ dest, asset, amount, busy, onConfirm }) {
         <motion.div variants={listItem} className="transfers-fact">
           <span>Asset</span>
           <span className="transfers-fact__net">
-            <AssetMark asset={asset} size={18} />
+            <HoldingMark asset={asset} size={18} />
             <strong>{asset}</strong>
           </span>
         </motion.div>

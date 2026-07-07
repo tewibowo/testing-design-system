@@ -512,6 +512,30 @@ body {
   overflow: hidden;
 }
 
+/* ---- Fiat flag marks (ui/FiatFlag.jsx) ----------------------------------- */
+
+.fiat-flag {
+  position: relative;
+  display: inline-flex;
+  border-radius: 999px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.fiat-flag svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+/* Hairline ring above the flag so light fields (JP/US stripes) keep a
+   circular edge on white cards. */
+.fiat-flag::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px rgba(10, 13, 18, 0.12);
+}
+
 /* ---- Money -------------------------------------------------------------- */
 
 .money {
