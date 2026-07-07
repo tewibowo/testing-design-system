@@ -186,6 +186,9 @@ body {
   flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  /* Keep list overscroll local — chaining it to the document would bounce
+     the whole shell (see ui/bounceGuard.js). */
+  overscroll-behavior: contain;
 }
 
 .screen-pad {
