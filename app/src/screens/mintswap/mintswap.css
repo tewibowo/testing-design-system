@@ -131,6 +131,23 @@
   gap: 10px;
 }
 
+/* Asset-class group inside the picker sheet (Stablecoins / Fiat) */
+.mintswap-assetgroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.mintswap-assetgroup + .mintswap-assetgroup {
+  margin-top: 6px;
+}
+.mintswap-assetgroup__label {
+  font: 700 11px/1 "Red Hat Display", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary, #505454);
+  padding: 4px 2px 0;
+}
+
 .mintswap-assetrow {
   display: flex;
   align-items: center;

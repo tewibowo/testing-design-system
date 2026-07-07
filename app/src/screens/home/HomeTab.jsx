@@ -3,16 +3,21 @@
  *    0ms   screen mounts (tab root, no push transition)
  *   40ms   sections begin staggering in (50ms apart):
  *          balance → quick actions → assets card → OTC banner → legal
- *    ↳     balance figure counts up 0 → 30.58 (Money odometer, 600ms)
+ *    ↳     balance figure counts up 0 → total (Money odometer, 600ms)
  *    ↳     asset rows stagger 50ms inside the card as it enters
+ *  later   changing the display currency odometers the total + every
+ *          ≈-conversion to the new denomination
  * ──────────────────────────────────────────────── */
 import { useState } from "react";
 import { motion } from "motion/react";
 import { useNav } from "@app/nav/Navigator.jsx";
 import { useSheet } from "@app/nav/Sheet.jsx";
 import { Money } from "@app/ui/Money.jsx";
-import { listContainer, listItem, pressable, EASE_BRAND } from "@app/motion/presets.js";
-import { balances, notifications, otc } from "@app/data/db.js";
+import { listContainer, listItem, pressable } from "@app/motion/presets.js";
+import { balances, notifications, otc, fiatCurrencies, assetDecimals, fmtMoney } from "@app/data/db.js";
+import { useBalances } from "@app/data/walletStore.js";
+import { useDisplayCurrency, setDisplayCurrency } from "@app/data/currencyStore.js";
+import { valueInSgd } from "@app/screens/mintswap/rates.js";
 import { openTransferIn } from "@app/screens/transfers/TransferInSheet.jsx";
 import { openTransferOut } from "@app/screens/transfers/TransferOutSheet.jsx";
 import { armKeyboard } from "@app/ui/keyboardRelay.js";
@@ -41,6 +46,12 @@ const NETWORK_ORDER = ["ETHEREUM", "POLYGON", "AVALANCHE", "ARBITRUM", "BNB", "B
 const rowNetworks = (row) =>
   row.asset === "USDC" ? ["POLYGON"] : NETWORK_ORDER.slice(0, row.networkIconCount);
 
+// My Assets card tabs (design feedback: replaces the refresh button).
+const ASSET_TABS = [
+  { id: "stable", label: "Stablecoins" },
+  { id: "fiat", label: "Fiat" }
+];
+
 // OTC banner body — verbatim from db, with the amount emphasised the way
 // the dashboard renders it ("100,000 USD" bold, tabular).
 function bannerBody() {
@@ -62,11 +73,93 @@ function bannerBody() {
 // so the badge stays hidden until db marks items unread.
 const unreadFromDb = notifications.items.filter((n) => !n.read).length;
 
+/* ── Display-currency picker (bottom sheet) ── */
+
+function CurrencySheet({ activeCode, onSelect }) {
+  return (
+    <motion.div
+      className="home-cursheet"
+      variants={listContainer}
+      initial="initial"
+      animate="enter"
+    >
+      <motion.h3 variants={listItem} className="home-cursheet__title">
+        Show balances in
+      </motion.h3>
+      {fiatCurrencies.map((c) => (
+        <motion.button
+          key={c.code}
+          type="button"
+          variants={listItem}
+          {...pressable}
+          className={"home-currow" + (c.code === activeCode ? " is-selected" : "")}
+          onClick={() => onSelect(c.code)}
+        >
+          <AssetMark asset={c.code} size={32} label={c.code === "EUR" ? "€" : c.code === "JPY" ? "¥" : undefined} />
+          <span className="home-currow__id">
+            <span className="home-currow__code">{c.code}</span>
+            <span className="home-currow__name">{c.name}</span>
+          </span>
+          {c.code === activeCode && (
+            <span className="material-symbols-rounded home-currow__check" aria-hidden="true">
+              check
+            </span>
+          )}
+        </motion.button>
+      ))}
+    </motion.div>
+  );
+}
+
 export function HomeTab({ unreadNotifications = unreadFromDb }) {
   const nav = useNav();
   const { openSheet } = useSheet();
-  const [spin, setSpin] = useState(0);
+  const [assetTab, setAssetTab] = useState("stable");
   const [toastNode, showToast] = useHomeToast();
+  const wallet = useBalances();
+  const currency = useDisplayCurrency();
+
+  // Everything is valued live: SGD value per unit (rates.js) × holdings,
+  // then denominated in the selected display currency.
+  const inDisplay = (assetId, amount) =>
+    amount * valueInSgd(assetId) * currency.perSgd;
+  const total = Object.entries(wallet).reduce(
+    (sum, [id, amount]) => sum + inDisplay(id, amount),
+    0
+  );
+
+  const pickCurrency = () =>
+    openSheet(({ close }) => (
+      <CurrencySheet
+        activeCode={currency.code}
+        onSelect={(code) => {
+          setDisplayCurrency(code);
+          close();
+        }}
+      />
+    ));
+
+  const rowActions = (assetId) => (
+    <div className="home-asset__actions">
+      <IconButton
+        variant="outline"
+        size="sm"
+        icon="add"
+        label={`Transfer in ${assetId}`}
+        onClick={() => openTransferIn(openSheet, { asset: assetId })}
+      />
+      <IconButton
+        variant="outline"
+        size="sm"
+        icon="arrow_outward"
+        label={`Transfer out ${assetId}`}
+        onClick={() => openTransferOut(openSheet, { asset: assetId })}
+      />
+    </div>
+  );
+
+  const approx = (assetId) =>
+    `≈ ${fmtMoney(inDisplay(assetId, wallet[assetId] ?? 0), currency.decimals)} ${currency.code}`;
 
   return (
     <div className="home-wrap">
@@ -96,17 +189,26 @@ export function HomeTab({ unreadNotifications = unreadFromDb }) {
           initial="initial"
           animate="enter"
         >
-          {/* Estimated balance — Money odometer counts up on first load */}
+          {/* Estimated balance — odometer counts up on load and re-runs on
+              currency change; the currency suffix is the picker trigger. */}
           <motion.section variants={listItem} className="home-balance">
             <EstimatedBalance
               amount={
-                <Money
-                  value={balances.estimated.amount}
-                  decimals={2}
-                  animateOnMount
-                />
+                <Money value={total} decimals={currency.decimals} animateOnMount />
               }
-              currency={balances.estimated.currency}
+              currency={
+                <button
+                  type="button"
+                  className="home-currency"
+                  aria-label={`Change display currency, currently ${currency.code}`}
+                  onClick={pickCurrency}
+                >
+                  {currency.code}
+                  <span className="material-symbols-rounded" aria-hidden="true">
+                    expand_more
+                  </span>
+                </button>
+              }
             />
           </motion.section>
 
@@ -133,65 +235,91 @@ export function HomeTab({ unreadNotifications = unreadFromDb }) {
             ))}
           </motion.section>
 
-          {/* My Assets */}
+          {/* My Assets — Stablecoins | Fiat */}
           <motion.section variants={listItem} className="home-card home-assets">
             <div className="home-card__head">
               <span className="home-card__title">My Assets</span>
-              <motion.button
-                className="home-refresh"
-                aria-label="Refresh"
-                onClick={() => setSpin((s) => s + 360)}
-                animate={{ rotate: spin }}
-                transition={{ duration: 0.5, ease: EASE_BRAND }}
-              >
-                <span className="material-symbols-rounded">refresh</span>
-              </motion.button>
+              <div className="home-seg" role="tablist" aria-label="Asset class">
+                {ASSET_TABS.map((t) => (
+                  <button
+                    key={t.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={assetTab === t.id}
+                    className={"home-seg__btn" + (assetTab === t.id ? " is-active" : "")}
+                    onClick={() => setAssetTab(t.id)}
+                  >
+                    {t.label}
+                  </button>
+                ))}
+              </div>
             </div>
-            <motion.ul className="home-assets__list" variants={listContainer}>
-              {balances.assets.map((row) => (
-                <motion.li key={row.asset} variants={listItem} className="home-asset">
-                  <AssetMark asset={row.asset} size={40} />
-                  <div className="home-asset__id">
-                    <span className="home-asset__symbol">{row.asset}</span>
-                    <span className="home-asset__nets">
-                      {rowNetworks(row).map((n) => (
-                        <span className="home-asset__net" key={n}>
-                          <AssetMark asset={n} size={16} />
-                        </span>
-                      ))}
-                      {row.networkOverflow && (
-                        <span className="home-asset__more">{row.networkOverflow}</span>
-                      )}
-                      {row.isNew && <span className="home-asset__new">NEW</span>}
-                    </span>
-                  </div>
-                  <div className="home-asset__bal">
-                    <Money
-                      className="home-asset__amount"
-                      value={Number(row.balance)}
-                      decimals={2}
-                    />
-                    <span className="home-asset__fiat">≈ {row.fiat} SGD</span>
-                  </div>
-                  <div className="home-asset__actions">
-                    <IconButton
-                      variant="outline"
-                      size="sm"
-                      icon="add"
-                      label={`Transfer in ${row.asset}`}
-                      onClick={() => openTransferIn(openSheet, { asset: row.asset })}
-                    />
-                    <IconButton
-                      variant="outline"
-                      size="sm"
-                      icon="arrow_outward"
-                      label={`Transfer out ${row.asset}`}
-                      onClick={() => openTransferOut(openSheet, { asset: row.asset })}
-                    />
-                  </div>
-                </motion.li>
-              ))}
-            </motion.ul>
+
+            {assetTab === "stable" ? (
+              <motion.ul
+                key="stable"
+                className="home-assets__list"
+                variants={listContainer}
+                initial="initial"
+                animate="enter"
+              >
+                {balances.assets.map((row) => (
+                  <motion.li key={row.asset} variants={listItem} className="home-asset">
+                    <AssetMark asset={row.asset} size={40} />
+                    <div className="home-asset__id">
+                      <span className="home-asset__symbol">{row.asset}</span>
+                      <span className="home-asset__nets">
+                        {rowNetworks(row).map((n) => (
+                          <span className="home-asset__net" key={n}>
+                            <AssetMark asset={n} size={16} />
+                          </span>
+                        ))}
+                        {row.networkOverflow && (
+                          <span className="home-asset__more">{row.networkOverflow}</span>
+                        )}
+                        {row.isNew && <span className="home-asset__new">NEW</span>}
+                      </span>
+                    </div>
+                    <div className="home-asset__bal">
+                      <Money
+                        className="home-asset__amount"
+                        value={wallet[row.asset] ?? 0}
+                        decimals={2}
+                      />
+                      <span className="home-asset__fiat">{approx(row.asset)}</span>
+                    </div>
+                    {rowActions(row.asset)}
+                  </motion.li>
+                ))}
+              </motion.ul>
+            ) : (
+              <motion.ul
+                key="fiat"
+                className="home-assets__list"
+                variants={listContainer}
+                initial="initial"
+                animate="enter"
+              >
+                {balances.fiat.map((row) => (
+                  <motion.li key={row.asset} variants={listItem} className="home-asset">
+                    <AssetMark asset={row.asset} size={40} />
+                    <div className="home-asset__id">
+                      <span className="home-asset__symbol">{row.asset}</span>
+                      <span className="home-asset__name">{row.name}</span>
+                    </div>
+                    <div className="home-asset__bal">
+                      <Money
+                        className="home-asset__amount"
+                        value={wallet[row.asset] ?? 0}
+                        decimals={assetDecimals(row.asset)}
+                      />
+                      <span className="home-asset__fiat">{approx(row.asset)}</span>
+                    </div>
+                    {rowActions(row.asset)}
+                  </motion.li>
+                ))}
+              </motion.ul>
+            )}
           </motion.section>
 
           {/* OTC Desk banner */}

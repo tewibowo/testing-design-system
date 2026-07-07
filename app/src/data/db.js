@@ -14,7 +14,7 @@
  * @property {boolean} isPrimary  True for the account that continues into StraitsX.
  *
  * @typedef {Object} User
- * @property {string} name              All-caps handle shown in the top nav ("TEWIBOWO").
+ * @property {string} name              All-caps handle shown in the top nav ("ALEXTAN").
  * @property {string} email             Primary login email.
  * @property {string} phone             Full phone number (profile panel).
  * @property {string} maskedPhone       Masked form used in SMS-OTP copy.
@@ -131,23 +131,25 @@
  * ────────────────────────────────────────────────────────────── */
 
 /** @type {User} */
+// Identity is fully mocked — no real PII. Structure mirrors the captures
+// (all-caps handle, Google chooser rows, two signup addresses).
 export const user = {
-  name: "TEWIBOWO",
-  email: "tewi@fazzfinancial.com",
-  phone: "+62 811173050",
-  maskedPhone: "*****050",
+  name: "ALEXTAN",
+  email: "alex.tan@example.com",
+  phone: "+65 8000 1234",
+  maskedPhone: "*****234",
   status: "Verified",
   accountType: "Personal Account",
-  // Google OAuth "Choose an account" rows, verbatim order (auth-login.md §4).
+  // Google OAuth "Choose an account" rows (mocked identities, layout as captured).
   googleAccounts: [
-    { name: "tewi bowo", email: "tewi@fazzfinancial.com", avatar: "teal", isPrimary: true },
-    { name: "astoranian astor", email: "astoranian@gmail.com", avatar: "indigo", isPrimary: false },
-    { name: "tewi bowo", email: "tewibowo@gmail.com", avatar: "photo", isPrimary: false },
-    { name: "tewi bowo", email: "tewi1990@gmail.com", avatar: "orange-red", isPrimary: false },
+    { name: "Alex Tan", email: "alex.tan@example.com", avatar: "teal", isPrimary: true },
+    { name: "Maya Putri", email: "maya.putri@example.com", avatar: "indigo", isPrimary: false },
+    { name: "Alex Tan", email: "alex.t.design@example.com", avatar: "photo", isPrimary: false },
+    { name: "Alex Tan", email: "alextan90@example.com", avatar: "orange-red", isPrimary: false },
   ],
   // Sign-up flow captures used two different addresses (two recording sessions).
-  signupEmail: "astoranian@gmail.com",        // typed on the registration form (A1/A2)
-  verifiedEmail: "tewibowodesign@gmail.com",  // confirmed in the email-verification flow (A4/A5)
+  signupEmail: "maya.putri@example.com",       // typed on the registration form (A1/A2)
+  verifiedEmail: "alex.t.design@example.com",  // confirmed in the email-verification flow (A4/A5)
 };
 
 /* ──────────────────────────────────────────────────────────────
@@ -158,15 +160,43 @@ export const user = {
  * ────────────────────────────────────────────────────────────── */
 
 /** @type {Balances} */
+// Seeded with healthy demo balances (design feedback: "add some balance to
+// the assets"). `fiat` rows are cash holdings shown on the My Assets Fiat
+// tab; v1 computes all ≈-conversions live (see data/currencyStore.js), the
+// static `fiat` strings remain for v2 which still renders them directly.
 export const balances = {
-  estimated: { amount: 30.58, display: "30.58", currency: "SGD" },
+  estimated: { amount: 2307.56, display: "2,307.56", currency: "SGD" },
   assets: [
-    { asset: "XSGD", balance: "0.00", fiat: "0.00", networkIconCount: 4, networkOverflow: "+5", isNew: true },
-    { asset: "XUSD", balance: "0.00", fiat: "0.00", networkIconCount: 3, networkOverflow: null, isNew: true },
-    { asset: "USDT", balance: "23.77", fiat: "30.58", networkIconCount: 3, networkOverflow: null, isNew: true },
-    { asset: "USDC", balance: "0.00", fiat: "0.00", networkIconCount: 1, networkOverflow: null, isNew: false },
+    { asset: "XSGD", balance: "1250.00", fiat: "1250.00", networkIconCount: 4, networkOverflow: "+5", isNew: true },
+    { asset: "XUSD", balance: "85.20", fiat: "110.41", networkIconCount: 3, networkOverflow: null, isNew: true },
+    { asset: "USDT", balance: "523.77", fiat: "676.08", networkIconCount: 3, networkOverflow: null, isNew: true },
+    { asset: "USDC", balance: "210.00", fiat: "271.07", networkIconCount: 1, networkOverflow: null, isNew: false },
+  ],
+  /** Fiat cash holdings — My Assets → Fiat tab. */
+  fiat: [
+    { asset: "USD", name: "US Dollar", balance: "1000.00" },
+    { asset: "SGD", name: "Singapore Dollar", balance: "2500.00" },
+    { asset: "IDR", name: "Indonesian Rupiah", balance: "15000000" },
   ],
 };
+
+/* ──────────────────────────────────────────────────────────────
+ * DISPLAY CURRENCIES
+ * Fiat currencies the Estimated Balance can be denominated in.
+ * `perSgd` = units of the currency per 1 SGD (fixed demo FX; USD
+ * kept consistent with the captured XSGD→XUSD rate 0.7717).
+ * ────────────────────────────────────────────────────────────── */
+
+export const fiatCurrencies = [
+  { code: "SGD", name: "Singapore Dollar", perSgd: 1, decimals: 2 },
+  { code: "USD", name: "US Dollar", perSgd: 0.7717, decimals: 2 },
+  { code: "IDR", name: "Indonesian Rupiah", perSgd: 12150, decimals: 0 },
+  { code: "EUR", name: "Euro", perSgd: 0.682, decimals: 2 },
+  { code: "JPY", name: "Japanese Yen", perSgd: 115.2, decimals: 0 },
+];
+
+/** Display decimals for a wallet asset (IDR is a zero-decimal currency). */
+export const assetDecimals = (id) => (id === "IDR" ? 0 : 2);
 
 /* ──────────────────────────────────────────────────────────────
  * ASSETS
@@ -214,22 +244,22 @@ export const swapRates = {
 export const banks = {
   /** @type {Bank[]} User's linked bank accounts (My Account → Bank Accounts). */
   linked: [
-    { name: "Bank Mandiri", account: "1220015006821", status: "Verified", statusAfterVerify: "Verified" },
+    { name: "Bank Mandiri", account: "5540098712345", status: "Verified", statusAfterVerify: "Verified" },
     // Flips Unverified → Pending after the verify-flow statement upload.
-    { name: "CIMB Niaga", account: "707140118140", status: "Unverified", statusAfterVerify: "Pending" },
+    { name: "CIMB Niaga", account: "812345670099", status: "Unverified", statusAfterVerify: "Pending" },
   ],
   /** @type {RecipientBank} FAST deposit details on Transfer In → Bank Transfer. */
   transferIn: {
-    recipientName: "TEWIBOWO",
+    recipientName: "ALEX TAN",
     bankName: "Xfers Pte Ltd", // capitalisation verbatim on this screen
-    accountNumber: "3225-6257-7650-1",
+    accountNumber: "9001-2233-4455-6",
     method: "FAST",
   },
   /** @type {RecipientBank} FAST transfer details on the Mint page (different VAN). */
   mint: {
-    recipientName: "TEWIBOWO",
+    recipientName: "ALEX TAN",
     bankName: "XFERS PTE LTD", // all-caps verbatim on the Mint screen
-    accountNumber: "3225-5974-1423-2",
+    accountNumber: "9001-8877-6655-4",
     method: "FAST",
   },
   vanHelper:
@@ -248,7 +278,7 @@ export const blockchainAddresses = {
       id: "solana",
       provider: "Solana",
       subtitle: "Personal Address (Non-Custodial)",
-      address: "DnjNRLdEQxCbSrkz8FpApvrVHGYDFZddMPfP5JjoqPoY",
+      address: "9xKpQvTeWm3RnLdAzYhBu5FsCjV2gNqM8PdEkXr4JtUo",
       status: "Not Verified",
       networks: ["Solana"],
       networkAssetIds: ["SOLANA"],
@@ -257,7 +287,7 @@ export const blockchainAddresses = {
       id: "metamask",
       provider: "MetaMask",
       subtitle: "MetaMask - Personal Address (Non-Custodial)",
-      address: "0xd8129977699358235e7865327b575f736cc72e87",
+      address: "0x7a4fc2b91d3e85a6c09eb14f57d2683ba0ce4912",
       status: "Verified",
       networks: ["Ethereum", "Polygon", "Avalanche C-Chain", "Arbitrum", "BNB Smart Chain", "Base"],
       networkAssetIds: ["ETHEREUM", "POLYGON", "AVALANCHE", "ARBITRUM", "BNB", "BASE"],
@@ -266,7 +296,7 @@ export const blockchainAddresses = {
   // StraitsX deposit address shown on Transfer In → Blockchain (Ethereum).
   deposit: {
     network: "Ethereum",
-    address: "0x6a232e04e2cf24f377cb150be1f4877db3c4f438",
+    address: "0x3f91b7c24d8ea065f1b92c7834dae5906cb1077a",
   },
 };
 
@@ -505,11 +535,11 @@ export const mint = {
     feeCap: "30 XSGD",    // network fee cap
     max: "200,000 XSGD",  // maximum transaction amount (excess refunded)
   },
-  recipient: banks.mint, // XFERS PTE LTD · 3225-5974-1423-2 · TEWIBOWO · FAST
+  recipient: banks.mint, // XFERS PTE LTD · 9001-8877-6655-4 · ALEX TAN · FAST
   setup: {
     network: "Ethereum",
     wallet: "MetaMask",
-    address: "0xd8129977699358235e7865327b575f736cc72e87",
+    address: "0x7a4fc2b91d3e85a6c09eb14f57d2683ba0ce4912",
     status: "Verified",
   },
   steps: [
@@ -534,9 +564,9 @@ export const mint = {
 /** @type {TwoFa} */
 export const twofa = {
   code: "416370",
-  maskedPhone: "*****050",
+  maskedPhone: "*****234",
   resendSeconds: 60, // captures show mid-count "00:57" (email) and "00:54" (SMS)
-  emailOtpTarget: "tewi@fazzfinancial.com",
+  emailOtpTarget: "alex.tan@example.com",
   instruction: "Enter the 6-digit code generated by your Two-factor Authentication (2FA) app.",
   troubleText: "Having trouble with authenticator?",
   securityCheck: {
@@ -596,7 +626,7 @@ export function fmtMoney(n, decimals = 2) {
 
 /**
  * Middle-truncate a blockchain address the way the dashboard does:
- *   truncAddr("0xd8129977699358235e7865327b575f736cc72e87") → "0xd812…72e87"
+ *   truncAddr("0x7a4fc2b91d3e85a6c09eb14f57d2683ba0ce4912") → "0x7a4f…e4912"
  * Works for non-0x addresses too (first 6 + "…" + last 5).
  * @param {string} addr
  * @returns {string}

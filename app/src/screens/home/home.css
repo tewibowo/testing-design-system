@@ -154,18 +154,103 @@
   font-weight: 700;
   color: var(--sx-color-deep-ivy, #002b2a);
 }
-.home-refresh {
+/* Asset-class segmented control (replaces the refresh button) */
+.home-seg {
+  display: flex;
+  gap: 2px;
+  background: var(--sx-color-grey-100, #f0f0f0);
+  border-radius: 999px;
+  padding: 2px;
+}
+.home-seg__btn {
   border: 0;
   background: none;
-  padding: 6px;
-  margin: -6px;
-  display: flex;
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-family: "Red Hat Display", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
   color: var(--sx-color-grey-500, #505454);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  transition: background 200ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    color 200ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.home-refresh .material-symbols-rounded {
+.home-seg__btn.is-active {
+  background: #fff;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  box-shadow: 0 1px 2px rgba(10, 13, 18, 0.08);
+}
+
+/* Fiat row caption (fiat rows show the currency name where stablecoins
+   show their network marks) */
+.home-asset__name {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 12px;
+  color: var(--sx-color-grey-500, #505454);
+}
+
+/* Display-currency trigger — the currency suffix inside EstimatedBalance */
+.home-currency {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  border: 0;
+  background: var(--sx-color-grey-100, #f0f0f0);
+  border-radius: 999px;
+  padding: 4px 8px 4px 12px;
+  font: inherit;
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 700;
+  color: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.home-currency .material-symbols-rounded {
+  font-size: 18px;
+  color: var(--sx-color-grey-500, #505454);
+}
+
+/* Display-currency picker sheet */
+.home-cursheet__title {
+  font: 700 17px/1.2 "Red Hat Display", sans-serif;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  text-align: center;
+  margin: 0 0 10px;
+}
+.home-currow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  border: 0;
+  background: none;
+  padding: 11px 4px;
+  border-radius: 12px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  text-align: left;
+}
+.home-currow.is-selected {
+  background: var(--sx-color-grey-50, #fafafa);
+}
+.home-currow__id {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.home-currow__code {
+  font: 700 15px/1 "Red Hat Display", sans-serif;
+  color: var(--sx-color-deep-ivy, #002b2a);
+}
+.home-currow__name {
+  font: 400 12px/1 "Hanken Grotesk", sans-serif;
+  color: var(--sx-color-grey-500, #505454);
+}
+.home-currow__check {
+  margin-left: auto;
   font-size: 20px;
+  color: var(--sx-color-vibrant-green, #00d37e);
 }
 
 /* ---- Asset list ----------------------------------------------------------- */

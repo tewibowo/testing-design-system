@@ -30,7 +30,8 @@ import { useNav } from "@app/nav/Navigator.jsx";
 import { Money } from "@app/ui/Money.jsx";
 import { SheetStepHeader, SheetSteps } from "@app/ui/SheetSteps.jsx";
 import { listContainer, listItem, pressable, DUR, EASE_BRAND } from "@app/motion/presets.js";
-import { balances, banks, blockchainAddresses, fees, fmtMoney, networks, truncAddr } from "@app/data/db.js";
+import { assetDecimals, balances, banks, blockchainAddresses, fees, fmtMoney, networks, truncAddr } from "@app/data/db.js";
+import { useBalances, debit } from "@app/data/walletStore.js";
 import { AssetMark } from "@ds/components/AssetMark/AssetMark.jsx";
 import { CommitButton, FlowRow, SHEET_TIMING, SheetSuccess, useCommit } from "./sheetParts.jsx";
 import { armKeyboard } from "@app/ui/keyboardRelay.js";
@@ -51,15 +52,18 @@ const STEPS = {
 const TOTAL = 4;
 const BACK_OF = { amount: "dest", review: "amount" };
 
-const balanceOf = (asset) =>
-  parseFloat(balances.assets.find((a) => a.asset === asset)?.balance) || 0;
+// Withdrawable holdings by class. Fiat cash can only leave via a bank
+// (destination rule enforced in AmountStep); stablecoins go anywhere.
+const STABLE_IDS = balances.assets.map((a) => a.asset);
+const FIAT_IDS = balances.fiat.map((a) => a.asset);
+const ALL_IDS = [...STABLE_IDS, ...FIAT_IDS];
 
 export function TransferOutSheet({ close, asset: initialAsset = "XSGD" }) {
   const nav = useNav();
   const [{ step, dir }, setPos] = useState({ step: "dest", dir: 1 });
   const [dest, setDest] = useState(null);
   const [asset, setAsset] = useState(
-    balances.assets.some((a) => a.asset === initialAsset) ? initialAsset : "XSGD"
+    ALL_IDS.includes(initialAsset) ? initialAsset : "XSGD"
   );
   const [amountStr, setAmountStr] = useState("");
   const { busy, commit } = useCommit(TIMING.commit);
@@ -110,6 +114,7 @@ export function TransferOutSheet({ close, asset: initialAsset = "XSGD" }) {
           <AmountStep
             asset={asset}
             onAsset={setAsset}
+            allowFiat={dest?.kind === "bank"}
             amountStr={amountStr}
             onAmount={setAmountStr}
             busy={busy}
@@ -122,7 +127,13 @@ export function TransferOutSheet({ close, asset: initialAsset = "XSGD" }) {
             asset={asset}
             amount={amountNum}
             busy={busy}
-            onConfirm={() => commit(() => go("success"))}
+            onConfirm={() =>
+              commit(() => {
+                // Debit the wallet so Home's balances odometer the withdrawal.
+                debit(asset, amountNum);
+                go("success");
+              })
+            }
           />
         )}
         {step === "success" && (
@@ -185,9 +196,11 @@ function DestStep({ onBank, onWallet, onVerifyBank, onVerifyWallet }) {
   );
 }
 
-/* ── Step 2 — pick the stablecoin + amount ── */
+/* ── Step 2 — pick the asset + amount ──
+ * Bank destinations can send any holding (stablecoin or fiat cash);
+ * blockchain wallets only take stablecoins. */
 
-function AmountStep({ asset, onAsset, amountStr, onAmount, busy, onReview }) {
+function AmountStep({ asset, onAsset, allowFiat, amountStr, onAmount, busy, onReview }) {
   const amountInputRef = useRef(null);
   // preventScroll: focusing during the step slide must not scroll the
   // sheet/stack containers (visible as a sideways jump).
@@ -200,8 +213,21 @@ function AmountStep({ asset, onAsset, amountStr, onAmount, busy, onReview }) {
 
   const [open, setOpen] = useState(false);
   const shake = useAnimationControls();
+  const wallet = useBalances();
 
-  const balance = balanceOf(asset);
+  // A fiat asset picked from Home falls back to XSGD for wallet dests.
+  useEffect(() => {
+    if (!allowFiat && FIAT_IDS.includes(asset)) onAsset("XSGD");
+  }, [allowFiat, asset, onAsset]);
+
+  const groups = allowFiat
+    ? [
+        { label: "Stablecoins", ids: STABLE_IDS },
+        { label: "Fiat", ids: FIAT_IDS }
+      ]
+    : [{ label: "Stablecoins", ids: STABLE_IDS }];
+
+  const balance = wallet[asset] ?? 0;
   const amountNum = parseFloat(amountStr) || 0;
   const over = amountNum > balance;
   const valid = amountNum > 0 && !over;
@@ -261,32 +287,41 @@ function AmountStep({ asset, onAsset, amountStr, onAmount, busy, onReview }) {
                 initial="initial"
                 animate="enter"
               >
-                {balances.assets.map((a) => (
-                  <motion.button
-                    key={a.asset}
-                    type="button"
-                    variants={listItem}
-                    {...pressable}
-                    className={"transfers-assetrow" + (a.asset === asset ? " is-selected" : "")}
-                    onClick={() => {
-                      onAsset(a.asset);
-                      setOpen(false);
-                    }}
-                  >
-                    <AssetMark asset={a.asset} size={28} />
-                    <span className="transfers-assetrow__sym">{a.asset}</span>
-                    <span className="transfers-assetrow__bal">
-                      {fmtMoney(parseFloat(a.balance) || 0)} {a.asset}
-                    </span>
-                    {a.asset === asset && (
-                      <span
-                        className="material-symbols-rounded transfers-assetrow__check"
-                        aria-hidden="true"
-                      >
-                        check
-                      </span>
+                {groups.map((group) => (
+                  <div key={group.label} className="transfers-assetgroup">
+                    {groups.length > 1 && (
+                      <motion.span variants={listItem} className="transfers-assetgroup__label">
+                        {group.label}
+                      </motion.span>
                     )}
-                  </motion.button>
+                    {group.ids.map((id) => (
+                      <motion.button
+                        key={id}
+                        type="button"
+                        variants={listItem}
+                        {...pressable}
+                        className={"transfers-assetrow" + (id === asset ? " is-selected" : "")}
+                        onClick={() => {
+                          onAsset(id);
+                          setOpen(false);
+                        }}
+                      >
+                        <AssetMark asset={id} size={28} />
+                        <span className="transfers-assetrow__sym">{id}</span>
+                        <span className="transfers-assetrow__bal">
+                          {fmtMoney(wallet[id] ?? 0, assetDecimals(id))} {id}
+                        </span>
+                        {id === asset && (
+                          <span
+                            className="material-symbols-rounded transfers-assetrow__check"
+                            aria-hidden="true"
+                          >
+                            check
+                          </span>
+                        )}
+                      </motion.button>
+                    ))}
+                  </div>
                 ))}
               </motion.div>
             </motion.div>
@@ -315,14 +350,14 @@ function AmountStep({ asset, onAsset, amountStr, onAmount, busy, onReview }) {
       {/* Balance + Max */}
       <motion.div variants={listItem} className={"transfers-balline" + (over ? " is-over" : "")}>
         <span>
-          Balance: <Money value={balance} suffix={` ${asset}`} />
+          Balance: <Money value={balance} decimals={assetDecimals(asset)} suffix={` ${asset}`} />
         </span>
         <motion.button
           type="button"
           {...pressable}
           className="transfers-maxchip"
           disabled={busy}
-          onClick={() => onAmount(balance.toFixed(2))}
+          onClick={() => onAmount(balance.toFixed(assetDecimals(asset)))}
         >
           Max
         </motion.button>
@@ -336,7 +371,7 @@ function AmountStep({ asset, onAsset, amountStr, onAmount, busy, onReview }) {
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: DUR.base, ease: EASE_BRAND }}
           >
-            That&rsquo;s more than you have — you can send up to {fmtMoney(balance)} {asset}.
+            That&rsquo;s more than you have — you can send up to {fmtMoney(balance, assetDecimals(asset))} {asset}.
           </motion.p>
         )}
       </AnimatePresence>

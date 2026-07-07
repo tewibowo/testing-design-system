@@ -101,9 +101,14 @@ export function openTransferIn(openSheet, opts = {}) {
   openSheet(({ close }) => <TransferInSheet close={close} asset={asset} />);
 }
 
-/* ── Step 1 — choose how the money comes in ── */
+/* ── Step 1 — choose how the money comes in ──
+ * Fiat cash (USD/SGD/IDR) arrives by bank only — the blockchain option
+ * applies to stablecoins. */
+
+const FIAT_IDS = ["USD", "SGD", "IDR"];
 
 function MethodStep({ asset, onBank, onChain }) {
+  const isFiat = FIAT_IDS.includes(asset);
   return (
     <motion.div className="transfers-step" variants={listContainer} initial="initial" animate="enter">
       <motion.p variants={listItem} className="transfers-lead">
@@ -112,15 +117,21 @@ function MethodStep({ asset, onBank, onChain }) {
       <FlowRow
         icon="account_balance"
         title="Bank transfer (FAST)"
-        sub="Free · Instant · SGD converts 1:1 to XSGD"
+        sub={
+          isFiat
+            ? `Free · Instant · Deposits credit your ${asset} balance`
+            : "Free · Instant · SGD converts 1:1 to XSGD"
+        }
         onClick={onBank}
       />
-      <FlowRow
-        icon="account_balance_wallet"
-        title="Blockchain deposit"
-        sub={`Send ${asset} on Ethereum from any wallet`}
-        onClick={onChain}
-      />
+      {!isFiat && (
+        <FlowRow
+          icon="account_balance_wallet"
+          title="Blockchain deposit"
+          sub={`Send ${asset} on Ethereum from any wallet`}
+          onClick={onChain}
+        />
+      )}
     </motion.div>
   );
 }
@@ -128,7 +139,7 @@ function MethodStep({ asset, onBank, onChain }) {
 /* ── Step 2a — FAST details as copy-rows (spec §4, values verbatim) ── */
 
 function BankStep({ busy, onTransferred }) {
-  const d = banks.transferIn; // TEWIBOWO / Xfers Pte Ltd / 3225-6257-7650-1 / FAST
+  const d = banks.transferIn; // ALEX TAN / Xfers Pte Ltd / 9001-2233-4455-6 / FAST
   // "200,000 SGD per txn." (db verbatim) → compact "200,000 SGD/txn" fact.
   const maxFact = limits.bankTransferIn.maximumAmount.replace(" per txn.", "/txn");
   return (

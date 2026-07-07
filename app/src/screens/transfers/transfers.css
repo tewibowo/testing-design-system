@@ -229,6 +229,22 @@
   gap: 8px;
   padding: 2px;
 }
+/* Asset-class group inside the picker (Stablecoins / Fiat) */
+.transfers-assetgroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.transfers-assetgroup + .transfers-assetgroup {
+  margin-top: 4px;
+}
+.transfers-assetgroup__label {
+  font: 700 10px/1 "Red Hat Display", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary, #505454);
+  padding: 4px 2px 0;
+}
 .transfers-assetrow {
   display: flex;
   align-items: center;

@@ -27,7 +27,7 @@ import {
   DUR,
   EASE_BRAND
 } from "@app/motion/presets.js";
-import { assets, swapRates, fees, fmtMoney } from "@app/data/db.js";
+import { assets, balances, swapRates, fees, fmtMoney, assetDecimals } from "@app/data/db.js";
 import { AssetMark } from "@ds/components/AssetMark/AssetMark.jsx";
 import { Button } from "@ds/components/Button/Button.jsx";
 import { IconButton } from "@ds/components/IconButton/IconButton.jsx";
@@ -39,7 +39,16 @@ import "./mintswap.css";
 
 const AMOUNT_RE = /^(\d+\.?\d*|\.\d*)?$/;
 // Captured amounts render at one decimal: "10.0 USDT" → "12.9 XSGD" (§6).
+// IDR is a zero-decimal currency, so its figures drop the fraction.
 const RECEIVE_DECIMALS = 1;
+const decOf = (id) => (id === "IDR" ? 0 : RECEIVE_DECIMALS);
+
+// Swap now spans both asset classes (design feedback): stablecoins and
+// fiat cash quote through the same rates.js valuation table.
+const HOLDING_GROUPS = [
+  { label: "Stablecoins", ids: balances.assets.map((a) => a.asset) },
+  { label: "Fiat", ids: balances.fiat.map((a) => a.asset) }
+];
 
 const phaseSwap = {
   initial: { opacity: 0, y: 12 },
@@ -130,10 +139,13 @@ export function SwapScreen() {
       // Credit the quoted (displayed) figure — §6 suggests USDT 23.77 → 13.77
       // and XSGD 0.00 → 12.90 after the captured 10.0 USDT → 12.9 XSGD swap.
       const quoted =
-        Math.round(receive * 10 ** RECEIVE_DECIMALS) / 10 ** RECEIVE_DECIMALS;
+        Math.round(receive * 10 ** decOf(toId)) / 10 ** decOf(toId);
       setResult({ from: fromId, to: toId, spend: amount, receive: quoted });
     }, 600);
   };
+
+  const toDec = decOf(toId);
+  const fromDec = decOf(fromId);
 
   // Success phase: commit the swap shortly after the check draws so the
   // balances card odometers from the old figures to the new ones.
@@ -222,7 +234,7 @@ export function SwapScreen() {
                         <Money
                           className="mintswap-leg__num"
                           value={receive}
-                          decimals={RECEIVE_DECIMALS}
+                          decimals={toDec}
                         />
                       ) : (
                         <span className="mintswap-leg__num is-zero">0.00</span>
@@ -257,7 +269,7 @@ export function SwapScreen() {
             <div className="screen-scroll mintswap-success-scroll">
               <SuccessState
                 title="Swap successful"
-                body={`You swapped ${result.spend.toFixed(RECEIVE_DECIMALS)} ${result.from} for ${result.receive.toFixed(RECEIVE_DECIMALS)} ${result.to}.`}
+                body={`You swapped ${result.spend.toFixed(decOf(result.from))} ${result.from} for ${result.receive.toFixed(decOf(result.to))} ${result.to}.`}
               >
                 <div className="mintswap-balances">
                   <span className="mintswap-balances__title">Updated balances</span>
@@ -268,7 +280,7 @@ export function SwapScreen() {
                       <Money
                         className="mintswap-balances__value"
                         value={wallet[id] ?? 0}
-                        decimals={2}
+                        decimals={assetDecimals(id)}
                       />
                     </div>
                   ))}
@@ -286,6 +298,8 @@ export function SwapScreen() {
         open={confirmOpen}
         from={fromId}
         to={toId}
+        fromDec={fromDec}
+        toDec={toDec}
         amount={amount}
         receive={receive}
         rateLabel={rateLabel}
@@ -308,7 +322,7 @@ function SwapLeg({ label, currency, balance, children, onPick }) {
       <div className="mintswap-leg__labels">
         <span className="mintswap-leg__label">{label}</span>
         <span className="mintswap-leg__balance">
-          Balance: <span className="num">{fmtMoney(balance)}</span> {currency}
+          Balance: <span className="num">{fmtMoney(balance, assetDecimals(currency))}</span> {currency}
         </span>
       </div>
       <div className="mintswap-leg__field">
@@ -339,32 +353,39 @@ function SwapLeg({ label, currency, balance, children, onPick }) {
   );
 }
 
-/* ── Asset picker (bottom sheet) — db assets + live balances ── */
+/* ── Asset picker (bottom sheet) — stablecoins + fiat, live balances ── */
 
 function AssetSheet({ activeId, onSelect }) {
   const wallet = useBalances();
   return (
     <SheetList title="Select Asset:">
-      {assets.map((a) => (
-        <motion.button
-          key={a.id}
-          type="button"
-          variants={listItem}
-          {...pressable}
-          className={"mintswap-assetrow" + (a.id === activeId ? " is-selected" : "")}
-          onClick={() => onSelect(a.id)}
-        >
-          <AssetMark asset={a.id} size={32} />
-          <span className="mintswap-assetrow__sym">{a.symbol}</span>
-          <span className="mintswap-assetrow__bal num">
-            {fmtMoney(wallet[a.id] ?? 0)} {a.symbol}
-          </span>
-          {a.id === activeId && (
-            <span className="material-symbols-rounded mintswap-assetrow__check" aria-hidden="true">
-              check
-            </span>
-          )}
-        </motion.button>
+      {HOLDING_GROUPS.map((group) => (
+        <div key={group.label} className="mintswap-assetgroup">
+          <motion.span variants={listItem} className="mintswap-assetgroup__label">
+            {group.label}
+          </motion.span>
+          {group.ids.map((id) => (
+            <motion.button
+              key={id}
+              type="button"
+              variants={listItem}
+              {...pressable}
+              className={"mintswap-assetrow" + (id === activeId ? " is-selected" : "")}
+              onClick={() => onSelect(id)}
+            >
+              <AssetMark asset={id} size={32} />
+              <span className="mintswap-assetrow__sym">{id}</span>
+              <span className="mintswap-assetrow__bal num">
+                {fmtMoney(wallet[id] ?? 0, assetDecimals(id))} {id}
+              </span>
+              {id === activeId && (
+                <span className="material-symbols-rounded mintswap-assetrow__check" aria-hidden="true">
+                  check
+                </span>
+              )}
+            </motion.button>
+          ))}
+        </div>
       ))}
     </SheetList>
   );
@@ -378,6 +399,8 @@ function ConfirmSwapModal({
   open,
   from,
   to,
+  fromDec = RECEIVE_DECIMALS,
+  toDec = RECEIVE_DECIMALS,
   amount,
   receive,
   rateLabel,
@@ -432,7 +455,7 @@ function ConfirmSwapModal({
         <div className="mintswap-confirm__row">
           <span className="mintswap-confirm__label">You will spend</span>
           <span className="mintswap-confirm__value">
-            <Money value={amount} decimals={RECEIVE_DECIMALS} suffix={` ${from}`} />
+            <Money value={amount} decimals={fromDec} suffix={` ${from}`} />
           </span>
         </div>
         <div className="mintswap-confirm__row">
@@ -451,7 +474,7 @@ function ConfirmSwapModal({
         <div className="mintswap-confirm__row">
           <span className="mintswap-confirm__label">You will be getting</span>
           <span className="mintswap-confirm__value">
-            <Money value={receive} decimals={RECEIVE_DECIMALS} suffix={` ${to}`} />
+            <Money value={receive} decimals={toDec} suffix={` ${to}`} />
           </span>
         </div>
       </div>
