@@ -40,18 +40,20 @@ const ANDROID_STEPS = [
 ];
 
 /**
- * First-visit overlay for mobile browsers: shows how to install the
- * prototype as a home-screen app. Hidden when already running standalone,
- * on desktop, or once dismissed (remembered per app version).
+ * Overlay for mobile browsers: shows how to install the prototype as a
+ * home-screen app. Hidden when already running standalone or on desktop.
+ * "Continue in browser" suppresses it for the current browser session only
+ * (sessionStorage) — a fresh visit shows the guide again, since installing
+ * is the primary path for anyone the link is shared with.
  */
 export function InstallGate({ storageKey = "stx-install-gate", appName = "StraitsX" }) {
   const [visible, setVisible] = useState(
-    () => isMobile() && !isStandalone() && !localStorage.getItem(storageKey)
+    () => isMobile() && !isStandalone() && !sessionStorage.getItem(storageKey)
   );
   const steps = useMemo(() => (isIos() ? IOS_STEPS : ANDROID_STEPS), []);
 
   const dismiss = () => {
-    localStorage.setItem(storageKey, "1");
+    sessionStorage.setItem(storageKey, "1");
     setVisible(false);
   };
 
