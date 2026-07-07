@@ -24,12 +24,14 @@ body {
 
 /* Phone: the page canvas must match the app, not the desktop-frame ivy
    backdrop. iOS standalone can mis-size the viewport on cold launch and
-   paint the canvas in the strip below the app — with the ivy default that
-   read as a green band. v2 re-overrides this in v2-theme.css. */
+   paint the canvas in the strip below the app — matching the app's page
+   background (grey-50, what screens actually show at the bottom) makes
+   the strip read as page continuation instead of a white bar. v2
+   re-overrides this in v2-theme.css. */
 @media (max-width: 767.98px) {
   html,
   body {
-    background: #fff;
+    background: var(--sx-color-grey-50, #fafafa);
   }
 }
 
