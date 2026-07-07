@@ -1,0 +1,376 @@
+/* v2 Home tab — ivy hero + card-less content (v2-mobbin-brief §2.1).
+   Hierarchy via hairlines and the teal-vs-ivy value step; no shadows,
+   no gradients. */
+
+.v2home {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.v2home-scroll {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Hero region (pattern backdrop) ------------------------------------ */
+
+.v2home-hero {
+  position: relative;
+  padding: 0 20px;
+}
+
+/* Header row — 56px, avatar left, icon buttons right (§2.1.2) */
+.v2home-top {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 56px;
+}
+.v2home-top__spacer {
+  flex: 1;
+}
+
+.v2home-avatar {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--v2-chip);
+  color: var(--v2-mint);
+  font: 700 14px/1 "Red Hat Display", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.v2home-iconbtn {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--v2-text-dim); /* white 64% until pressed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.v2home-iconbtn:active {
+  color: var(--v2-text);
+  background: var(--v2-pressed);
+}
+.v2home-iconbtn .material-symbols-rounded {
+  font-size: 24px;
+}
+
+/* ---- Balance hero (§2.1.3) ---------------------------------------------- */
+
+.v2home-balance {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 0 4px;
+  text-align: center;
+}
+
+.v2home-balance__label {
+  font: 700 12px/1 "Red Hat Display", sans-serif;
+  color: var(--v2-text-dim);
+  letter-spacing: 0.02em;
+}
+
+.v2home-hero__amount {
+  margin-top: 10px;
+  font-family: "Red Hat Mono", monospace;
+  font-weight: 500;
+  font-size: 56px;
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+  color: var(--v2-text);
+  display: flex;
+  align-items: baseline;
+}
+
+.v2home-hero__cents {
+  font-size: 56%; /* small-cents treatment (Revolut) */
+  color: var(--v2-text-dim);
+}
+
+.v2home-assets-chip {
+  margin-top: 14px;
+  font-weight: 500;
+}
+.v2home-assets-chip .material-symbols-rounded {
+  font-size: 16px;
+  color: var(--v2-text-dim);
+}
+
+/* ---- Quick actions (§2.1.4) ---------------------------------------------- */
+
+.v2home-actions {
+  display: flex;
+  justify-content: center;
+  gap: 26px;
+  padding: 22px 0 26px;
+}
+
+.v2home-action {
+  border: 0;
+  background: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: var(--v2-text);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.v2home-action__circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background: var(--v2-chip);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.v2home-action:active .v2home-action__circle {
+  background: var(--v2-pressed);
+}
+.v2home-action__circle .material-symbols-rounded {
+  font-size: 24px;
+}
+
+.v2home-action__label {
+  font: 700 12px/1 "Red Hat Display", sans-serif;
+  color: var(--v2-text-dim);
+}
+
+/* ---- Content sections ----------------------------------------------------- */
+
+.v2home-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding-bottom: 28px;
+}
+
+.v2home-eyebrow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font: 700 12px/1 "Red Hat Display", sans-serif;
+  color: var(--v2-text-dim);
+  letter-spacing: 0.02em;
+  margin-bottom: 10px;
+}
+
+.v2home-viewall {
+  border: 0;
+  background: none;
+  padding: 0;
+  font: 700 13px/1 "Red Hat Display", sans-serif;
+  color: var(--v2-mint);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Latest activity single-row card (§2.1.5, row anatomy per §2.5) */
+.v2home-latest {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+}
+
+.v2home-latest__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: var(--v2-chip);
+  color: var(--v2-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.v2home-latest__icon .material-symbols-rounded {
+  font-size: 20px;
+}
+
+.v2home-latest__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.v2home-latest__type {
+  font: 700 14px/1.2 "Red Hat Display", sans-serif;
+  color: var(--v2-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.v2home-latest__desc {
+  font: 400 12px/1.3 "Hanken Grotesk", sans-serif;
+  color: var(--v2-text-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.v2home-latest__amt {
+  margin-left: auto;
+  font-size: 14px;
+  color: var(--v2-text);
+  white-space: nowrap;
+}
+.v2home-latest__amt.is-credit {
+  color: var(--v2-mint);
+}
+
+/* Asset rows — card-less on ivy, 64px, hairlines between (§2.1.6) */
+.v2home-asset {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 64px;
+}
+.v2home-asset + .v2home-asset {
+  border-top: 1px solid var(--v2-line);
+}
+
+.v2home-asset__mark {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+.v2home-asset__badge {
+  position: absolute;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 999px;
+  border: 2px solid var(--v2-bg); /* punches the badge out of the mark */
+  display: flex;
+}
+
+.v2home-asset__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.v2home-asset__name {
+  font: 700 15px/1.2 "Red Hat Display", sans-serif;
+  color: var(--v2-text);
+}
+.v2home-asset__holdings {
+  font-size: 12px;
+  color: var(--v2-text-dim);
+}
+
+.v2home-asset__right {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+.v2home-asset__fiat {
+  font-size: 15px;
+  color: var(--v2-text);
+}
+.v2home-asset__delta {
+  font-size: 12px;
+  color: var(--v2-mint);
+}
+.v2home-asset__delta.is-down {
+  color: var(--v2-critical);
+}
+
+/* OTC banner — quiet teal card, gold icon (§2.1.7) */
+.v2home-otc {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px;
+  border: 0;
+  text-align: left;
+  color: var(--v2-text);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.v2home-otc__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: var(--v2-chip);
+  color: var(--v2-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.v2home-otc__icon .material-symbols-rounded {
+  font-size: 22px;
+}
+
+.v2home-otc__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.v2home-otc__title {
+  font: 700 14px/1.2 "Red Hat Display", sans-serif;
+}
+.v2home-otc__body {
+  font: 400 12px/1.4 "Hanken Grotesk", sans-serif;
+  color: var(--v2-text-dim);
+}
+
+.v2home-otc__chev {
+  margin-left: auto;
+  color: var(--v2-text-faint);
+  flex-shrink: 0;
+}
+
+/* ---- Toast (own dark styling; DS Toast is light-theme) ------------------- */
+
+.v2home-toast-region {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  right: 20px;
+  z-index: 30;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.v2home-toast {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--v2-surface);
+  border: 1px solid var(--v2-line);
+  color: var(--v2-text);
+  font: 700 13px/1 "Red Hat Display", sans-serif;
+}
+.v2home-toast .material-symbols-rounded {
+  font-size: 18px;
+  color: var(--v2-mint);
+}

@@ -1,0 +1,139 @@
+/* Swapmint shared — phase scaffolding, primary pill, picker sheets, toasts
+   and the press-and-hold commit pill. Prefix: v2swapmint- (BUILDERS-V2).
+   Dark ivy ground, teal cards radius 12, hairlines, no shadows. */
+
+/* ---- Phase wrapper (swap edit/success, mint setup/instructions) -------- */
+
+.v2swapmint-phase {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Primary CTA pill (green bg, ivy text; v2 disabled = chip + faint) -- */
+
+.v2swapmint-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 48px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--v2-accent);
+  color: var(--v2-bg);
+  font: 700 15px/1 "Red Hat Display", sans-serif;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.v2swapmint-cta:disabled {
+  background: var(--v2-chip);
+  color: var(--v2-text-faint);
+  cursor: default;
+}
+
+/* ---- Sheets (asset / network pickers, review, 2FA) ---------------------- */
+
+.v2swapmint-sheet {
+  padding-bottom: 4px;
+}
+.v2swapmint-sheet__title {
+  font: 700 17px/1.2 "Red Hat Display", sans-serif;
+  color: var(--v2-text);
+  margin: 4px 0 14px;
+}
+
+.v2swapmint-pickrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 4px;
+  border: 0;
+  background: none;
+  text-align: left;
+  color: var(--v2-text);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.v2swapmint-pickrow + .v2swapmint-pickrow {
+  border-top: 1px solid var(--v2-line-soft);
+}
+.v2swapmint-pickrow__sym {
+  font: 700 15px/1.2 "Red Hat Display", sans-serif;
+}
+.v2swapmint-pickrow.is-active .v2swapmint-pickrow__sym {
+  color: var(--v2-mint);
+}
+.v2swapmint-pickrow__bal {
+  margin-left: auto;
+  font-size: 14px;
+  color: var(--v2-text-dim);
+}
+.v2swapmint-pickrow__check {
+  color: var(--v2-mint);
+  font-size: 20px;
+}
+.v2swapmint-pickrow__check--end {
+  margin-left: auto;
+}
+
+/* ---- Toasts (§4.8: slide from top, 2s; ivy text on mint) ---------------- */
+
+.v2swapmint-toasts {
+  position: absolute;
+  top: calc(var(--safe-top, 0px) + 12px);
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+  z-index: 60;
+}
+.v2swapmint-toast {
+  background: var(--v2-mint);
+  color: var(--v2-bg);
+  border-radius: 999px;
+  padding: 10px 18px;
+  font: 700 14px/1 "Red Hat Display", sans-serif;
+}
+
+/* ---- Press-and-hold commit pill (§4.7) ----------------------------------
+   Mint fill wipes left→right while held (600ms linear, driven by motion);
+   transform-origin left so the release SETTLE reverts back to the start. */
+
+.v2swapmint-hold {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 52px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--v2-accent);
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.v2swapmint-hold__fill {
+  position: absolute;
+  inset: 0;
+  background: var(--v2-mint);
+  transform-origin: left center;
+  transform: scaleX(0);
+  pointer-events: none;
+}
+.v2swapmint-hold__label {
+  position: relative;
+  z-index: 1;
+  color: var(--v2-bg);
+  font: 700 15px/1 "Red Hat Display", sans-serif;
+}

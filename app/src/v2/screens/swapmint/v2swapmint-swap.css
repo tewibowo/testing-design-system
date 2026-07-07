@@ -1,0 +1,260 @@
+/* Swap screen (brief §2.2) — rate line, two teal signed amount cards with
+   the ivy seam button, presets/CTA/keypad column, review sheet rows and the
+   ivy success phase. Prefix: v2swapmint-. */
+
+/* ---- Editor column ------------------------------------------------------ */
+
+.v2swapmint-editor {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.v2swapmint-flex {
+  flex: 1;
+}
+
+/* ---- Rate line (§2.2.2): pulsing mint dot + mono countdown -------------- */
+
+.v2swapmint-rate {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 2px 0 14px;
+}
+.v2swapmint-rate__live {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.v2swapmint-rate__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--v2-mint);
+  flex-shrink: 0;
+}
+.v2swapmint-rate__pair {
+  font-size: 13px;
+  color: var(--v2-text-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.v2swapmint-rate__count {
+  font-size: 12px;
+  color: var(--v2-text-faint);
+  white-space: nowrap;
+}
+.v2swapmint-rate__mmss {
+  display: inline-block;
+  min-width: 4ch;
+  color: var(--v2-text-dim);
+}
+
+/* ---- Amount cards + seam button (§2.2.3–4) ------------------------------ */
+
+.v2swapmint-cards {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.v2swapmint-card {
+  padding: 16px;
+}
+.v2swapmint-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.v2swapmint-card__sub {
+  margin-top: 8px;
+  font: 400 13px/1.35 "Hanken Grotesk", sans-serif;
+  color: var(--v2-text-dim);
+}
+.v2swapmint-card__sub.is-critical {
+  color: var(--v2-critical);
+}
+/* Leg modifiers — Revolut treatment: balance subline sits under the chip
+   (left), the fiat approximation under the amount (right). */
+.v2swapmint-card--pay .v2swapmint-card__sub {
+  text-align: left;
+}
+.v2swapmint-card--receive .v2swapmint-card__sub {
+  text-align: right;
+}
+
+/* Asset chip: coin cluster carries the shared layoutId (§4.5) */
+.v2swapmint-assetchip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px 6px 6px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--v2-chip);
+  color: var(--v2-text);
+  cursor: pointer;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.v2swapmint-assetchip__coin {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.v2swapmint-assetchip__sym {
+  font: 700 15px/1 "Red Hat Display", sans-serif;
+}
+.v2swapmint-assetchip__chev {
+  font-size: 18px;
+  color: var(--v2-text-faint);
+}
+
+/* Signed amounts — Red Hat Mono 32 tabular (§2.2.3) */
+.v2swapmint-amount {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.1;
+  text-align: right;
+  min-width: 0;
+  overflow: hidden;
+}
+.v2swapmint-amount__tick {
+  display: inline-block;
+  white-space: nowrap;
+}
+.v2swapmint-amount__sign {
+  margin-right: 2px;
+  color: var(--v2-text-dim);
+}
+.v2swapmint-amount .is-zero {
+  color: var(--v2-text-faint);
+}
+.v2swapmint-amount__receive {
+  color: var(--v2-mint);
+  white-space: nowrap;
+}
+.v2swapmint-amount__receive.is-zero,
+.v2swapmint-amount__receive.is-zero .money {
+  color: var(--v2-text-faint);
+}
+
+/* Seam button: 40px ivy circle + 2px ivy ring punching through both cards */
+.v2swapmint-seam {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--v2-bg);
+  box-shadow: 0 0 0 2px var(--v2-bg);
+  color: var(--v2-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.v2swapmint-seam .material-symbols-rounded {
+  font-size: 20px;
+  display: block;
+}
+
+/* ---- CTA row above keypad (§2.2.7) -------------------------------------- */
+
+.v2swapmint-ctarow {
+  margin: 4px 0 2px;
+}
+
+/* ---- Review sheet (§2.2.8) ----------------------------------------------- */
+
+.v2swapmint-review {
+  padding-bottom: 4px;
+}
+.v2swapmint-review__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 0;
+}
+.v2swapmint-review__row + .v2swapmint-review__row {
+  border-top: 1px solid var(--v2-line-soft);
+}
+.v2swapmint-review__label {
+  font: 400 14px/1.3 "Hanken Grotesk", sans-serif;
+  color: var(--v2-text-dim);
+}
+.v2swapmint-review__value {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--v2-text);
+  text-align: right;
+}
+.v2swapmint-review__value.is-mint {
+  color: var(--v2-mint);
+}
+.v2swapmint-review__cta {
+  margin-top: 16px;
+}
+.v2swapmint-review__hint {
+  margin: 10px 0 0;
+  font: 400 12px/1.3 "Hanken Grotesk", sans-serif;
+  color: var(--v2-text-faint);
+  text-align: center;
+}
+
+/* ---- Success phase (ivy ground; §2.2.8 → §4.2 odometer balances) --------- */
+
+.v2swapmint-success__scroll {
+  display: flex;
+  flex-direction: column;
+}
+/* Dark-ground overrides for SuccessState copy — local scope only */
+.v2swapmint-success .success-state__title {
+  color: var(--v2-text);
+}
+.v2swapmint-success .success-state__body {
+  color: var(--v2-text-dim);
+}
+
+.v2swapmint-balances {
+  width: 100%;
+  padding: 14px 16px;
+  text-align: left;
+}
+.v2swapmint-balances__title {
+  display: block;
+  font: 700 12px/1 "Red Hat Display", sans-serif;
+  color: var(--v2-text-dim);
+  margin-bottom: 4px;
+}
+.v2swapmint-balances__row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+}
+.v2swapmint-balances__row + .v2swapmint-balances__row {
+  border-top: 1px solid var(--v2-line-soft);
+}
+.v2swapmint-balances__sym {
+  font: 700 14px/1.2 "Red Hat Display", sans-serif;
+  color: var(--v2-text);
+}
+.v2swapmint-balances__value {
+  margin-left: auto;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--v2-text);
+}

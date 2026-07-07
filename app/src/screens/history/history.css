@@ -1,0 +1,469 @@
+/* Transaction History area — list, filter sheet, detail.
+ * Prefix: history-  ·  Colors follow the shell convention:
+ * var(--sx-color-*, <fallback>) with DS token values as fallbacks.
+ * Type: Red Hat Display (titles/labels), Hanken Grotesk (body, global),
+ * Red Hat Mono (ids/amounts — the shared .money class is already mono). */
+
+/* ---- Header filter affordance ------------------------------------------ */
+
+.history-filter-wrap {
+  position: relative;
+  display: inline-flex;
+}
+.history-filter-dot {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--sx-color-vibrant-green, #00d37e);
+  border: 1.5px solid #fff;
+  pointer-events: none;
+}
+
+/* ---- Chrome: tabs + toolbar + sub-filter (pinned above the scroll) ----- */
+
+.history-chrome {
+  flex-shrink: 0;
+  padding: 0 20px 10px;
+}
+
+.history-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+.history-toolbar .field {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.history-subrow {
+  margin-top: 10px;
+}
+.history-subtab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.history-subtab__count {
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--sx-color-grey-100, #f0f0f0);
+  color: var(--sx-color-grey-500, #505454);
+  font: 700 11px/18px "Red Hat Display", sans-serif;
+  text-align: center;
+}
+
+/* ---- Panels (tab content crossfade host) -------------------------------- */
+
+.history-panelhost {
+  position: relative;
+}
+.history-panel {
+  width: 100%;
+}
+
+/* ---- Transaction card list (web table → mobile cards, §1.5/§2.5) ------- */
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 4px 0 16px;
+}
+
+.history-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid var(--sx-color-grey-200, #e0e0e0);
+  border-radius: 16px;
+  padding: 14px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.history-row__mark {
+  position: relative;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+}
+.history-row__fallback {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: var(--sx-color-grey-100, #f0f0f0);
+  color: var(--sx-color-grey-500, #505454);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.history-row__fallback .material-symbols-rounded {
+  font-size: 20px;
+}
+.history-row__dir {
+  position: absolute;
+  right: -4px;
+  bottom: -4px;
+  width: 17px;
+  height: 17px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid var(--sx-color-grey-200, #e0e0e0);
+  color: var(--sx-color-deep-ivy, #002b2a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.history-row__dir .material-symbols-rounded {
+  font-size: 11px;
+}
+
+.history-row__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.history-row__title {
+  font: 700 14px/1.35 "Red Hat Display", sans-serif;
+  color: var(--sx-color-deep-ivy, #002b2a);
+}
+.history-row__sub {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--sx-color-grey-500, #505454);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.history-row__sub--extra {
+  white-space: normal;
+}
+.history-row__meta {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 4px;
+  min-width: 0;
+  font-size: 12px;
+  color: var(--sx-color-grey-500, #505454);
+}
+.history-row__id {
+  font-family: "Red Hat Mono", monospace;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.history-row__dot {
+  color: var(--sx-color-grey-300, #c6c6c6);
+}
+.history-row__date {
+  white-space: nowrap;
+}
+
+.history-row__side {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+.history-row__amt {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--sx-color-deep-ivy, #002b2a);
+}
+.history-row__amt.is-muted {
+  color: var(--sx-color-placeholder, #b6b6b6);
+  font-family: "Red Hat Mono", monospace;
+}
+
+/* Small borderless copy button (rows + detail) */
+.history-copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: var(--sx-color-grey-500, #505454);
+  cursor: pointer;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.history-copy:active {
+  background: var(--sx-color-grey-100, #f0f0f0);
+}
+.history-copy .material-symbols-rounded {
+  font-size: 15px;
+}
+
+/* ---- Empty states -------------------------------------------------------- */
+
+.history-empty {
+  padding: 24px 0;
+}
+.history-empty--otc {
+  background: #fff;
+  border: 1px solid var(--sx-color-grey-200, #e0e0e0);
+  border-radius: 16px;
+  margin-top: 4px;
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+.history-empty--otc .btn {
+  margin-top: 14px;
+}
+.history-otc-illo {
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ---- Legal footer (global chrome §0) ------------------------------------ */
+
+.history-legal {
+  margin: 8px 2px 24px;
+  color: var(--sx-color-grey-500, #505454);
+}
+.history-legal p {
+  margin: 0 0 8px;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+/* Inline text link (legal footer, detail help line) */
+.history-link {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: var(--sx-color-link, #187d97);
+  text-decoration: underline;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---- Toast (local region — no global ToastProvider is mounted) ---------- */
+
+.history-toast-region {
+  position: absolute;
+  top: calc(var(--safe-top) + 8px);
+  left: 20px;
+  right: 20px;
+  z-index: 60;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+.history-toast-region .toast {
+  min-width: 0;
+  max-width: 100%;
+  box-shadow: 0 8px 24px rgba(10, 13, 18, 0.18);
+}
+
+/* ---- Filter & Sort sheet (§9, inferred) ---------------------------------- */
+
+.history-sheet {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 4px;
+}
+.history-sheet__title {
+  margin: 0;
+  font: 700 18px/1.3 "Red Hat Display", sans-serif;
+  color: var(--sx-color-deep-ivy, #002b2a);
+}
+.history-sheet__section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.history-sheet__label {
+  font: 700 13px/1.35 "Red Hat Display", sans-serif;
+  color: var(--sx-color-deep-ivy, #002b2a);
+}
+.history-sheet__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+/* Design feedback: chips read as binary — selected (solid ivy) or not
+   (white + grey outline). Hover only nudges the border, never fills. */
+.history-sheet__chips .tag--clickable {
+  background: #fff;
+  border-color: var(--sx-color-grey-300, #c6c6c6);
+  color: var(--sx-color-deep-ivy, #002b2a);
+}
+.history-sheet__chips .tag--clickable:hover {
+  background: #fff;
+  border-color: var(--sx-color-deep-ivy, #002b2a);
+}
+.history-sheet__chips .tag--clickable.is-selected,
+.history-sheet__chips .tag--clickable.is-selected:hover {
+  background: var(--sx-color-deep-ivy, #002b2a);
+  border-color: var(--sx-color-deep-ivy, #002b2a);
+  color: #fff;
+}
+.history-sheet__footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+/* ---- Detail screen (§4) --------------------------------------------------- */
+
+.history-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 14px;
+  padding-bottom: 32px;
+}
+.history-detail-missing {
+  padding-top: 48px;
+}
+
+.history-dcard {
+  background: #fff;
+  border: 1px solid var(--sx-color-grey-200, #e0e0e0);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.history-dcard__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.history-dcard__title {
+  margin: 0;
+  font: 700 16px/1.3 "Red Hat Display", sans-serif;
+  color: var(--sx-color-deep-ivy, #002b2a);
+}
+.history-dcard__divider {
+  height: 1px;
+  background: var(--sx-color-grey-200, #e0e0e0);
+}
+
+/* Amount Details rows — label left, value right (§4.2) */
+.history-drow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.history-drow__label {
+  font-size: 14px;
+  color: var(--sx-color-grey-500, #505454);
+}
+.history-drow__value {
+  font-size: 14px;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  text-align: right;
+}
+.history-drow--strong .history-drow__value {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* Transaction Details rows — grey label above dark value (§4.6) */
+.history-attrs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.history-attr {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.history-attr__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font: 600 13px/1.35 "Red Hat Display", sans-serif;
+  color: var(--sx-color-grey-500, #505454);
+}
+.history-attr__value {
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  word-break: break-word;
+}
+.history-attr__value .money {
+  font-size: 14px;
+}
+
+.history-info {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--sx-color-grey-400, #8a8f8f);
+  cursor: pointer;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.history-info .material-symbols-rounded {
+  font-size: 16px;
+}
+
+.history-hashrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.history-hashlink {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-family: "Red Hat Mono", monospace;
+  font-size: 14px;
+  color: var(--sx-color-link, #187d97);
+  text-decoration: underline;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.history-helpline {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 2px 4px 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--sx-color-grey-500, #505454);
+}
+.history-helpline .material-symbols-rounded {
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}

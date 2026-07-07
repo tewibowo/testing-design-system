@@ -1,15 +1,24 @@
 name: "Chromatic"
 
-# Runs visual regression on every push and PR. Requires CHROMATIC_PROJECT_TOKEN
+# Visual regression for the DESIGN SYSTEM ONLY. Requires CHROMATIC_PROJECT_TOKEN
 # to be set in repository Settings → Secrets and variables → Actions.
-
+#
+# Deliberately NOT triggered on pull_request: GitHub evaluates PR path filters
+# against the ENTIRE PR diff, so a prototype branch that happens to touch any
+# design-system file (or root package.json) re-runs Chromatic on EVERY push and
+# burns through the snapshot quota. Chromatic now runs only when design-system
+# sources land on main, or on demand via workflow_dispatch.
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+    paths:
+      - "src/**"
+      - ".storybook/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/chromatic.yml"
+  workflow_dispatch:
 
 jobs:
   chromatic:

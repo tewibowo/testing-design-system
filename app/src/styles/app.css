@@ -1,0 +1,594 @@
+/* ---- App shell: phone-first, framed on desktop ---------------------- */
+
+:root {
+  --safe-top: env(safe-area-inset-top, 0px);
+  /* Clamped: the home indicator needs at most 34px, but iOS reports inflated
+     values in some modes (Safari's collapsed bottom toolbar, some iOS 26
+     standalone launches) — unclamped, the tab bar and CTA bars grow a huge
+     dead strip at the bottom. */
+  --safe-bottom: min(env(safe-area-inset-bottom, 0px), 34px);
+  --tabbar-height: 64px;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--sx-color-deep-ivy, #002b2a);
+  overscroll-behavior: none;
+}
+
+/* Phone: the page canvas must match the app, not the desktop-frame ivy
+   backdrop. iOS standalone can mis-size the viewport on cold launch and
+   paint the canvas in the strip below the app — matching the app's page
+   background (grey-50, what screens actually show at the bottom) makes
+   the strip read as page continuation instead of a white bar. v2
+   re-overrides this in v2-theme.css. */
+@media (max-width: 767.98px) {
+  html,
+  body {
+    background: var(--sx-color-grey-50, #fafafa);
+  }
+}
+
+.device {
+  /* Fill the initial containing block with pure layout (fixed + inset: 0)
+     instead of a measured height: 100dvh and window.innerHeight are both
+     reported stale on iOS standalone cold launch (leaving a bottom band),
+     and JS-mirrored values only correct if iOS fires a resize event. Inset
+     sizing tracks the viewport automatically, no measurement involved. */
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  overflow: hidden;
+}
+
+/* iOS standalone short-viewport correction (see ui/viewportFix.js): the
+   layout viewport ends ~47pt above the physical screen bottom. iOS is
+   inconsistent about the strip below that edge — some launches paint the
+   page canvas there, others clip the window and show system white. The
+   app NEVER lays out beyond the reported viewport: sizing anything taller
+   makes iOS treat the overflow as pannable (the whole shell — tab bar
+   included — could be dragged down like a loose sheet), and the clipped
+   variant would cut it off anyway. The canvas color (set per app above /
+   in v2-theme.css) blends the strip when it is paintable. The only
+   correction needed: the safe-area inset zeroes out, because the viewport
+   edge already sits well above the home indicator in this state. */
+.vp-short {
+  --safe-bottom: 0px;
+}
+
+/* Desktop / tablet: present the app inside a phone frame so colleagues
+   reviewing on a laptop see it as intended. */
+@media (min-width: 768px) {
+  #root {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .device {
+    position: relative;
+    inset: auto;
+    width: 390px;
+    height: min(844px, 94vh);
+    border-radius: 44px;
+    border: 10px solid #0a0d12;
+    box-shadow:
+      0 24px 48px rgba(0, 0, 0, 0.45),
+      0 4px 12px rgba(0, 0, 0, 0.35);
+    --safe-top: 14px;
+    --safe-bottom: 10px;
+  }
+}
+
+/* ---- Stack navigator -------------------------------------------------- */
+
+.stack-root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.stack-frame {
+  position: absolute;
+  inset: 0;
+  background: var(--sx-color-grey-50, #fafafa);
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+  /* Isolate each screen's layout/paint so deep stacks composite cheaply. */
+  contain: layout paint;
+}
+
+.stack-dim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 43, 42, 0.18);
+  pointer-events: none;
+}
+
+/* ---- Bottom sheet ------------------------------------------------------ */
+
+/* Entrances run as CSS animations so the compositor drives them: the sheet
+   mounts its whole content tree on the same frame the slide starts, and a
+   JS-driven tween (framer) drops frames under that load — the appear jitter.
+   Framer still owns drag-to-dismiss and the exit tween (inline transforms,
+   which these animations no longer override once finished). */
+@keyframes sheet-scrim-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes sheet-panel-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+.sheet-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 43, 42, 0.4);
+  z-index: 40;
+  animation: sheet-scrim-in 320ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+
+.sheet-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 41;
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -8px 32px rgba(10, 13, 18, 0.16);
+  max-height: 88%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  will-change: transform;
+  animation: sheet-panel-in 320ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+
+/* Drag-to-dismiss target: the strip around the grabber. The body below it
+   keeps native scrolling (the panel is NOT the scroller — framer drag on a
+   scroll container blocks compositor scrolling). */
+.sheet-handle {
+  flex-shrink: 0;
+  padding-top: 8px;
+  touch-action: none;
+  cursor: grab;
+}
+
+.sheet-grabber {
+  width: 40px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--sx-color-grey-300, #c6c6c6);
+  margin: 6px auto 14px;
+}
+
+.sheet-body {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  padding: 0 20px calc(20px + var(--safe-bottom));
+}
+
+/* ---- Shared screen scaffolding ---------------------------------------- */
+
+.screen-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  /* Keep list overscroll local — chaining it to the document would bounce
+     the whole shell (see ui/bounceGuard.js). */
+  overscroll-behavior: contain;
+}
+
+.screen-pad {
+  padding: 0 20px;
+}
+
+.cta-bar {
+  padding: 12px 20px calc(12px + var(--safe-bottom));
+  background: #fff;
+  border-top: 1px solid var(--sx-color-grey-200, #e0e0e0);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cta-bar .btn { width: 100%; }
+
+.tab-host {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+/* Panes stack (all tabs stay mounted — see ui/TabPanes.jsx); the active
+   one is faded in on top. */
+.tab-pane {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- App header -------------------------------------------------------- */
+
+.app-header {
+  padding: calc(var(--safe-top) + 8px) 12px 8px;
+  background: transparent;
+  flex-shrink: 0;
+}
+.app-header__row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  min-height: 40px;
+}
+.app-header__side { display: flex; align-items: center; }
+.app-header__side--right { justify-content: flex-end; gap: 4px; }
+.app-header__title {
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  text-align: center;
+  white-space: nowrap;
+}
+.app-header__back {
+  border: 0;
+  background: none;
+  padding: 8px;
+  margin-left: -4px;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  cursor: pointer;
+  display: flex;
+}
+.app-header__back .material-symbols-rounded { font-size: 22px; }
+.app-header__large-title {
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.15;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  margin: 6px 8px 4px;
+}
+
+/* ---- Tab bar — floating liquid-glass capsule ----------------------------
+   iOS 26 language: the bar floats inset from the screen edges, content
+   scrolls behind it through a frosted blur, and the selection is a glass
+   "lens" that slides between tabs (layoutId pill in ui/TabBar.jsx). */
+
+.tabbar {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: calc(var(--safe-bottom, 0px) + 10px);
+  z-index: 30;
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  padding: 5px 6px;
+  border-radius: 999px;
+  border: 0.5px solid rgba(255, 255, 255, 0.6);
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.34)
+  );
+  -webkit-backdrop-filter: blur(22px) saturate(1.9);
+  backdrop-filter: blur(22px) saturate(1.9);
+  box-shadow:
+    0 12px 32px rgba(10, 13, 18, 0.18),
+    0 2px 8px rgba(10, 13, 18, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+/* No backdrop-filter support → near-opaque surface so the bar stays legible */
+@supports not (backdrop-filter: blur(1px)) {
+  .tabbar {
+    background: rgba(255, 255, 255, 0.94);
+  }
+}
+/* Root screens scroll under the floating bar — clear its footprint */
+.tab-pane .screen-scroll {
+  padding-bottom: calc(78px + var(--safe-bottom, 0px));
+}
+.tabbar__item {
+  position: relative;
+  flex: 1;
+  border: 0;
+  background: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 0 5px;
+  cursor: pointer;
+  color: var(--sx-color-grey-500, #505454);
+  -webkit-tap-highlight-color: transparent;
+}
+.tabbar__item.is-active { color: var(--sx-color-deep-ivy, #002b2a); }
+.tabbar__icon-wrap {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 30px;
+}
+/* Selection lens — a NEUTRAL glass droplet covering the whole tab (icon +
+   label), bulging slightly past the bar's edges like the iOS 26 magnifier.
+   Per the HIG, the selection material stays uncolored — the tint lives on
+   the selected symbol/label instead. */
+.tabbar__pill {
+  position: absolute;
+  inset: -4px 3px;
+  border-radius: 999px;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.72),
+    rgba(255, 255, 255, 0.5)
+  );
+  border: 0.5px solid rgba(255, 255, 255, 0.8);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.9),
+    inset 0 -2px 4px rgba(10, 13, 18, 0.05),
+    0 4px 10px rgba(10, 13, 18, 0.1);
+}
+.tabbar__icon { font-size: 22px; position: relative; z-index: 1; }
+.tabbar__badge {
+  position: absolute;
+  top: -2px;
+  right: 8px;
+  z-index: 2;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--sx-color-critical, #df1312);
+  color: #fff;
+  font-family: "Red Hat Display", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+.tabbar__label {
+  position: relative;
+  z-index: 1;
+  font-family: "Red Hat Display", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* ---- Success state ------------------------------------------------------ */
+
+.success-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px;
+}
+.success-state__circle {
+  width: 96px;
+  height: 96px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.success-state__title {
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  margin: 0 0 8px;
+}
+.success-state__body {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--sx-color-grey-500, #505454);
+  margin: 0 0 24px;
+  max-width: 280px;
+}
+.success-state__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 300px;
+}
+
+/* ---- Focus ring (brand: 2px information-blue, offset 2px) --------------- */
+
+.input:focus-within,
+.input.is-focused {
+  border-color: var(--sx-color-information, #0d69d4);
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 4px var(--sx-color-information, #0d69d4);
+}
+
+/* ---- Install gate (mobile browser → add to home screen) ----------------- */
+
+.installgate {
+  position: absolute;
+  inset: 0;
+  z-index: 80;
+  background: var(--sx-color-deep-ivy, #002b2a);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px 28px calc(28px + var(--safe-bottom));
+}
+.installgate__logo {
+  display: block;
+  width: 64px;
+  margin-bottom: 20px;
+  color: var(--sx-color-vibrant-green, #00d37e);
+}
+.installgate__logo svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.installgate__title {
+  font: 700 26px/1.15 "Red Hat Display", sans-serif;
+  color: #fff;
+  margin: 0 0 10px;
+  text-wrap: balance;
+}
+.installgate__lead {
+  font: 400 15px/1.5 "Hanken Grotesk", sans-serif;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0 0 28px;
+  max-width: 300px;
+  text-wrap: pretty;
+}
+.installgate__steps {
+  list-style: none;
+  margin: 0 0 32px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 330px;
+  text-align: left;
+}
+.installgate__step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 13px 14px;
+}
+.installgate__step-num {
+  font: 700 12px/1 "Red Hat Mono", monospace;
+  color: var(--sx-color-vibrant-green, #00d37e);
+  width: 12px;
+  flex-shrink: 0;
+}
+.installgate__step-icon {
+  font-size: 22px;
+  color: var(--sx-color-vibrant-green, #00d37e);
+  flex-shrink: 0;
+}
+.installgate__step-text {
+  font: 400 14px/1.4 "Hanken Grotesk", sans-serif;
+  color: #fff;
+}
+.installgate__continue {
+  border: 0;
+  background: none;
+  color: rgba(255, 255, 255, 0.56);
+  font: 600 14px/1 "Red Hat Display", sans-serif;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+/* ---- Sheet steps (multi-step bottom-sheet flows) ------------------------ */
+
+.sheetsteps__header {
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  align-items: center;
+  min-height: 36px;
+  margin-bottom: 6px;
+}
+.sheetsteps__side {
+  display: flex;
+  align-items: center;
+}
+.sheetsteps__side--right {
+  justify-content: flex-end;
+}
+.sheetsteps__back {
+  border: 0;
+  background: none;
+  padding: 6px;
+  margin-left: -8px;
+  cursor: pointer;
+  color: inherit;
+  display: flex;
+}
+.sheetsteps__back .material-symbols-rounded {
+  font-size: 24px;
+}
+.sheetsteps__title {
+  text-align: center;
+  font: 700 17px/1.2 "Red Hat Display", sans-serif;
+}
+.sheetsteps__dots {
+  display: flex;
+  gap: 4px;
+}
+.sheetsteps__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.18;
+  transition: opacity 200ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    background 200ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.sheetsteps__dot.is-done {
+  opacity: 0.45;
+}
+.sheetsteps__dot.is-current {
+  background: var(--sx-color-vibrant-green, #00d37e);
+  opacity: 1;
+}
+.sheetsteps__viewport {
+  overflow: hidden;
+}
+
+/* ---- Fiat flag marks (ui/FiatFlag.jsx) ----------------------------------- */
+
+.fiat-flag {
+  position: relative;
+  display: inline-flex;
+  border-radius: 999px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.fiat-flag svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+/* Hairline ring above the flag so light fields (JP/US stripes) keep a
+   circular edge on white cards. */
+.fiat-flag::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px rgba(10, 13, 18, 0.12);
+}
+
+/* ---- Money -------------------------------------------------------------- */
+
+.money {
+  font-family: "Red Hat Mono", monospace;
+  font-variant-numeric: tabular-nums;
+}

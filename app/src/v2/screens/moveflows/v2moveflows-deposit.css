@@ -1,0 +1,159 @@
+/* Moveflows deposit branches — §2.3. Prefix: v2mf-. */
+
+/* Network segmented pills (blockchain branch) — horizontal scroll; active
+   state (mint text + mint hairline) comes from .v2-chip.is-active. */
+.v2mf-nets {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 8px 20px 20px;
+  scrollbar-width: none;
+}
+.v2mf-nets::-webkit-scrollbar {
+  display: none;
+}
+.v2mf-nets .v2-chip {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* White QR card, radius 12, ivy modules; logomark 40px embedded centre. */
+.v2mf-qrwrap {
+  position: relative;
+  width: fit-content;
+  margin: 8px auto 0;
+}
+.device.v2 .v2mf-qr {
+  background: #ffffff;
+  border: 0;
+  border-radius: 12px;
+  padding: 20px;
+  gap: 0;
+}
+.v2mf-qrlogo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.v2mf-qrlogo img {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+/* Middle-truncated address under the QR */
+.v2mf-addr {
+  text-align: center;
+  margin: 16px 20px 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--v2-text);
+}
+
+/* Copy / Share side-by-side pills */
+.v2mf-btnrow {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+.v2mf-btnrow .v2mf-pill {
+  flex: 1;
+  width: auto;
+}
+
+/* Bank branch — label-over-mono copy rows on a teal card */
+.v2mf-copyrows {
+  padding: 4px 16px;
+}
+.v2mf-copyrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+}
+.v2mf-copyrow + .v2mf-copyrow {
+  border-top: 1px solid var(--v2-line-soft);
+}
+.v2mf-copyrow__label {
+  font: 700 12px/1 "Red Hat Display", sans-serif;
+  color: var(--v2-text-dim);
+  margin-bottom: 5px;
+}
+.v2mf-copyrow__value {
+  font: 500 16px/1.2 "Red Hat Mono", monospace;
+  font-variant-numeric: tabular-nums;
+  color: var(--v2-text);
+  word-break: break-all;
+}
+.v2mf-copybtn {
+  width: 36px;
+  height: 36px;
+  margin-left: auto;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--v2-text-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.v2mf-copybtn .material-symbols-rounded {
+  font-size: 20px;
+}
+.v2mf-copybtn:active {
+  background: var(--v2-pressed);
+}
+
+/* Info callout — teal card, gold info icon (§2.3 bank branch) */
+.v2mf-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px;
+  margin-top: 12px;
+}
+.v2mf-callout .material-symbols-rounded {
+  font-size: 20px;
+  color: var(--v2-warning);
+  flex-shrink: 0;
+}
+.v2mf-callout p {
+  margin: 1px 0 0;
+  font: 400 13px/1.5 "Hanken Grotesk", sans-serif;
+  color: var(--v2-text-dim);
+}
+
+/* Trust notes — icon-led compliance lines directly on ivy */
+.v2mf-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 20px 2px 28px;
+}
+.v2mf-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.v2mf-note .material-symbols-rounded {
+  font-size: 18px;
+  color: var(--v2-text-dim);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.v2mf-note p {
+  margin: 0;
+  font: 400 13px/1.5 "Hanken Grotesk", sans-serif;
+  color: var(--v2-text-dim);
+}

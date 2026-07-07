@@ -1,0 +1,478 @@
+/* Account area — My Account tab + bank add/verify flows.
+ * Class prefix: account-.  Colors/radii/shadows come from the DS semantic
+ * tokens in src/styles/tokens.css (--text-primary, --border, --status-*, …). */
+
+.account-tab {
+  padding-bottom: 24px;
+}
+
+/* ── Shared card shell ─────────────────────────────────────── */
+
+.account-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+/* ── Profile card (spec §1) ────────────────────────────────── */
+
+.account-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: var(--space-4);
+  text-align: center;
+}
+.account-profile__logo {
+  display: block;
+  margin: var(--space-2) 0 var(--space-3);
+}
+.account-profile__name {
+  font: var(--label-large);
+  color: var(--text-primary);
+  letter-spacing: 0.04em;
+  margin-bottom: var(--space-3);
+}
+.account-profile__rows {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border);
+}
+.account-profile__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.account-profile__label {
+  font: var(--label-small);
+  color: var(--text-primary);
+}
+.account-profile__value {
+  font: var(--body-small);
+  color: var(--text-secondary);
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+.account-profile__note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+  font: var(--body-small);
+  color: var(--text-secondary);
+  text-align: left;
+}
+.account-profile__note .link-btn,
+.account-info-line .link-btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: inherit;
+  text-decoration: underline;
+  vertical-align: baseline;
+}
+
+.account-info-ic {
+  font-size: 16px;
+  color: var(--status-positive);
+  flex: 0 0 auto;
+  margin-top: 1px;
+}
+
+/* ── Tabs (DS default/underline variant, squeezed for 3 mobile labels) ─ */
+
+.account-tabs {
+  margin-bottom: var(--space-4);
+}
+.account-tabs .tabs__strip {
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.account-tabs .tabs__strip::-webkit-scrollbar {
+  display: none;
+}
+.account-tabs .tabs__tab {
+  padding: 0 var(--space-1);
+  height: 40px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.account-tabs .tabs__tab.is-active::after {
+  left: var(--space-1);
+  right: var(--space-1);
+}
+
+/* ── Section header + lists ────────────────────────────────── */
+
+.account-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+.account-h2 {
+  font: var(--title-mobile-medium);
+  color: var(--text-primary);
+  margin: 0;
+}
+.account-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.account-info-line {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  font: var(--body-small);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-3);
+}
+.account-label {
+  display: block;
+  font: var(--label-small);
+  color: var(--text-primary);
+}
+
+/* ── Bank rows (spec §2) ───────────────────────────────────── */
+
+.account-bank__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+.account-bank__glyph {
+  font-size: 26px;
+  color: var(--text-primary);
+}
+.account-bank__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.account-bank__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.account-bank__id {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.account-bank__name {
+  font: var(--label-medium);
+  color: var(--text-primary);
+}
+.account-bank__num {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+}
+
+/* ── Address cards (spec §3) ───────────────────────────────── */
+
+.account-addr {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.account-addr__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-1);
+}
+.account-addr__id {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+.account-addr__name {
+  font: var(--label-medium);
+  color: var(--text-primary);
+}
+.account-addr__sub {
+  font: var(--body-small);
+  color: var(--text-secondary);
+}
+.account-addr__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex: 0 0 auto;
+}
+.account-addr__netrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.account-addr__netnames {
+  flex: 1;
+  font: var(--body-small);
+  color: var(--text-primary);
+  min-width: 0;
+}
+.account-netcluster {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+.account-netcluster .asset-mark {
+  margin-left: -6px;
+  box-shadow: 0 0 0 2px var(--surface);
+  border-radius: var(--radius-full);
+}
+.account-netcluster .asset-mark:first-child {
+  margin-left: 0;
+}
+.account-addr .copybox__value {
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+.account-pagination {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ── Security settings (spec §4) ───────────────────────────── */
+
+.account-security {
+  padding: 0;
+}
+.account-security__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--border);
+}
+.account-security__title {
+  font: var(--title-mobile-small);
+  color: var(--text-primary);
+  margin: 0;
+}
+.account-security__body {
+  font: var(--body-medium);
+  color: var(--text-secondary);
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+}
+.account-security__foot {
+  padding: var(--space-3) var(--space-4) var(--space-4);
+  border-top: 1px solid var(--border);
+}
+.account-security__foot .btn {
+  width: 100%;
+}
+
+/* Critical action — DS Button has no critical variant, so override. */
+.account-btn--critical.btn--primary {
+  background: var(--status-critical);
+  color: var(--text-inverse);
+}
+.account-btn--critical.btn--primary:hover,
+.account-btn--critical.btn--primary:active {
+  background: color-mix(in srgb, var(--status-critical) 85%, #000);
+  color: var(--text-inverse);
+}
+
+.account-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: 14px var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font: var(--label-medium);
+  color: var(--status-critical);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.account-logout .material-symbols-rounded {
+  font-size: 20px;
+}
+
+/* ── Currency-selection sheet (spec §5 step 2) ─────────────── */
+
+.account-sheet {
+  padding: var(--space-2) 0 var(--space-1);
+}
+.account-sheet__title {
+  font: var(--title-mobile-small);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-4);
+}
+.account-sheet__actions {
+  margin-top: var(--space-5);
+}
+
+/* ── Confirm sheet ─────────────────────────────────────────── */
+
+.account-confirm {
+  padding: var(--space-2) 0 var(--space-1);
+}
+.account-confirm__title {
+  font: var(--title-mobile-small);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-2);
+}
+.account-confirm__body {
+  font: var(--body-medium);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-4);
+}
+.account-confirm__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.account-confirm__actions .btn {
+  width: 100%;
+}
+
+/* ── Toasts (local stack, top of screen) ───────────────────── */
+
+.account-toasts {
+  position: absolute;
+  top: calc(var(--safe-top, 0px) + 8px);
+  left: var(--space-4);
+  right: var(--space-4);
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  pointer-events: none;
+}
+.account-toasts .toast {
+  pointer-events: auto;
+  box-shadow: var(--shadow-2);
+}
+
+/* ── Flow screens (banks-add / banks-verify) ───────────────── */
+
+.account-flow {
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-5);
+}
+.account-flow__lead {
+  font: var(--body-medium);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-4);
+}
+.account-flow__heading {
+  margin-bottom: var(--space-3);
+}
+.account-cta-row {
+  display: flex;
+  gap: var(--space-3);
+}
+.account-cta-row .btn {
+  width: auto;
+  flex: 1;
+}
+.account-step-success {
+  display: flex;
+  min-height: 420px;
+}
+
+/* Form (spec §5 step 3) */
+.account-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-3);
+}
+.account-form__alert {
+  margin-bottom: var(--space-2);
+}
+.account-flabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+.account-flabel__info {
+  font-size: 15px;
+  color: var(--text-secondary);
+  cursor: help;
+}
+/* Inline errors fade + rise in when validation fires. */
+.account-form .field__helper.is-error {
+  color: var(--status-critical);
+  animation: account-error-in var(--dur-2) var(--ease) both;
+}
+@keyframes account-error-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Verify flow copy (spec §6 step 2) */
+.account-verify__ensure {
+  font: var(--body-medium);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-1);
+}
+.account-verify__list {
+  list-style: none;
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.account-verify__list li {
+  font: var(--body-medium);
+  color: var(--text-primary);
+}
+.account-verify__faq {
+  font: var(--body-medium);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-3);
+}
+.account-verify__faq .link-btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: inherit;
+  text-decoration: underline;
+}
+.account-note {
+  background: var(--status-surface-warning);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  font: var(--body-medium);
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+}
+.account-verify__poa {
+  font: var(--body-small);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-4);
+}
+/* The mock picker replaces the OS dialog, so hide the per-file Replace
+ * button (it would open a real picker); Remove still works. */
+.account-upload .upload__file-actions .btn--secondary {
+  display: none;
+}

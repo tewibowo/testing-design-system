@@ -9,7 +9,16 @@ export default [
   {
     // ui_kits/ and preview/ are legacy, kept for reference only (see README);
     // they predate this component library and aren't part of the npm package.
-    ignores: ["dist/**", "storybook-static/**", "node_modules/**", "ui_kits/**", "preview/**"],
+    // app/ is the standalone mobile-prototype Vite app with its own
+    // toolchain and deploy pipeline; it isn't part of the npm package either.
+    ignores: [
+      "dist/**",
+      "storybook-static/**",
+      "**/node_modules/**",
+      "ui_kits/**",
+      "preview/**",
+      "app/**",
+    ],
   },
   js.configs.recommended,
   {

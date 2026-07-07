@@ -1,0 +1,271 @@
+/* v2 Account area — tab root + profile push (v2-mobbin-brief §2.7).
+   Dark ivy ground, teal group cards radius 12, hairline separators inset to
+   text, no shadows. Prefix: v2account-. */
+
+.v2account-body {
+  padding-bottom: 32px;
+}
+
+/* ── Profile header card (§2.7.1) ─────────────────────────────── */
+
+.v2account-profile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  margin-top: 4px;
+  padding: 16px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--v2-surface);
+  color: var(--v2-text);
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.v2account-profile__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background: var(--v2-bg);
+  color: var(--v2-mint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 700 20px/1 "Red Hat Display", sans-serif;
+  flex-shrink: 0;
+}
+.v2account-profile__id {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+.v2account-profile__name {
+  font: 700 18px/1.2 "Red Hat Display", sans-serif;
+}
+.v2account-profile__email {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: 400 13px/1.35 "Hanken Grotesk", sans-serif;
+  color: var(--v2-text-dim);
+}
+.v2account-profile__chev {
+  color: var(--v2-text-faint);
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+/* ── Eyebrow-labelled groups (§2.7.2) ─────────────────────────── */
+
+.v2account-eyebrow {
+  margin: 24px 4px 8px;
+  font: 700 12px/1 "Red Hat Display", sans-serif;
+  letter-spacing: 0.02em;
+  color: var(--v2-text-dim);
+}
+.v2account-group {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* ── Rows: 52px, icon disc + label + trailing + chevron ───────── */
+
+.v2account-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 52px;
+  padding: 8px 14px;
+  border: 0;
+  background: none;
+  color: var(--v2-text);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.v2account-row--static {
+  cursor: default;
+}
+/* hairline inset to the text edge (14 pad + 36 disc + 12 gap) */
+.v2account-row + .v2account-row::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 62px;
+  right: 0;
+  height: 1px;
+  background: var(--v2-line-soft);
+}
+.v2account-row__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: var(--v2-raised);
+  color: var(--v2-text-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.v2account-row__icon .material-symbols-rounded {
+  font-size: 22px;
+}
+.v2account-row__icon--critical {
+  background: color-mix(in srgb, var(--v2-critical) 16%, transparent);
+  color: var(--v2-critical);
+}
+.v2account-row__label {
+  flex: 1;
+  min-width: 0;
+  font: 700 15px/1.3 "Red Hat Display", sans-serif;
+}
+.v2account-row__label--critical {
+  color: var(--v2-critical);
+}
+.v2account-row__value {
+  font: 400 14px/1 "Hanken Grotesk", sans-serif;
+  color: var(--v2-text-dim);
+  flex-shrink: 0;
+}
+.v2account-row__value--mono {
+  font: 500 13px/1 "Red Hat Mono", monospace;
+}
+.v2account-row__value--mint {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font: 700 13px/1 "Red Hat Display", sans-serif;
+  color: var(--v2-mint);
+}
+.v2account-row__value--mint .material-symbols-rounded {
+  font-size: 16px;
+}
+.v2account-row__copy {
+  color: var(--v2-text-dim);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.v2account-row__chev {
+  color: var(--v2-text-faint);
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+/* DS Switch on ivy — §2.7 toggle recipe: track white 16% → vibrant green */
+.v2account-row .control {
+  align-items: center;
+}
+.v2account-row .switch__track {
+  background: rgba(255, 255, 255, 0.16);
+}
+.v2account-row .control input:checked + .switch__track {
+  background: var(--v2-accent);
+}
+.v2account-row .switch__thumb {
+  background: #fff;
+  box-shadow: none;
+}
+
+/* ── Log out (§2.7.4): standalone card, critical tint, no icon ── */
+
+.v2account-logout {
+  width: 100%;
+  margin-top: 24px;
+  padding: 15px 16px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--v2-surface);
+  color: var(--v2-critical);
+  font: 700 15px/1 "Red Hat Display", sans-serif;
+  text-align: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── Profile push screen ──────────────────────────────────────── */
+
+.v2account-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 0 20px;
+}
+.v2account-hero__avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 999px;
+  background: var(--v2-bg);
+  box-shadow: inset 0 0 0 1px var(--v2-line);
+  color: var(--v2-mint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 700 26px/1 "Red Hat Display", sans-serif;
+  margin-bottom: 8px;
+}
+.v2account-hero__name {
+  font: 700 20px/1.2 "Red Hat Display", sans-serif;
+}
+.v2account-hero__type {
+  font: 400 13px/1.35 "Hanken Grotesk", sans-serif;
+  color: var(--v2-text-dim);
+}
+.v2account-hero .v2account-tag {
+  margin-top: 6px;
+}
+
+.v2account-attr {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 52px;
+  padding: 8px 16px;
+}
+.v2account-attr + .v2account-attr::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 16px;
+  right: 0;
+  height: 1px;
+  background: var(--v2-line-soft);
+}
+.v2account-attr__label {
+  font: 400 14px/1.3 "Hanken Grotesk", sans-serif;
+  color: var(--v2-text-dim);
+  flex-shrink: 0;
+}
+.v2account-attr__value {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-align: right;
+  font: 400 14px/1.3 "Hanken Grotesk", sans-serif;
+  color: var(--v2-text);
+}
+.v2account-attr__value--mono {
+  font: 500 13px/1.4 "Red Hat Mono", monospace;
+}
+
+.v2account-iconbtn {
+  border: 0;
+  background: none;
+  padding: 8px;
+  color: var(--v2-text-dim);
+  display: flex;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}

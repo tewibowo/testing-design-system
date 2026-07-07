@@ -1,0 +1,920 @@
+/* Home area — dashboard, notifications, OTC flow.
+ * Prefix: home-  ·  Colors follow the shell convention:
+ * var(--sx-color-*, <fallback>) with DS token values as fallbacks. */
+
+/* ---- Shared wrapper ---------------------------------------------------- */
+
+.home-wrap {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: var(--sx-color-bg, #f6f7f9);
+}
+.home-wrap--white {
+  background: #fff;
+}
+
+/* ---- Toast (local region — no global ToastProvider is mounted) --------- */
+
+.home-toast-region {
+  position: absolute;
+  top: calc(var(--safe-top) + 8px);
+  left: 20px;
+  right: 20px;
+  z-index: 60;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+.home-toast-region .toast {
+  min-width: 0;
+  max-width: 100%;
+  box-shadow: 0 8px 24px rgba(10, 13, 18, 0.18);
+}
+
+/* ---- Home top row (tab root — no AppHeader back) ----------------------- */
+
+.home-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(var(--safe-top) + 12px) 20px 8px;
+  flex-shrink: 0;
+}
+.home-bell {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--sx-color-grey-100, #f0f0f0);
+  color: var(--sx-color-deep-ivy, #002b2a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.home-bell .material-symbols-rounded {
+  font-size: 22px;
+}
+.home-bell__badge {
+  position: absolute;
+  top: -2px;
+  right: -3px;
+  min-width: 17px;
+  height: 17px;
+  border-radius: 999px;
+  background: var(--sx-color-critical, #df1312);
+  color: #fff;
+  font-family: "Red Hat Display", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 15px;
+  text-align: center;
+  padding: 0 4px;
+  border: 1px solid var(--sx-color-bg, #f6f7f9);
+  box-sizing: border-box;
+}
+
+/* ---- Home sections ------------------------------------------------------ */
+
+.home-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* 16px side gutter keeps cards, banner and legal off the screen edge */
+  padding: 8px 16px 28px;
+}
+
+.home-balance {
+  padding: 0 4px; /* nets 20px with the section gutter */
+}
+.home-balance .estimated-balance__value {
+  font-size: 40px;
+}
+
+.home-actions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.home-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  background: none;
+  padding: 4px 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.home-action__circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  background: var(--sx-color-vibrant-green, #00d37e);
+  color: var(--sx-color-deep-ivy, #002b2a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home-action__circle .material-symbols-rounded {
+  font-size: 24px;
+}
+.home-action__label {
+  font-family: "Red Hat Display", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  white-space: nowrap;
+}
+
+/* ---- Cards --------------------------------------------------------------- */
+
+.home-card {
+  background: #fff;
+  border: 1px solid rgba(216, 216, 216, 0.55);
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(10, 13, 18, 0.05);
+  padding: 14px 16px 6px;
+}
+.home-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 2px;
+}
+.home-card__title {
+  font-family: "Red Hat Display", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--sx-color-deep-ivy, #002b2a);
+}
+/* Asset-class segmented control (replaces the refresh button) */
+.home-seg {
+  display: flex;
+  gap: 2px;
+  background: var(--sx-color-grey-100, #f0f0f0);
+  border-radius: 999px;
+  padding: 2px;
+}
+.home-seg__btn {
+  border: 0;
+  background: none;
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-family: "Red Hat Display", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--sx-color-grey-500, #505454);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 200ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    color 200ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.home-seg__btn.is-active {
+  background: #fff;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  box-shadow: 0 1px 2px rgba(10, 13, 18, 0.08);
+}
+
+/* Fiat row caption (fiat rows show the currency name where stablecoins
+   show their network marks) */
+.home-asset__name {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 12px;
+  color: var(--sx-color-grey-500, #505454);
+}
+
+/* Display-currency trigger — the currency suffix inside EstimatedBalance */
+.home-currency {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  border: 0;
+  background: var(--sx-color-grey-100, #f0f0f0);
+  border-radius: 999px;
+  padding: 4px 8px 4px 12px;
+  font: inherit;
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 700;
+  color: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.home-currency .material-symbols-rounded {
+  font-size: 18px;
+  color: var(--sx-color-grey-500, #505454);
+}
+
+/* Display-currency picker sheet */
+.home-cursheet__title {
+  font: 700 17px/1.2 "Red Hat Display", sans-serif;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  text-align: center;
+  margin: 0 0 10px;
+}
+.home-currow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  border: 0;
+  background: none;
+  padding: 11px 4px;
+  border-radius: 12px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  text-align: left;
+}
+.home-currow.is-selected {
+  background: var(--sx-color-grey-50, #fafafa);
+}
+.home-currow__id {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.home-currow__code {
+  font: 700 15px/1 "Red Hat Display", sans-serif;
+  color: var(--sx-color-deep-ivy, #002b2a);
+}
+.home-currow__name {
+  font: 400 12px/1 "Hanken Grotesk", sans-serif;
+  color: var(--sx-color-grey-500, #505454);
+}
+.home-currow__check {
+  margin-left: auto;
+  font-size: 20px;
+  color: var(--sx-color-vibrant-green, #00d37e);
+}
+
+/* ---- Asset list ----------------------------------------------------------- */
+
+.home-assets__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.home-asset {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 0;
+}
+.home-asset + .home-asset {
+  border-top: 1px solid rgba(216, 216, 216, 0.45);
+}
+.home-asset__id {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.home-asset__symbol {
+  font-family: "Red Hat Display", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--sx-color-deep-ivy, #002b2a);
+}
+.home-asset__nets {
+  display: flex;
+  align-items: center;
+}
+.home-asset__net {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  border: 1.5px solid #fff;
+  margin-left: -5px;
+  display: inline-flex;
+  overflow: hidden;
+  box-sizing: content-box;
+}
+.home-asset__net:first-child {
+  margin-left: 0;
+}
+.home-asset__more {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 11px;
+  color: var(--sx-color-grey-500, #505454);
+  margin-left: 4px;
+}
+.home-asset__new {
+  font-family: "Red Hat Display", sans-serif;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  color: #fff;
+  background: var(--sx-color-critical, #df1312);
+  border-radius: 4px;
+  padding: 2.5px 4px;
+  margin-left: 6px;
+}
+.home-asset__bal {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  min-width: 0;
+}
+.home-asset__amount {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--sx-color-deep-ivy, #002b2a);
+}
+.home-asset__fiat {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 12px;
+  color: var(--sx-color-grey-500, #505454);
+  white-space: nowrap;
+}
+.home-asset__actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.home-asset__actions .icon-btn--sm {
+  width: 32px;
+  height: 32px;
+}
+.home-asset__actions .icon-btn--sm .material-symbols-rounded {
+  font-size: 18px;
+}
+
+/* ---- OTC banner (DS OtcBanner restyled for a phone column) --------------- */
+
+.home-otcbanner .otc {
+  min-height: 176px;
+  padding: 20px;
+  border-radius: 16px;
+}
+.home-otcbanner .otc__deco {
+  display: none; /* design feedback: drop the swirl artwork on mobile */
+}
+.home-otcbanner .otc__title {
+  font-size: 20px;
+}
+
+/* ---- Legal footer ---------------------------------------------------------- */
+
+.home-legal {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 2px 0 6px;
+}
+.home-legal p {
+  margin: 0;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--sx-color-grey-500, #505454);
+  opacity: 0.85;
+}
+.home-link {
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  color: var(--sx-color-link, #187d97);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---- Notifications: filter chips ------------------------------------------ */
+
+.home-chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 6px 20px 14px;
+  flex-shrink: 0;
+  scrollbar-width: none;
+}
+.home-chips::-webkit-scrollbar {
+  display: none;
+}
+.home-chip {
+  position: relative;
+  flex: 0 0 auto;
+  border: 0;
+  padding: 0;
+  background: var(--sx-color-grey-100, #f0f0f0);
+  border-radius: 8px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.home-chip__pill {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid var(--sx-color-vibrant-green, #00d37e);
+  box-shadow: 0 1px 2px rgba(10, 13, 18, 0.06);
+}
+.home-chip__label {
+  position: relative;
+  z-index: 1;
+  display: block;
+  padding: 7px 12px;
+  font-family: "Red Hat Display", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sx-color-grey-500, #505454);
+  white-space: nowrap;
+  transition: color 120ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.home-chip.is-active .home-chip__label {
+  color: var(--sx-color-positive, #257c58);
+  font-weight: 700;
+}
+
+/* ---- Notifications: list ---------------------------------------------------- */
+
+.home-notifs {
+  position: relative; /* popLayout anchors exiting rows here */
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 28px;
+}
+.home-notif {
+  display: flex;
+  gap: 12px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(216, 216, 216, 0.45);
+}
+.home-notif__icon {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+.home-notif__icon .material-symbols-rounded {
+  font-size: 18px;
+  font-variation-settings: "FILL" 1;
+}
+.home-notif__icon--dark {
+  background: var(--sx-color-deep-ivy, #002b2a);
+  color: #fff;
+}
+.home-notif__icon--warning {
+  background: var(--sx-color-warning-surface, #fffaea);
+  color: var(--sx-color-warning, #fc9a07);
+}
+.home-notif__icon--plain {
+  background: var(--sx-color-grey-100, #f0f0f0);
+  color: var(--sx-color-deep-ivy, #002b2a);
+}
+.home-notif__main {
+  flex: 1;
+  min-width: 0;
+}
+.home-notif__meta {
+  display: flex;
+  gap: 8px;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 12px;
+  color: var(--sx-color-grey-500, #505454);
+}
+.home-notif__meta .is-critical {
+  color: var(--sx-color-critical, #df1312);
+  font-weight: 600;
+}
+.home-notif__title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "Red Hat Display", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  margin: 3px 0 4px;
+}
+.home-notif__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--sx-color-critical, #df1312);
+  flex: 0 0 auto;
+}
+.home-notif__body {
+  margin: 0;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--sx-color-grey-500, #505454);
+  overflow-wrap: anywhere;
+}
+.home-notifs__empty {
+  padding-top: 24px;
+}
+
+/* ---- OTC flow ---------------------------------------------------------------- */
+
+.home-otc__host {
+  position: relative; /* popLayout anchors the exiting step here */
+}
+.home-otc__step-pad {
+  padding-bottom: 24px;
+}
+.home-otc-sheet {
+  padding-bottom: 4px;
+}
+.home-otc__title {
+  font-family: "Red Hat Display", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  margin: 10px 0 16px;
+}
+.home-otc__title--center {
+  text-align: center;
+}
+
+/* Intro */
+.home-otc__illo {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 20px;
+}
+.home-otc__illo-circle {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  border-radius: 999px;
+  background: var(--sx-color-mint-surface, #d7efe2);
+  color: var(--sx-color-deep-ivy, #002b2a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home-otc__illo-circle > .material-symbols-rounded {
+  font-size: 42px;
+}
+.home-otc__illo-coin {
+  position: absolute;
+  right: -8px;
+  bottom: -2px;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: var(--sx-color-vibrant-green, #00d37e);
+  color: var(--sx-color-deep-ivy, #002b2a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--sx-color-bg, #f6f7f9);
+}
+.home-otc__illo-coin .material-symbols-rounded {
+  font-size: 18px;
+  font-variation-settings: "FILL" 1;
+}
+.home-otc__lead {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  text-align: center;
+  margin: 0 0 16px;
+}
+.home-otc__steps {
+  background: var(--sx-color-grey-100, #f0f0f0);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.home-otc__step {
+  display: flex;
+  gap: 12px;
+}
+.home-otc__stepnum {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: var(--sx-color-deep-ivy, #002b2a);
+  color: #fff;
+  font-family: "Red Hat Display", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+}
+.home-otc__steptext {
+  margin: 0;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--sx-color-deep-ivy, #002b2a);
+}
+.home-otc__contact {
+  background: #fff;
+  border: 1px solid rgba(216, 216, 216, 0.55);
+  border-radius: 12px;
+  margin-top: 16px;
+}
+.home-otc__contact-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 14px;
+}
+.home-otc__contact-row + .home-otc__contact-row {
+  border-top: 1px solid rgba(216, 216, 216, 0.45);
+}
+.home-otc__contact-icon {
+  color: var(--sx-color-deep-ivy, #002b2a);
+  display: flex;
+}
+.home-otc__contact-icon .material-symbols-rounded {
+  font-size: 22px;
+}
+.home-otc__contact-main {
+  flex: 1;
+  min-width: 0;
+}
+.home-otc__contact-title {
+  font-family: "Red Hat Display", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--sx-color-deep-ivy, #002b2a);
+}
+.home-otc__contact-sub {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 13px;
+  color: var(--sx-color-grey-500, #505454);
+  overflow-wrap: anywhere;
+}
+
+/* Form */
+.home-field-label {
+  display: block;
+  font-family: "Red Hat Display", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  margin: 20px 0 8px;
+}
+.home-otc__dirs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.home-otc__dir {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  background: #fff;
+  border: 1px solid var(--sx-color-border, #d8d8d8);
+  border-radius: 8px;
+  font-family: "Red Hat Display", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.home-otc__dir .material-symbols-rounded {
+  font-size: 18px;
+}
+.home-otc__dir.is-active {
+  border: 2px solid var(--sx-color-deep-ivy, #002b2a);
+  font-weight: 700;
+}
+.home-otc__amount {
+  display: flex;
+  align-items: stretch;
+  height: 52px;
+  background: #fff;
+  border: 1px solid var(--sx-color-border, #d8d8d8);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 120ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.home-otc__amount:focus-within {
+  border-color: var(--sx-color-deep-ivy, #002b2a);
+}
+.home-otc__amount.is-error {
+  border-color: var(--sx-color-critical, #df1312);
+}
+.home-otc__amount input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: none;
+  padding: 0 14px;
+  font-family: "Red Hat Mono", monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: 15px;
+  color: var(--sx-color-deep-ivy, #002b2a);
+}
+.home-otc__amount input::placeholder {
+  font-family: "Hanken Grotesk", sans-serif;
+  color: var(--sx-color-placeholder, #b6b6b6);
+}
+.home-otc__asset {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  border-left: 1px solid var(--sx-color-border, #d8d8d8);
+  background: none;
+  padding: 0 12px;
+  font-family: "Red Hat Display", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.home-otc__asset .material-symbols-rounded {
+  font-size: 18px;
+  color: var(--sx-color-grey-500, #505454);
+}
+.home-helper {
+  margin: 8px 0 0;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--sx-color-grey-500, #505454);
+}
+.home-helper.is-error {
+  color: var(--sx-color-critical, #df1312);
+}
+.home-otc__counter {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid var(--sx-color-border, #d8d8d8);
+  border-radius: 8px;
+  padding: 12px 14px;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.home-otc__counter .material-symbols-rounded {
+  font-size: 20px;
+  color: var(--sx-color-grey-500, #505454);
+}
+.home-otc__counter-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.home-otc__counter-label {
+  font-family: "Red Hat Display", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--sx-color-deep-ivy, #002b2a);
+}
+.home-otc__counter-cap {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 12px;
+  color: var(--sx-color-grey-500, #505454);
+}
+
+/* Footer button pair */
+.home-otc__row2 {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+.home-otc__row2 .btn {
+  flex: 1;
+  width: auto;
+}
+
+/* Confirmation */
+.home-otc__summary {
+  background: var(--sx-color-grey-100, #f0f0f0);
+  border-radius: 12px;
+  padding: 20px 16px;
+  text-align: center;
+  margin-top: 6px;
+}
+.home-otc__pair {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.home-otc__pairside {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Red Hat Display", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--sx-color-deep-ivy, #002b2a);
+}
+.home-otc__pairside .money {
+  font-size: 16px;
+  font-weight: 700;
+}
+.home-otc__pair-arrow {
+  color: var(--sx-color-grey-500, #505454);
+  font-size: 20px;
+}
+.home-otc__caption {
+  margin: 10px 0 0;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--sx-color-grey-500, #505454);
+}
+.home-otc__details {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+}
+.home-otc__detail {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 0;
+}
+.home-otc__detail + .home-otc__detail {
+  border-top: 1px solid rgba(216, 216, 216, 0.45);
+}
+.home-otc__detail-label {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 14px;
+  color: var(--sx-color-grey-500, #505454);
+}
+.home-otc__detail-value {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  text-align: right;
+}
+
+/* ---- Asset picker sheet content ------------------------------------------- */
+
+.home-sheet__title {
+  font-family: "Red Hat Display", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  margin: 4px 0 10px;
+}
+.home-sheet__option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 6px;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.home-sheet__option .material-symbols-rounded {
+  font-size: 20px;
+  color: var(--sx-color-vibrant-green, #00d37e);
+}
+.home-sheet__opt-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.home-sheet__opt-label {
+  font-family: "Red Hat Display", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--sx-color-deep-ivy, #002b2a);
+}
+.home-sheet__opt-cap {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 12px;
+  color: var(--sx-color-grey-500, #505454);
+}

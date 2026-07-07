@@ -1,0 +1,769 @@
+/* Blockchain address flows — add (link wallet / manual) + verify.
+ * Class prefix: blockchain-. Colors via --sx-* tokens with brand fallbacks
+ * (same convention as the app shell). The WalletConnect QR screen keeps
+ * WalletConnect's dark branding per the build spec. */
+
+/* ---- Shared stage wrapper (screen content that swaps as one unit) ---- */
+
+.blockchain-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* ---- Local toast ------------------------------------------------------ */
+
+.blockchain-toast-region {
+  position: absolute;
+  top: calc(var(--safe-top) + 10px);
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 30;
+}
+.blockchain-toast-region--sheet {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+.blockchain-toast {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--sx-color-deep-ivy, #002b2a);
+  color: #fff;
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  box-shadow: 0 8px 24px rgba(10, 13, 18, 0.24);
+}
+.blockchain-toast .material-symbols-rounded {
+  font-size: 18px;
+  color: var(--sx-color-vibrant-green, #00d37e);
+}
+
+/* ---- Typography helpers ----------------------------------------------- */
+
+.blockchain-q {
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  margin: 20px 0 8px;
+}
+.blockchain-body {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--sx-color-grey-500, #505454);
+  margin: 4px 0 0;
+}
+.blockchain-body strong { color: var(--sx-color-deep-ivy, #002b2a); }
+.blockchain-caption {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--sx-color-grey-500, #505454);
+}
+.blockchain-link { text-decoration: underline; }
+.blockchain-footnote {
+  margin: 20px 0 8px;
+  text-align: center;
+}
+
+/* ---- Method chooser (Link Blockchain Address) -------------------------- */
+
+.blockchain-method-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+.blockchain-method-list .selbox { align-items: flex-start; padding: 16px; }
+.blockchain-method-list .selbox__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.blockchain-method-ico {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sx-color-mint-surface, #f0f9f4);
+  color: var(--sx-color-secure-teal, #054948);
+}
+.blockchain-method-ico .material-symbols-rounded { font-size: 22px; }
+
+/* ---- Sheets (chooser pickers) ------------------------------------------ */
+
+.blockchain-sheet { padding-bottom: 4px; }
+.blockchain-sheet__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--sx-color-grey-200, #e0e0e0);
+  margin-bottom: 14px;
+}
+.blockchain-sheet__title {
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  margin: 0;
+}
+.blockchain-sheet__close {
+  border: 0;
+  background: none;
+  padding: 6px;
+  margin: -6px;
+  display: flex;
+  cursor: pointer;
+  color: var(--sx-color-grey-500, #505454);
+}
+.blockchain-sheet__close .material-symbols-rounded { font-size: 22px; }
+
+.blockchain-provider-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 14px 0 4px;
+}
+.blockchain-provider-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--sx-color-grey-300, #d8d8d8);
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+}
+.blockchain-provider-row__name {
+  flex: 1;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--sx-color-deep-ivy, #002b2a);
+}
+.blockchain-provider-row__est {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 13px;
+  color: var(--sx-color-grey-500, #505454);
+}
+.blockchain-sheet-foot {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--sx-color-grey-500, #505454);
+  margin: 14px 0 6px;
+}
+.blockchain-sheet-foot strong { color: var(--sx-color-deep-ivy, #002b2a); }
+
+/* Picker rows (chains / platforms) */
+.blockchain-picker {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 6px;
+  display: flex;
+  flex-direction: column;
+}
+.blockchain-picker__row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 4px;
+  border: 0;
+  border-bottom: 1px solid var(--sx-color-grey-100, #f0f0f0);
+  background: none;
+  cursor: pointer;
+  text-align: left;
+}
+.blockchain-picker li:last-child .blockchain-picker__row { border-bottom: 0; }
+.blockchain-picker__name {
+  flex: 1;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--sx-color-deep-ivy, #002b2a);
+}
+.blockchain-picker__radio {
+  font-size: 22px;
+  color: var(--sx-color-grey-300, #d8d8d8);
+}
+.blockchain-picker__row.is-selected .blockchain-picker__radio {
+  color: var(--sx-color-vibrant-green, #00d37e);
+}
+
+/* ---- Manual add form ---------------------------------------------------- */
+
+.blockchain-form { padding-bottom: 24px; }
+.blockchain-choice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.blockchain-helper-line { margin: 10px 0 0; }
+.blockchain-form .field { margin-top: 20px; }
+.blockchain-form .important-notes { margin-top: 20px; }
+
+/* Custom select-style trigger that opens a bottom sheet */
+.blockchain-field__control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid var(--sx-color-grey-300, #d8d8d8);
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 16px;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  width: 100%;
+}
+.blockchain-field__value { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.blockchain-field__value.is-placeholder { color: var(--sx-color-grey-400, #b6b6b6); }
+.blockchain-field__chevron { color: var(--sx-color-grey-500, #505454); font-size: 22px; }
+
+.blockchain-mono-area textarea {
+  font-family: "Red Hat Mono", monospace;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Confirmation sheet rows */
+.blockchain-confirm-rows {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+}
+.blockchain-confirm-rows > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--sx-color-grey-100, #f0f0f0);
+}
+.blockchain-confirm-rows > div:last-child { border-bottom: 0; }
+.blockchain-confirm-rows dt {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 13px;
+  color: var(--sx-color-grey-500, #505454);
+}
+.blockchain-confirm-rows dd {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  text-align: right;
+}
+
+/* ---- Address chip (mono + copy) ----------------------------------------- */
+
+.blockchain-addr-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--sx-color-grey-200, #e0e0e0);
+  border-radius: 12px;
+  background: var(--sx-color-grey-50, #fafafa);
+  cursor: pointer;
+  text-align: left;
+}
+.blockchain-addr-chip--inline { width: auto; }
+.blockchain-addr-chip__text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.blockchain-addr-chip__label {
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--sx-color-grey-500, #505454);
+}
+.blockchain-addr-chip__addr {
+  font-family: "Red Hat Mono", monospace;
+  font-size: 13px;
+  color: var(--sx-color-deep-ivy, #002b2a);
+}
+.blockchain-addr-chip__copy {
+  font-size: 18px;
+  color: var(--sx-color-secure-teal, #054948);
+}
+
+/* Mono inline value (confirmation rows) */
+.blockchain-mono {
+  font-family: "Red Hat Mono", monospace;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ---- Confirm sheet (delete / unlink) ------------------------------------- */
+
+.blockchain-confirm-body { margin: 0 0 18px; }
+.blockchain-confirm-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 4px;
+}
+.blockchain-btn--critical.btn--primary {
+  background: var(--status-critical, #df1312);
+  color: var(--text-inverse, #fff);
+}
+.blockchain-btn--critical.btn--primary:hover,
+.blockchain-btn--critical.btn--primary:active {
+  background: color-mix(in srgb, var(--status-critical, #df1312) 85%, #000);
+  color: var(--text-inverse, #fff);
+}
+
+/* ---- Addresses list ("My Addresses", spec A1) ----------------------------- */
+
+.blockchain-list { padding-bottom: 28px; }
+.blockchain-list__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 16px 0 10px;
+}
+.blockchain-h2 {
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  margin: 0;
+}
+.blockchain-info-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--sx-color-grey-500, #505454);
+  margin: 0 0 16px;
+}
+.blockchain-info-ic {
+  font-size: 18px;
+  color: var(--sx-color-vibrant-green, #00d37e);
+  margin-top: 1px;
+}
+
+.blockchain-card {
+  background: #fff;
+  border: 1px solid var(--sx-color-grey-200, #e0e0e0);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.blockchain-card__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.blockchain-card__id.list-blockchain {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  background: transparent;
+}
+.blockchain-card__id .list-blockchain__icon {
+  width: 40px;
+  height: 40px;
+}
+.blockchain-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.blockchain-card__label {
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--sx-color-grey-500, #505454);
+  margin-top: 2px;
+}
+.blockchain-card__netrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.blockchain-card__netnames {
+  flex: 1;
+  min-width: 0;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--sx-color-deep-ivy, #002b2a);
+}
+.blockchain-empty {
+  text-align: center;
+  margin: 24px 0;
+}
+
+/* Success-state secondary link (blockchain flows only) */
+.blockchain-stage .success-state__actions .link-btn { justify-content: center; }
+
+/* ---- Wallet link (MetaMask stub) ----------------------------------------- */
+
+.blockchain-connect {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px;
+  gap: 4px;
+}
+.blockchain-connect__title {
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--sx-color-deep-ivy, #002b2a);
+  margin: 20px 0 4px;
+}
+.blockchain-connect__hint {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--sx-color-grey-500, #505454);
+  max-width: 260px;
+  margin: 0 0 16px;
+}
+.blockchain-dots { display: inline-flex; gap: 6px; }
+.blockchain-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--sx-color-vibrant-green, #00d37e);
+  display: inline-block;
+}
+.blockchain-connect__cancel { margin-top: 22px; }
+
+/* ---- Verify flow ---------------------------------------------------------- */
+
+.blockchain-verify-intro { margin-top: 4px; }
+.blockchain-verify .alert { margin-top: 16px; }
+.blockchain-verify .blockchain-addr-chip { margin-top: 14px; }
+.blockchain-option-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+.blockchain-option-stack .selbox { align-items: flex-start; }
+.blockchain-option-stack .selbox__label {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.blockchain-steps {
+  list-style: none;
+  counter-reset: bsteps;
+  margin: 14px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.blockchain-steps li {
+  counter-increment: bsteps;
+  display: flex;
+  gap: 10px;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--sx-color-grey-500, #505454);
+}
+.blockchain-steps li::before {
+  content: counter(bsteps);
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--sx-color-mint-surface, #f0f9f4);
+  color: var(--sx-color-secure-teal, #054948);
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+.blockchain-deposit-card {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.blockchain-deposit-card .qr { align-self: center; }
+.blockchain-deposit-card .field { width: 100%; }
+.blockchain-verify-notes { margin-top: 20px; }
+
+/* ---- WalletConnect QR screen (dark, third-party branding) ----------------- */
+
+.blockchain-wc {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: #101012;
+  transition: background 320ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.blockchain-wc.is-linked { background: var(--sx-color-grey-50, #fafafa); }
+
+.blockchain-wc__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: calc(var(--safe-top) + 10px) 16px 10px;
+  background: #3396ff;
+}
+.blockchain-wc__back {
+  border: 0;
+  background: none;
+  padding: 6px;
+  margin-left: -6px;
+  display: flex;
+  cursor: pointer;
+  color: #fff;
+}
+.blockchain-wc__back .material-symbols-rounded { font-size: 20px; }
+.blockchain-wc__brand {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+}
+.blockchain-wc__brand img { border-radius: 999px; background: #fff; }
+.blockchain-wc__help {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 0;
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blockchain-wc__panel { padding: 20px 20px 32px; }
+.blockchain-wc__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 4px 0 14px;
+}
+.blockchain-wc__title {
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: #fff;
+  margin: 0;
+}
+.blockchain-wc__copy {
+  border: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+}
+.blockchain-wc__copy .material-symbols-rounded { font-size: 18px; }
+
+.blockchain-wc__tabs {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+.blockchain-wc__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  background: none;
+  padding: 8px 2px 10px;
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+.blockchain-wc__tab .material-symbols-rounded { font-size: 18px; }
+.blockchain-wc__tab.is-active { color: #3396ff; border-bottom-color: #3396ff; }
+
+.blockchain-wc__qr {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width: fit-content;
+}
+.blockchain-wc__qr .qr { border: 0; }
+.blockchain-wc__qr-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 0 0 4px #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.blockchain-wc__scan-hint {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.65);
+  text-align: center;
+  margin: 14px auto 0;
+  max-width: 280px;
+}
+
+.blockchain-wc__section {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 24px 0 12px;
+}
+.blockchain-wc__section .material-symbols-rounded { font-size: 18px; }
+
+.blockchain-wc__wallets {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 4px;
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+}
+.blockchain-wc__wallet {
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 64px;
+}
+.blockchain-wc__tile {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.blockchain-wc__tile--dark { background: #1a1a1a; }
+.blockchain-wc__tile--safepal { background: #4a88f8; }
+.blockchain-wc__tile--safepal .blockchain-wc__tile-letter { color: #fff; }
+.blockchain-wc__tile--grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3px;
+  padding: 7px;
+}
+.blockchain-wc__tile--grid img { width: 16px; height: 16px; }
+.blockchain-wc__tile-letter {
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: #4a88f8;
+}
+.blockchain-wc__wallet-name {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* WC connecting stage */
+.blockchain-wc__connecting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 48px 24px;
+  gap: 4px;
+}
+.blockchain-wc__connecting .blockchain-wc__tile { width: 64px; height: 64px; }
+.blockchain-wc__connecting-title {
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+  margin: 18px 0 4px;
+}
+.blockchain-wc__connecting-hint {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 18px;
+  max-width: 250px;
+}
+.blockchain-wc__cancel { margin-top: 20px; }
