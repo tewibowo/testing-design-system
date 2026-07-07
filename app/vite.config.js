@@ -11,6 +11,11 @@ export default defineConfig({
   // Relative base so the same build works at any hosting path
   // (GitHub Pages subpath, Vercel root, PR previews…).
   base: "./",
+  // Stamped into the debug HUD so a device screenshot proves which build
+  // the service worker is actually serving.
+  define: {
+    __BUILD_ID__: JSON.stringify(new Date().toISOString().slice(0, 16).replace("T", " ") + "Z")
+  },
   build: {
     rollupOptions: {
       input: {
