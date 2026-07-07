@@ -47,31 +47,17 @@ body {
 
 /* iOS standalone short-viewport correction (see ui/viewportFix.js): the
    layout viewport ends ~47pt above the physical screen bottom. iOS is
-   inconsistent about the strip below that edge — some launches let the
-   page paint it, others CLIP the window there and show system white.
-   Strategy that survives both: stretch only the shell BACKGROUND to the
-   full screen, but anchor all bottom chrome (tab bar, sheets, CTA bars)
-   to the viewport edge via --vp-gap so nothing can be cut off. The safe
-   inset zeroes out because the viewport edge already clears the home
-   indicator in both variants. */
-.vp-short .device {
-  bottom: auto;
-  height: var(--screen-h, 100dvh);
-}
+   inconsistent about the strip below that edge — some launches paint the
+   page canvas there, others clip the window and show system white. The
+   app NEVER lays out beyond the reported viewport: sizing anything taller
+   makes iOS treat the overflow as pannable (the whole shell — tab bar
+   included — could be dragged down like a loose sheet), and the clipped
+   variant would cut it off anyway. The canvas color (set per app above /
+   in v2-theme.css) blends the strip when it is paintable. The only
+   correction needed: the safe-area inset zeroes out, because the viewport
+   edge already sits well above the home indicator in this state. */
 .vp-short {
   --safe-bottom: 0px;
-}
-.vp-short .stack-frame {
-  padding-bottom: var(--vp-gap, 0px);
-}
-.vp-short .tabbar {
-  bottom: calc(var(--vp-gap, 0px) + 10px);
-}
-.vp-short .sheet-panel {
-  bottom: var(--vp-gap, 0px);
-}
-.vp-short .installgate {
-  padding-bottom: calc(var(--vp-gap, 0px) + 28px);
 }
 
 /* Desktop / tablet: present the app inside a phone frame so colleagues
